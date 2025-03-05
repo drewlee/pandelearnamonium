@@ -1,4 +1,6 @@
-body, h1, p {
+body,
+h1,
+p {
   margin: 0;
   padding: 0;
 }
@@ -11,9 +13,11 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  font: normal 400 16px / 1.4 "Outfit", sans-serif;
-  color: hsl(218, 44%, 22%);
-  background-color: hsl(212, 45%, 89%);
+  font:
+    normal 400 16px / 1.4 Outfit,
+    sans-serif;
+  color: hsl(218deg 44% 22%);
+  background-color: hsl(212deg 45% 89%);
 }
 
 .visually-hidden {
@@ -35,9 +39,9 @@ body {
 .qr-card {
   width: 288px;
   padding: 16px 16px 40px;
-  background-color: hsl(0, 0%, 100%);
+  background-color: hsl(0deg 0% 100%);
   border-radius: 20px;
-  box-shadow: 0 25px 25px hsla(0, 0%, 0%, 0.0477);
+  box-shadow: 0 25px 25px hsla(0deg 0% 0% / 4.77%);
 }
 
 .qr-card-image {
@@ -61,7 +65,7 @@ body {
   font-weight: 400;
   letter-spacing: 0.2px;
   text-align: center;
-  color: hsl(216, 15%, 48%);
+  color: hsl(216deg 15% 48%);
 }
 
 .attribution {
@@ -71,5 +75,5 @@ body {
 }
 
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: hsl(228deg 45% 44%);
 }
