@@ -9,9 +9,19 @@
   "scripts": {
     "eslint": "eslint .",
     "lint": "npm run prettier; npm run stylelint; npm run eslint",
-    "prepare": "cd .. && husky cassess/.husky",
+    "prepare": "cd .. && husky",
     "prettier": "prettier . -w",
     "stylelint": "stylelint '**/*.css'"
+  },
+  "lint-staged": {
+    "!(*.css)": [
+      "prettier -uw",
+      "eslint"
+    ],
+    "*.css": [
+      "prettier -uw",
+      "stylelint"
+    ]
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -21,6 +31,7 @@
     "eslint-config-prettier": "^10.0.2",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "prettier": "3.5.3",
     "stylelint": "^16.15.0",
     "stylelint-config-standard": "^37.0.0"

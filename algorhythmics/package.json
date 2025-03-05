@@ -10,7 +10,7 @@
     "build": "tsc -b",
     "eslint": "eslint .",
     "lint": "npm run prettier; npm run eslint",
-    "prepare": "cd .. && husky algorhythmics/.husky",
+    "prepare": "cd .. && husky",
     "prettier": "prettier . -w",
     "start": "echo 'running start'",
     "test": "npm run lint && npm run build && tsc -b ./tests && vitest run",
