@@ -22,14 +22,14 @@ const config = [
     },
   },
 
-  // ESLint recommended config
+  // ESLint recommended settings
   {
     name: 'eslint/recommended',
     files: JS_FILES,
     ...pluginJs.configs.recommended,
   },
 
-  // Prettier config
+  // Prettier settings
   {
     name: 'eslint-config-prettier',
     files: JS_FILES,
