@@ -8,12 +8,19 @@
   "type": "module",
   "scripts": {
     "build": "tsc -b",
-    "eslint": "eslint . ",
-    "lint": "npm run prettier && npm run eslint",
-    "prettier": "prettier . -w --log-level silent",
+    "eslint": "eslint .",
+    "lint": "npm run prettier; npm run eslint",
+    "prepare": "cd .. && husky algorhythmics/.husky",
+    "prettier": "prettier . -w",
     "start": "echo 'running start'",
     "test": "npm run lint && npm run build && tsc -b ./tests && vitest run",
     "ts-node": "node --import ./ts-node-esm-loader.js --no-deprecation"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier -uw",
+      "eslint"
+    ]
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -22,6 +29,8 @@
     "eslint-config-prettier": "^10.0.2",
     "eslint-plugin-tsdoc": "^0.4.0",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "prettier": "3.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",

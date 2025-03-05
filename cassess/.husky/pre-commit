@@ -1,0 +1,3 @@
+cd cassess
+npm run lint
+exit 1
