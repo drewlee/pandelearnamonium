@@ -5,15 +5,20 @@ import html from '@html-eslint/eslint-plugin';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
+  // Global settings
   {
     languageOptions: {
       globals: globals.browser,
     },
   },
 
+  // ESLint recommended settings
   pluginJs.configs.recommended,
+
+  // Prettier settings
   eslintConfigPrettier,
 
+  // HTML ESLint settings
   {
     files: ['**/*.html'],
     ...Object.entries(html.configs['flat/recommended']).reduce((config, [key, values]) => {
