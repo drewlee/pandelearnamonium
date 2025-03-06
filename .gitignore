@@ -131,3 +131,6 @@ dist
 
 # Misc
 .DS_Store
+*.sketch
+*.fig
+*.xd
