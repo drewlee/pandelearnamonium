@@ -1,21 +1,5 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 40px 20px;
-  padding: 0;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-li {
-  display: block;
 }
 
 code {
@@ -23,6 +7,7 @@ code {
   color: #d60101;
 }
 
+/* Base Elements */
 .flex-section {
   margin: 50px 0;
 }
@@ -49,6 +34,7 @@ code {
   margin: 20px 0;
 }
 
+/* Flex Grow, Flex Shrink, Flex Basis Styles */
 .flex-container-gsb-1 .flex-item {
   flex: 0 1 auto;
 }

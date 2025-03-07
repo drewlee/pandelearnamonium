@@ -1,28 +1,5 @@
-html {
-  font:
-    normal 62.5% / 1.4 Helvetica,
-    Arial,
-    sans-serif;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 1.6rem;
-}
-
 h1 {
   margin: 22px 20px;
-  font-size: 3.2rem;
-}
-
-h2 {
-  font-size: 2.4rem;
-}
-
-p {
-  margin: 0;
-  padding: 0;
 }
 
 /* Base Elements */
@@ -139,7 +116,7 @@ p {
 }
 
 .flex-example-three-col-center {
-  padding: 14px;
+  padding: 0 14px;
 }
 
 /* Fixed Height Cards */
@@ -159,8 +136,7 @@ p {
 }
 
 .flex-example-card-content {
-  margin: 0;
-  padding: 10px;
+  padding: 0 10px;
   flex: 1 0 auto;
 }
 
@@ -181,12 +157,8 @@ p {
 
 .flex-example-vcenter-container {
   width: 500px;
-  margin: 10px;
+  padding: 0 1.2rem;
   background-color: rgb(255 237 159);
   border: 1px solid rgb(0 0 0);
   border-radius: 10px;
-}
-
-.flex-example-vcenter-container p {
-  margin: 14px;
 }

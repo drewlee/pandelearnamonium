@@ -22,6 +22,10 @@ ol {
   list-style-type: none;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font:
     normal 62.5% / 1.4 Helvetica,
@@ -70,4 +74,8 @@ p {
 
 li {
   font-size: 1.6rem;
+}
+
+a {
+  color: rgb(0 115 255);
 }
