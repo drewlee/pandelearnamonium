@@ -57,7 +57,7 @@ a {
   max-width: 334px;
   min-width: 277px;
   margin: 40.5px var(--spacing-300) 0;
-  padding: var(--spacing-300);
+  padding: calc(var(--spacing-300) - 1px);
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-950);
   border-radius: 20px;
@@ -65,6 +65,7 @@ a {
 }
 
 .blog-prv-card-cover {
+  height: 200px;
   margin-bottom: var(--spacing-300);
   border-radius: 10px;
   overflow: hidden;
@@ -80,8 +81,9 @@ a {
   display: inline-block;
   padding: var(--spacing-50) var(--spacing-150);
   border-radius: 4px;
-  font-weight: 800;
   background-color: var(--color-yellow);
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  font-weight: 800;
 }
 
 .blog-prv-card-date {
