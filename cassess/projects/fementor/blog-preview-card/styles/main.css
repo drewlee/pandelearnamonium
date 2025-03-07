@@ -1,3 +1,4 @@
+/* Custom Font Inclusion */
 @font-face {
   font-family: Figtree;
   src: url('../assets/fonts/Figtree-VariableFont_wght.ttf') format('truetype');
@@ -5,11 +6,19 @@
   font-style: normal;
 }
 
+/* Custom Properties */
 :root {
+  /* Color Scheme */
   --color-gray-950: hsl(0deg 0% 7%);
   --color-gray-500: hsl(0deg 0% 42%);
   --color-white: hsl(0deg 0% 100%);
   --color-yellow: hsl(47deg 88% 63%);
+
+  /* Spacing */
+  --spacing-50: 4px;
+  --spacing-100: 8px;
+  --spacing-150: 12px;
+  --spacing-300: 24px;
 }
 
 html {
@@ -29,6 +38,14 @@ body {
   font-size: 1.4rem;
 }
 
+h1,
+p,
+a {
+  margin: 0;
+  padding: 0;
+}
+
+/* Blog Preview Card Styles */
 .blog-prv-card-container {
   display: flex;
   justify-content: center;
@@ -39,8 +56,8 @@ body {
 .blog-prv-card {
   max-width: 334px;
   min-width: 277px;
-  margin: 0 24px;
-  padding: 24px;
+  margin: 40.5px var(--spacing-300) 0;
+  padding: var(--spacing-300);
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-950);
   border-radius: 20px;
@@ -48,9 +65,11 @@ body {
 }
 
 .blog-prv-card-cover {
+  margin-bottom: var(--spacing-300);
   border-radius: 10px;
   overflow: hidden;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .blog-prv-card-cover img {
@@ -59,26 +78,44 @@ body {
 
 .blog-prv-card-tag {
   display: inline-block;
-  padding: 4px 12px;
+  padding: var(--spacing-50) var(--spacing-150);
   border-radius: 4px;
   font-weight: 800;
   background-color: var(--color-yellow);
 }
 
+.blog-prv-card-date {
+  margin-top: var(--spacing-150);
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
+}
+
 .blog-prv-card-title {
+  margin-top: var(--spacing-150);
   font-size: clamp(2rem, 5vw, 2.4rem);
   font-weight: 800;
 }
 
+.blog-prv-card-title a {
+  text-decoration: none;
+  color: var(--color-gray-950);
+}
+
+.blog-prv-card-title a:hover,
+.blog-prv-card-title a:focus {
+  color: var(--color-yellow);
+}
+
 .blog-prv-card-excerpt {
-  font-size: 1.6rem;
+  margin-top: var(--spacing-150);
+  font-size: clamp(1.4rem, 3vw, 1.6rem);
   color: var(--color-gray-500);
 }
 
 .blog-prv-card-author {
   display: flex;
   align-items: center;
-  column-gap: 12px;
+  column-gap: var(--spacing-150);
+  margin-top: var(--spacing-300);
   font-weight: 800;
 }
 
@@ -92,12 +129,14 @@ body {
   margin: 0;
 }
 
+/* Attribution Styles */
 .attribution {
-  padding: 14px 0;
+  padding: var(--spacing-150) 0;
   font-size: 1.1rem;
   text-align: center;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .attribution a {
   color: hsl(228deg 45% 44%);
 }
