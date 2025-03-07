@@ -1,0 +1,192 @@
+html {
+  font:
+    normal 62.5% / 1.4 Helvetica,
+    Arial,
+    sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+}
+
+h1 {
+  margin: 22px 20px;
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Base Elements */
+.flex-example {
+  margin: 50px 20px;
+}
+
+/* Search Bar */
+.flex-example-search-container {
+  display: flex;
+}
+
+.flex-example-search-input,
+.flex-example-search-btn {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid rgb(0 0 0);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  outline: none;
+}
+
+.flex-example-search-input {
+  color: rgb(0 0 0);
+  background-color: rgb(255 255 255);
+  flex: 1 0 auto;
+}
+
+.flex-example-search-btn {
+  cursor: pointer;
+  color: rgb(255 255 255);
+  background-color: rgb(0 0 0);
+  flex: 0 0 auto;
+}
+
+.flex-example-search-input:focus,
+.flex-example-search-btn:focus {
+  outline: 2px solid rgb(71 123 246);
+}
+
+/* Navigation Bar Shared Styles */
+.flex-example-nav-container {
+  display: flex;
+  align-items: center;
+  padding: 12px 0 12px 20px;
+  background-color: rgb(0 0 0);
+}
+
+.flex-example-nav-container a {
+  color: rgb(255 255 255);
+  text-decoration: none;
+}
+
+.flex-example-nav-container a:hover,
+.flex-example-nav-container a:focus {
+  text-decoration: underline;
+}
+
+.flex-example-nav-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.flex-example-nav-link {
+  border-left: 1px solid rgb(255 255 255);
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+/* Basic Navigation Bar */
+.flex-example-nav-logo + .flex-example-nav-link {
+  margin-left: auto;
+  border-left: none;
+}
+
+.basic .flex-example-nav-link {
+  padding: 0 4px;
+  flex: 0 1 9.4rem;
+}
+
+/* Scaling Navigation Bar */
+.flex-example-nav-link-container {
+  display: flex;
+  flex: 0 0 50%;
+  margin-left: auto;
+}
+
+.scaling .flex-example-nav-link {
+  padding: 0 20px;
+  flex: 1 0 auto;
+}
+
+.flex-example-nav-link:first-child {
+  border-left: none;
+}
+
+/* Three Colum Layout */
+.flex-example-three-col-header,
+.flex-example-three-col-footer {
+  padding: 20px 0;
+  background-color: rgb(124 197 241);
+  text-align: center;
+}
+
+.flex-example-three-col-main {
+  display: flex;
+}
+
+.flex-example-three-col-left,
+.flex-example-three-col-right {
+  flex: 0 0 auto;
+  padding: 14px;
+  background-color: rgb(255 237 159);
+}
+
+.flex-example-three-col-center {
+  padding: 14px;
+}
+
+/* Fixed Height Cards */
+.flex-example-card-container {
+  display: flex;
+  column-gap: 20px;
+}
+
+.flex-example-card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 220px;
+  overflow: hidden;
+  border: 1px solid rgb(0 0 0);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.flex-example-card-content {
+  margin: 0;
+  padding: 10px;
+  flex: 1 0 auto;
+}
+
+.flex-example-card-footer {
+  padding: 10px;
+  font-weight: bold;
+  background-color: rgb(124 197 241);
+  flex: 0 0 auto;
+}
+
+/* Vertical Centering */
+.flex-vcenter {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-example-vcenter-container {
+  width: 500px;
+  margin: 10px;
+  background-color: rgb(255 237 159);
+  border: 1px solid rgb(0 0 0);
+  border-radius: 10px;
+}
+
+.flex-example-vcenter-container p {
+  margin: 14px;
+}
