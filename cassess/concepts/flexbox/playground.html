@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/playground.css" />
+    <script src="scripts/app.js" defer></script>
+    <title>Flexbox Playground</title>
+  </head>
+  <body>
+    <h1>Flexbox Playground</h1>
+
+    <main>
+      <section class="flex-section">
+        <h2>Flex Direction</h2>
+
+        <p>Controls the directional placement of flex items.</p>
+
+        <div class="control-container">
+          <label for="select-flex-direction-01">flex-direction:</label>
+          <select
+            id="select-flex-direction-01"
+            class="flex-style-control"
+            data-controls="container-flex-direction"
+          >
+            <option selected>row</option>
+            <option>row-reverse</option>
+            <option>column</option>
+            <option>column-reverse</option>
+          </select>
+        </div>
+
+        <ul id="container-flex-direction" class="flex-container">
+          <li class="flex-item">1</li>
+          <li class="flex-item">2</li>
+          <li class="flex-item">3</li>
+          <li class="flex-item">4</li>
+          <li class="flex-item">5</li>
+        </ul>
+      </section>
+
+      <section class="flex-section">
+        <h2>Justify Content</h2>
+
+        <p>Controls the alignment of flex items along the main axis.</p>
+
+        <div class="control-container">
+          <label for="select-justify-content">justify-content:</label>
+          <select
+            id="select-justify-content"
+            class="flex-style-control"
+            data-controls="container-justify-content"
+          >
+            <option value="flex-start" selected>flex-start</option>
+            <option value="flex-end">flex-end</option>
+            <option value="start">start</option>
+            <option value="end">end</option>
+            <option value="left">left</option>
+            <option value="right">right</option>
+            <option value="center">center</option>
+            <option value="space-around">space-around</option>
+            <option value="space-between">space-between</option>
+            <option value="space-evenly">space-evenly</option>
+          </select>
+        </div>
+
+        <ul id="container-justify-content" class="flex-container">
+          <li class="flex-item">1</li>
+          <li class="flex-item">2</li>
+          <li class="flex-item">3</li>
+          <li class="flex-item">4</li>
+          <li class="flex-item">5</li>
+        </ul>
+      </section>
+
+      <section class="flex-section">
+        <h2>Align Items</h2>
+
+        <p>Controls the alignment of flex items along the cross axis.</p>
+
+        <div class="control-container">
+          <label for="select-align-items">align-items:</label>
+          <select
+            id="select-align-items"
+            class="flex-style-control"
+            data-controls="container-align-items"
+          >
+            <option value="stretch" selected>stretch</option>
+            <option value="flex-start">flex-start</option>
+            <option value="flex-end">flex-end</option>
+            <option value="center">center</option>
+            <option value="baseline">baseline</option>
+          </select>
+        </div>
+
+        <ul id="container-align-items" class="flex-container">
+          <li class="flex-item">1</li>
+          <li class="flex-item">2</li>
+          <li class="flex-item">3</li>
+          <li class="flex-item">4</li>
+          <li class="flex-item">5</li>
+        </ul>
+      </section>
+
+      <section class="flex-section">
+        <h2>Align Content</h2>
+
+        <p>Controls the alignment of wrapped lines.</p>
+
+        <div class="control-container">
+          <label for="select-align-content">align-content:</label>
+          <select
+            id="select-align-content"
+            class="flex-style-control"
+            data-controls="container-align-content"
+          >
+            <option selected>normal</option>
+            <option>flex-start</option>
+            <option>flex-end</option>
+            <option>center</option>
+            <option>baseline</option>
+            <option>space-between</option>
+            <option>space-around</option>
+            <option>space-evenly</option>
+            <option>stretch</option>
+          </select>
+        </div>
+
+        <div class="control-container">
+          <label for="select-flex-wrap-01">flex-wrap:</label>
+          <select
+            id="select-flex-wrap-01"
+            class="flex-style-control"
+            data-controls="container-align-content"
+            data-style="flex-wrap"
+          >
+            <option selected>wrap</option>
+            <option>wrap-reverse</option>
+            <option>nowrap</option>
+          </select>
+        </div>
+
+        <ul id="container-align-content" class="flex-container">
+          <li class="flex-item">1</li>
+          <li class="flex-item">2</li>
+          <li class="flex-item">3</li>
+          <li class="flex-item">4</li>
+          <li class="flex-item">5</li>
+          <li class="flex-item">6</li>
+          <li class="flex-item">7</li>
+          <li class="flex-item">8</li>
+          <li class="flex-item">9</li>
+          <li class="flex-item">10</li>
+        </ul>
+      </section>
+
+      <section class="flex-section">
+        <h2>Gap</h2>
+
+        <p>Adds spacing between the flex item columns and rows.</p>
+
+        <div class="control-container">
+          <label for="row-gap-input">row-gap:</label>
+          <input
+            id="row-gap-input"
+            class="flex-style-control"
+            data-controls="container-gap"
+            data-style="row-gap"
+            data-style-units="px"
+            type="number"
+            value="0"
+            min="0"
+            max="25"
+          />
+        </div>
+
+        <div class="control-container">
+          <label for="column-gap-input">column-gap:</label>
+          <input
+            id="column-gap-input"
+            class="flex-style-control"
+            data-controls="container-gap"
+            data-style="column-gap"
+            data-style-units="px"
+            type="number"
+            value="0"
+            min="0"
+            max="25"
+          />
+        </div>
+
+        <div class="control-container">
+          <label for="select-flex-direction-02">flex-direction:</label>
+          <select
+            id="select-flex-direction-02"
+            class="flex-style-control"
+            data-controls="container-gap"
+            data-style="flex-direction"
+          >
+            <option selected>row</option>
+            <option>row-reverse</option>
+            <option>column</option>
+            <option>column-reverse</option>
+          </select>
+        </div>
+
+        <div class="control-container">
+          <label for="select-flex-wrap-02">flex-wrap:</label>
+          <select
+            id="select-flex-wrap-02"
+            class="flex-style-control"
+            data-controls="container-gap"
+            data-style="flex-wrap"
+          >
+            <option selected>wrap</option>
+            <option>wrap-reverse</option>
+            <option>nowrap</option>
+          </select>
+        </div>
+
+        <ul id="container-gap" class="flex-container">
+          <li class="flex-item">1</li>
+          <li class="flex-item">2</li>
+          <li class="flex-item">3</li>
+          <li class="flex-item">4</li>
+          <li class="flex-item">5</li>
+          <li class="flex-item">6</li>
+          <li class="flex-item">7</li>
+          <li class="flex-item">8</li>
+          <li class="flex-item">9</li>
+        </ul>
+      </section>
+
+      <section class="flex-section">
+        <h2>Flex Grow, Flex Shrink, and Flex Basis</h2>
+
+        <p>
+          With the default value, <code>flex: initial</code> or <code>flex: 0 1 auto</code>, items
+          are unable to grow to fill the flex container, but will attempt to shrink without
+          overflowing. The <code>flex-basis</code> is based on the content size.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-1">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <p>
+          With the value of <code>flex: auto</code> or <code>flex: 1 1 auto</code>, items grow to
+          fill the flex container and will also attempt to shrink without overflowing. The
+          <code>flex-basis</code> is based on the content size. Note that the last item is bigger
+          than the other two, as it's text content is longer.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-2">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <p>
+          For the value of <code>flex: none</code> or <code>flex: 0 0 auto</code>, the items cannot
+          grow or shrink. As before, the <code>flex-basis</code> is based on the content size.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-3">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <p>
+          Specifying an integer value, such as <code>flex: 1</code> or
+          <code>flex: 1 1 0</code> allows the items to grow and shrink. However, the
+          <code>flex-basis</code> is set to ignore its contents. This results in all of the items
+          being of equal size.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-4">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <p>
+          Setting an explicit <code>flex-basis</code> while disabling <code>flex-grow</code> with
+          the <code>flex: 0 1 120px</code> style declaration.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-5">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <p>
+          Setting the third item to take up twice as much space as the first two items. The first
+          two items are set to <code>flex: 1 1 120px</code>, while the third item's
+          <code>flex-grow</code> value is set to <code>2</code>.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-6">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <p>
+          Same as above, but the <code>flex-basis</code> has been set to a value of
+          <code>auto</code>, making the distribution much more proportionally even.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-7">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <p>
+          The first item is constricted, while the second and third items are set to grow to fit the
+          flex container. The styles include <code>flex: 1 1 50px</code> on the second and third
+          items, and <code>flex: 0 1 50px</code> on the first item.
+        </p>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-8">
+          <li class="flex-item">one</li>
+          <li class="flex-item">two</li>
+          <li class="flex-item">three four five</li>
+        </ul>
+
+        <h3>Playground</h3>
+
+        <div class="flex-container-gsb-controls">
+          <div class="flex-container-gsb-controls-col">
+            <div>
+              <label for="select-flex-grow-01">one flex-grow</label>
+              <input
+                id="select-flex-grow-01"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-01"
+                data-style="flex-grow"
+                type="number"
+                value="1"
+                min="0"
+                max="10"
+              />
+            </div>
+
+            <div>
+              <label for="select-flex-shrink-01">one flex-shrink</label>
+              <input
+                id="select-flex-shrink-01"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-01"
+                data-style="flex-shrink"
+                type="number"
+                value="1"
+                min="0"
+                max="10"
+              />
+            </div>
+
+            <div>
+              <label for="select-flex-basis-01">one flex-basis</label>
+              <select
+                id="select-flex-basis-01"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-01"
+                data-owns="select-flex-basis-px-01"
+                data-style="flex-basis"
+              >
+                <option selected>auto</option>
+                <option>0</option>
+                <option value="select-flex-basis-px-01">px</option>
+              </select>
+              <input
+                aria-label="one flex-basis px value"
+                id="select-flex-basis-px-01"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-01"
+                data-style="flex-basis"
+                data-style-units="px"
+                type="number"
+                value="0"
+                min="1"
+                max="200"
+                disabled
+              />
+            </div>
+          </div>
+
+          <div class="flex-container-gsb-controls-col">
+            <div>
+              <label for="select-flex-grow-02">two flex-grow</label>
+              <input
+                id="select-flex-grow-02"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-02"
+                data-style="flex-grow"
+                type="number"
+                value="1"
+                min="0"
+                max="10"
+              />
+            </div>
+
+            <div>
+              <label for="select-flex-shrink-02">two flex-shrink</label>
+              <input
+                id="select-flex-shrink-02"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-02"
+                data-style="flex-shrink"
+                type="number"
+                value="1"
+                min="0"
+                max="10"
+              />
+            </div>
+
+            <div>
+              <label for="select-flex-basis-02">two flex-basis</label>
+              <select
+                id="select-flex-basis-02"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-02"
+                data-owns="select-flex-basis-px-02"
+                data-style="flex-basis"
+              >
+                <option selected>auto</option>
+                <option>0</option>
+                <option>px</option>
+              </select>
+              <input
+                aria-label="two flex-basis px value"
+                id="select-flex-basis-px-02"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-02"
+                data-style="flex-basis"
+                data-style-units="px"
+                type="number"
+                value="0"
+                min="1"
+                max="200"
+                disabled
+              />
+            </div>
+          </div>
+
+          <div class="flex-container-gsb-controls-col">
+            <div>
+              <label for="select-flex-grow-03">three flex-grow</label>
+              <input
+                id="select-flex-grow-03"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-03"
+                data-style="flex-grow"
+                type="number"
+                value="1"
+                min="0"
+                max="10"
+              />
+            </div>
+
+            <div>
+              <label for="select-flex-shrink-03">three flex-shrink</label>
+              <input
+                id="select-flex-shrink-03"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-03"
+                data-style="flex-shrink"
+                type="number"
+                value="1"
+                min="0"
+                max="10"
+              />
+            </div>
+
+            <div>
+              <label for="select-flex-basis-03">three flex-basis</label>
+              <select
+                id="select-flex-basis-03"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-03"
+                data-owns="select-flex-basis-px-03"
+                data-style="flex-basis"
+              >
+                <option selected>auto</option>
+                <option>0</option>
+                <option>px</option>
+              </select>
+              <input
+                aria-label="three flex-basis px value"
+                id="select-flex-basis-px-03"
+                class="flex-style-control"
+                data-controls="flex-item-gsb-pg-03"
+                data-style="flex-basis"
+                data-style-units="px"
+                type="number"
+                value="0"
+                min="1"
+                max="200"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+
+        <ul class="flex-container flex-container-gsb flex-container-gsb-playground">
+          <li id="flex-item-gsb-pg-01" class="flex-item">one</li>
+          <li id="flex-item-gsb-pg-02" class="flex-item">two</li>
+          <li id="flex-item-gsb-pg-03" class="flex-item">three</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

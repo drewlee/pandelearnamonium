@@ -1,0 +1,73 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+dl,
+dt,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+html {
+  font:
+    normal 62.5% / 1.4 Helvetica,
+    Arial,
+    sans-serif;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+h1 {
+  margin: 2.4rem 0;
+  font-size: 3.2rem;
+}
+
+h2 {
+  margin: 2rem 0;
+  font-size: 2.4rem;
+}
+
+h3 {
+  margin: 1.6rem 0;
+  font-size: 1.8rem;
+}
+
+h4 {
+  margin: 1.2rem 0;
+  font-size: 1.6rem;
+}
+
+h5 {
+  margin: 1rem 0;
+  font-size: 1.3rem;
+}
+
+h6 {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+}
+
+p {
+  margin: 1.2rem 0;
+  font-size: 1.6rem;
+}
+
+li {
+  font-size: 1.6rem;
+}
