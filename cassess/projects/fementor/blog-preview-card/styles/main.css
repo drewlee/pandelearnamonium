@@ -58,6 +58,9 @@ a {
   min-width: 277px;
   margin: 40.5px var(--spacing-300) 0;
   padding: calc(var(--spacing-300) - 1px);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-300);
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-950);
   border-radius: 20px;
@@ -66,7 +69,6 @@ a {
 
 .blog-prv-card-cover {
   height: 200px;
-  margin-bottom: var(--spacing-300);
   border-radius: 10px;
   overflow: hidden;
   display: flex;
@@ -77,8 +79,14 @@ a {
   display: block;
 }
 
+.blog-prv-card-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-150);
+}
+
 .blog-prv-card-tag {
-  display: inline-block;
+  align-self: flex-start;
   padding: var(--spacing-50) var(--spacing-150);
   border-radius: 4px;
   background-color: var(--color-yellow);
@@ -87,12 +95,10 @@ a {
 }
 
 .blog-prv-card-date {
-  margin-top: var(--spacing-150);
   font-size: clamp(1.2rem, 3vw, 1.4rem);
 }
 
 .blog-prv-card-title {
-  margin-top: var(--spacing-150);
   font-size: clamp(2rem, 5vw, 2.4rem);
   font-weight: 800;
 }
@@ -108,7 +114,6 @@ a {
 }
 
 .blog-prv-card-excerpt {
-  margin-top: var(--spacing-150);
   font-size: clamp(1.4rem, 3vw, 1.6rem);
   color: var(--color-gray-500);
 }
@@ -117,7 +122,6 @@ a {
   display: flex;
   align-items: center;
   column-gap: var(--spacing-150);
-  margin-top: var(--spacing-300);
   font-weight: 800;
 }
 
@@ -138,6 +142,7 @@ a {
   text-align: center;
 }
 
+/* Favor grouping styles by their associated elements. */
 /* stylelint-disable-next-line no-descending-specificity */
 .attribution a {
   color: hsl(228deg 45% 44%);
