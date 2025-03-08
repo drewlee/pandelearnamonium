@@ -142,7 +142,7 @@ a {
   text-align: center;
 }
 
-/* Favor grouping styles by their associated elements. */
+/* Favor grouping styles by their associated elements */
 /* stylelint-disable-next-line no-descending-specificity */
 .attribution a {
   color: hsl(228deg 45% 44%);

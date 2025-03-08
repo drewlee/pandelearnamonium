@@ -1,8 +1,135 @@
-.attribution {
-  font-size: 11px;
+/* Custom Font Inclusion */
+@font-face {
+  font-family: Inter;
+  src: url('../assets/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+  font-weight: 400 600;
+  font-style: normal;
+}
+
+/* Custom Properties */
+:root {
+  /* Color Scheme */
+  --color-green: hsl(75deg 94% 57%);
+  --color-grey-700: hsl(0deg 0% 20%);
+  --color-grey-800: hsl(0deg 0% 12%);
+  --color-grey-900: hsl(0deg 0% 8%);
+  --color-white: hsl(0deg 0% 100%);
+}
+
+body,
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+}
+
+html {
+  font:
+    normal 400 62.5% / 1.5 Inter,
+    sans-serif;
+  color: var(--color-white);
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.4em;
+  background-color: var(--color-grey-900);
+}
+
+/* Social Links Profile Styles */
+.soc-link-prof-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+}
+
+.soc-link-prof {
+  max-width: 384px;
+  min-width: 328px;
+  margin: 44.5px 24px 0;
+  padding: 24px 0;
+  flex: 1 0 0;
+  background-color: var(--color-grey-800);
+  border-radius: 10px;
   text-align: center;
 }
 
+.soc-link-prof-img {
+  width: 86px;
+  height: 86px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.soc-link-prof-name {
+  margin: 28px 0 7px;
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.soc-link-prof-location {
+  margin: 0 0 24px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-green);
+}
+
+.soc-link-prof-links {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  align-items: center;
+  margin: 24px 40px 0;
+}
+
+.soc-link-prof-links a {
+  width: 100%;
+  min-width: 278px;
+  padding: 12px 0;
+  border-radius: 8px;
+  background-color: var(--color-grey-700);
+  text-decoration: none;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-white);
+  transition:
+    background-color 0.2s ease-in,
+    color 0.2s ease-in;
+}
+
+.soc-link-prof-links a:hover,
+.soc-link-prof-links a:focus {
+  background-color: var(--color-green);
+  color: var(--color-grey-900);
+}
+
+/* Overrides for Non-Mobile Screens */
+@media (width > 375px) {
+  body {
+    .soc-link-prof {
+      padding: 40px 0;
+    }
+  }
+}
+
+/* Attribution */
+.attribution {
+  padding: 14px 0;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Favor grouping styles by their associated elements */
+/* stylelint-disable-next-line no-descending-specificity */
 .attribution a {
-  color: hsl(228deg 45% 44%);
+  color: var(--color-green);
 }
