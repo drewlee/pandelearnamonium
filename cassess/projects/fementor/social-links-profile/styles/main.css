@@ -72,14 +72,14 @@ body {
 }
 
 .soc-link-prof-name {
-  margin: 28px 0 7px;
-  font-size: 2.2rem;
-  font-weight: 500;
+  margin: 27px 0 4px;
+  font-size: 2.4rem;
+  font-weight: 600;
 }
 
 .soc-link-prof-location {
-  margin: 0 0 24px;
-  font-size: 1.3rem;
+  margin: 0 0 23px;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--color-green);
 }
