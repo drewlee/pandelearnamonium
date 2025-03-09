@@ -1,9 +1,10 @@
 /* Custom Font Inclusion */
 @font-face {
   font-family: Inter;
-  src: url('../assets/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
-  font-weight: 400 600;
+  src: url('../assets/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
+  font-weight: 400 700;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Custom Properties */
@@ -16,6 +17,7 @@
   --color-white: hsl(0deg 0% 100%);
 }
 
+/* Reset & General Styles */
 body,
 h1,
 h2,
@@ -42,6 +44,11 @@ body {
   justify-content: center;
   font-size: 1.4em;
   background-color: var(--color-grey-900);
+}
+
+/* Utilities */
+.transition-off * {
+  transition: none !important;
 }
 
 /* Social Links Profile Styles */
@@ -129,7 +136,7 @@ body {
   text-align: center;
 }
 
-/* Favor grouping styles by their associated elements */
+/* Disabled to favor grouping styles by their associated elements */
 /* stylelint-disable-next-line no-descending-specificity */
 .attribution a {
   color: var(--color-green);
