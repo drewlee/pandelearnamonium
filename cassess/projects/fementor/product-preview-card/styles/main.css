@@ -156,6 +156,7 @@ body {
 
 /* Attribution */
 .attribution {
+  min-width: 350px;
   margin: var(--spacing-200) 0;
   font-size: 1rem;
   line-height: 1;
