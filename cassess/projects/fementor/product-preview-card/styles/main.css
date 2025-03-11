@@ -181,4 +181,9 @@ body {
   .prd-preview_prd-img {
     flex: 0 0 300px;
   }
+
+  .prd-preview_content {
+    justify-content: space-between;
+    row-gap: 0;
+  }
 }
