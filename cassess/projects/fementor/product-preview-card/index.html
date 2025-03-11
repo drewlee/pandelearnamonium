@@ -3,31 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-
-    <title>Frontend Mentor | Product preview card component</title>
-
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Montserrat:wght@500..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <title>Frontend Mentor | Product Preview Card Component</title>
   </head>
   <body>
-    Perfume Gabrielle Essence Eau De Parfum A floral, solar and voluptuous interpretation composed
-    by Olivier Polge, Perfumer-Creator for the House of CHANEL. $149.99 $169.99 Add to Cart
+    <main class="prd-preview_card-container">
+      <div class="prd-preview_card">
+        <picture class="prd-preview_prd-img">
+          <source srcset="./images/image-product-desktop.jpg" media="(min-width: 624px)" />
+          <img src="./images/image-product-mobile.jpg" alt="Gabrielle Essence Eau De Parfum" />
+        </picture>
+        <section class="prd-preview_content">
+          <p class="prd-preview_prd-category type_montserrat_sml">Perfume</p>
+          <h1 class="prd-preview_prd-name type_fraunces_lrg">Gabrielle Essence Eau De Parfum</h1>
+          <p class="prd-preview_prd-desc">
+            A floral, solar and voluptuous interpretation composed by Olivier Polge,
+            Perfumer-Creator for the House of CHANEL.
+          </p>
+          <p class="prd-preview_price-block">
+            <span class="prd-preview_price type_fraunces_lrg">$149.99</span>
+            <span class="prd-preview_strike-price type_montserrat_mid">$169.99</span>
+          </p>
+          <button class="prd-preview_btn-atc type_montserrat_lrg" type="button">Add to Cart</button>
+        </section>
+      </div>
+    </main>
 
-    <div class="attribution">
+    <footer class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-      Coded by <a href="#">Your Name Here</a>.
-    </div>
+      Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
+    </footer>
   </body>
 </html>
