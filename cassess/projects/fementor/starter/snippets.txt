@@ -1,0 +1,15 @@
+# Markdown for README
+- Solution URL: https://github.com/drewlee/pandelearnamonium/tree/main/cassess/projects/fementor/<project_name>
+- Live Site URL: https://drewlee.github.io/pandelearnamonium/cassess/projects/fementor/<project_name>/
+
+- Accessibility
+- ESLint
+- Stylelint
+
+- Website - [Andrew A. Lee](https://github.com/drewlee)
+- Frontend Mentor - [@drewlee](https://www.frontendmentor.io/profile/drewlee)
+
+# HTML
+<link rel="stylesheet" href="./styles/main.css" />
+
+Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
