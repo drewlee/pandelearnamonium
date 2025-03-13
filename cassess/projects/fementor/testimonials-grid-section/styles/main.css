@@ -1,0 +1,91 @@
+/* CUSTOM PROPERTIES */
+:root {
+  /* Color Scheme */
+  --color-black: rgb(18 18 18);
+  --color-dark-blue: rgb(25 32 45);
+  --color-grey-100: rgb(231 234 238);
+  --color-grey-200: rgb(207 207 207);
+  --color-grey-400: rgb(103 109 126);
+  --color-grey-500: rgb(72 85 106);
+  --color-purple-50: rgb(237 228 255);
+  --color-purple-300: rgb(167 117 241);
+  --color-purple-500: rgb(115 63 200);
+  --color-white: rgb(255 255 255);
+
+  /* Spacing */
+  --spacing-50: 4px;
+  --spacing-100: 8px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+}
+
+/* RESETS & GENERAL STYLES */
+* {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+html {
+  font:
+    normal 500 62.5% / 1.1 'Barlow Semi Condensed',
+    sans-serif;
+  background-color: rgb(246 245 246);
+}
+
+body {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--color-black);
+}
+
+/* TYPOGRAPHY */
+.type_barlow-lrg {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.type_barlow-mid {
+  line-height: 1.4;
+}
+
+.type_barlow-sml {
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+/* Attribution */
+.attribution {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.attribution a {
+  color: rgb(62 82 163);
+}
+
+/* OVERRIDES FOR NON-MOBILE SCREENS */
+@media (width > 375px) {
+  /* placeholder */
+}
