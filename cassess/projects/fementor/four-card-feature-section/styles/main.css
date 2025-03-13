@@ -102,13 +102,12 @@ body {
 .card-feature_heading {
   min-width: 300px;
   max-width: 549px;
-  margin: 56px auto;
+  margin: 102px auto 73px;
+  text-align: center;
 }
 
-.card-feature_title,
-.card-feature_desc {
-  margin: 18px 0;
-  text-align: center;
+.card-feature_title {
+  margin: 0 0 var(--spacing-200);
 }
 
 /* Cards */
