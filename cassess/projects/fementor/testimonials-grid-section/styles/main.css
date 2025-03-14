@@ -25,10 +25,6 @@
 }
 
 /* RESETS & GENERAL STYLES */
-* {
-  box-sizing: border-box;
-}
-
 body,
 h2,
 p,
@@ -73,12 +69,12 @@ body {
 
 /* TESTIMONIAL GRID STYLES */
 .testi-grid-item_container {
-  box-sizing: content-box;
-  width: 305px;
-  padding: 0 35px;
+  min-width: 305px;
+  max-width: 1114px;
+  margin: 73px auto;
+  padding: 0 clamp(35px, 10vw, 60.5px);
   display: grid;
   grid-template-columns: 1fr;
-  margin: 73px auto;
   gap: var(--spacing-400);
 }
 
@@ -99,7 +95,6 @@ body {
 }
 
 .testi-grid-item_actor-avatar {
-  box-sizing: content-box;
   display: block;
   width: 28px;
   height: 28px;
@@ -178,7 +173,6 @@ body {
 /* OVERRIDES FOR NON-MOBILE SCREENS */
 @media (width >= 768px) {
   .testi-grid-item_container {
-    width: 647px;
     margin: 83px auto;
     grid-template-columns: repeat(2, 1fr);
   }
@@ -190,9 +184,8 @@ body {
   }
 }
 
-@media (width >= 1184px) {
+@media (width >= 1120px) {
   .testi-grid-item_container {
-    width: 1114px;
     margin: 229px auto;
     grid-template-columns: repeat(4, 1fr);
     row-gap: var(--spacing-300);
