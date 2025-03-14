@@ -11,4 +11,5 @@
 - [Social Links Profile](./projects/fementor/social-links-profile)
 - [Recipe Page](./projects/fementor/recipe-page)
 - [Product Preview Card Component](./projects/fementor/product-preview-card)
-- [Four Card Feature Section](./projects/fementor/four-card-feature-section/)
+- [Four Card Feature Section](./projects/fementor/four-card-feature-section)
+- [Testimonials Grid Section](./projects/fementor/testimonials-grid-section)
