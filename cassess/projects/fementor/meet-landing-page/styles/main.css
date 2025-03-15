@@ -1,0 +1,438 @@
+/* CUSTOM PROPERTIES */
+:root {
+  /* Color Scheme */
+  --color-cyan-300: rgb(143 227 249);
+  --color-cyan-600: rgb(77 150 168);
+  --color-purple-300: rgb(217 184 255);
+  --color-purple-600: rgb(133 95 177);
+  --color-slate-300: rgb(209 209 223);
+  --color-slate-600: rgb(135 135 157);
+  --color-slate-900: rgb(40 40 61);
+  --color-white: rgb(250 250 250);
+
+  /* Spacing */
+  --spacing-50: 4px;
+  --spacing-100: 8px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-700: 56px;
+  --spacing-800: 64px;
+  --spacing-900: 72px;
+  --spacing-1000: 80px;
+  --spacing-1100: 88px;
+  --spacing-1400: 112px;
+
+  /* Marker Dimensions */
+  --dims-marker: var(--spacing-700);
+  --dims-marker-top-height: 80px;
+  --dims-marker-half: calc(var(--dims-marker) / 2);
+}
+
+/* RESETS & GENERAL STYLES */
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  display: block;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+html {
+  font:
+    normal 500 62.5% / 1.1 'Red Hat Display',
+    sans-serif;
+  background-color: var(--color-white);
+}
+
+body {
+  font-size: 1.6rem;
+  color: var(--color-slate-600);
+}
+
+/* TYPOGRAPHY
+- Red Hat Display Medium: 500
+- Red Hat Display Black: 900
+- Primary heading: 64px
+  - Tablet: 48px
+  - Mobile: 40px
+- Secondary headings: 40px
+  - Tablet: 36px
+  - Mobile: 32px
+- Body: 18px
+  - Tablet: 16px
+  - Mobile: 16px
+- Accent: 16px
+  - Tablet: 14px
+  - Mobile: 12px
+- Buttons: 16px
+  - Tablet: 16px
+  - Mobile: 16px */
+.font_heading-primary {
+  font-size: 4rem;
+  font-weight: 900;
+}
+
+.font_heading-secondary {
+  font-size: 3.2rem;
+  font-weight: 900;
+}
+
+.font_body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+.font_accent {
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 0.4rem;
+  text-transform: uppercase;
+}
+
+.font_button {
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+/* MEET LANDING PAGE STYLES
+   Buttons */
+.mlpage-btn {
+  padding: calc(var(--spacing-200) - 2px) var(--spacing-500);
+  border-radius: 29px;
+  border-color: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.mlpage-btn em {
+  font-style: normal;
+}
+
+.mlpage-btn_primary {
+  background-color: var(--color-cyan-600);
+}
+
+.mlpage-btn_secondary {
+  background-color: var(--color-purple-600);
+}
+
+.mlpage-btn_primary em {
+  color: var(--color-cyan-300);
+}
+
+.mlpage-btn_secondary em {
+  color: var(--color-purple-300);
+}
+
+.mlpage-btn_primary:hover,
+.mlpage-btn_primary:focus {
+  background-color: rgb(113 192 212);
+}
+
+.mlpage-btn_secondary:hover,
+.mlpage-btn_secondary:focus {
+  background-color: rgb(177 139 221);
+}
+
+/* Marker */
+.mlpage_marker {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: var(--spacing-700);
+  height: var(--spacing-700);
+  margin: var(--dims-marker-top-height) auto 0;
+  border: 1px solid var(--color-slate-300);
+  border-radius: 50%;
+  background-color: var(--color-white);
+  color: var(--color-slate-600);
+}
+
+.mlpage_marker::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: calc(var(--dims-marker-top-height) * -1);
+  width: 1px;
+  height: var(--dims-marker-top-height);
+  background-color: var(--color-slate-300);
+}
+
+/* Header */
+.mlpage-header {
+  padding: var(--spacing-600) 0 0;
+  text-align: center;
+}
+
+.mlpage-header_logo {
+  display: inline-block;
+}
+
+.mlpage-header_logo img {
+  display: block;
+}
+
+.mlpage-header::after {
+  content: '';
+  display: block;
+  height: 40vw;
+  min-height: 160px;
+  max-height: 303px;
+  margin: var(--spacing-800) 0 0;
+  background: url('../assets/tablet/image-hero.png') center center / auto 100% no-repeat;
+}
+
+/* Main Content */
+.mlpage-main {
+  padding: var(--spacing-600) var(--spacing-400) var(--spacing-800);
+}
+
+.mlpage-main_heading {
+  color: var(--color-slate-900);
+}
+
+/* Call to Action */
+.mlpage-main_cta-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-300);
+  align-items: center;
+  padding: 0 0 var(--spacing-300);
+  text-align: center;
+}
+
+.mlpage-main_cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-200) 0;
+  align-items: center;
+}
+
+/* Marker Placement */
+.mlpage-main .mlpage_marker {
+  margin: calc(var(--dims-marker-top-height) + var(--spacing-300)) auto 0;
+}
+
+/* Product Description */
+.mlpage-main_desc-container {
+  text-align: center;
+}
+
+.mlpage-main_desc-topic {
+  margin: 0 0 var(--spacing-200);
+  color: var(--color-cyan-600);
+}
+
+.mlpage-main_desc-heading {
+  margin: 0 0 var(--spacing-400);
+  color: var(--color-slate-900);
+}
+
+/* Photo Grid
+- Column Width: 148px
+  - Tablet: 152px
+  - Desktop: 256px
+- Gap: 16px
+  - Tablet: 24px
+  - Desktop: 32px */
+.mlpage-main_photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(148px, 47.6%));
+  gap: var(--spacing-200);
+  justify-content: center;
+  max-width: 440px;
+  margin: var(--spacing-800) auto;
+}
+
+.mlpage-main_photo-grid-item img {
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Footer */
+.mlpage-footer {
+  position: relative;
+  margin: calc(var(--dims-marker-top-height) + var(--dims-marker-half)) 0 0;
+  padding: var(--spacing-800) var(--spacing-400);
+  color: var(--color-white);
+  background-color: var(--color-cyan-600);
+}
+
+.mlpage-footer .mlpage_marker {
+  position: absolute;
+  left: 50%;
+  top: calc((var(--dims-marker-top-height) + var(--dims-marker-half)) * -1);
+  margin-left: calc(var(--dims-marker-half) * -1);
+}
+
+.mlpage-footer_container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-300) 0;
+  align-items: center;
+}
+
+.mlpage-footer_item {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.mlpage-footer::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: url('../assets/mobile/image-footer.jpg') center center / cover /* 100% auto */
+    no-repeat transparent;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+/* OVERRIDES FOR NON-MOBILE SCREENS */
+@media (width >= 768px) {
+  /* TYPOGRAPHY */
+  .font_heading-primary {
+    font-size: 4.8rem;
+  }
+
+  .font_heading-secondary {
+    font-size: 3.6rem;
+  }
+
+  .font_accent {
+    font-size: 1.4rem;
+  }
+
+  /* Header */
+  .mlpage-header::after {
+    background-size: auto 303px;
+  }
+
+  /* Main Content */
+  .mlpage-main {
+    padding-top: var(--spacing-900);
+  }
+
+  /* Call to Action */
+  .mlpage-main_cta-container {
+    width: 448px;
+    margin: 0 auto;
+    padding: 0 0 var(--spacing-800);
+  }
+
+  .mlpage-main_cta {
+    flex-direction: row;
+    gap: 0 var(--spacing-200);
+  }
+
+  /* Marker Placement */
+  .mlpage-main .mlpage_marker {
+    margin-top: calc(var(--dims-marker-top-height) + var(--spacing-700));
+  }
+
+  /* Photo Grid */
+  .mlpage-main_photo-grid {
+    grid-template-columns: repeat(4, 21.6%);
+    gap: var(--spacing-300);
+    max-width: 1185px;
+  }
+
+  /* Footer */
+  .mlpage-footer::before {
+    background-image: url('../assets/tablet/image-footer.jpg');
+  }
+}
+
+@media (width >= 1024px) {
+  /* TYPOGRAPHY */
+  .font_heading-primary {
+    font-size: 6.4rem;
+  }
+
+  .font_heading-secondary {
+    font-size: 4rem;
+  }
+
+  .font_body {
+    font-size: 1.8rem;
+  }
+
+  .font_accent {
+    font-size: 1.6rem;
+  }
+
+  /* Header */
+  .mlpage-header {
+    padding-top: var(--spacing-1000);
+  }
+
+  .mlpage-header::after {
+    display: none;
+  }
+
+  /* Main Content */
+  .mlpage-main {
+    padding-top: var(--spacing-1000);
+    padding-bottom: var(--spacing-900);
+    background:
+      url('../assets/desktop/image-hero-left.png') -90px top no-repeat,
+      url('../assets/desktop/image-hero-right.png') 120% top no-repeat;
+  }
+
+  /* Call to Action */
+  .mlpage-main_cta-container {
+    row-gap: var(--spacing-400);
+    padding: 0 0 var(--spacing-1100);
+  }
+
+  /* Photo Grid */
+  .mlpage-main_photo-grid {
+    gap: var(--spacing-400);
+  }
+
+  /* Footer */
+  .mlpage-footer {
+    padding: var(--spacing-800) 160px;
+  }
+
+  .mlpage-footer_container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0 var(--spacing-1000);
+  }
+
+  .mlpage-footer_item {
+    text-align: left;
+    flex: 1 0 0;
+  }
+
+  .mlpage-footer_item:nth-child(3) {
+    flex: 0 0 auto;
+  }
+
+  .mlpage-footer::before {
+    background-image: url('../assets/desktop/image-footer.jpg');
+  }
+}
