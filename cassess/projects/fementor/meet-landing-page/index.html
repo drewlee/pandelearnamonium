@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
     <link rel="stylesheet" href="./styles/main.css" />
+    <script>
+      // Disable transition effects on initial page load
+      window.addEventListener('load', () => document.body.classList.remove('transition-off'));
+    </script>
     <title>Frontend Mentor | Meet Landing Page</title>
   </head>
-  <body>
+  <body class="transition-off">
     <header class="mlpage-header">
       <a class="mlpage-header_logo" href="./">
         <img src="./assets/logo.svg" alt="Meet logo" />
