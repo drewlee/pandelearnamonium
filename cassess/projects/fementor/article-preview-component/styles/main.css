@@ -1,0 +1,192 @@
+/* CUSTOM FONT INCLUSION */
+@font-face {
+  font-family: Manrope;
+  src: url('../assets/fonts/manrope/Manrope-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CUSTOM PROPERTIES */
+:root {
+  /* Color Scheme */
+  --color-grey-200: rgb(236 242 248);
+  --color-grey-400: rgb(157 174 194);
+  --color-grey-500: rgb(110 128 152);
+  --color-grey-900: rgb(72 85 106);
+  --color-white: rgb(255 255 255);
+
+  /* Spacing */
+  --spacing-100: 8px;
+}
+
+/* RESETS & GENERAL STYLES */
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+html {
+  font:
+    normal 500 62.5% / 1.4 Manrope,
+    sans-serif;
+  background-color: var(--color-grey-200);
+}
+
+body {
+  color: var(--color-grey-500);
+}
+
+/* TYPOGRAPHY
+  - Medium: 500
+  - Bold: 700
+  - 700 20px / 1.3 
+  - 500 13px / 1.4
+  - 700 13px / 1.4
+  - 700 13px / 1.4 all-caps */
+.font_heading {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.025rem;
+  line-height: 1.3;
+}
+
+.font_body {
+  font-size: 1.3rem;
+  letter-spacing: 0.0016rem;
+}
+
+.font_emphasis {
+  font-weight: 700;
+}
+
+.font_accent {
+  letter-spacing: 0.325rem;
+  text-transform: uppercase;
+}
+
+/* MAIN CONTENT
+  Component Breakpoint Widths
+  - Mobile: 375px
+    - Container: 327px
+  - Tablet: 768px
+    - Container: 608px / 79.17%
+    - Image width: 229px / 37.67%
+  - Desktop: 1440px
+    - Container: 730px / 50.69%
+    - Image width: 285px / 39% */
+.apcomp-container {
+  display: grid;
+  min-width: 375px;
+  grid-template-rows: 24px auto 24px;
+  grid-template-columns: 24px auto 24px;
+  align-items: center;
+  height: 100vh;
+}
+
+.apcomp-content {
+  display: flex;
+  flex-direction: column;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  border-radius: 10px;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+.apcomp-content_card-img {
+  height: 53.3vw;
+  min-height: 200px;
+  overflow: hidden;
+}
+
+.apcomp-content_card-img img {
+  width: 100%;
+}
+
+.apcomp-content_card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  padding: 32px 32px 16px;
+}
+
+.apcomp-content_card h1 {
+  color: var(--color-grey-900);
+}
+
+.apcomp-content_card-author {
+  display: flex;
+  align-items: center;
+  gap: 0 16px;
+  padding: 24px 0 0;
+}
+
+.apcomp-content_card-author-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.apcomp-content_card-author-info p {
+  color: var(--color-grey-900);
+}
+
+.apcomp-content_card-author-btn {
+  width: 32px;
+  height: 32px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border-color: transparent;
+  border-radius: 50%;
+  background: url('../images/icon-share.svg') no-repeat center center var(--color-grey-200);
+  cursor: pointer;
+}
+
+/* Attribution */
+.attribution {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.attribution a {
+  color: rgb(62 82 163);
+}
+
+/* OVERRIDES FOR NON-MOBILE SCREENS */
+@media (width >= 768px) {
+  .apcomp-container {
+    grid-template-columns: minmax(80px, auto) minmax(608px, 730px) minmax(80px, auto);
+  }
+
+  .apcomp-content {
+    flex-direction: row;
+  }
+
+  .apcomp-content_card-img {
+    height: auto;
+    position: relative;
+    flex: 0 0 39%;
+  }
+
+  .apcomp-content_card-img img {
+    height: 100%;
+    width: auto;
+    position: absolute;
+  }
+}
