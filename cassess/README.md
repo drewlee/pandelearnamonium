@@ -14,3 +14,4 @@
 - [Four Card Feature Section](./projects/fementor/four-card-feature-section/)
 - [Testimonials Grid Section](./projects/fementor/testimonials-grid-section/)
 - [Meet Landing Page](./projects/fementor/meet-landing-page/)
+- [Article Preview Component](./projects/fementor/article-preview-component/)

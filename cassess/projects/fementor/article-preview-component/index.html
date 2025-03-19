@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <link rel="stylesheet" href="./styles/main.css" />
-    <script src="./scripts/app.js" defer></script>
+    <script src="./scripts/init.js" type="module"></script>
     <title>Frontend Mentor | Article Preview Component</title>
   </head>
   <body class="font_body">
     <div class="apcomp-container">
       <main class="apcomp-content">
         <div class="apcomp-content_card-img">
-          <img src="./images/drawers.jpg" alt="Green dresser" />
+          <img src="./images/drawers.jpg" alt="Green dresser" width="327" height="262" />
         </div>
 
         <section class="apcomp-content_card">
@@ -30,28 +30,63 @@
             <img
               class="apcomp-content_card-author-img"
               src="./images/avatar-michelle.jpg"
+              width="40"
+              height="40"
               alt="Michelle Appleton's avatar"
             />
+
             <div class="apcomp-content_card-author-info">
               <p class="font_emphasis">Michelle Appleton</p>
-              <time datetime="06-08-2020">28 Jun 2020</time>
+              <time datetime="2020-06-28">28 Jun 2020</time>
             </div>
-            <button
-              id="share-btn"
-              class="apcomp-content_card-author-btn"
-              type="button"
-              aria-label="Share"
-            ></button>
-            <!-- Share -->
+
+            <div class="apcomp-content_share-popup-container">
+              <div id="apcomp-share-popup" class="apcomp-share-popup_container">
+                <div class="apcomp-share-popup">
+                  <p class="font_accent">Share</p>
+                  <button
+                    class="apcomp-share-popup_share-btn facebook"
+                    type="button"
+                    aria-label="Facebook"
+                  ></button>
+                  <button
+                    class="apcomp-share-popup_share-btn twitter"
+                    type="button"
+                    aria-label="Twitter"
+                  ></button>
+                  <button
+                    class="apcomp-share-popup_share-btn pinterest"
+                    type="button"
+                    aria-label="Pinterest"
+                  ></button>
+                  <button
+                    id="close-btn"
+                    class="apcomp-share-popup_close-btn"
+                    type="button"
+                    aria-label="Close"
+                  ></button>
+                </div>
+              </div>
+
+              <button
+                id="share-btn"
+                class="apcomp-content_card-author-btn"
+                type="button"
+                aria-label="Share"
+                aria-haspopup="true"
+                aria-controls="apcomp-share-popup"
+                aria-expanded="false"
+              ></button>
+            </div>
           </div>
         </section>
       </main>
-      <!--
-        <div class="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+
+      <footer class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
         Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
-        </div>
-      -->
+      </footer>
     </div>
   </body>
 </html>
