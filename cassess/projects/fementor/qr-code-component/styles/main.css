@@ -6,6 +6,8 @@ p {
 }
 
 html {
+  background-color: hsl(212deg 45% 89%);
+  color: hsl(218deg 44% 22%);
   font:
     normal 400 100% / 1.4 Outfit,
     sans-serif;
@@ -15,8 +17,6 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  color: hsl(218deg 44% 22%);
-  background-color: hsl(212deg 45% 89%);
 }
 
 .visually-hidden {
@@ -48,7 +48,7 @@ body {
   width: 288px;
   height: 288px;
   border-radius: 10px;
-  background: url('../images/image-qr-code.png') 0 0 / cover;
+  background: url('../images/image-qr-code.png') top left / cover no-repeat;
 }
 
 .qr-card-title {

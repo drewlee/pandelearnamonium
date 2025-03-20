@@ -1,0 +1,134 @@
+/* CUSTOM FONT INCLUSION */
+@font-face {
+  font-family: 'Roboto Regular';
+  src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Bold';
+  src: url('../assets/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CUSTOM PROPERTIES */
+:root {
+  /* Color Scheme */
+  --color-blue-700: rgb(54 56 77);
+  --color-blue-800: rgb(36 39 66);
+  --color-grey: rgb(148 148 148);
+  --color-red: rgb(255 97 85);
+  --color-white: rgb(255 255 255);
+
+  /* Spacing */
+  --spacing-100: 8px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-700: 56px;
+  --spacing-800: 64px;
+  --spacing-1000: 80px;
+  --spacing-1300: 104px;
+}
+
+/* RESETS & GENERAL STYLES */
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li,
+button,
+input {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+img {
+  display: block;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border-color: transparent;
+  cursor: pointer;
+}
+
+html {
+  color: var(--color-blue-800);
+  font:
+    normal 400 100% / 1.5 'Roboto Regular',
+    sans-serif;
+  background-color: var(--color-blue-700);
+}
+
+body {
+  /* placeholder */
+}
+
+/* TYPOGRAPHY
+  - 400: regular 
+  - 700: bold
+  - 700 56px / 1
+  - 700 40px / 1 (Mobile)
+  - 700 16px / 1.5
+  - 400 16px / 1.5
+  - 700 12px / 1.5 */
+.font-style_heading {
+  font:
+    normal 700 2.5rem / 1 'Roboto Bold',
+    sans-serif; /* 40px */
+}
+
+.font-style_body {
+  font:
+    normal 400 1rem / 1.5 'Roboto Regular',
+    sans-serif; /* 16px */
+}
+
+.font-style_sml {
+  font:
+    normal 700 0.75rem / 1.5 'Roboto Bold',
+    sans-serif; /* 12px */
+}
+
+.font-style_bold {
+  font-family: 'Roboto Bold', sans-serif;
+  font-weight: 700;
+}
+
+/* Attribution */
+.attribution {
+  color: var(--color-white);
+  font-size: 0.6875rem; /* 11px */
+  text-align: center;
+}
+
+.attribution a {
+  color: var(--color-white);
+}
+
+/* OVERRIDES FOR NON-MOBILE SCREENS */
+@media (width >= 768px) {
+  /* TYPOGRAPHY */
+  .font_heading {
+    font-size: 3.5rem; /* 56px */
+  }
+}

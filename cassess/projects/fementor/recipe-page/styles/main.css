@@ -64,36 +64,34 @@ ul {
 }
 
 html {
+  background-color: var(--color-stone-100);
+  color: var(--color-stone-600);
   font:
-    normal 400 62.5% / 1.5 Outfit,
+    normal 400 100% / 1.5 Outfit,
     sans-serif;
 }
 
 body {
-  background-color: var(--color-stone-100);
-  font:
-    normal 400 1.6rem / 1.5 Outfit,
-    sans-serif;
-  color: var(--color-stone-600);
+  font-size: 1rem; /* 16px */
 }
 
 /* TYPOGRAPHY */
 .type_young-serif_lg {
   font:
-    normal 400 3.6rem / 1 'Young Serif',
-    sans-serif;
+    normal 400 2.25rem / 1 'Young Serif',
+    sans-serif; /* 36px */
 }
 
 .type_young-serif_md {
   font:
-    normal 400 2.8rem / 1 'Young Serif',
-    sans-serif;
+    normal 400 1.75rem / 1 'Young Serif',
+    sans-serif; /* 28px */
 }
 
 .type_outfit_md {
   font:
-    normal 600 2rem / 1 Outfit,
-    sans-serif;
+    normal 600 1.25rem / 1 Outfit,
+    sans-serif; /* 20px */
 }
 
 /* UTILITIES */
@@ -119,6 +117,7 @@ body {
 
 .recipe-pg_cover-img img {
   width: 100%;
+  height: auto;
 }
 
 /* Headings */
@@ -230,8 +229,8 @@ ol.recipe-pg_list li::before {
 .attribution {
   min-width: 375px;
   padding: var(--spacing-150) 0;
-  font-size: 1.1rem;
-  line-height: 1.2rem;
+  font-size: 0.6875rem; /* 11px */
+  line-height: 0.75rem; /* 12px */
   text-align: center;
   background-color: var(--color-white);
 }
@@ -249,7 +248,7 @@ ol.recipe-pg_list li::before {
 
   /* TYPOGRAPHY */
   .type_young-serif_lg {
-    font-size: 4rem;
+    font-size: 2.5rem; /* 40px */
   }
 
   /* Cover Image */

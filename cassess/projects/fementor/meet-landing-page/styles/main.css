@@ -65,15 +65,15 @@ ul {
 }
 
 html {
+  color: var(--color-slate-600);
   font:
-    normal 500 62.5% / 1.1 'Red Hat Display',
+    normal 500 100% / 1.1 'Red Hat Display',
     sans-serif;
   background-color: var(--color-white);
 }
 
 body {
-  font-size: 1.6rem;
-  color: var(--color-slate-600);
+  font-size: 1rem; /* 16px */
 }
 
 /* UTILITIES */
@@ -100,30 +100,30 @@ body {
   - Tablet: 16px
   - Mobile: 16px */
 .font_heading-primary {
-  font-size: 4rem;
+  font-size: 2.5rem; /* 40px */
   font-weight: 900;
 }
 
 .font_heading-secondary {
-  font-size: 3.2rem;
+  font-size: 2rem; /* 32px */
   font-weight: 900;
 }
 
 .font_body {
-  font-size: 1.6rem;
+  font-size: 1rem; /* 16px */
   line-height: 1.5;
 }
 
 .font_accent {
-  font-size: 1.2rem;
+  font-size: 0.75rem; /* 12px */
   font-weight: 900;
-  letter-spacing: 0.4rem;
+  letter-spacing: 0.25rem; /* 4px */
   text-transform: uppercase;
 }
 
 .font_button {
   font-family: 'Red Hat Display', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1rem; /* 16px */
   font-weight: 900;
   line-height: 1.5;
 }
@@ -309,6 +309,7 @@ body {
 .mlpage-main_photo-grid-item img {
   display: block;
   width: 100%;
+  height: auto;
   border-radius: 8px;
 }
 
@@ -357,15 +358,15 @@ body {
 @media (width >= 768px) {
   /* TYPOGRAPHY */
   .font_heading-primary {
-    font-size: 4.8rem;
+    font-size: 3rem; /* 48px */
   }
 
   .font_heading-secondary {
-    font-size: 3.6rem;
+    font-size: 2.25rem; /* 36px */
   }
 
   .font_accent {
-    font-size: 1.4rem;
+    font-size: 0.875rem; /* 14px */
   }
 
   /* Header */
@@ -406,19 +407,19 @@ body {
 @media (width >= 1024px) {
   /* TYPOGRAPHY */
   .font_heading-primary {
-    font-size: 6.4rem;
+    font-size: 4rem; /* 64px */
   }
 
   .font_heading-secondary {
-    font-size: 4rem;
+    font-size: 2.5rem; /* 40px */
   }
 
   .font_body {
-    font-size: 1.8rem;
+    font-size: 1.125rem; /* 18px */
   }
 
   .font_accent {
-    font-size: 1.6rem;
+    font-size: 1rem; /* 16px */
   }
 
   /* Header */

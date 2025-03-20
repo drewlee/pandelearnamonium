@@ -34,13 +34,13 @@ blockquote {
 }
 
 html {
-  font: normal 400 62.5% / 1.4 var(--font-family-barlow);
   background-color: rgb(246 245 246);
+  color: var(--color-grey-400);
+  font: normal 400 100% / 1.4 var(--font-family-barlow);
 }
 
 body {
-  font-size: 1.3rem;
-  color: var(--color-grey-400);
+  font-size: 0.8125rem; /* 13px */
 }
 
 /* UTILITIES */
@@ -56,15 +56,15 @@ body {
 
 /* TYPOGRAPHY */
 .type_barlow-lrg {
-  font: normal 500 2rem / 1.2 var(--font-family-barlow);
+  font: normal 500 1.25rem / 1.2 var(--font-family-barlow); /* 20px */
 }
 
 .type_barlow-mid {
-  font: normal 400 1.3rem / 1.1 var(--font-family-barlow);
+  font: normal 400 0.8125rem / 1.1 var(--font-family-barlow); /* 13px */
 }
 
 .type_barlow-sml {
-  font: normal 400 1.1rem / 1.1 var(--font-family-barlow);
+  font: normal 400 0.6875rem / 1.1 var(--font-family-barlow); /* 11px */
 }
 
 /* TESTIMONIAL GRID STYLES */

@@ -23,10 +23,11 @@
 }
 
 html {
-  font:
-    normal 400 62.5% / 1.5 Figtree,
-    sans-serif;
   color: var(--color-gray-950);
+  font:
+    normal 400 100% / 1.5 Figtree,
+    sans-serif;
+  background-color: var(--color-yellow);
 }
 
 body {
@@ -35,8 +36,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: var(--color-yellow);
-  font-size: 1.4rem;
+  font-size: 0.875rem; /* 14px */
 }
 
 h1,
@@ -91,16 +91,16 @@ a {
   padding: var(--spacing-50) var(--spacing-150);
   border-radius: 4px;
   background-color: var(--color-yellow);
-  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  font-size: clamp(0.75rem, 3vw, 0.875rem); /* 12px ... 14px */
   font-weight: 800;
 }
 
 .blog-prv-card-date {
-  font-size: clamp(1.2rem, 3vw, 1.4rem);
+  font-size: clamp(0.75rem, 3vw, 0.875rem); /* 12px ... 14px */
 }
 
 .blog-prv-card-title {
-  font-size: clamp(2rem, 5vw, 2.4rem);
+  font-size: clamp(1.25rem, 5vw, 1.5rem); /* 20px ... 24px */
   font-weight: 800;
 }
 
@@ -115,7 +115,7 @@ a {
 }
 
 .blog-prv-card-excerpt {
-  font-size: clamp(1.4rem, 3vw, 1.6rem);
+  font-size: clamp(0.875rem, 3vw, 1rem); /* 14px ... 16px */
   color: var(--color-gray-500);
 }
 
@@ -139,11 +139,11 @@ a {
 /* Attribution */
 .attribution {
   padding: var(--spacing-150) 0;
-  font-size: 1.1rem;
+  font-size: 0.6875rem; /* 11px */
   text-align: center;
 }
 
-/* Disabled to favor grouping styles by their associated elements */
+/* Disabled in favor of grouping styles by their associated elements */
 /* stylelint-disable-next-line no-descending-specificity */
 .attribution a {
   color: hsl(228deg 45% 44%);

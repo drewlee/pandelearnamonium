@@ -51,14 +51,11 @@ button {
 }
 
 html {
+  color: var(--color-grey-500);
   font:
-    normal 500 62.5% / 1.4 Manrope,
+    normal 500 100% / 1.4 Manrope,
     sans-serif;
   background-color: var(--color-grey-200);
-}
-
-body {
-  color: var(--color-grey-500);
 }
 
 /* TYPOGRAPHY
@@ -69,15 +66,15 @@ body {
   - 700 13px / 1.4
   - 700 13px / 1.4 all-caps */
 .font_heading {
-  font-size: 2rem;
+  font-size: 1.25rem; /* 20px */
   font-weight: 700;
-  letter-spacing: 0.025rem;
+  letter-spacing: 0.0156rem; /* 0.25px */
   line-height: 1.3;
 }
 
 .font_body {
-  font-size: 1.3rem;
-  letter-spacing: 0.0016rem;
+  font-size: 0.8125rem; /* 13px */
+  letter-spacing: 0.001rem; /* 0.016px */
 }
 
 .font_emphasis {
@@ -85,7 +82,7 @@ body {
 }
 
 .font_accent {
-  letter-spacing: 0.325rem;
+  letter-spacing: 0.2031rem; /* 3.25px */
   text-transform: uppercase;
 }
 
@@ -239,7 +236,7 @@ body {
 .attribution {
   grid-row: 3 / 4;
   padding: var(--spacing-200) 0;
-  font-size: 1.1rem;
+  font-size: 0.6875rem; /* 11px */
   text-align: center;
   color: var(--color-grey-900);
 }

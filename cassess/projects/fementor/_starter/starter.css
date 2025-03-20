@@ -40,13 +40,13 @@ ul {
 
 html {
   font:
-    normal 400 62.5% / 1.5 Arial,
+    normal 400 100% / 1.5 Arial,
     sans-serif;
+  background-color: var(--color-white);
 }
 
 body {
-  background-color: var(--color-white);
-  font-size: 1.4rem;
+  font-size: 0.875rem; /* 14px */
   color: var(--color-black);
 }
 
@@ -54,7 +54,7 @@ body {
 
 /* Attribution */
 .attribution {
-  font-size: 1.1rem;
+  font-size: 0.6875rem; /* 11px */
   text-align: center;
 }
 

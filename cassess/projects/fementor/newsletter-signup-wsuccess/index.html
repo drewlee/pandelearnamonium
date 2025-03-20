@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <script src="./scripts/app.js" type="module"></script>
+    <title>Frontend Mentor | Newsletter Sign-up Form with Success Message</title>
+  </head>
+  <body class="font-style_body">
+    <!-- Sign-up form start -->
+    <h1 class="font-style_heading">Stay updated!</h1>
+
+    Join 60,000+ product managers receiving monthly updates on: Product discovery and building what
+    matters Measuring to ensure updates are a success And much more!
+
+    <form class="newsletter-form" id="nlform" method="post" novalidate>
+      <label class="newsletter-form_email-label" for="nlform_email-input">Email address</label>
+      <input
+        class="newsletter-form_email-input"
+        id="nlform_email-input"
+        type="text"
+        placeholder="email@company.com"
+      />
+
+      <button
+        class="newsletter-form_submit-btn newsletter-btn font-style_body font-style_bold"
+        type="submit"
+      >
+        Subscribe to monthly newsletter
+      </button>
+    </form>
+    <!-- Sign-up form end -->
+
+    <!-- Success message start -->
+    Thanks for subscribing! A confirmation email has been sent to {ash@loremcompany.com}. Please
+    open it and click the button inside to confirm your subscription.
+
+    <button
+      id="success-dismiss-btn"
+      class="newsletter-btn font-style_body font-style_bold"
+      type="button"
+    >
+      Dismiss message
+    </button>
+    <!-- Success message end -->
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
+    </div>
+  </body>
+</html>
