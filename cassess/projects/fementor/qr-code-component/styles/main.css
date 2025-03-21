@@ -14,9 +14,13 @@ html {
 }
 
 body {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  height: 100svh;
+  display: grid;
+  grid-template:
+    '.' minmax(16px, 47.4px)
+    'main' 1fr
+    'footer' auto;
+  place-items: center;
 }
 
 .visually-hidden {
@@ -28,27 +32,20 @@ body {
   white-space: nowrap;
 }
 
-.qr-card-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 auto;
-}
-
 .qr-card {
+  grid-area: main;
   width: 288px;
   padding: 16px 16px 40px;
   background-color: hsl(0deg 0% 100%);
   border-radius: 20px;
   box-shadow: 0 25px 25px hsla(0deg 0% 0% / 4.77%);
-  margin-top: 47.4px;
 }
 
 .qr-card-image {
   width: 288px;
   height: 288px;
   border-radius: 10px;
-  background: url('../images/image-qr-code.png') top left / cover no-repeat;
+  background: url('../images/image-qr-code.png') 0 0 / contain no-repeat;
 }
 
 .qr-card-title {
@@ -69,7 +66,8 @@ body {
 }
 
 .attribution {
-  margin: 16px 0;
+  grid-area: footer;
+  padding: 16px 0;
   font-size: 0.6875rem;
   text-align: center;
 }

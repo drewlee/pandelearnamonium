@@ -39,10 +39,14 @@ html {
 }
 
 body {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 100svh;
+  display: grid;
+  grid-template:
+    '. . .' minmax(16px, 44.5px)
+    '. main .' 1fr
+    'footer footer footer' auto
+    / 1fr minmax(376px, 432px) 1fr;
+  align-items: center;
   font-size: 0.875rem; /* 14px */
 }
 
@@ -52,19 +56,10 @@ body {
 }
 
 /* Social Links Profile Styles */
-.soc-link-prof-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 0;
-}
-
 .soc-link-prof {
-  max-width: 384px;
-  min-width: 328px;
-  margin: 44.5px 24px 0;
+  grid-area: main;
+  margin: 0 24px;
   padding: 24px 0;
-  flex: 1 0 0;
   background-color: var(--color-grey-800);
   border-radius: 12px;
   text-align: center;
@@ -95,13 +90,10 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
-  align-items: center;
   margin: 24px 40px 0;
 }
 
 .soc-link-prof-links a {
-  width: 100%;
-  min-width: 278px;
   padding: 12px 0;
   border-radius: 8px;
   background-color: var(--color-grey-700);
@@ -120,24 +112,23 @@ body {
   color: var(--color-grey-900);
 }
 
-/* Overrides for Non-Mobile Screens */
-@media (width > 375px) {
-  body {
-    .soc-link-prof {
-      padding: 40px 0;
-    }
-  }
-}
-
 /* Attribution */
 .attribution {
+  grid-area: footer;
   padding: 14px 0;
   font-size: 0.6875rem; /* 11px */
   text-align: center;
 }
 
-/* Disabled to favor grouping styles by their associated elements */
+/* Disabled in favor of grouping styles by their associated elements */
 /* stylelint-disable-next-line no-descending-specificity */
 .attribution a {
   color: var(--color-green);
+}
+
+/* Overrides for Non-Mobile Screens */
+@media (width > 375px) {
+  .soc-link-prof {
+    padding: 40px 0;
+  }
 }
