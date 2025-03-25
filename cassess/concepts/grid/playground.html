@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="./styles/playground.css" />
+    <script src="./scripts/app.js" defer></script>
+    <title>Grid Playground</title>
+  </head>
+  <body>
+    <h1>Grid Playground</h1>
+
+    <main>
+      <section class="grid-section">
+        <h2>Justify Items</h2>
+        <p>Aligns items in cells along the row axis.</p>
+
+        <div class="control-container">
+          <label for="select-justify-items">justify-items:</label>
+          <select
+            id="select-justify-items"
+            class="grid-style-control"
+            data-controls="container-justify-items"
+          >
+            <option selected>stretch</option>
+            <option>start</option>
+            <option>end</option>
+            <option>center</option>
+          </select>
+        </div>
+
+        <div class="grid-container" id="container-justify-items">
+          <div class="grid-item">1</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+        </div>
+      </section>
+
+      <section class="grid-section">
+        <h2>Align Items</h2>
+        <p>Aligns items in cells along the column axis.</p>
+
+        <div class="control-container">
+          <label for="select-align-items">align-items:</label>
+          <select
+            id="select-align-items"
+            class="grid-style-control"
+            data-controls="container-align-items"
+          >
+            <option selected>stretch</option>
+            <option>start</option>
+            <option>end</option>
+            <option>center</option>
+            <option>baseline</option>
+          </select>
+        </div>
+
+        <div class="grid-container" id="container-align-items" style="height: 160px">
+          <div class="grid-item">1</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+        </div>
+      </section>
+
+      <section class="grid-section">
+        <h2>Justify Content</h2>
+        <p>Aligns the grid along the row axis.</p>
+
+        <div class="control-container">
+          <label for="select-justify-content">justify-content:</label>
+          <select
+            id="select-justify-content"
+            class="grid-style-control"
+            data-controls="container-justify-content"
+          >
+            <option selected>stretch</option>
+            <option>start</option>
+            <option>end</option>
+            <option>center</option>
+            <option>space-around</option>
+            <option>space-between</option>
+            <option>space-evenly</option>
+          </select>
+        </div>
+
+        <div class="grid-container" id="container-justify-content">
+          <div class="grid-item">1</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+        </div>
+      </section>
+
+      <section class="grid-section">
+        <h2>Align Content</h2>
+        <p>Aligns the grid along the column axis.</p>
+
+        <div class="control-container">
+          <label for="select-align-content">align-content:</label>
+          <select
+            id="select-align-content"
+            class="grid-style-control"
+            data-controls="container-align-content"
+          >
+            <option selected>stretch</option>
+            <option>start</option>
+            <option>end</option>
+            <option>center</option>
+            <option>space-around</option>
+            <option>space-between</option>
+            <option>space-evenly</option>
+          </select>
+        </div>
+
+        <div class="grid-container" id="container-align-content" style="height: 160px">
+          <div class="grid-item">1</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+        </div>
+      </section>
+
+      <section class="grid-section">
+        <h2>Grid Auto Flow</h2>
+        <p>Controls the automatic placement of items in grid tracks.</p>
+
+        <div class="control-container">
+          <label for="select-align-content">grid-auto-flow:</label>
+          <select
+            id="select-grid-auto-flow"
+            class="grid-style-control"
+            data-controls="container-grid-auto-flow"
+          >
+            <option selected>row</option>
+            <option>column</option>
+          </select>
+        </div>
+
+        <div class="grid-container grid-container_auto-flow" id="container-grid-auto-flow">
+          <div class="grid-item grid-item-1">1</div>
+          <div class="grid-item grid-item-2">2</div>
+          <div class="grid-item grid-item-3">3</div>
+          <div class="grid-item grid-item-4">4</div>
+          <div class="grid-item grid-item-5">5</div>
+        </div>
+      </section>
+
+      <section class="grid-section">
+        <h2>Sizing Unit Keywords</h2>
+        <p>Control grid cell dimensions.</p>
+
+        <div class="control-container">
+          <label for="select-grid-sizing">grid-auto-flow:</label>
+          <select
+            id="select-grid-sizing"
+            class="grid-style-control"
+            data-controls="container-grid-sizing"
+            data-style="grid-template-columns"
+          >
+            <option value="repeat(3, auto)" selected>auto</option>
+            <option value="repeat(3, 1fr)">1fr</option>
+            <option value="repeat(3, min-content)">min-content</option>
+            <option value="repeat(3, max-content)">max-content</option>
+            <option value="repeat(3, fit-content(100px))">fit-content</option>
+            <option value="repeat(3, minmax(100px, 1fr))">minmax</option>
+          </select>
+        </div>
+
+        <div class="grid-container grid-container_sizing" id="container-grid-sizing">
+          <div class="grid-item">E pluribus unum</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+        </div>
+      </section>
+
+      <section class="grid-section">
+        <h2>Auto Repeat</h2>
+        <p>
+          Determines how cells of variable size are automatically fit. The
+          <code>auto-fill</code> keyword will fill available space with empty cells.
+        </p>
+
+        <div class="control-container">
+          <label for="select-grid-repeat">grid-auto-flow:</label>
+          <select
+            id="select-grid-repeat"
+            class="grid-style-control"
+            data-controls="container-grid-repeat"
+            data-style="grid-template-columns"
+          >
+            <option value="repeat(auto-fill, minmax(200px, 1fr))" selected>auto-fill</option>
+            <option value="repeat(auto-fit, minmax(200px, 1fr))">auto-fit</option>
+          </select>
+        </div>
+
+        <div class="grid-container grid-container_repeat" id="container-grid-repeat">
+          <div class="grid-item">1</div>
+          <div class="grid-item">2</div>
+          <div class="grid-item">3</div>
+          <div class="grid-item">4</div>
+          <div class="grid-item">5</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

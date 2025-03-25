@@ -16,25 +16,43 @@
         id="newsletter-form-content"
         tabindex="-1"
       >
-        <div class="newsletter-content_signup-cover"></div>
+        <!-- <div class="newsletter-content_signup-cover"></div> -->
+        <picture class="newsletter-content_signup-cover">
+          <source
+            srcset="./assets/images/illustration-sign-up-desktop.svg"
+            width="400"
+            height="593"
+            media="(min-width: 1024px)"
+          />
+          <!-- Intentional null alt attribute for purely decorative image -->
+          <img
+            src="./assets/images/illustration-sign-up-mobile.svg"
+            width="375"
+            height="284"
+            alt=""
+          />
+        </picture>
 
         <div class="newsletter-content_signup-container">
-          <h1 class="font-style_heading">Stay updated!</h1>
-
+          <h1 class="newsletter-content_signup-heading font-style_heading">Stay updated!</h1>
           <p>Join 60,000+ product managers receiving monthly updates on:</p>
 
-          <ul class="">
-            <li class="">Product discovery and building what matters</li>
-            <li class="">Measuring to ensure updates are a success</li>
-            <li class="">And much more!</li>
+          <ul class="newsletter-content_signup-list">
+            <li class="newsletter-content_signup-list-item">
+              Product discovery and building what matters
+            </li>
+            <li class="newsletter-content_signup-list-item">
+              Measuring to ensure updates are a success
+            </li>
+            <li class="newsletter-content_signup-list-item">And much more!</li>
           </ul>
 
           <form class="newsletter-form" id="nlform" method="post" novalidate>
-            <div class="">
-              <label class="newsletter-form_email-label" for="nlform_email-input">
+            <div class="newsletter-form_email-label-container">
+              <label class="newsletter-form_email-label font-style_sml" for="nlform_email-input">
                 Email address
               </label>
-              <p class="">Valid email required</p>
+              <p class="newsletter-form_error font-style_sml">Valid email required</p>
             </div>
             <input
               class="newsletter-form_email-input"

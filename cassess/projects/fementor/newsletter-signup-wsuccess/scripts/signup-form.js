@@ -4,6 +4,7 @@ export default class SignupForm extends Component {
   constructor() {
     super();
 
+    this.emailInputEl = document.getElementById('nlform_email-input');
     this.formContentEl = document.getElementById('newsletter-form-content');
     this.successContentEl = document.getElementById('success-content');
   }
@@ -38,9 +39,16 @@ export default class SignupForm extends Component {
   handleFormSubmit(evt) {
     evt.preventDefault();
 
-    this.formContentEl.setAttribute('hidden', '');
-    this.successContentEl.removeAttribute('hidden');
-    this.successContentEl.focus();
+    const email = this.emailInputEl.value;
+
+    if (this.isValidEmail(email)) {
+      this.formEl.classList.remove('error');
+      // this.formContentEl.setAttribute('hidden', '');
+      // this.successContentEl.removeAttribute('hidden');
+      // this.successContentEl.focus();
+    } else {
+      this.formEl.classList.add('error');
+    }
   }
 
   /**
@@ -50,5 +58,21 @@ export default class SignupForm extends Component {
     this.successContentEl.setAttribute('hidden', '');
     this.formContentEl.removeAttribute('hidden');
     this.formContentEl.focus();
+  }
+
+  /**
+   *
+   * @param {string} email -
+   * @returns {boolean}
+   */
+  isValidEmail(email) {
+    const emailRegExp = /^.+@.+\..+$/;
+    const nEmail = email.trim();
+
+    if (!emailRegExp.test(nEmail)) {
+      return false;
+    }
+
+    return true;
   }
 }
