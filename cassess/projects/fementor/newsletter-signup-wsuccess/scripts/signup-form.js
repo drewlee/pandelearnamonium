@@ -1,12 +1,19 @@
 import Component from './component.js';
 
 export default class SignupForm extends Component {
-  constructor() {
-    super();
+  /** @type {string} */
+  _email = '';
 
-    this.emailInputEl = document.getElementById('nlform_email-input');
-    this.formContentEl = document.getElementById('newsletter-form-content');
-    this.successContentEl = document.getElementById('success-content');
+  /** @returns {string} */
+  get email() {
+    return this._email;
+  }
+
+  /** @param {string} value */
+  set email(value) {
+    this._email = value;
+    this.emailInputEl.value = '';
+    this.successEmailEl.textContent = this._email;
   }
 
   /**
@@ -17,62 +24,125 @@ export default class SignupForm extends Component {
   registerDOM() {
     return [
       {
-        id: 'nlform',
+        id: 'newsletter-form',
         el: 'formEl',
         type: 'submit',
         listener: 'handleFormSubmit',
       },
       {
-        id: 'success-dismiss-btn',
-        el: 'dismissBtnEl',
+        id: 'success-content',
+        el: 'successContentEl',
         type: 'click',
         listener: 'handleSuccessDismiss',
+      },
+      {
+        id: 'newsletter-form-email-input',
+        el: 'emailInputEl',
+      },
+      {
+        id: 'newsletter-form-content',
+        el: 'formContentEl',
+      },
+      {
+        id: 'success-email',
+        el: 'successEmailEl',
+      },
+      {
+        id: 'newsletter-form-error',
+        el: 'formErrorEl',
       },
     ];
   }
 
   /**
-   * Handles form submission.
+   * Form submission event listener.
    *
    * @param {SubmitEvent} evt - The event object.
    */
   handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const email = this.emailInputEl.value;
+    const email = this.emailInputEl.value.trim();
 
     if (this.isValidEmail(email)) {
       this.formEl.classList.remove('error');
-      // this.formContentEl.setAttribute('hidden', '');
-      // this.successContentEl.removeAttribute('hidden');
-      // this.successContentEl.focus();
+      this.emailInputEl.setAttribute('aria-invalid', false);
+      this.emailInputEl.removeAttribute('aria-describedby');
+
+      this.email = email;
+
+      this.showContent(this.successContentEl);
+      this.setFocus(this.successContentEl);
     } else {
       this.formEl.classList.add('error');
+      this.emailInputEl.setAttribute('aria-invalid', true);
+      this.emailInputEl.setAttribute('aria-describedby', 'newsletter-form-error');
+      this.setFocus(this.formErrorEl);
     }
   }
 
   /**
-   * Handles dismissing the success message.
+   * Success message dismiss event listener.
+   *
+   * @param {PointerEvent} evt - The event object.
    */
-  handleSuccessDismiss() {
-    this.successContentEl.setAttribute('hidden', '');
-    this.formContentEl.removeAttribute('hidden');
-    this.formContentEl.focus();
+  handleSuccessDismiss(evt) {
+    if (evt.target.id === 'success-dismiss-btn') {
+      this.showContent(this.formContentEl);
+      this.setFocus(this.formContentEl);
+    }
   }
 
   /**
+   * Tabindex attribute cleanup event listener.
    *
-   * @param {string} email -
-   * @returns {boolean}
+   * @param {FocusEvent} currentTarget - The HTML element that triggered the event.
+   */
+  handleCleanupTabindex({ currentTarget }) {
+    currentTarget.removeAttribute('tabindex');
+    currentTarget.removeEventListener('focusout', this.handleCleanupTabindex);
+  }
+
+  /**
+   * Determines whether the provided email address is of valid format.
+   *
+   * @param {string} email - The user entered email address.
+   * @returns {boolean} Whether the email address is of valid format.
    */
   isValidEmail(email) {
     const emailRegExp = /^.+@.+\..+$/;
-    const nEmail = email.trim();
+    const nEmail = email;
 
-    if (!emailRegExp.test(nEmail)) {
-      return false;
-    }
+    return emailRegExp.test(nEmail);
+  }
 
-    return true;
+  /**
+   * Adds a tabindex attribute to the provided HTML element.
+   *
+   * @param {HTMLElement} el - The HTML element.
+   */
+  setTabindex(el) {
+    el.setAttribute('tabindex', -1);
+    el.addEventListener('focusout', this.handleCleanupTabindex);
+  }
+
+  /**
+   * Sets focus to the provided HTML element.
+   *
+   * @param {HTMLElement} el - The HTML element.
+   */
+  setFocus(el) {
+    this.setTabindex(el);
+    el.focus();
+  }
+
+  /**
+   * Displays the provided HTML element.
+   *
+   * @param {HTMLElement} el - The HTML element.
+   */
+  showContent(el) {
+    document.querySelectorAll('.active').forEach((el) => el.classList.remove('active'));
+    el.classList.add('active');
   }
 }

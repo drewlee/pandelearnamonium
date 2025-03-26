@@ -15,3 +15,4 @@
 - [Testimonials Grid Section](./projects/fementor/testimonials-grid-section/)
 - [Meet Landing Page](./projects/fementor/meet-landing-page/)
 - [Article Preview Component](./projects/fementor/article-preview-component/)
+- [Newsletter Sign-up With Success](./projects/fementor/newsletter-signup-wsuccess/)

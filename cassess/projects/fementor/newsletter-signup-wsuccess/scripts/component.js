@@ -37,12 +37,17 @@ export default class Component {
 
       this[el] = this[el] ?? document.getElementById(attrs.id);
 
-      if (typeof listener === 'string') {
-        callback = this[listener];
-      } else if (typeof listener === 'function') {
-        callback = listener;
-      } else {
-        throw new TypeError('Invalid listener type');
+      switch (typeof listener) {
+        case 'string':
+          callback = this[listener];
+          break;
+        case 'function':
+          callback = listener;
+          break;
+        case 'undefined':
+          continue;
+        default:
+          throw new TypeError('Invalid listener type');
       }
 
       this[el].addEventListener(attrs.type, callback);

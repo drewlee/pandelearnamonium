@@ -9,32 +9,36 @@
     <title>Frontend Mentor | Newsletter Sign-up Form with Success Message</title>
   </head>
   <body class="font-style_body">
+    <!-- Only a single H1 instance is ever visible on screen -->
+    <!-- eslint-disable @html-eslint/no-multiple-h1 -->
     <main class="newsletter-content">
       <!-- Sign-up form start -->
       <section
-        class="newsletter-content_styles newsletter-content_signup"
+        class="newsletter-content_styles newsletter-content_signup active"
         id="newsletter-form-content"
-        tabindex="-1"
+        aria-labelledby="newsletter-form-heading"
       >
-        <!-- <div class="newsletter-content_signup-cover"></div> -->
         <picture class="newsletter-content_signup-cover">
           <source
             srcset="./assets/images/illustration-sign-up-desktop.svg"
-            width="400"
-            height="593"
             media="(min-width: 1024px)"
           />
-          <!-- Intentional null alt attribute for purely decorative image -->
           <img
             src="./assets/images/illustration-sign-up-mobile.svg"
             width="375"
             height="284"
-            alt=""
+            alt="Stylized graphic of computer software"
           />
         </picture>
 
         <div class="newsletter-content_signup-container">
-          <h1 class="newsletter-content_signup-heading font-style_heading">Stay updated!</h1>
+          <h1
+            class="newsletter-content_signup-heading font-style_heading"
+            id="newsletter-form-heading"
+          >
+            Stay updated!
+          </h1>
+
           <p>Join 60,000+ product managers receiving monthly updates on:</p>
 
           <ul class="newsletter-content_signup-list">
@@ -47,19 +51,29 @@
             <li class="newsletter-content_signup-list-item">And much more!</li>
           </ul>
 
-          <form class="newsletter-form" id="nlform" method="post" novalidate>
+          <form class="newsletter-form" id="newsletter-form" method="post" novalidate>
             <div class="newsletter-form_email-label-container">
-              <label class="newsletter-form_email-label font-style_sml" for="nlform_email-input">
+              <label
+                class="newsletter-form_email-label font-style_sml"
+                for="newsletter-form-email-input"
+              >
                 Email address
               </label>
-              <p class="newsletter-form_error font-style_sml">Valid email required</p>
+              <p class="newsletter-form_error font-style_sml" id="newsletter-form-error">
+                Valid email required
+              </p>
             </div>
+
             <input
               class="newsletter-form_email-input"
-              id="nlform_email-input"
+              id="newsletter-form-email-input"
               type="text"
               placeholder="email@company.com"
+              required
+              aria-required="true"
+              aria-invalid="false"
             />
+
             <button
               class="newsletter-form_submit-btn newsletter-btn font-style_body font-style_bold"
               type="submit"
@@ -75,21 +89,39 @@
       <section
         class="newsletter-content_styles newsletter-content_success"
         id="success-content"
-        tabindex="-1"
-        hidden
+        aria-labelledby="success-content-heading"
       >
-        Thanks for subscribing! A confirmation email has been sent to {ash@loremcompany.com}. Please
-        open it and click the button inside to confirm your subscription.
+        <div class="newsletter-content_success-container">
+          <img
+            src="./assets/images/icon-success.svg"
+            alt="Checkmark graphic"
+            width="64"
+            height="64"
+          />
 
-        <button
-          id="success-dismiss-btn"
-          class="newsletter-btn font-style_body font-style_bold"
-          type="button"
-        >
-          Dismiss message
-        </button>
-        <!-- Success message end -->
+          <h1
+            class="newsletter-content_success-heading font-style_heading"
+            id="success-content-heading"
+          >
+            Thanks for subscribing!
+          </h1>
+
+          <p class="newsletter-content_success-msg">
+            A confirmation email has been sent to
+            <strong class="font-style_bold" id="success-email"></strong>. Please open it and click
+            the button inside to confirm your subscription.
+          </p>
+
+          <button
+            id="success-dismiss-btn"
+            class="newsletter-btn font-style_body font-style_bold"
+            type="button"
+          >
+            Dismiss message
+          </button>
+        </div>
       </section>
+      <!-- Success message end -->
     </main>
 
     <footer class="attribution">
