@@ -62,7 +62,7 @@ export default class SignupForm extends Component {
   handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const email = this.emailInputEl.value.trim();
+    const email = this.emailInputEl.value;
 
     if (this.isValidEmail(email)) {
       this.formEl.classList.remove('error');
@@ -110,10 +110,10 @@ export default class SignupForm extends Component {
    * @returns {boolean} Whether the email address is of valid format.
    */
   isValidEmail(email) {
-    const emailRegExp = /^.+@.+\..+$/;
-    const nEmail = email;
-
-    return emailRegExp.test(nEmail);
+    // Validation is by no means meant to be exhaustive and is primarily for the benefit of the
+    // user as opposed to a strict syntactic check.
+    const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegExp.test(email);
   }
 
   /**

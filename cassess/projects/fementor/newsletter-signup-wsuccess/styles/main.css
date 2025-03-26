@@ -71,12 +71,14 @@ button {
   cursor: pointer;
 }
 
+* {
+  outline-width: 0;
+  transition: outline-width 100ms ease-in;
+}
+
 *:focus-visible {
-  outline: none;
-  box-shadow:
-    0 0 0 1px var(--color-white),
-    0 0 0 4px rgb(108 199 255),
-    0 0 0 5px var(--color-white);
+  outline: 2px solid rgb(0 145 255);
+  outline-offset: 2px;
 }
 
 html {
