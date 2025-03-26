@@ -6,3 +6,62 @@ h1 {
 .grid-example {
   margin: 50px 20px;
 }
+
+/* Three Colum Layout */
+.grid-example-three-col {
+  display: grid;
+  grid-template:
+    'header header header'
+    'left center right'
+    'footer footer footer'
+    / max-content minmax(300px, auto) max-content;
+}
+
+.grid-example-three-col-header {
+  grid-area: header;
+}
+
+.grid-example-three-col-footer {
+  grid-area: footer;
+}
+
+.grid-example-three-col-header,
+.grid-example-three-col-footer {
+  padding: 20px 0;
+  background-color: rgb(124 197 241);
+  text-align: center;
+}
+
+.grid-example-three-col-left {
+  grid-area: left;
+}
+
+.grid-example-three-col-right {
+  grid-area: right;
+}
+
+.grid-example-three-col-left,
+.grid-example-three-col-right {
+  padding: 14px;
+  background-color: rgb(255 237 159);
+}
+
+.grid-example-three-col-center {
+  grid-area: center;
+  padding: 0 14px;
+}
+
+/* Vertical Centering */
+.grid-vcenter {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.grid-example-vcenter-container {
+  width: 500px;
+  padding: 0 0.75rem; /* 12px */
+  background-color: rgb(255 237 159);
+  border: 1px solid rgb(0 0 0);
+  border-radius: 10px;
+}
