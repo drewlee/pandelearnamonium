@@ -112,7 +112,7 @@ export default class SignupForm extends Component {
   isValidEmail(email) {
     // Validation is by no means meant to be exhaustive and is primarily for the benefit of the
     // user as opposed to a strict syntactic check.
-    const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     return emailRegExp.test(email);
   }
 
