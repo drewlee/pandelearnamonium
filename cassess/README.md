@@ -3,6 +3,7 @@
 ### Concepts
 
 - [Flexbox](./concepts/flexbox/)
+- [Grid](./concepts/grid/)
 
 ### Projects
 
@@ -16,3 +17,4 @@
 - [Meet Landing Page](./projects/fementor/meet-landing-page/)
 - [Article Preview Component](./projects/fementor/article-preview-component/)
 - [Newsletter Sign-up With Success](./projects/fementor/newsletter-signup-wsuccess/)
+- [Time Tracking Dashboard](./projects/fementor/time-tracking-dashboard/)

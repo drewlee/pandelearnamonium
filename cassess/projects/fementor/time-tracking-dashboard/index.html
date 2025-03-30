@@ -3,106 +3,122 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-
-    <title>Frontend Mentor | Time tracking dashboard</title>
-
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <script src="./scripts/init.js" type="module"></script>
+    <title>Frontend Mentor | Time Tracking Dashboard</title>
   </head>
-  <body>
-    Report for Jeremy Robson Daily Weekly Monthly Work 5hrs
-    <!-- daily -->
-    Previous - 7hrs
-    <!-- daily -->
-    32hrs
-    <!-- weekly -->
-    Previous - 36hrs
-    <!-- weekly -->
-    103hrs
-    <!-- monthly -->
-    Previous - 128hrs
-    <!-- monthly -->
+  <body class="ttdash-layout font-style_body">
+    <div class="ttdash-layout-inner">
+      <header class="ttdash-header">
+        <div class="ttdash-header_inner">
+          <img
+            src="./images/image-jeremy.png"
+            class="ttdash-header_avatar"
+            width="64"
+            height="64"
+            alt="Jeremy Robson's avatar"
+          />
+          <h1 class="ttdash-header_heading">
+            <span class="ttdash-header_sub font-style_accent">Report for</span>
+            <span class="ttdash-header_name font-style_secondary">Jeremy Robson</span>
+          </h1>
+        </div>
 
-    Play 1hr
-    <!-- daily -->
-    Previous - 2hrs
-    <!-- daily -->
-    10hrs
-    <!-- weekly -->
-    Previous - 8hrs
-    <!-- weekly -->
-    23hrs
-    <!-- monthly -->
-    Previous - 29hrs
-    <!-- monthly -->
+        <nav class="ttdash-header_nav" id="dashboard-nav">
+          <a href="#daily" class="ttdash-header_nav-item font-style_body active">Daily</a>
+          <a href="#weekly" class="ttdash-header_nav-item font-style_body">Weekly</a>
+          <a href="#monthly" class="ttdash-header_nav-item font-style_body">Monthly</a>
+        </nav>
+      </header>
 
-    Study 0hrs
-    <!-- daily -->
-    Previous - 1hr
-    <!-- daily -->
-    4hrs
-    <!-- weekly -->
-    Previous - 7hrs
-    <!-- weekly -->
-    13hrs
-    <!-- monthly -->
-    Previous - 19hrs
-    <!-- monthly -->
+      <main class="ttdash-content" id="dashboard-content">
+        <!-- Placeholder Content -->
+        <article class="ttdash-card">
+          <div class="ttdash-card_inner">
+            <div class="ttdash-card_label-container">
+              <h2 class="ttdash-card_label font-style_body font-style_bold">Work</h2>
+              <button class="ttdash-card_more-btn" type="button" aria-label="See more"></button>
+            </div>
+            <div class="ttdash-card_hours-container">
+              <p class="ttdash-card_hours font-style_primary">-</p>
+              <p class="ttdash-card_prev-hours font-style_accent">-</p>
+            </div>
+          </div>
+        </article>
 
-    Exercise 1hr
-    <!-- daily -->
-    Previous - 1hr
-    <!-- daily -->
-    4hrs
-    <!-- weekly -->
-    Previous - 5hrs
-    <!-- weekly -->
-    11hrs
-    <!-- monthly -->
-    Previous - 18hrs
-    <!-- monthly -->
+        <article class="ttdash-card">
+          <div class="ttdash-card_inner">
+            <div class="ttdash-card_label-container">
+              <h2 class="ttdash-card_label font-style_body font-style_bold">Play</h2>
+              <button class="ttdash-card_more-btn" type="button" aria-label="See more"></button>
+            </div>
+            <div class="ttdash-card_hours-container">
+              <p class="ttdash-card_hours font-style_primary">-</p>
+              <p class="ttdash-card_prev-hours font-style_accent">-</p>
+            </div>
+          </div>
+        </article>
 
-    Social 1hr
-    <!-- daily -->
-    Previous - 3hrs
-    <!-- daily -->
-    5hrs
-    <!-- weekly -->
-    Previous - 10hrs
-    <!-- weekly -->
-    21hrs
-    <!-- monthly -->
-    Previous - 23hrs
-    <!-- monthly -->
+        <article class="ttdash-card">
+          <div class="ttdash-card_inner">
+            <div class="ttdash-card_label-container">
+              <h2 class="ttdash-card_label font-style_body font-style_bold">Study</h2>
+              <button class="ttdash-card_more-btn" type="button" aria-label="See more"></button>
+            </div>
+            <div class="ttdash-card_hours-container">
+              <p class="ttdash-card_hours font-style_primary">-</p>
+              <p class="ttdash-card_prev-hours font-style_accent">-</p>
+            </div>
+          </div>
+        </article>
 
-    Self Care 0hrs
-    <!-- daily -->
-    Previous - 1hr
-    <!-- daily -->
-    2hrs
-    <!-- weekly -->
-    Previous - 2hrs
-    <!-- weekly -->
-    7hrs
-    <!-- monthly -->
-    Previous - 11hrs
-    <!-- monthly -->
+        <article class="ttdash-card">
+          <div class="ttdash-card_inner">
+            <div class="ttdash-card_label-container">
+              <h2 class="ttdash-card_label font-style_body font-style_bold">Exercise</h2>
+              <button class="ttdash-card_more-btn" type="button" aria-label="See more"></button>
+            </div>
+            <div class="ttdash-card_hours-container">
+              <p class="ttdash-card_hours font-style_primary">-</p>
+              <p class="ttdash-card_prev-hours font-style_accent">-</p>
+            </div>
+          </div>
+        </article>
 
-    <div class="attribution">
+        <article class="ttdash-card">
+          <div class="ttdash-card_inner">
+            <div class="ttdash-card_label-container">
+              <h2 class="ttdash-card_label font-style_body font-style_bold">Social</h2>
+              <button class="ttdash-card_more-btn" type="button" aria-label="See more"></button>
+            </div>
+            <div class="ttdash-card_hours-container">
+              <p class="ttdash-card_hours font-style_primary">-</p>
+              <p class="ttdash-card_prev-hours font-style_accent">-</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="ttdash-card">
+          <div class="ttdash-card_inner">
+            <div class="ttdash-card_label-container">
+              <h2 class="ttdash-card_label font-style_body font-style_bold">Self Care</h2>
+              <button class="ttdash-card_more-btn" type="button" aria-label="See more"></button>
+            </div>
+            <div class="ttdash-card_hours-container">
+              <p class="ttdash-card_hours font-style_primary">-</p>
+              <p class="ttdash-card_prev-hours font-style_accent">-</p>
+            </div>
+          </div>
+        </article>
+        <!-- End Placeholder Content -->
+      </main>
+    </div>
+
+    <footer class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-      Coded by <a href="#">Your Name Here</a>.
-    </div>
+      Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
+    </footer>
   </body>
 </html>
