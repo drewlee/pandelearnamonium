@@ -86,7 +86,7 @@ export function normalizeFloat(value) {
 
   const out = `${normWholeNumber}.${normFloat}`;
 
-  if (isNaN(out)) {
+  if (isNaN(Number(out))) {
     return value;
   }
 
@@ -113,7 +113,7 @@ export function validateFloat(value) {
 
   const out = normFloat ? `${normWholeNumber}.${normFloat}` : normWholeNumber;
 
-  if (isNaN(out)) {
+  if (isNaN(Number(out))) {
     return value;
   }
 
@@ -126,13 +126,13 @@ export function validateFloat(value) {
  *
  * @param {string} bill - The dollar cost of the bill.
  * @param {string} people - The number of people to split the bill amongst.
- * @param {string} percentage - The tip percentage value.
+ * @param {number} percentage - The tip percentage value.
  *
- * @returns {Record<string, number>} The dollar tip amount and total cost amount per person.
+ * @returns {Record<string, string>} The dollar tip amount and total cost amount per person.
  */
 export function calculateTips(bill, people, percentage) {
   const splitSubTotal = Number(bill) / Number(people);
-  const splitTip = splitSubTotal * Number(percentage);
+  const splitTip = splitSubTotal * percentage;
   const splitTotal = splitSubTotal + splitTip;
 
   return {

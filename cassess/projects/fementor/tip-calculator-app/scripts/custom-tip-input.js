@@ -1,6 +1,6 @@
 import Component from '../../shared/scripts/component.js';
+import PubSub from '../../shared/scripts/pubsub.js';
 import { getAllowedKeys, validateFloat } from './utils.js';
-import PubSub from './pubsub.js';
 
 export default class CustomTipInput extends Component {
   /** @type {Set<string>} */
@@ -22,9 +22,12 @@ export default class CustomTipInput extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string | (e: Event) => void>[]}
+   * @returns {Record<string, string | ((evt: Event) => void)>[]}
    */
   registerDOM() {
+    /** @type {HTMLInputElement} */
+    this.el = null;
+
     return [
       {
         id: 'splitter-custom-tip-input',
@@ -113,7 +116,7 @@ export default class CustomTipInput extends Component {
    */
   showValidationError() {
     this.el.classList.add('error');
-    this.el.setAttribute('aria-invalid', true);
+    this.el.setAttribute('aria-invalid', 'true');
   }
 
   /**
@@ -121,6 +124,6 @@ export default class CustomTipInput extends Component {
    */
   hideValidationError() {
     this.el.classList.remove('error');
-    this.el.setAttribute('aria-invalid', false);
+    this.el.setAttribute('aria-invalid', 'false');
   }
 }

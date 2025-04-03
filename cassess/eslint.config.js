@@ -8,7 +8,10 @@ export default [
   // Global settings
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.vitest,
+      },
     },
   },
 

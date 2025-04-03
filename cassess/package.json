@@ -9,9 +9,13 @@
   "scripts": {
     "eslint": "eslint .",
     "lint": "npm run prettier; npm run stylelint; npm run eslint",
+    "lint:test": "npm run prettier:check; npm run stylelint; npm run eslint",
     "prepare": "cd .. && husky",
     "prettier": "prettier . -w",
-    "stylelint": "stylelint '**/*.css'"
+    "prettier:check": "prettier . -c",
+    "stylelint": "stylelint '**/*.css'",
+    "test": "npm run lint:test && vitest run",
+    "vitest": "vitest run"
   },
   "lint-staged": {
     "!(*.css)": [
@@ -31,10 +35,12 @@
     "eslint-config-prettier": "^10.0.2",
     "globals": "^16.0.0",
     "husky": "^9.1.7",
+    "jsdom": "^26.0.0",
     "lint-staged": "^15.4.3",
     "prettier": "3.5.3",
     "stylelint": "^16.15.0",
-    "stylelint-config-standard": "^37.0.0"
+    "stylelint-config-standard": "^37.0.0",
+    "vitest": "^3.1.1"
   },
   "volta": {
     "node": "22.14.0"

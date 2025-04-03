@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "rootDir": "./",
+    "types": ["vitest/globals"],
+    "checkJs": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["concepts/**/*", "projects/**/*"]
+}

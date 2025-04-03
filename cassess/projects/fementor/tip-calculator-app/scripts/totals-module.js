@@ -1,5 +1,5 @@
 import Component from '../../shared/scripts/component.js';
-import PubSub from './pubsub.js';
+import PubSub from '../../shared/scripts/pubsub.js';
 import { calculateTips } from './utils.js';
 
 export default class TotalsModule extends Component {
@@ -18,9 +18,21 @@ export default class TotalsModule extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string | (e: Event) => void>[]}
+   * @returns {Record<string, string | ((evt: Event) => void)>[]}
    */
   registerDOM() {
+    /** @type {HTMLButtonElement} */
+    this.resetBtnEl = null;
+
+    /** @type {HTMLElement} */
+    this.splitTipEl = null;
+
+    /** @type {HTMLElement} */
+    this.splitTotalEl = null;
+
+    /** @type {HTMLElement} */
+    this.liveRegionEl = null;
+
     return [
       {
         id: 'splitter-reset-btn',
@@ -76,6 +88,7 @@ export default class TotalsModule extends Component {
    */
   handleCalculateTip(tipPercent) {
     // Retrieve the user entered input values.
+    /** @type {Record<string, string>[]} */
     const result = PubSub.trigger('getInputValues');
 
     if (result === undefined || !result.length) {
@@ -84,6 +97,7 @@ export default class TotalsModule extends Component {
     }
 
     // Transform the results array into an object.
+    /** @type {Record<string, string>} */
     const values = result.reduce((values, props) => {
       values = { ...values, ...props };
       return values;
@@ -102,7 +116,7 @@ export default class TotalsModule extends Component {
     // Update the UI.
     this.renderTotals(splitTip, splitTotal);
     this.resetBtnEl.classList.remove('disabled');
-    this.resetBtnEl.setAttribute('aria-disabled', false);
+    this.resetBtnEl.setAttribute('aria-disabled', 'false');
     this.#isActive = true;
 
     return true;
@@ -114,7 +128,7 @@ export default class TotalsModule extends Component {
   handleReset() {
     this.renderTotals();
     this.resetBtnEl.classList.add('disabled');
-    this.resetBtnEl.setAttribute('aria-disabled', true);
+    this.resetBtnEl.setAttribute('aria-disabled', 'true');
     this.#isActive = false;
   }
 

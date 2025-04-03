@@ -1,5 +1,5 @@
 import Component from '../../shared/scripts/component.js';
-import PubSub from './pubsub.js';
+import PubSub from '../../shared/scripts/pubsub.js';
 
 export default class TipButtons extends Component {
   /** @type {HTMLButtonElement} */
@@ -27,7 +27,7 @@ export default class TipButtons extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string | (e: Event) => void>[]}
+   * @returns {Record<string, string | ((evt: Event) => void)>[]}
    */
   registerDOM() {
     return [
@@ -46,17 +46,18 @@ export default class TipButtons extends Component {
    * @param {MouseEvent} evt - The mouse event object.
    */
   handleTipSelection(evt) {
-    const {
-      target,
-      target: { id },
-    } = evt;
+    const { target } = evt;
 
-    if (id && id.startsWith('splitter-tip-btn-')) {
-      const percent = this.#tipPercentage.get(id);
-      const [isSuccess] = PubSub.trigger('calculateTip', percent);
+    if (target instanceof HTMLButtonElement) {
+      const { id } = target;
 
-      if (isSuccess) {
-        this.setActiveEl(target);
+      if (id && id.startsWith('splitter-tip-btn-')) {
+        const percent = this.#tipPercentage.get(id);
+        const [isSuccess] = PubSub.trigger('calculateTip', percent);
+
+        if (isSuccess) {
+          this.setActiveEl(target);
+        }
       }
     }
   }
@@ -72,7 +73,7 @@ export default class TipButtons extends Component {
     }
 
     this.#activeEl.classList.remove('active');
-    this.#activeEl.setAttribute('aria-pressed', false);
+    this.#activeEl.setAttribute('aria-pressed', 'false');
     this.#activeEl = null;
   }
 
@@ -85,7 +86,7 @@ export default class TipButtons extends Component {
     this.handleInactiveEl();
 
     el.classList.add('active');
-    el.setAttribute('aria-pressed', true);
+    el.setAttribute('aria-pressed', 'true');
     this.#activeEl = el;
   }
 }

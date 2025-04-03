@@ -1,6 +1,6 @@
 import Component from '../../shared/scripts/component.js';
+import PubSub from '../../shared/scripts/pubsub.js';
 import { errorMsg, getAllowedActiveKeys, getAllowedKeys, normalizeFloat } from './utils.js';
-import PubSub from './pubsub.js';
 
 export default class BillInput extends Component {
   /** @type {Set<string>} */
@@ -25,9 +25,15 @@ export default class BillInput extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string | (e: Event) => void>[]}
+   * @returns {Record<string, string | ((evt: Event) => void)>[]}
    */
   registerDOM() {
+    /** @type {HTMLInputElement} */
+    this.el = null;
+
+    /** @type {HTMLElement} */
+    this.errorEl = null;
+
     return [
       {
         id: 'splitter-bill-input',
@@ -131,7 +137,7 @@ export default class BillInput extends Component {
    */
   showValidationError(msg) {
     this.el.classList.add('error');
-    this.el.setAttribute('aria-invalid', true);
+    this.el.setAttribute('aria-invalid', 'true');
     this.el.setAttribute('aria-describedby', this.errorEl.id);
     this.errorEl.textContent = msg;
   }
@@ -141,7 +147,7 @@ export default class BillInput extends Component {
    */
   hideValidationError() {
     this.el.classList.remove('error');
-    this.el.setAttribute('aria-invalid', false);
+    this.el.setAttribute('aria-invalid', 'false');
     this.el.removeAttribute('aria-describedby');
     this.errorEl.textContent = '';
   }
