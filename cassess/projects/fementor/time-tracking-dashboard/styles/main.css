@@ -200,10 +200,15 @@ html {
 .ttdash-card_more-btn {
   margin: 0 0 0 auto;
   padding: var(--spacing-100) 0;
-  width: 21px;
-  background: url('../images/icon-ellipsis.svg') no-repeat center transparent;
+  background: transparent;
   border-color: transparent;
+  color: var(--color-navy-200);
   cursor: pointer;
+}
+
+.ttdash-card_more-btn:hover,
+.ttdash-card_more-btn:focus-visible {
+  color: var(--color-white);
 }
 
 .ttdash-card_hours-container {
