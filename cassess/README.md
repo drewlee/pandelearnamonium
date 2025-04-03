@@ -18,3 +18,4 @@
 - [Article Preview Component](./projects/fementor/article-preview-component/)
 - [Newsletter Sign-up With Success](./projects/fementor/newsletter-signup-wsuccess/)
 - [Time Tracking Dashboard](./projects/fementor/time-tracking-dashboard/)
+- [Tip Calculator App](./projects/fementor/tip-calculator-app/)

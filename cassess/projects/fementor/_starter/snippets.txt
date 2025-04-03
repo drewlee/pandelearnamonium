@@ -2,6 +2,7 @@
 - Solution URL: https://github.com/drewlee/pandelearnamonium/tree/main/cassess/projects/fementor/<project_name>
 - Live Site URL: https://drewlee.github.io/pandelearnamonium/cassess/projects/fementor/<project_name>/
 
+- JavaScript
 - Accessibility
 - ESLint
 - Stylelint

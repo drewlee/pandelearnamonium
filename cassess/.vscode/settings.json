@@ -1,5 +1,17 @@
 {
+  "editor.formatOnSave": true,
+  "prettier.configPath": "prettier.config.js",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[css]": {
-    "editor.defaultFormatter": "stylelint.vscode-stylelint"
-  }
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.requireConfig": true
 }
