@@ -1,7 +1,7 @@
 /* CUSTOM FONT INCLUSION */
 @font-face {
   font-family: 'Space Mono';
-  src: url('../../_shared/assets/fonts/space-mono/SpaceMono-Bold.ttf') format('opentype-variations');
+  src: url('../../shared/assets/fonts/space-mono/SpaceMono-Bold.ttf') format('opentype-variations');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

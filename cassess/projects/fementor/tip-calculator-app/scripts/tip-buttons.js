@@ -1,4 +1,4 @@
-import Component from '../../_shared/scripts/component.js';
+import Component from '../../shared/scripts/component.js';
 import PubSub from './pubsub.js';
 
 export default class TipButtons extends Component {
