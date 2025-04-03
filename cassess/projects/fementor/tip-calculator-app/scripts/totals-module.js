@@ -47,6 +47,10 @@ export default class TotalsModule extends Component {
    * Click event listener on the reset button element.
    */
   handleResetClick() {
+    if (!this.#isActive) {
+      return;
+    }
+
     PubSub.trigger('clearAllValues');
     this.handleReset();
   }
@@ -97,7 +101,8 @@ export default class TotalsModule extends Component {
 
     // Update the UI.
     this.renderTotals(splitTip, splitTotal);
-    this.resetBtnEl.disabled = false;
+    this.resetBtnEl.classList.remove('disabled');
+    this.resetBtnEl.setAttribute('aria-disabled', false);
     this.#isActive = true;
 
     return true;
@@ -108,7 +113,8 @@ export default class TotalsModule extends Component {
    */
   handleReset() {
     this.renderTotals();
-    this.resetBtnEl.disabled = true;
+    this.resetBtnEl.classList.add('disabled');
+    this.resetBtnEl.setAttribute('aria-disabled', true);
     this.#isActive = false;
   }
 
