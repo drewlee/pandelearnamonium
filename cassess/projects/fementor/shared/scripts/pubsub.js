@@ -6,6 +6,9 @@
  * @typedef {(type: string, ...args: any[]) => any[]} PubSubTriggerFn
  */
 
+const TYPE_ERROR_MSG = 'Specified an invalid type for the `type` parameter';
+const LISTENER_ERROR_MSG = 'Specified an invalid type for the `listener` parameter';
+
 /**
  * Helper function for registering a custom event listener.
  *
@@ -15,11 +18,11 @@
  */
 function _addListener(type, listener) {
   if (typeof type !== 'string') {
-    throw new TypeError('Specified an invalid type for the `type` parameter');
+    throw new TypeError(TYPE_ERROR_MSG);
   }
 
   if (typeof listener !== 'function') {
-    throw new TypeError('Specified an invalid type for the `listener` parameter');
+    throw new TypeError(LISTENER_ERROR_MSG);
   }
 
   const listeners = this._registry.has(type) ? this._registry.get(type).slice() : [];
@@ -62,7 +65,7 @@ function off(type, listener) {
   if (type === undefined) {
     this._registry.clear();
   } else if (typeof type !== 'string') {
-    throw new Error('Specified an invalid type for the `type` parameter');
+    throw new Error(TYPE_ERROR_MSG);
   } else if (this._registry.has(type)) {
     const regListeners = this._registry.get(type);
     const filteredListeners = [];
@@ -91,7 +94,7 @@ function off(type, listener) {
  */
 function trigger(type, ...args) {
   if (typeof type !== 'string') {
-    throw new TypeError('Specified an invalid type for the `type` parameter');
+    throw new TypeError(TYPE_ERROR_MSG);
   }
 
   const results = [];
@@ -122,7 +125,7 @@ const PubSub = Object();
 
 Object.defineProperties(PubSub, {
   _registry: {
-    /** @type {Map<string, (...args: unknown[]) => unknown>} */
+    /** @type {Map<string, PubSubListenerFn>} */
     value: new Map(),
   },
   _addListener: {
