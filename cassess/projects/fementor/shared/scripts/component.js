@@ -1,4 +1,10 @@
+/**
+ * @namespace ComponentType
+ * @typedef {(evt: Event) => void} ComponentType.ListenerFn
+ * @typedef {{ id: string, el: string, type?: string, listener?: string | ComponentType.ListenerFn }} ComponentType.EventRegistry
+ */
 export default class Component {
+  /** @type {ComponentType.EventRegistry[]} */
   events = [];
 
   constructor() {
@@ -9,6 +15,8 @@ export default class Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    * Must be subclassed.
+   *
+   * @returns {ComponentType.EventRegistry[]}
    */
   registerDOM() {
     throw new Error('The `registerDOM` method must be overridden by the subclass');
@@ -33,6 +41,8 @@ export default class Component {
 
     for (const attrs of events) {
       const { el, listener } = attrs;
+
+      /** @type {ComponentType.ListenerFn} */
       let callback = () => {};
 
       this[el] = this[el] ?? document.getElementById(attrs.id);

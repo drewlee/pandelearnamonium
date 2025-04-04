@@ -1,6 +1,8 @@
 import Component from '../../shared/scripts/component.js';
 import PubSub from '../../shared/scripts/pubsub.js';
 
+/** @import {ComponentType} from  '../../shared/scripts/component.js' */
+
 export default class TipButtons extends Component {
   /** @type {HTMLButtonElement} */
   #activeEl = null;
@@ -27,7 +29,7 @@ export default class TipButtons extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string | ((evt: Event) => void)>[]}
+   * @returns {ComponentType.EventRegistry[]}
    */
   registerDOM() {
     return [
