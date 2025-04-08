@@ -27,12 +27,11 @@ export function _getSymbolCharCodes() {
 
 /**
  * Returns the minimum and maximum range for the specified character type.
- * Primarily used in testing.
  *
  * @param {number} charType - The character type. @see CHAR_TYPE
  * @returns {[number, number]} The min and max range.
  */
-export function _getRangeForCharType(charType) {
+export function getRangeForCharType(charType) {
   return CHAR_RANGE.get(charType);
 }
 

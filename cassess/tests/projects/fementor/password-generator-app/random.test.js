@@ -3,7 +3,7 @@ import {
   generateRandomPassword,
   getRandomCharForType,
   getRandomNumInRange,
-  _getRangeForCharType,
+  getRangeForCharType,
   _getSymbolCharCodes,
 } from '../index.js';
 
@@ -38,7 +38,7 @@ describe('getRandomCharForType', () => {
   test('Gets an uppercase letter in the expected range', () => {
     const mathSpy = vi.spyOn(Math, 'random');
     const charType = CHAR_TYPE.UPPERCASE;
-    let [min, max] = _getRangeForCharType(charType);
+    let [min, max] = getRangeForCharType(charType);
     max += 1; // Max is exclusive
 
     // Minimum range value
@@ -77,7 +77,7 @@ describe('getRandomCharForType', () => {
   test('Gets a lowercase letter in the expected range', () => {
     const mathSpy = vi.spyOn(Math, 'random');
     const charType = CHAR_TYPE.LOWERCASE;
-    let [min, max] = _getRangeForCharType(charType);
+    let [min, max] = getRangeForCharType(charType);
     max += 1; // Max is exclusive
 
     // Minimum range value
@@ -108,7 +108,7 @@ describe('getRandomCharForType', () => {
   test('Gets a number in the expected range', () => {
     const mathSpy = vi.spyOn(Math, 'random');
     const charType = CHAR_TYPE.NUMBER;
-    let [min, max] = _getRangeForCharType(charType);
+    let [min, max] = getRangeForCharType(charType);
     max += 1; // Max is exclusive
 
     // Minimum range value
@@ -147,7 +147,7 @@ describe('getRandomCharForType', () => {
   test('Gets a symbol in the expected range', () => {
     const mathSpy = vi.spyOn(Math, 'random');
     const charType = CHAR_TYPE.SYMBOL;
-    let [min, max] = _getRangeForCharType(charType);
+    let [min, max] = getRangeForCharType(charType);
     max += 1; // Max is exclusive
 
     // Minimum range value
@@ -244,9 +244,9 @@ describe('generateRandomPassword', () => {
     let mathSpy = vi.spyOn(Math, 'random');
 
     for (const char of password) {
-      const [ucMin, ucMax] = _getRangeForCharType(CHAR_TYPE.UPPERCASE);
-      const [lcMin, lcMax] = _getRangeForCharType(CHAR_TYPE.LOWERCASE);
-      const [numMin, numMax] = _getRangeForCharType(CHAR_TYPE.NUMBER);
+      const [ucMin, ucMax] = getRangeForCharType(CHAR_TYPE.UPPERCASE);
+      const [lcMin, lcMax] = getRangeForCharType(CHAR_TYPE.LOWERCASE);
+      const [numMin, numMax] = getRangeForCharType(CHAR_TYPE.NUMBER);
       let code = char.charCodeAt(0);
       let typeIdx = -1;
       let [min, max] = [-1, -1];
@@ -269,7 +269,7 @@ describe('generateRandomPassword', () => {
       } else {
         // Symbol
         typeIdx = 3;
-        [min, max] = _getRangeForCharType(CHAR_TYPE.SYMBOL);
+        [min, max] = getRangeForCharType(CHAR_TYPE.SYMBOL);
         code = _getSymbolCharCodes().indexOf(code);
       }
 

@@ -29,7 +29,8 @@
   background-color: var(--color-grey-200);
 }
 
-.pw-gen_length-range:hover::-webkit-slider-thumb {
+.pw-gen_length-range:hover::-webkit-slider-thumb,
+.pw-gen_length-range:focus-visible::-webkit-slider-thumb {
   border: 2px solid var(--color-green-200);
   background-color: var(--color-grey-850);
 }

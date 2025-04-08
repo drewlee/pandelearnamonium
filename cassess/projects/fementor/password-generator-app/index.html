@@ -18,12 +18,14 @@
         <div class="pw-gen_copy">
           <p class="pw-gen_copy-text font-style_tertiary" id="pw-gen_copy-text">Copied</p>
           <button
-            class="pw-gen_copy-btn icn-copy"
+            class="pw-gen_copy-btn"
             id="pw-gen_copy-btn"
             type="button"
             aria-label="Copy to clipboard"
             disabled
-          ></button>
+          >
+            <span class="icn-copy"></span>
+          </button>
         </div>
       </div>
 
@@ -122,6 +124,13 @@
           Generate <span class="pw-gen_generate-btn-icn icn-arrow"></span>
         </button>
       </div>
+      <div class="visually-hidden" id="pw-gen_live-region" aria-live="polite"></div>
     </main>
+
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
+    </footer>
   </body>
 </html>

@@ -1,5 +1,6 @@
 import Component from '../../shared/scripts/component.js';
 import { CHAR_TYPE, generateRandomPassword } from './random.js';
+import { calcPasswordStrength } from './pw-strength.js';
 
 export default class App extends Component {
   /** @type {Set<string>} */
@@ -26,7 +27,6 @@ export default class App extends Component {
   set isActive(isActiveParam) {
     this.#isActive = isActiveParam;
     this.generateBtnEl.disabled = !isActiveParam;
-    this.copyBtnEl.disabled = !isActiveParam;
   }
 
   /** @returns {boolean} */
@@ -73,6 +73,12 @@ export default class App extends Component {
     /** @type {HTMLElement} */
     this.lengthOutputEl = null;
 
+    /** @type {HTMLElement} */
+    this.strengthEl = null;
+
+    /** @type {HTMLElement} */
+    this.liveRegionEl = null;
+
     return [
       {
         id: 'pw-gen_generate-btn',
@@ -117,10 +123,16 @@ export default class App extends Component {
         id: 'pw-gen_length-output',
         el: 'lengthOutputEl',
       },
+      {
+        id: 'pw-gen_strength',
+        el: 'strengthEl',
+      },
+      {
+        id: 'pw-gen_live-region',
+        el: 'liveRegionEl',
+      },
     ];
   }
-
-  // TODO: handle click to copy functionality
 
   /**
    * Event listener for the password generate button.
@@ -131,6 +143,10 @@ export default class App extends Component {
 
     this.password = generateRandomPassword(charTypes, length);
 
+    // Update the strength indicator.
+    this.updateStrengthIndicator(charTypes, length);
+    this.copyBtnEl.disabled = false;
+
     // Shrinks the font size to fit long passwords.
     length >= 15
       ? this.pwOutputEl.classList.add('shrink-font-size')
@@ -138,10 +154,12 @@ export default class App extends Component {
 
     this.pwOutputEl.innerText = this.password;
     this.copyTextEl.classList.remove('active');
+
+    this.notifyA11y(`Generated password ${this.password}`);
   }
 
   /**
-   * TODO
+   * Input event listener for the character range element.
    */
   handleRangeInput() {
     const { value } = this.lengthRangeEl;
@@ -155,14 +173,18 @@ export default class App extends Component {
     this.lengthRangeEl.dataset.rangeValue = percent;
   }
 
+  /**
+   * Click event listener for the copy to clipboard button.
+   */
   handleClickToCopy() {
-    navigator.clipboard
-      .writeText(this.password)
-      .then(() => this.copyTextEl.classList.add('active'));
+    navigator.clipboard.writeText(this.password).then(() => {
+      this.copyTextEl.classList.add('active');
+      this.notifyA11y(`Copied password to clipboard`);
+    });
   }
 
   /**
-   * TODO
+   * Change event listener for the character selection checkboxes.
    *
    * @param {Event} evt - The event object.
    */
@@ -186,7 +208,7 @@ export default class App extends Component {
   }
 
   /**
-   * TODO
+   * Calculates the selected range value as a percentage based on its min and max value.
    *
    * @param {string} min - The minimum range value.
    * @param {string} max - The maximum range value.
@@ -202,7 +224,7 @@ export default class App extends Component {
 
   /**
    * Transforms the selected character type values into an array of numbers as defined
-   * in the CHAR_TYPE enum. @see CHAR_TYPE
+   * in the `CHAR_TYPE` enum. @see CHAR_TYPE
    *
    * @param {Set<string>} selectedCharTypes - The selected character types.
    * @returns {number[]} The selected character types as an array of numbers.
@@ -211,5 +233,33 @@ export default class App extends Component {
     return [...selectedCharTypes].map((charType) => {
       return CHAR_TYPE[charType.toUpperCase()];
     });
+  }
+
+  /**
+   * Outputs the strength of the password.
+   *
+   * @param {number[]} charTypes - The character types. @see CHAR_TYPE
+   * @param {number} length - The length of the password.
+   */
+  updateStrengthIndicator(charTypes, length) {
+    const strength = calcPasswordStrength(charTypes, length);
+    const className = `strength-${strength + 1}`;
+
+    this.strengthEl.className = this.strengthEl.className.replace(/ strength-\d/, '');
+    this.strengthEl.classList.add(className);
+  }
+
+  /**
+   * Populates a live region to notify a11y users of content changes.
+   *
+   * @param {string} message - The message to notify.
+   */
+  notifyA11y(message) {
+    this.liveRegionEl.textContent = message;
+
+    // Clear the live region after a short duration.
+    setTimeout(() => {
+      this.liveRegionEl.textContent = '';
+    }, 5000);
   }
 }
