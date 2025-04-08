@@ -1,0 +1,455 @@
+/* CUSTOM FONT INCLUSION */
+@font-face {
+  font-family: 'Jet Brains Mono';
+  src: url('../../shared/assets/fonts/jet-brains-mono/JetBrainsMono-VariableFont_wght.ttf')
+    format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CUSTOM PROPERTIES */
+:root {
+  /* Color Scheme */
+  --color-black: rgb(0 0 0);
+  --color-white: rgb(255 255 255);
+  --color-grey-950: rgb(8 7 11);
+  --color-grey-900: rgb(20 19 27);
+  --color-grey-850: rgb(24 23 31);
+  --color-grey-800: rgb(36 35 44);
+  --color-grey-700: rgb(84 83 91);
+  --color-grey-600: rgb(128 124 146);
+  --color-grey-200: rgb(230 229 234);
+  --color-green-200: rgb(164 255 175);
+  --color-yellow-300: rgb(248 205 101);
+  --color-orange-400: rgb(251 124 88);
+  --color-red-500: rgb(246 74 74);
+
+  /* Spacing */
+  --spacing-unit: 8px;
+  --spacing-100: calc(var(--spacing-unit) * 1);
+  --spacing-200: calc(var(--spacing-unit) * 2);
+  --spacing-300: calc(var(--spacing-unit) * 3);
+  --spacing-400: calc(var(--spacing-unit) * 4);
+  --spacing-500: calc(var(--spacing-unit) * 5);
+  --spacing-600: calc(var(--spacing-unit) * 6);
+}
+
+/* RESETS & GENERAL STYLES */
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li,
+fieldset,
+legend,
+input,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+img,
+input,
+label {
+  display: block;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+fieldset {
+  border: none;
+}
+
+button,
+input {
+  border-color: transparent;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+html {
+  font:
+    normal 500 100% / 1.25 'Jet Brains Mono',
+    monospace;
+  background-color: var(--color-grey-950);
+  color: var(--color-grey-200);
+}
+
+body {
+}
+
+/* UTILITIES */
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* TYPOGRAPHY
+   - 32px / 42px bold
+   - 24px / 32px bold
+   - 18px / 24px bold
+   - 16px / 20px bold */
+.font-style_primary {
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.3333; /* 32px */
+}
+
+.font-style_secondary {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.3333; /* 24px */
+}
+
+.font-style_tertiary {
+  font-size: 1rem; /* 16px */
+  line-height: 1.25; /* 20px */
+}
+
+/* ICONS */
+.icn-copy {
+  mask: url('../images/icon-copy.svg') center / cover no-repeat;
+}
+
+.icn-arrow {
+  mask: url('../images/icon-arrow-right.svg') center / cover no-repeat;
+}
+
+/* LAYOUT */
+.pw-gen_grid-layout {
+  display: grid;
+  grid-template-columns: auto minmax(375px, 572px) auto;
+  /* minmax(var(--spacing-200), auto) */
+  /* minmax(343px, 540px) */
+  /* minmax(var(--spacing-200), auto); */
+  height: 100svh;
+  align-items: center;
+}
+
+/* APPLICATION STYLES */
+.pw-gen_main {
+  grid-column: 2;
+  padding: 0 var(--spacing-200);
+}
+
+.pw-gen_main-heading {
+  padding: var(--spacing-200) 0;
+  color: var(--color-grey-600);
+  font-size: 1rem; /* 16px */
+  text-align: center;
+}
+
+/* Password Output */
+.pw-gen_password-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: var(--spacing-400);
+  margin: 0 0 var(--spacing-200);
+  padding: var(--spacing-200);
+  background-color: var(--color-grey-800);
+}
+
+.pw-gen_password-output {
+  color: var(--color-grey-200);
+}
+
+.pw-gen_password-output.shrink-font-size {
+  font-size: 1.125rem; /* 18px */
+}
+
+.pw-gen_password-output:empty::before {
+  content: 'P4$5W0rD!';
+  color: var(--color-grey-700);
+}
+
+/* Copy Content */
+.pw-gen_copy {
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing-100);
+}
+
+.pw-gen_copy-text {
+  display: none;
+  color: var(--color-green-200);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.pw-gen_copy-text.active {
+  display: block;
+}
+
+.pw-gen_copy-btn {
+  width: 17.5px;
+  height: 20px;
+  background-color: var(--color-green-200);
+}
+
+.pw-gen_copy-btn:disabled {
+  background-color: var(--color-grey-700);
+  cursor: default;
+}
+
+.pw-gen_copy-btn:hover:not(:disabled),
+.pw-gen_copy-btn:focus-visible:not(:disabled) {
+  background-color: var(--color-white);
+}
+
+.pw-gen_length-output {
+  color: var(--color-green-200);
+}
+
+.pw-gen_controls {
+  background-color: var(--color-grey-800);
+  padding: var(--spacing-200);
+}
+
+.pw-gen_length-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 var(--spacing-100);
+}
+
+/* Custom Checkboxes */
+.pw-gen_char-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-200) 0;
+  padding: var(--spacing-400) 0;
+}
+
+.pw-gen_checkbox-container {
+  display: flex;
+  gap: 0 var(--spacing-200);
+  align-items: center;
+}
+
+.pw-gen_checkbox {
+  appearance: none;
+  border-radius: 0;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-grey-800);
+  border: 2px solid var(--color-grey-200);
+  cursor: pointer;
+}
+
+.pw-gen_checkbox:checked {
+  border-color: var(--color-green-200);
+  background: url('../images/icon-check.svg') center no-repeat var(--color-green-200);
+}
+
+.pw-gen_checkbox-container::selection,
+.pw-gen_checkbox-label::selection {
+  background-color: transparent;
+}
+
+/* Strength Indicator */
+.pw-gen_strength-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-200);
+  background-color: var(--color-grey-850);
+  text-transform: uppercase;
+}
+
+.pw-gen_strength-label {
+  color: var(--color-grey-600);
+}
+
+.pw-gen_strength {
+  color: var(--color-grey-200);
+}
+
+.pw-gen_strength-text {
+  display: none;
+}
+
+.pw-gen_strength-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing-200);
+}
+
+.pw-gen_strength-bars {
+  display: flex;
+  gap: 0 var(--spacing-100);
+}
+
+.pw-gen_strength-bar {
+  width: 6px;
+  height: 24px;
+  border: 2px solid var(--color-grey-200);
+  background-color: transparent;
+}
+
+.pw-gen_strength-indicator.strength-1 {
+  .pw-gen_strength-text:nth-child(1) {
+    display: block;
+  }
+
+  .pw-gen_strength-bar:nth-child(1) {
+    border-color: var(--color-red-500);
+    background-color: var(--color-red-500);
+  }
+}
+
+.pw-gen_strength-indicator.strength-2 {
+  .pw-gen_strength-text:nth-child(2) {
+    display: block;
+  }
+
+  .pw-gen_strength-bar:nth-child(1),
+  .pw-gen_strength-bar:nth-child(2) {
+    border-color: var(--color-orange-400);
+    background-color: var(--color-orange-400);
+  }
+}
+
+.pw-gen_strength-indicator.strength-3 {
+  .pw-gen_strength-text:nth-child(3) {
+    display: block;
+  }
+
+  .pw-gen_strength-bar:nth-child(1),
+  .pw-gen_strength-bar:nth-child(2),
+  .pw-gen_strength-bar:nth-child(3) {
+    border-color: var(--color-yellow-300);
+    background-color: var(--color-yellow-300);
+  }
+}
+
+.pw-gen_strength-indicator.strength-4 {
+  .pw-gen_strength-text:nth-child(4) {
+    display: block;
+  }
+
+  .pw-gen_strength-bar:nth-child(1),
+  .pw-gen_strength-bar:nth-child(2),
+  .pw-gen_strength-bar:nth-child(3),
+  .pw-gen_strength-bar:nth-child(4) {
+    border-color: var(--color-green-200);
+    background-color: var(--color-green-200);
+  }
+}
+
+/* Generate Button */
+.pw-gen_generate-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 var(--spacing-200);
+  width: 100%;
+  margin: var(--spacing-200) 0 0;
+  padding: var(--spacing-200) 0;
+  border: 2px solid var(--color-green-200);
+  background-color: var(--color-green-200);
+  color: var(--color-grey-800);
+  text-transform: uppercase;
+}
+
+.pw-gen_generate-btn:disabled {
+  background-color: var(--color-grey-800);
+  border-color: var(--color-grey-700);
+  color: var(--color-grey-700);
+  cursor: default;
+}
+
+.pw-gen_generate-btn:hover:not(:disabled),
+.pw-gen_generate-btn:focus-visible:not(:disabled) {
+  background-color: var(--color-grey-800);
+  color: var(--color-green-200);
+}
+
+.pw-gen_generate-btn-icn {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-grey-800);
+}
+
+.pw-gen_generate-btn:disabled .pw-gen_generate-btn-icn {
+  background-color: var(--color-grey-700);
+}
+
+.pw-gen_generate-btn:hover:not(:disabled) .pw-gen_generate-btn-icn {
+  background-color: var(--color-green-200);
+}
+
+/* OVERRIDES FOR NON-MOBILE SCREENS */
+@media (width >= 540px) {
+  /* TYPOGRAPHY */
+  .font-style_primary {
+    font-size: 2rem; /* 32px */
+    line-height: 1.3125; /* 42px */
+  }
+
+  .font-style_secondary {
+    font-size: 1.5rem; /* 24px */
+    line-height: 1.3333; /* 32px */
+  }
+
+  .font-style_tertiary {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.3333; /* 24px */
+  }
+
+  /* APPLICATION STYLES
+     Heading */
+  .pw-gen_main-heading {
+    margin: var(--spacing-300) 0;
+  }
+
+  /* Password Output */
+  .pw-gen_password-container {
+    min-height: 42px;
+    margin: 0 0 var(--spacing-300);
+    padding: calc(var(--spacing-200) + 3px) var(--spacing-400);
+  }
+
+  /* Copy Button */
+  .pw-gen_copy-btn {
+    width: 21px;
+    height: 24px;
+  }
+
+  .pw-gen_controls {
+    padding: var(--spacing-300) var(--spacing-400) var(--spacing-500);
+  }
+
+  /* Password Output */
+  .pw-gen_password-output.shrink-font-size {
+    font-size: 1.75rem; /* 30px */
+  }
+
+  .pw-gen_length-container {
+    margin: 0 0 var(--spacing-200);
+  }
+
+  /* Generate Button */
+  .pw-gen_generate-btn {
+    gap: 0 var(--spacing-300);
+    margin: var(--spacing-400) 0 0;
+    padding: 18.5px 0;
+  }
+}
+
+@media (width >= 768px) {
+}

@@ -42,6 +42,7 @@ class TestComponent extends Component {
 afterEach(() => {
   setRegistry(DEFAULT_REGISTRY);
   document.body.innerHTML = '';
+  vi.restoreAllMocks();
 });
 
 describe('Component', () => {

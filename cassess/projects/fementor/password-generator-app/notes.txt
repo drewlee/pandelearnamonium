@@ -1,0 +1,125 @@
+IMPLEMENTATION NOTES
+--------------------
+
+- Use `String.fromCharCode` / `String.fromCodePoint` to draw characters from
+- Allowed special characters: ! @ # $ % ^ & ? - _
+- Code equivalent: 33 35 36 37 45 63 64 94 95
+  - These are non-contiguous, so will require special handling
+  - Probably a hardcoded array
+- Range for numbers: 33 - 47
+- Range for lower case letters: 97 - 122
+- Range for upper case letters: 65 - 90
+- The contiguous values can be queried at runtime
+- Strategy:
+  - For special characters, create a predefined array
+  - For the other values, generate a random number between their respective ranges
+  - Will need a custom random number generator function that can accept a range of numbers
+  - Will also need to generate a number representing the character type to draw from
+
+- How to programmatically add a value to the clipboard?
+  - `document.execCommand('copy')`
+  - Text must first be selected
+  - For non-HTTPS pages. For HTTPS, there is the Clipboard API:
+
+  ```js
+  navigator.clipboard.writeText('Hello World!')
+    .then(() => console.log('Text copied to clipboard'))
+    .catch((err) => console.log('Failed to copy text: ', err));
+  ```
+
+  - Using text ranges for non-HTTPS:
+
+  ```js
+  const range = document.createRange();
+
+  range.setStart(el.firstChild, 0);
+  range.setEnd(el.firstChild, el.firstChild.length);
+
+  const selection = window.getSelection();
+
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  document.execCommand('copy');
+
+  selection.removeAllRanges();
+  ```
+
+- Can a range slider be styled?
+  See https://www.smashingmagazine.com/2021/12/create-custom-range-input-consistent-browsers/
+
+How to calculate the password strength?
+  - It will need to be a mix of password length and character types
+  - E.g., a password of 20 characters using lowercase letters is not as strong as a password of 6
+    characters using lowercase letters and symbols
+  - The character range is from 0 to 20
+
+HTML Structure
+--------------
+- Password display: readonly text input
+- Click to copy: button
+- Character length: styled range slider
+- Character selection: input checkboxes
+- Strength indicator: HTML & CSS
+- Generate button
+
+Basic User Flow
+---------------
+1. User selects the character length.
+  i. What should be the default value? 0, 1, or 20?
+  ii. Might as well disable the "Generate" button if the value is 0.
+2. User selects the types of characters.
+  i. Disable the "Generate" button of no checkboxes have been checked.
+3. User clicks the "Generate" button.
+4. A random password is generated and displayed in the input.
+5. The strength of the password is determined and output.
+6. User can press the "Copy to clipboard" button.
+7. A confirmation is displayed to denote that the password has been copied.
+8. If the user activates "Generate" again, the confirmation is removed.
+
+App Architecture
+----------------
+
+Components:
+  - Text input
+    - One way
+    - Displays generated password
+    - PassWordInput.setValue(password)
+  - Range slider
+    - One way
+    - Updates the shown character number
+    - Determines the length of the password to generate
+    - LengthSlider.getValue()
+  - Checkbox group
+    - One way
+    - Determines character types to use for password generation
+    - How to setup the app to react to content changes?
+    - TypesCheckboxes.getValue()
+  - Copy button
+    - One way
+    - Add generated password to clipboard
+    - Display notification
+    - Remove notification
+    - Needs to know the password value
+    - CopyButton.setPassword()
+    - How to setup the app to react to content changes?
+  - Strength indicator
+    - One way
+    - Displays the password strength
+    - StrengthIndicator.set(rating)
+  - Generate button
+    - Two way
+    - Kicks off the password generation process
+    - Disabled or enabled based on the state of the slider and checkbox group
+    - GenerateButton.setDisabled()
+    - GenerateButton.setEnabled()
+    - GenerateButton.onClick()
+
+Business logic:
+  - Random number generator for a range of numbers
+    - getRandomInRange(start, end)
+    - start is inclusive while end is exclusive
+    - (end - start) * Math.floor(Math.random()) + start
+  - Generate a random number to determine the character type
+  - Generate a random number to get a character
+  - Calculate the password strength

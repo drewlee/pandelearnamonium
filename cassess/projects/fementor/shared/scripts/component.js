@@ -27,7 +27,7 @@ export default class Component {
    */
   #bindEventListeners() {
     Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach((listener) => {
-      if (typeof this[listener] === 'function' && listener.startsWith('handle')) {
+      if (listener.startsWith('handle') && typeof this[listener] === 'function') {
         this[listener] = this[listener].bind(this);
       }
     });

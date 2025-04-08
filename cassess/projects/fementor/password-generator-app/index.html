@@ -3,13 +3,125 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
-
-    <title>Frontend Mentor | Password generator app</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/range-slider.css" />
+    <script src="./scripts/init.js" type="module"></script>
+    <title>Frontend Mentor | Password Generator App</title>
   </head>
-  <body>
-    Password Generator P4$5W0rD! Character Length Include Uppercase Letters Include Lowercase
-    Letters Include Numbers Include Symbols Strength Generate
+  <body class="pw-gen_grid-layout font-style_tertiary">
+    <main class="pw-gen_main">
+      <h1 class="pw-gen_main-heading font-style_secondary">Password Generator</h1>
+
+      <div class="pw-gen_password-container">
+        <p class="pw-gen_password-output font-style_primary" id="pw-gen_password-output"></p>
+        <div class="pw-gen_copy">
+          <p class="pw-gen_copy-text font-style_tertiary" id="pw-gen_copy-text">Copied</p>
+          <button
+            class="pw-gen_copy-btn icn-copy"
+            id="pw-gen_copy-btn"
+            type="button"
+            aria-label="Copy to clipboard"
+            disabled
+          ></button>
+        </div>
+      </div>
+
+      <div class="pw-gen_controls">
+        <div class="pw-gen_length-container">
+          <label class="font-style_tertiary" for="pw-gen_length-range">Character Length</label>
+          <span class="pw-gen_length-output font-style_primary" id="pw-gen_length-output">0</span>
+        </div>
+        <input
+          class="pw-gen_length-range"
+          id="pw-gen_length-range"
+          type="range"
+          data-range-value="0"
+          min="0"
+          max="20"
+          step="1"
+          value="0"
+        />
+
+        <fieldset class="pw-gen_char-checkboxes" id="pw-gen_char-checkboxes">
+          <legend class="visually-hidden font-style_tertiary">Types of Characters</legend>
+
+          <div class="pw-gen_checkbox-container">
+            <input
+              class="pw-gen_checkbox"
+              id="pw-gen_uppercase-checkbox"
+              type="checkbox"
+              value="uppercase"
+            />
+            <label class="pw-gen_checkbox-label" for="pw-gen_uppercase-checkbox">
+              Include Uppercase Letters
+            </label>
+          </div>
+
+          <div class="pw-gen_checkbox-container">
+            <input
+              class="pw-gen_checkbox"
+              id="pw-gen_lowercase-checkbox"
+              type="checkbox"
+              value="lowercase"
+            />
+            <label class="pw-gen_checkbox-label" for="pw-gen_lowercase-checkbox">
+              Include Lowercase Letters
+            </label>
+          </div>
+
+          <div class="pw-gen_checkbox-container">
+            <input
+              class="pw-gen_checkbox"
+              id="pw-gen_number-checkbox"
+              type="checkbox"
+              value="number"
+            />
+            <label class="pw-gen_checkbox-label" for="pw-gen_number-checkbox">
+              Include Numbers
+            </label>
+          </div>
+
+          <div class="pw-gen_checkbox-container">
+            <input
+              class="pw-gen_checkbox"
+              id="pw-gen_symbol-checkbox"
+              type="checkbox"
+              value="symbol"
+            />
+            <label class="pw-gen_checkbox-label" for="pw-gen_symbol-checkbox">
+              Include Symbols
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="pw-gen_strength-container">
+          <p class="pw-gen_strength-label font-style_tertiary">Strength</p>
+          <div class="pw-gen_strength-indicator" id="pw-gen_strength">
+            <div class="pw-gen_strength font-style_secondary">
+              <span class="pw-gen_strength-text">Too Weak!</span>
+              <span class="pw-gen_strength-text">Weak</span>
+              <span class="pw-gen_strength-text">Medium</span>
+              <span class="pw-gen_strength-text">Strong</span>
+            </div>
+            <div class="pw-gen_strength-bars">
+              <div class="pw-gen_strength-bar"></div>
+              <div class="pw-gen_strength-bar"></div>
+              <div class="pw-gen_strength-bar"></div>
+              <div class="pw-gen_strength-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="pw-gen_generate-btn font-style_tertiary"
+          id="pw-gen_generate-btn"
+          type="button"
+          disabled
+        >
+          Generate <span class="pw-gen_generate-btn-icn icn-arrow"></span>
+        </button>
+      </div>
+    </main>
   </body>
 </html>
