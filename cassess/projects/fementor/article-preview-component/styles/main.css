@@ -172,8 +172,18 @@ html {
 }
 
 /* Share Buttons */
+.icn-share {
+  display: block;
+  width: 15px;
+  height: 13px;
+  mask: url('../images/icon-share.svg') center / cover no-repeat;
+}
+
 .apcomp-content_card-author-btn,
 .apcomp-share-popup_close-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
   padding: 0;
@@ -181,12 +191,29 @@ html {
 }
 
 .apcomp-content_card-author-btn {
-  background: url('../images/icon-share.svg') no-repeat center center var(--color-grey-200);
+  background-color: var(--color-grey-200);
+
+  .icn-share {
+    background-color: var(--color-grey-500);
+  }
 }
 
-.apcomp-content_card-author-btn[aria-expanded='true'],
-.apcomp-share-popup_close-btn {
-  background: url('../images/icon-share-white.svg') no-repeat center center var(--color-grey-500);
+.apcomp-share-popup_close-btn,
+.apcomp-content_card-author-btn[aria-expanded='true'] {
+  background-color: var(--color-grey-500);
+
+  .icn-share {
+    background-color: var(--color-grey-200);
+  }
+}
+
+.apcomp-content_card-author-btn:hover:not([aria-expanded='true']),
+.apcomp-content_card-author-btn:focus-visible:not([aria-expanded='true']) {
+  background-color: var(--color-grey-400);
+
+  .icn-share {
+    background-color: var(--color-white);
+  }
 }
 
 /* Share Popup */
