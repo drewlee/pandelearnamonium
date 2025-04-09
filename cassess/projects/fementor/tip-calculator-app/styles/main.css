@@ -155,11 +155,11 @@ html {
 /* LAYOUT */
 .top-grid-layout {
   display: grid;
-  grid-template-rows: 1fr 3fr auto;
-  grid-template-columns:
-    minmax(0, var(--spacing-1000))
-    minmax(375px, auto)
-    minmax(0, var(--spacing-1000));
+  grid-template:
+    'header header header' 1fr
+    '. main .' 3fr
+    'footer footer footer' auto
+    / minmax(0, var(--spacing-1000)) minmax(375px, auto) minmax(0, var(--spacing-1000));
   height: 100svh;
 }
 
@@ -214,7 +214,7 @@ html {
 /* MAIN STYLES
    Header */
 .splitter-header {
-  grid-column: 1 / -1;
+  grid-area: header;
   align-self: center;
   padding: 45px 0;
 }
@@ -225,7 +225,7 @@ html {
 
 /* Application */
 .splitter-main {
-  grid-column: 2 / -2;
+  grid-area: main;
 }
 
 .splitter-main_container {
@@ -342,7 +342,7 @@ html {
 
 /* Attribution */
 .attribution {
-  grid-column: 1 / -1;
+  grid-area: footer;
   padding: 1.5rem 0; /* 16px */
   font-size: 0.6875rem; /* 11px */
   text-align: center;

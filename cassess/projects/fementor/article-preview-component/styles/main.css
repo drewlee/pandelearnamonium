@@ -1,7 +1,8 @@
 /* CUSTOM FONT INCLUSION */
 @font-face {
   font-family: Manrope;
-  src: url('../assets/fonts/manrope/Manrope-VariableFont_wght.ttf') format('truetype-variations');
+  src: url('../../shared/assets/fonts/manrope/Manrope-VariableFont_wght.ttf')
+    format('truetype-variations');
   font-weight: 500 700;
   font-style: normal;
   font-display: swap;
@@ -98,7 +99,7 @@ html {
     - Image width: 285px / 39% */
 .apcomp-container {
   display: grid;
-  grid-template-rows: minmax(var(--spacing-200), var(--spacing-600)) 1fr auto;
+  grid-template-rows: minmax(1rem, 3rem) 1fr auto; /* 16px, 48px */
   align-items: center;
   height: 100svh;
   min-width: 327px;

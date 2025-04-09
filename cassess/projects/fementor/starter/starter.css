@@ -1,7 +1,8 @@
 /* CUSTOM FONT INCLUSION */
 @font-face {
   font-family: FontName;
-  src: url('../assets/fonts/outfit/<font_name>.ttf') format('truetype-variations');
+  src: url('../../shared/assets/fonts/<font_name>/<font_file_name>.ttf')
+    format('opentype-variations');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;

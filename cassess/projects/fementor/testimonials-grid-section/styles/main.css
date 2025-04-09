@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  src: url('../../shared/assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Regular.ttf')
+    format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  src: url('../../shared/assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Medium.ttf')
+    format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* CUSTOM PROPERTIES */
 :root {
   /* Color Scheme */

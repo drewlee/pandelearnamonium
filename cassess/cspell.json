@@ -1,0 +1,27 @@
+{
+  "version": "0.2",
+  "ignorePaths": [],
+  "dictionaryDefinitions": [],
+  "dictionaries": [],
+  "words": ["bootcamp", "mlpage", "rglr", "sbold", "testi", "xlght"],
+  "ignoreWords": [
+    "apcomp",
+    "cassess",
+    "Csvg",
+    "describedby",
+    "drewlee",
+    "fementor",
+    "Figtree",
+    "Flexbox",
+    "Fraunces",
+    "nodenext",
+    "nutri",
+    "opsz",
+    "Parfum",
+    "Polge",
+    "slnt",
+    "ttdash",
+    "wght"
+  ],
+  "import": []
+}

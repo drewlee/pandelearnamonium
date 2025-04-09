@@ -105,7 +105,7 @@ html {
   height: 100svh;
   display: grid;
   grid-template:
-    minmax(var(--spacing-100), 45px) 1fr auto
+    minmax(0.5rem, 2.8125rem) 1fr auto /* 8px, 45px */
     / minmax(var(--spacing-300), 10.16%) minmax(327px, auto) minmax(var(--spacing-300), 10.16%);
   align-items: center;
 }

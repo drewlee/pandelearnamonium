@@ -1,7 +1,8 @@
 /* Custom Font Inclusion */
 @font-face {
   font-family: Inter;
-  src: url('../assets/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
+  src: url('../../shared/assets/fonts/inter/Inter-VariableFont_slnt,wght.ttf')
+    format('opentype-variations');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -42,7 +43,8 @@ body {
   height: 100svh;
   display: grid;
   grid-template:
-    '. . .' minmax(16px, 44.5px)
+    /* stylelint-disable-next-line number-max-precision */
+    '. . .' minmax(1rem, 2.78125rem) /* 16px, 44.5px */
     '. main .' 1fr
     'footer footer footer' auto
     / 1fr minmax(376px, 432px) 1fr;
