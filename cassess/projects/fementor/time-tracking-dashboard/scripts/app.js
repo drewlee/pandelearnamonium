@@ -39,7 +39,7 @@ class App {
   /**
    * The public interface for retrieving and processing time tracking dashboard data.
    *
-   * @returns {Record<string, object>} The formatted data.
+   * @returns {Promise<Record<string, object>>} The formatted data.
    */
   async getDashboardData() {
     const data = await this.#fetchJsonData();

@@ -1,7 +1,8 @@
 /* CUSTOM FONT INCLUSION */
 @font-face {
   font-family: Rubik;
-  src: url('../assets/fonts/rubik/Rubik-VariableFont_wght.ttf') format('opentype-variations');
+  src: url('../../shared/assets/fonts/rubik/Rubik-VariableFont_wght.ttf')
+    format('truetype-variations');
   font-weight: 300 500;
   font-style: normal;
   font-display: swap;

@@ -1,4 +1,4 @@
-import PubSub from '../pubsub.js';
+import { PubSub } from '../index.js';
 
 afterEach(() => {
   PubSub.off();

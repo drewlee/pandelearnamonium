@@ -14,7 +14,7 @@ export function setFocus(el) {
  * @param {HTMLElement} el - The HTML element.
  */
 export function setTabindex(el) {
-  el.setAttribute('tabindex', -1);
+  el.setAttribute('tabindex', '-1');
   el.addEventListener('focusout', handleCleanupTabindex);
 }
 
@@ -26,6 +26,8 @@ export function setTabindex(el) {
 export function handleCleanupTabindex(evt) {
   const { target } = evt;
 
-  target.removeAttribute('tabindex');
-  target.removeEventListener('focusout', handleCleanupTabindex);
+  if (target instanceof HTMLElement) {
+    target.removeAttribute('tabindex');
+    target.removeEventListener('focusout', handleCleanupTabindex);
+  }
 }

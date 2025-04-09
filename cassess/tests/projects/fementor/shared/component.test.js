@@ -1,6 +1,6 @@
-import Component from '../component.js';
+import { Component } from '../index.js';
 
-/** @import {ComponentType} from '../component.js' */
+/** @import {ComponentType} from '../../../../projects/fementor/shared/scripts/component.js' */
 
 /** @type {ComponentType.EventRegistry[]} */
 const DEFAULT_REGISTRY = [

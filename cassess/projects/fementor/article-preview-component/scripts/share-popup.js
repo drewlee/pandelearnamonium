@@ -1,4 +1,4 @@
-import Component from './component.js';
+import Component from '../../shared/scripts/component.js';
 
 export default class SharePopup extends Component {
   /** Component state */
@@ -7,9 +7,18 @@ export default class SharePopup extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string | (e: Event) => void>[]}
+   * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]}
    */
   registerDOM() {
+    /** @type {HTMLButtonElement} */
+    this.triggerEl = null;
+
+    /** @type {HTMLButtonElement} */
+    this.closeBtnEl = null;
+
+    /** @type {HTMLElement} */
+    this.sharePopupEl = null;
+
     return [
       {
         id: 'share-btn',

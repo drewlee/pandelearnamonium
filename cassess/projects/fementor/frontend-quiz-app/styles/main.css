@@ -1,7 +1,8 @@
 /* CUSTOM FONT INCLUSION */
 @font-face {
-  font-family: FontName;
-  src: url('../assets/fonts/outfit/<font_name>.ttf') format('truetype-variations');
+  font-family: Rubik;
+  src: url('../../shared/assets/fonts/rubik/Rubik-VariableFont_wght.ttf')
+    format('opentype-variations');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -40,7 +41,7 @@ ul {
 
 html {
   font:
-    normal 400 100% / 1.5 Arial,
+    normal 400 100% / 1.5 Rubik,
     sans-serif;
   background-color: var(--color-white);
   color: var(--color-black);

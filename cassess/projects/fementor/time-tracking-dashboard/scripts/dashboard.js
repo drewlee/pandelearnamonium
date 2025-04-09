@@ -1,4 +1,4 @@
-import Component from './component.js';
+import Component from '../../shared/scripts/component.js';
 import { setFocus } from './a11y-utils.js';
 
 export default class Dashboard extends Component {
@@ -31,9 +31,15 @@ export default class Dashboard extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string>[]} The registry array.
+   * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]} The registry array.
    */
   registerDOM() {
+    /** @type {HTMLElement} */
+    this.navEl = null;
+
+    /** @type {HTMLElement} */
+    this.dashboardContentEl = null;
+
     return [
       {
         id: 'dashboard-nav',
@@ -142,7 +148,11 @@ export default class Dashboard extends Component {
 
     const { target } = evt;
 
-    if (target.tagName === 'A' && !target.classList.contains('active')) {
+    if (
+      target instanceof HTMLAnchorElement &&
+      target.tagName === 'A' &&
+      !target.classList.contains('active')
+    ) {
       const timeframe = target.getAttribute('href').slice(1);
 
       this.navEl.querySelector('.active').classList.remove('active');

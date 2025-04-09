@@ -1,27 +1,45 @@
-import Component from './component.js';
+import Component from '../../shared/scripts/component.js';
 
 export default class SignupForm extends Component {
   /** @type {string} */
-  _email = '';
+  #email = '';
 
   /** @returns {string} */
   get email() {
-    return this._email;
+    return this.#email;
   }
 
   /** @param {string} value */
   set email(value) {
-    this._email = value;
+    this.#email = value;
     this.emailInputEl.value = '';
-    this.successEmailEl.textContent = this._email;
+    this.successEmailEl.textContent = this.#email;
   }
 
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {Record<string, string | (e: Event) => void>[]}
+   * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]}
    */
   registerDOM() {
+    /** @type {HTMLFormElement} */
+    this.formEl = null;
+
+    /** @type {HTMLInputElement} */
+    this.emailInputEl = null;
+
+    /** @type {HTMLElement} */
+    this.successContentEl = null;
+
+    /** @type {HTMLElement} */
+    this.formContentEl = null;
+
+    /** @type {HTMLElement} */
+    this.successEmailEl = null;
+
+    /** @type {HTMLElement} */
+    this.formErrorEl = null;
+
     return [
       {
         id: 'newsletter-form',
@@ -66,7 +84,7 @@ export default class SignupForm extends Component {
 
     if (this.isValidEmail(email)) {
       this.formEl.classList.remove('error');
-      this.emailInputEl.setAttribute('aria-invalid', false);
+      this.emailInputEl.setAttribute('aria-invalid', 'false');
       this.emailInputEl.removeAttribute('aria-describedby');
 
       this.email = email;
@@ -75,7 +93,7 @@ export default class SignupForm extends Component {
       this.setFocus(this.successContentEl);
     } else {
       this.formEl.classList.add('error');
-      this.emailInputEl.setAttribute('aria-invalid', true);
+      this.emailInputEl.setAttribute('aria-invalid', 'true');
       this.emailInputEl.setAttribute('aria-describedby', 'newsletter-form-error');
       this.setFocus(this.formErrorEl);
     }
@@ -87,7 +105,9 @@ export default class SignupForm extends Component {
    * @param {PointerEvent} evt - The event object.
    */
   handleSuccessDismiss(evt) {
-    if (evt.target.id === 'success-dismiss-btn') {
+    const { target } = evt;
+
+    if (target instanceof HTMLButtonElement && target.id === 'success-dismiss-btn') {
       this.showContent(this.formContentEl);
       this.setFocus(this.formContentEl);
     }
@@ -99,8 +119,10 @@ export default class SignupForm extends Component {
    * @param {FocusEvent} currentTarget - The HTML element that triggered the event.
    */
   handleCleanupTabindex({ currentTarget }) {
-    currentTarget.removeAttribute('tabindex');
-    currentTarget.removeEventListener('focusout', this.handleCleanupTabindex);
+    if (currentTarget instanceof HTMLElement) {
+      currentTarget.removeAttribute('tabindex');
+      currentTarget.removeEventListener('focusout', this.handleCleanupTabindex);
+    }
   }
 
   /**
@@ -122,7 +144,7 @@ export default class SignupForm extends Component {
    * @param {HTMLElement} el - The HTML element.
    */
   setTabindex(el) {
-    el.setAttribute('tabindex', -1);
+    el.setAttribute('tabindex', '-1');
     el.addEventListener('focusout', this.handleCleanupTabindex);
   }
 
