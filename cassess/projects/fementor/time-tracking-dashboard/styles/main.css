@@ -49,6 +49,16 @@ button {
   display: block;
 }
 
+* {
+  outline-width: 0;
+  transition: outline-width 100ms ease-in;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-yellow-300);
+  outline-offset: 2px;
+}
+
 html {
   color: var(--color-white);
   background-color: var(--color-navy-950);

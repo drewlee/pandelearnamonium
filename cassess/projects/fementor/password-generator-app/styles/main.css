@@ -86,6 +86,11 @@ html {
 }
 
 /* Focus Outline Style */
+* {
+  outline-width: 0;
+  transition: outline-width 100ms ease-in;
+}
+
 *:focus-visible {
   outline: 2px solid var(--color-yellow-300);
   outline-offset: 2px;
@@ -402,7 +407,8 @@ html {
   background-color: var(--color-grey-700);
 }
 
-.pw-gen_generate-btn:hover:not(:disabled) .pw-gen_generate-btn-icn {
+.pw-gen_generate-btn:hover:not(:disabled) .pw-gen_generate-btn-icn,
+.pw-gen_generate-btn:focus-visible:not(:disabled) .pw-gen_generate-btn-icn {
   background-color: var(--color-green-200);
 }
 

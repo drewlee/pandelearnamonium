@@ -51,6 +51,16 @@ button {
   cursor: pointer;
 }
 
+* {
+  outline-width: 0;
+  transition: outline-width 100ms ease-in;
+}
+
+*:focus-visible {
+  outline: 2px solid rgb(0 140 255);
+  outline-offset: 2px;
+}
+
 html {
   color: var(--color-grey-500);
   font:
@@ -237,6 +247,10 @@ html {
   border-radius: 0 0 10px 10px;
   background-color: var(--color-grey-900);
   color: var(--color-grey-400);
+}
+
+.apcomp-share-popup *:focus-visible {
+  outline-color: rgb(41 173 255);
 }
 
 .apcomp-share-popup_share-btn {
