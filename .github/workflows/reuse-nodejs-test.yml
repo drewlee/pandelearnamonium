@@ -1,0 +1,37 @@
+name: Reusable Node.js Test
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+      working-directory:
+        required: true
+        type: string
+      cache-dependency-path:
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ inputs.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: "npm"
+          cache-dependency-path: ${{ inputs.cache-dependency-path }}
+
+      - run: npm ci
+        working-directory: ${{ inputs.working-directory }}
+
+      - run: npm run build --if-present
+        working-directory: ${{ inputs.working-directory }}
+
+      - run: npm test
+        working-directory: ${{ inputs.working-directory }}
