@@ -3,8 +3,7 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": ["bootcamp", "mlpage", "Pinterest", "rglr", "sbold", "testi", "xlght"],
-  "ignoreWords": [
+  "words": [
     "apcomp",
     "cassess",
     "Csvg",
@@ -21,7 +20,15 @@
     "Polge",
     "slnt",
     "ttdash",
-    "wght"
+    "wght",
+    "bootcamp",
+    "mlpage",
+    "Pinterest",
+    "rglr",
+    "sbold",
+    "testi",
+    "xlght"
   ],
+  "ignoreWords": [],
   "import": []
 }

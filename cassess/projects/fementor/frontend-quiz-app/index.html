@@ -1,16 +1,41 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="fqa-root transitions-off">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+    <script>
+      document.documentElement.classList.add(
+        localStorage.getItem('isDarkTheme') === 'true' ? 'style-theme-dark' : 'style-theme-light',
+      );
+
+      document.addEventListener('DOMContentLoaded', () => {
+        requestAnimationFrame(() => document.documentElement.classList.remove('transitions-off'));
+      });
+    </script>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <script src="./scripts/init.js" type="module"></script>
     <title>Frontend Mentor | Frontend Quiz App</title>
   </head>
   <body>
+    <header class="fqa-header">
+      <div class="fqa-header_title" id="fqa-header-title">
+        <!-- Quiz Title -->
+      </div>
+      <div class="fqa-theme-switch">
+        <button
+          class="fqa-theme-switch_btn"
+          id="fqa-theme-switch-btn"
+          type="button"
+          role="switch"
+          aria-label="Enable dark mode"
+          aria-checked="false"
+        ></button>
+      </div>
+    </header>
+    <main class="fqa-main"></main>
     <!-- Quiz menu start -->
-
     Welcome to the Frontend Quiz! Pick a subject to get started. HTML CSS JavaScript Accessibility
-
     <!-- Quiz menu end -->
 
     <!-- Quiz question start -->
