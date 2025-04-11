@@ -13,25 +13,13 @@ on:
 
 jobs:
   test-algorhythmics:
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     uses: ./.github/workflows/reuse-nodejs-test.yml
     with:
-      node-version: ${{ matrix.node-version }}
       working-directory: "algorhythmics"
       cache-dependency-path: "algorhythmics/package-lock.json"
 
   test-cassess:
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     uses: ./.github/workflows/reuse-nodejs-test.yml
     with:
-      node-version: ${{ matrix.node-version }}
       working-directory: "cassess"
       cache-dependency-path: "cassess/package-lock.json"
