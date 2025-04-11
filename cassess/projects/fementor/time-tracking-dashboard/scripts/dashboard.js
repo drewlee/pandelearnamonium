@@ -1,6 +1,8 @@
 import Component from '../../shared/scripts/component.js';
 import { setFocus } from './a11y-utils.js';
 
+/** @import { TimeFrameRecordType } from './app.js' */
+
 export default class Dashboard extends Component {
   /** @type {Map<string, string>} */
   #prevLabel = new Map([
@@ -19,7 +21,7 @@ export default class Dashboard extends Component {
   /**
    * Class constructor.
    *
-   * @param {Record<string, object>} data - The time tracking dashboard data.
+   * @param {TimeFrameRecordType} data - The time tracking dashboard data.
    */
   constructor(data) {
     super();

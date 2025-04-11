@@ -3,6 +3,7 @@
  * @typedef {(evt: Event) => void} ComponentType.ListenerFn
  * @typedef {{ id: string, el: string, type?: string, listener?: string | ComponentType.ListenerFn }} ComponentType.EventRegistry
  */
+
 export default class Component {
   /** @type {ComponentType.EventRegistry[]} */
   events = [];
@@ -27,8 +28,10 @@ export default class Component {
    */
   #bindEventListeners() {
     Object.getOwnPropertyNames(Object.getPrototypeOf(this)).forEach((listener) => {
-      if (listener.startsWith('handle') && typeof this[listener] === 'function') {
-        this[listener] = this[listener].bind(this);
+      const listenerType = /** @type {keyof this} */ (listener);
+
+      if (listener.startsWith('handle') && typeof this[listenerType] === 'function') {
+        this[listenerType] = this[listenerType].bind(this);
       }
     });
   }
@@ -41,15 +44,18 @@ export default class Component {
 
     for (const attrs of events) {
       const { el, listener } = attrs;
+      const elType = /** @type {keyof this} */ (el);
 
       /** @type {ComponentType.ListenerFn} */
       let callback = () => {};
 
-      this[el] = this[el] ?? document.getElementById(attrs.id);
+      /** @type {any} */ (this[elType]) = this[elType] ?? document.getElementById(attrs.id);
 
       switch (typeof listener) {
         case 'string':
-          callback = this[listener];
+          callback = /** @type {ComponentType.ListenerFn} */ (
+            this[/** @type {keyof this} */ (listener)]
+          );
           break;
         case 'function':
           callback = listener;
@@ -60,7 +66,7 @@ export default class Component {
           throw new TypeError('Invalid listener type');
       }
 
-      this[el].addEventListener(attrs.type, callback);
+      /** @type {HTMLElement} */ (this[elType]).addEventListener(attrs.type, callback);
     }
 
     this.events = events;

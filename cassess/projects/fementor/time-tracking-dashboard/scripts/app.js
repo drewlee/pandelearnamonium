@@ -1,8 +1,30 @@
+/**
+ * @typedef {{
+ *  current: number,
+ *  previous: number,
+ * }} JSONTimeFrameEntryType
+ * @typedef {{
+ *  daily: JSONTimeFrameEntryType,
+ *  weekly: JSONTimeFrameEntryType,
+ *  monthly: JSONTimeFrameEntryType,
+ * }} JSONTimeFrameType
+ * @typedef {{
+ *  title: string,
+ *  timeframes: JSONTimeFrameType
+ * }} JSONRecordType
+ * @typedef {{
+ *  title: string,
+ *  current: number,
+ *  previous: number,
+ * }} TimeFrameActivityType
+ * @typedef {Record<string, TimeFrameActivityType[]>} TimeFrameRecordType
+ */
+
 class App {
   /**
    * Triggers a fetch request for time tracking dashboard data.
    *
-   * @returns {Promise<unknown[]>} The response JSON as a promise.
+   * @returns {Promise<JSONRecordType[]>} The response JSON as a promise.
    */
   async #fetchJsonData() {
     const response = await fetch('./data.json');
@@ -15,10 +37,11 @@ class App {
   /**
    * Processes the response JSON into a format that can be consumed by the UI.
    *
-   * @param {object} json - The response JSON.
-   * @returns {Record<string, object>} The formatted data.
+   * @param {JSONRecordType[]} json - The response JSON.
+   * @returns {TimeFrameRecordType} The formatted data.
    */
   #formatJsonData(json) {
+    /** @type {TimeFrameRecordType} */
     const initial = {
       daily: [],
       weekly: [],
@@ -39,7 +62,7 @@ class App {
   /**
    * The public interface for retrieving and processing time tracking dashboard data.
    *
-   * @returns {Promise<Record<string, object>>} The formatted data.
+   * @returns {Promise<TimeFrameRecordType>} The formatted data.
    */
   async getDashboardData() {
     const data = await this.#fetchJsonData();

@@ -1,5 +1,6 @@
 import Component from '../../shared/scripts/component.js';
 import ToggleSwitch from './toggle-switch.js';
+import type { ComponentType } from '../../shared/scripts/component.js';
 
 export default class App extends Component {
   declare themeSwitch: ToggleSwitch;
@@ -9,7 +10,7 @@ export default class App extends Component {
     this.syncThemeSwitchState();
   }
 
-  registerDOM() {
+  registerDOM(): ComponentType.EventRegistry[] {
     this.themeSwitch = new ToggleSwitch();
     this.themeSwitch.el.addEventListener('click', this.handleThemeToggleClick);
 

@@ -231,7 +231,7 @@ export default class App extends Component {
    */
   getCharTypesAsEnum(selectedCharTypes) {
     return [...selectedCharTypes].map((charType) => {
-      return CHAR_TYPE[charType.toUpperCase()];
+      return CHAR_TYPE[/** @type {keyof typeof CHAR_TYPE} */ (charType.toUpperCase())];
     });
   }
 
