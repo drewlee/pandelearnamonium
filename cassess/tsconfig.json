@@ -5,6 +5,8 @@
     "types": ["vitest/globals"],
     "checkJs": true,
     "noEmit": true,
+    "noImplicitAny": false,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },

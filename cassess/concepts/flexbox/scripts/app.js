@@ -11,7 +11,8 @@ function handleStyleChange(evt) {
 
     if (owns) {
       const isDisabled = val !== 'px';
-      document.getElementById(owns).disabled = isDisabled;
+      const inputEl = /** @type {HTMLInputElement} */ (document.getElementById(owns));
+      inputEl.disabled = isDisabled;
 
       if (!isDisabled) {
         return;

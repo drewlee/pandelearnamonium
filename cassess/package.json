@@ -7,6 +7,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:ts": "tsc -b",
     "eslint": "eslint .",
     "lint": "npm run prettier && npm run stylelint && npm run eslint",
     "lint:check": "npm run prettier:check && npm run stylelint && npm run eslint",
@@ -15,7 +16,7 @@
     "prettier:check": "prettier . -c",
     "prettier:write": "npm run prettier",
     "stylelint": "stylelint '**/*.css'",
-    "test": "npm run lint:check && vitest run",
+    "test": "npm run lint:check && npm run build:ts && vitest run",
     "vitest": "vitest run"
   },
   "lint-staged": {
