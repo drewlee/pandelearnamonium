@@ -17,9 +17,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+
     steps:
       - uses: actions/checkout@v4
-
       - name: Use Node.js ${{ inputs.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -28,10 +31,5 @@ jobs:
           cache-dependency-path: ${{ inputs.cache-dependency-path }}
 
       - run: npm ci
-        working-directory: ${{ inputs.working-directory }}
-
       - run: npm run build --if-present
-        working-directory: ${{ inputs.working-directory }}
-
       - run: npm test
-        working-directory: ${{ inputs.working-directory }}
