@@ -9,12 +9,13 @@
   "scripts": {
     "eslint": "eslint .",
     "lint": "npm run prettier && npm run stylelint && npm run eslint",
-    "lint:test": "npm run prettier:check && npm run stylelint && npm run eslint",
+    "lint:check": "npm run prettier:check && npm run stylelint && npm run eslint",
     "prepare": "cd .. && husky",
     "prettier": "prettier . -w",
     "prettier:check": "prettier . -c",
+    "prettier:write": "npm run prettier",
     "stylelint": "stylelint '**/*.css'",
-    "test": "npm run lint:test && vitest run",
+    "test": "npm run lint:check && vitest run",
     "vitest": "vitest run"
   },
   "lint-staged": {
