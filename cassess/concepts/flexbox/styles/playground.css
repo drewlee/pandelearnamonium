@@ -1,8 +1,8 @@
-body {
+.playground-body {
   margin: 40px 20px;
 }
 
-code {
+.playground-body code {
   background-color: #eee;
   color: #d60101;
 }

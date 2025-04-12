@@ -9,7 +9,8 @@
     "noImplicitAny": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "isolatedModules": true
   },
   "include": ["concepts/**/*", "projects/**/*", "tests/**/*"]
 }
