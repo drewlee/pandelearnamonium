@@ -1,10 +1,11 @@
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import html from '@html-eslint/eslint-plugin';
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig([
   // Global settings
   {
     languageOptions: {
@@ -58,4 +59,5 @@ export default [
       return config;
     }, {}),
   },
-];
+  globalIgnores(['dist']),
+]);
