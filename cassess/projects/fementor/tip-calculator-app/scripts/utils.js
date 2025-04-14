@@ -18,11 +18,11 @@ const allowedKeys = [
   '0',
 ];
 
-export const errorMsg = new Map([
-  ['zero', "Can't be zero"],
-  ['nan', 'Invalid number'],
-  ['max', 'Limit exceeded'],
-]);
+export const ERROR_MSG = {
+  ZERO: "Can't be zero",
+  NAN: 'Invalid number',
+  MAX: 'Limit exceeded',
+};
 
 /**
  * Returns a set of allowed active keyboard key values. The values are exposed as a getter function

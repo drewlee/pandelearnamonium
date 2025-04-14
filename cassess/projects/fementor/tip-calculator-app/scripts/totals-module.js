@@ -24,16 +24,16 @@ export default class TotalsModule extends Component {
    */
   registerDOM() {
     /** @type {HTMLButtonElement} */
-    this.resetBtnEl = null;
+    this.resetBtnEl;
 
     /** @type {HTMLElement} */
-    this.splitTipEl = null;
+    this.splitTipEl;
 
     /** @type {HTMLElement} */
-    this.splitTotalEl = null;
+    this.splitTotalEl;
 
     /** @type {HTMLElement} */
-    this.liveRegionEl = null;
+    this.liveRegionEl;
 
     return [
       {

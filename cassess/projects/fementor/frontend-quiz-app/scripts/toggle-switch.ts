@@ -1,4 +1,4 @@
-import Component from '../../shared/scripts/component.js';
+import Component, { type ComponentType } from '../../shared/scripts/component.js';
 
 export default class ToggleSwitch extends Component {
   #isActive: boolean = false;
@@ -9,7 +9,7 @@ export default class ToggleSwitch extends Component {
     return this.#isActive;
   }
 
-  registerDOM() {
+  registerDOM(): ComponentType.EventRegistry[] {
     return [
       {
         id: 'fqa-theme-switch-btn',

@@ -1,7 +1,7 @@
 /**
  * @namespace ComponentType
  * @typedef {(evt: Event) => void} ComponentType.ListenerFn
- * @typedef {{ id: string, el: string, type?: string, listener?: string | ComponentType.ListenerFn }} ComponentType.EventRegistry
+ * @typedef {{ id: string, el: string, type?: keyof HTMLElementEventMap, listener?: string | ComponentType.ListenerFn }} ComponentType.EventRegistry
  */
 
 export default class Component {
@@ -43,7 +43,7 @@ export default class Component {
     const events = this.registerDOM();
 
     for (const attrs of events) {
-      const { el, listener } = attrs;
+      const { el, listener, type } = attrs;
       const elType = /** @type {keyof this} */ (el);
 
       /** @type {ComponentType.ListenerFn} */
@@ -66,7 +66,9 @@ export default class Component {
           throw new TypeError('Invalid listener type');
       }
 
-      /** @type {HTMLElement} */ (this[elType]).addEventListener(attrs.type, callback);
+      if (type) {
+        /** @type {HTMLElement} */ (this[elType]).addEventListener(type, callback);
+      }
     }
 
     this.events = events;

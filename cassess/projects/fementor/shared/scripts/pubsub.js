@@ -13,6 +13,7 @@ const LISTENER_ERROR_MSG = 'Specified an invalid type for the `listener` paramet
  * Helper function for registering a custom event listener.
  *
  * @type {PubSubAddListenerFn}
+ * @this {PubSub}
  * @param type - The event type.
  * @param listener - The event listener function.
  */
@@ -25,7 +26,8 @@ function _addListener(type, listener) {
     throw new TypeError(LISTENER_ERROR_MSG);
   }
 
-  const listeners = this._registry.has(type) ? this._registry.get(type).slice() : [];
+  const maybeListeners = this._registry.get(type);
+  const listeners = maybeListeners ? maybeListeners.slice() : [];
 
   listeners.push(listener);
   this._registry.set(type, listeners);
@@ -35,6 +37,7 @@ function _addListener(type, listener) {
  * Public interface for registering custom event listener functions.
  *
  * @type {PubSubOnFn}
+ * @this {PubSub}
  * @param typeOrRecord - The event type, or an object of key/value pairs.
  * @param listener - The event listener function.
  */
@@ -50,7 +53,11 @@ function on(typeOrRecord, listener) {
       }
     }
   } else {
-    this._addListener(typeOrRecord, listener);
+    // Explicit type checking is handled in the function implementation.
+    this._addListener(
+      /** @type {string} */ (typeOrRecord),
+      /** @type {PubSubListenerFn} */ (listener),
+    );
   }
 }
 
@@ -58,6 +65,7 @@ function on(typeOrRecord, listener) {
  * Un-registers the specified custom event listener functions.
  *
  * @type {PubSubOffFn}
+ * @this {PubSub}
  * @param type - The event type.
  * @param listener - The event listener function.
  */
@@ -67,7 +75,7 @@ function off(type, listener) {
   } else if (typeof type !== 'string') {
     throw new Error(TYPE_ERROR_MSG);
   } else if (this._registry.has(type)) {
-    const regListeners = this._registry.get(type);
+    const regListeners = this._registry.get(type) ?? [];
     const filteredListeners = [];
 
     for (let i = 0; i < regListeners.length; i++) {
@@ -88,6 +96,7 @@ function off(type, listener) {
  * Executes all the event listener functions associated with the specified type.
  *
  * @type {PubSubTriggerFn}
+ * @this {PubSub}
  * @param type - The event type.
  * @param args - The arguments to pass into the event listener functions.
  * @returns The return values from calling the event listener functions.
@@ -100,7 +109,7 @@ function trigger(type, ...args) {
   const results = [];
 
   if (this._registry.has(type)) {
-    const regListeners = this._registry.get(type);
+    const regListeners = this._registry.get(type) ?? [];
 
     for (const listener of regListeners) {
       const result = listener(...args);
@@ -116,16 +125,17 @@ function trigger(type, ...args) {
 
 /**
  * @type {{
- *  on: PubSubOnFn,
- *  off: PubSubOffFn,
- *  trigger: PubSubTriggerFn,
+ *  _registry: Map<string, PubSubListenerFn[]>;
+ *  _addListener: PubSubAddListenerFn;
+ *  on: PubSubOnFn;
+ *  off: PubSubOffFn;
+ *  trigger: PubSubTriggerFn;
  * }}
  */
 const PubSub = Object();
 
 Object.defineProperties(PubSub, {
   _registry: {
-    /** @type {Map<string, PubSubListenerFn>} */
     value: new Map(),
   },
   _addListener: {

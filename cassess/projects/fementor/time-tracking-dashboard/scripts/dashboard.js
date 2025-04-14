@@ -1,22 +1,20 @@
 import Component from '../../shared/scripts/component.js';
 import { setFocus } from './a11y-utils.js';
 
-/** @import { TimeFrameRecordType } from './app.js' */
+/** @import {TimeFrameRecordType} from './app.js' */
+
+const TIMEFRAME_LABEL = Object.freeze({
+  daily: { prev: 'Yesterday', a11y: 'Daily report' },
+  weekly: { prev: 'Last Week', a11y: 'Weekly report' },
+  monthly: { prev: 'Last Month', a11y: 'Monthly report' },
+});
 
 export default class Dashboard extends Component {
-  /** @type {Map<string, string>} */
-  #prevLabel = new Map([
-    ['daily', 'Yesterday'],
-    ['weekly', 'Last Week'],
-    ['monthly', 'Last Month'],
-  ]);
+  /** @type {TimeFrameRecordType} */
+  data;
 
-  /** @type {Map<string, string>} */
-  #a11yLabel = new Map([
-    ['daily', 'Daily report'],
-    ['weekly', 'Weekly report'],
-    ['monthly', 'Monthly report'],
-  ]);
+  /** @type {Map<keyof TIMEFRAME_LABEL, string>} */
+  htmlCache;
 
   /**
    * Class constructor.
@@ -37,10 +35,10 @@ export default class Dashboard extends Component {
    */
   registerDOM() {
     /** @type {HTMLElement} */
-    this.navEl = null;
+    this.navEl;
 
     /** @type {HTMLElement} */
-    this.dashboardContentEl = null;
+    this.dashboardContentEl;
 
     return [
       {
@@ -69,17 +67,17 @@ export default class Dashboard extends Component {
   /**
    * Outputs the appropriate label in reference to the past for the given time frame.
    *
-   * @param {string} timeframe - The given time frame (e.g., daily, weekly, monthly).
+   * @param {keyof TIMEFRAME_LABEL} timeframe - The given time frame (e.g., daily, weekly, monthly).
    * @returns {string} The label in reference to the past.
    */
   getFormattedLabel(timeframe) {
-    return this.#prevLabel.get(timeframe);
+    return TIMEFRAME_LABEL[timeframe].prev;
   }
 
   /**
    * Composes the HTML content for the given time frame.
    *
-   * @param {string} timeframe - The time frame to display content for.
+   * @param {keyof TIMEFRAME_LABEL} timeframe - The time frame to display content for.
    * @returns {string} The HTML content.
    */
   getHTML(timeframe) {
@@ -112,26 +110,28 @@ export default class Dashboard extends Component {
   /**
    * Renders the HTML content for the specified time frame.
    *
-   * @param {string} timeframe - The time frame to display content for (e.g., daily, weekly, monthly).
+   * @param {keyof TIMEFRAME_LABEL} timeframe - The time frame to display content for (e.g., daily, weekly, monthly).
    */
   renderContentForTimeframe(timeframe) {
-    if (!this.htmlCache.has(timeframe)) {
-      const html = this.getHTML(timeframe);
+    let html = this.htmlCache.get(timeframe);
+
+    if (!html) {
+      html = this.getHTML(timeframe);
       this.htmlCache.set(timeframe, html);
     }
 
-    this.dashboardContentEl.innerHTML = this.htmlCache.get(timeframe);
+    this.dashboardContentEl.innerHTML = html;
   }
 
   /**
    * Sets the ARIA label for the corresponding time frame selected in the UI.
    * This is necessary to notify screen reader users of dynamic content changes.
    *
-   * @param {string} timeframe - The selected time frame (e.g., daily, weekly, monthly).
+   * @param {keyof TIMEFRAME_LABEL} timeframe - The selected time frame (e.g., daily, weekly, monthly).
    * @param {HTMLElement} el - The HTML element to apply the ARIA label to.
    */
   setA11yLabelForTimeframe(timeframe, el) {
-    el.setAttribute('aria-label', this.#a11yLabel.get(timeframe));
+    el.setAttribute('aria-label', TIMEFRAME_LABEL[timeframe].a11y);
   }
 
   /**
@@ -149,9 +149,16 @@ export default class Dashboard extends Component {
       target.tagName === 'A' &&
       !target.classList.contains('active')
     ) {
-      const timeframe = target.getAttribute('href').slice(1);
+      const href = target.getAttribute('href');
 
-      this.navEl.querySelector('.active').classList.remove('active');
+      if (!href) {
+        return;
+      }
+
+      const timeframe = /** @type {keyof TIMEFRAME_LABEL} */ (href.slice(1));
+      const activeEl = this.navEl.querySelector('.active');
+
+      activeEl && activeEl.classList.remove('active');
       target.classList.add('active');
 
       this.renderContentForTimeframe(timeframe);

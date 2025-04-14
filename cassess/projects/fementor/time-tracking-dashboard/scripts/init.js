@@ -14,9 +14,12 @@ async function init() {
   });
 
   const results = await Promise.all([dataPromise, contentLoadedPromise]);
-  const dashboard = new Dashboard(results[0]);
+  const data = results[0];
 
-  dashboard.renderContentForTimeframe('daily');
+  if (data) {
+    const dashboard = new Dashboard(data);
+    dashboard.renderContentForTimeframe('daily');
+  }
 }
 
 init();

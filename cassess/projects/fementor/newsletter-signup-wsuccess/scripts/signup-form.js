@@ -23,22 +23,22 @@ export default class SignupForm extends Component {
    */
   registerDOM() {
     /** @type {HTMLFormElement} */
-    this.formEl = null;
+    this.formEl;
 
     /** @type {HTMLInputElement} */
-    this.emailInputEl = null;
+    this.emailInputEl;
 
     /** @type {HTMLElement} */
-    this.successContentEl = null;
+    this.successContentEl;
 
     /** @type {HTMLElement} */
-    this.formContentEl = null;
+    this.formContentEl;
 
     /** @type {HTMLElement} */
-    this.successEmailEl = null;
+    this.successEmailEl;
 
     /** @type {HTMLElement} */
-    this.formErrorEl = null;
+    this.formErrorEl;
 
     return [
       {

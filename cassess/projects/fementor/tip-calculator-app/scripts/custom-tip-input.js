@@ -6,7 +6,7 @@ import { getAllowedKeys, validateFloat } from './utils.js';
 
 export default class CustomTipInput extends Component {
   /** @type {Set<string>} */
-  #allowedKeys = null;
+  #allowedKeys;
 
   constructor() {
     super();
@@ -28,7 +28,7 @@ export default class CustomTipInput extends Component {
    */
   registerDOM() {
     /** @type {HTMLInputElement} */
-    this.el = null;
+    this.el;
 
     return [
       {
@@ -96,6 +96,7 @@ export default class CustomTipInput extends Component {
       // No validation errors.
       this.hideValidationError();
       const percent = numValue * 0.01;
+      /** @type {boolean[]} */
       const [isSuccess] = PubSub.trigger('calculateTip', percent);
 
       if (isSuccess) {

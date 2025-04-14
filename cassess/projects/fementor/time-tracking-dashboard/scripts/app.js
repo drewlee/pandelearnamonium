@@ -24,7 +24,7 @@ class App {
   /**
    * Triggers a fetch request for time tracking dashboard data.
    *
-   * @returns {Promise<JSONRecordType[]>} The response JSON as a promise.
+   * @returns {Promise<JSONRecordType[] | undefined>} The response JSON as a promise.
    */
   async #fetchJsonData() {
     const response = await fetch('../../../fementor-time-tracking-dashboard-data.json');
@@ -62,12 +62,16 @@ class App {
   /**
    * The public interface for retrieving and processing time tracking dashboard data.
    *
-   * @returns {Promise<TimeFrameRecordType>} The formatted data.
+   * @returns {Promise<TimeFrameRecordType | undefined>} The formatted data.
    */
   async getDashboardData() {
     const data = await this.#fetchJsonData();
-    const formattedData = this.#formatJsonData(data);
 
+    if (!data) {
+      return;
+    }
+
+    const formattedData = this.#formatJsonData(data);
     return formattedData;
   }
 }

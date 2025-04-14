@@ -1,15 +1,15 @@
 import Component from '../../shared/scripts/component.js';
 import PubSub from '../../shared/scripts/pubsub.js';
-import { errorMsg, getAllowedActiveKeys, getAllowedKeys, normalizeWholeNumber } from './utils.js';
+import { ERROR_MSG, getAllowedActiveKeys, getAllowedKeys, normalizeWholeNumber } from './utils.js';
 
 /** @import {ComponentType} from  '../../shared/scripts/component.js' */
 
 export default class PeopleInput extends Component {
   /** @type {Set<string>} */
-  #allowedActiveKeys = null;
+  #allowedActiveKeys;
 
   /** @type {Set<string>} */
-  #allowedKeys = null;
+  #allowedKeys;
 
   constructor() {
     super();
@@ -30,10 +30,10 @@ export default class PeopleInput extends Component {
    */
   registerDOM() {
     /** @type {HTMLInputElement} */
-    this.el = null;
+    this.el;
 
     /** @type {HTMLElement} */
-    this.errorEl = null;
+    this.errorEl;
 
     return [
       {
@@ -111,14 +111,14 @@ export default class PeopleInput extends Component {
 
     if (!value.length || numValue === 0) {
       // The input is either empty or `0`.
-      this.showValidationError(errorMsg.get('zero'));
+      this.showValidationError(ERROR_MSG.ZERO);
       // The input is not a valid number. This condition can only occur if the user bypasses the
       // `input[type="number"]` or `keydown` event handler restrictions.
     } else if (isNaN(numValue) || numValue < 0) {
-      this.showValidationError(errorMsg.get('nan'));
+      this.showValidationError(ERROR_MSG.NAN);
     } else if (numValue > 999) {
       // Exceeded the maximum limit for the amount.
-      this.showValidationError(errorMsg.get('max'));
+      this.showValidationError(ERROR_MSG.MAX);
     } else {
       // No validation errors.
       this.hideValidationError();

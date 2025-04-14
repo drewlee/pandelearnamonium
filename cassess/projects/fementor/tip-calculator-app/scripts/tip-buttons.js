@@ -4,7 +4,7 @@ import PubSub from '../../shared/scripts/pubsub.js';
 /** @import {ComponentType} from  '../../shared/scripts/component.js' */
 
 export default class TipButtons extends Component {
-  /** @type {HTMLButtonElement} */
+  /** @type {HTMLButtonElement | null} */
   #activeEl = null;
 
   /** @type {Map<string, number>} */
@@ -55,6 +55,7 @@ export default class TipButtons extends Component {
 
       if (id && id.startsWith('splitter-tip-btn-')) {
         const percent = this.#tipPercentage.get(id);
+        /** @type {boolean[]} */
         const [isSuccess] = PubSub.trigger('calculateTip', percent);
 
         if (isSuccess) {

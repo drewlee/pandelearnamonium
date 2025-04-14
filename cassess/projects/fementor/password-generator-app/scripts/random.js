@@ -1,4 +1,3 @@
-/** @enum {number} */
 export const CHAR_TYPE = Object.freeze({
   UPPERCASE: 0,
   LOWERCASE: 1,
@@ -8,13 +7,13 @@ export const CHAR_TYPE = Object.freeze({
 
 const SYMBOL_CHAR_CODES = Object.freeze([33, 35, 36, 37, 45, 63, 64, 94, 95]);
 
-/** @type {Map<number, [number, number]>} */
-const CHAR_RANGE = new Map([
-  [CHAR_TYPE.UPPERCASE, [65, 90]],
-  [CHAR_TYPE.LOWERCASE, [97, 122]],
-  [CHAR_TYPE.NUMBER, [48, 57]],
-  [CHAR_TYPE.SYMBOL, [0, SYMBOL_CHAR_CODES.length - 1]],
-]);
+/** @type {Readonly<Record<CHAR_TYPE[keyof CHAR_TYPE], [number, number]>>} */
+const CHAR_RANGE = Object.freeze({
+  [CHAR_TYPE.UPPERCASE]: [65, 90],
+  [CHAR_TYPE.LOWERCASE]: [97, 122],
+  [CHAR_TYPE.NUMBER]: [48, 57],
+  [CHAR_TYPE.SYMBOL]: [0, SYMBOL_CHAR_CODES.length - 1],
+});
 
 /**
  * Returns the symbol character codes array. Primarily used for testing.
@@ -28,11 +27,11 @@ export function _getSymbolCharCodes() {
 /**
  * Returns the minimum and maximum range for the specified character type.
  *
- * @param {number} charType - The character type. @see CHAR_TYPE
+ * @param {CHAR_TYPE[keyof CHAR_TYPE]} charType - The character type. @see CHAR_TYPE
  * @returns {[number, number]} The min and max range.
  */
 export function getRangeForCharType(charType) {
-  return CHAR_RANGE.get(charType);
+  return CHAR_RANGE[charType];
 }
 
 /**
@@ -59,11 +58,17 @@ export function getRandomNumInRange(min, max) {
 /**
  * Generates a random character for the specified character type.
  *
- * @param {number} charType - The character type. @see CHAR_TYPE
+ * @param {CHAR_TYPE[keyof CHAR_TYPE]} charType - The character type. @see CHAR_TYPE
  * @returns {string} A random character.
  */
 export function getRandomCharForType(charType) {
-  const [min, max] = CHAR_RANGE.get(charType);
+  const range = CHAR_RANGE[charType];
+
+  if (!range) {
+    return '';
+  }
+
+  const [min, max] = range;
   let rNum = getRandomNumInRange(min, max + 1);
 
   // Symbols require special handling as their placement is non-contiguous.
@@ -77,7 +82,7 @@ export function getRandomCharForType(charType) {
 /**
  * Generates a random password of the specified length composed of the given character types.
  *
- * @param {number[]} charTypes - An array of character types. @see CHAR_TYPE
+ * @param {CHAR_TYPE[keyof CHAR_TYPE][]} charTypes - An array of character types. @see CHAR_TYPE
  * @param {number} length - The length of the generated password.
  * @returns {string} The randomly generated password.
  */

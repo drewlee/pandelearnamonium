@@ -3,9 +3,12 @@
  *
  * @param {Event} evt - The event object.
  */
-function handleStyleChange(evt) {
-  const el = /** @type {HTMLSelectElement | HTMLInputElement} */ (evt.target);
-  const controlName = el.dataset.controls;
+function handleStyleChange({ target: el }) {
+  if (!(el instanceof HTMLSelectElement) && !(el instanceof HTMLInputElement)) {
+    return;
+  }
+
+  const controlName = el.dataset.controls ?? '';
   const container = document.getElementById(controlName);
   const styleName = el.dataset.style ?? controlName.split('-').slice(1).join('-');
   let out = '';
@@ -17,8 +20,9 @@ function handleStyleChange(evt) {
 
     if (owns) {
       const isDisabled = val !== 'px';
-      const inputEl = /** @type {HTMLInputElement} */ (document.getElementById(owns));
-      inputEl.disabled = isDisabled;
+      const inputEl = document.getElementById(owns);
+
+      if (inputEl && inputEl instanceof HTMLInputElement) inputEl.disabled = isDisabled;
 
       if (!isDisabled) {
         return;
@@ -32,7 +36,7 @@ function handleStyleChange(evt) {
     out = `${el.value}${units}`;
   }
 
-  if (out) {
+  if (out && container) {
     container.style.setProperty(styleName, out);
   }
 }

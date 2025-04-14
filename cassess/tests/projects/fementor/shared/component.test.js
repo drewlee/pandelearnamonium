@@ -26,9 +26,16 @@ class EmptyComponent extends Component {}
 
 class TestComponent extends Component {
   registerDOM() {
+    /** @type {HTMLButtonElement | null} */
     this.testBtnEl = null;
+
+    /** @type {HTMLButtonElement | null} */
     this.testBtnEl1 = null;
+
+    /** @type {HTMLButtonElement | null} */
     this.testBtnEl2 = null;
+
+    /** @type {HTMLButtonElement | null} */
     this.testBtnEl3 = null;
 
     return getRegistry();
@@ -81,6 +88,8 @@ describe('Component.registerDOM', () => {
     document.body.appendChild(btnEl);
 
     const spyFn = vi.fn();
+
+    /** @type {ComponentType.EventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -102,6 +111,8 @@ describe('Component.registerDOM', () => {
     document.body.appendChild(btnEl);
 
     const spyFn = vi.fn();
+
+    /** @type {ComponentType.EventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -124,6 +135,8 @@ describe('Component.registerDOM', () => {
     document.body.appendChild(btnEl);
 
     const spyFn = vi.spyOn(TestComponent.prototype, 'handleTestButtonClick');
+
+    /** @type {ComponentType.EventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -150,10 +163,14 @@ describe('Component.registerDOM', () => {
     });
 
     const spyFn = vi.spyOn(TestComponent.prototype, 'handleTestButtonClick');
+
+    /** @type {{ type: keyof HTMLElementEventMap, listener: string }} */
     const events = {
       type: 'click',
       listener: 'handleTestButtonClick',
     };
+
+    /** @type {ComponentType.EventRegistry[]} */
     const registry = [
       {
         id: 'test-button-1',
@@ -194,12 +211,14 @@ describe('Component.bindEventListeners', () => {
 
     let context = null;
 
-    const spyFn = vi
-      .spyOn(TestComponent.prototype, 'handleTestButtonClick')
-      .mockImplementation(function () {
+    const spyFn = vi.spyOn(TestComponent.prototype, 'handleTestButtonClick').mockImplementation(
+      /** @this {TestComponent} */
+      function () {
         context = this;
-      });
+      },
+    );
 
+    /** @type {ComponentType.EventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -224,12 +243,14 @@ describe('Component.bindEventListeners', () => {
 
     let context = null;
 
-    const spyFn = vi
-      .spyOn(TestComponent.prototype, 'mishandleTestButtonClick')
-      .mockImplementation(function () {
+    const spyFn = vi.spyOn(TestComponent.prototype, 'mishandleTestButtonClick').mockImplementation(
+      /** @this {TestComponent} */
+      function () {
         context = this;
-      });
+      },
+    );
 
+    /** @type {ComponentType.EventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],

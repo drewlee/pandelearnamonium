@@ -3,7 +3,7 @@ import { CHAR_TYPE, generateRandomPassword } from './random.js';
 import { calcPasswordStrength } from './pw-strength.js';
 
 export default class App extends Component {
-  /** @type {Set<string>} */
+  /** @type {Set<keyof CHAR_TYPE>} */
   #selectedCharTypes = new Set();
 
   /** @type {boolean} */
@@ -12,13 +12,13 @@ export default class App extends Component {
   /** @type {number} */
   #charLength = 0;
 
-  /** @param {Set<string>} charTypes */
+  /** @param {Set<keyof CHAR_TYPE>} charTypes */
   set selectedCharTypes(charTypes) {
     this.#selectedCharTypes = charTypes;
     this.checkAppState();
   }
 
-  /** @returns {Set<string>} */
+  /** @returns {Set<keyof CHAR_TYPE>} */
   get selectedCharTypes() {
     return this.#selectedCharTypes;
   }
@@ -46,6 +46,9 @@ export default class App extends Component {
     return this.#charLength;
   }
 
+  /** @type {string} */
+  password = '';
+
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
@@ -53,31 +56,31 @@ export default class App extends Component {
    */
   registerDOM() {
     /** @type {HTMLButtonElement} */
-    this.generateBtnEl = null;
+    this.generateBtnEl;
 
     /** @type {HTMLInputElement} */
-    this.lengthRangeEl = null;
+    this.lengthRangeEl;
 
     /** @type {HTMLButtonElement} */
-    this.copyBtnEl = null;
+    this.copyBtnEl;
 
     /** @type {HTMLElement} */
-    this.copyTextEl = null;
+    this.copyTextEl;
 
     /** @type {HTMLElement} */
-    this.checkBoxesEl = null;
+    this.checkBoxesEl;
 
     /** @type {HTMLInputElement} */
-    this.pwOutputEl = null;
+    this.pwOutputEl;
 
     /** @type {HTMLElement} */
-    this.lengthOutputEl = null;
+    this.lengthOutputEl;
 
     /** @type {HTMLElement} */
-    this.strengthEl = null;
+    this.strengthEl;
 
     /** @type {HTMLElement} */
-    this.liveRegionEl = null;
+    this.liveRegionEl;
 
     return [
       {
@@ -139,7 +142,7 @@ export default class App extends Component {
    */
   handleGeneratePassword() {
     const length = Number(this.lengthRangeEl.value);
-    const charTypes = this.getCharTypesAsEnum(this.#selectedCharTypes);
+    const charTypes = this.getCharTypesAsEnum(this.selectedCharTypes);
 
     this.password = generateRandomPassword(charTypes, length);
 
@@ -168,6 +171,11 @@ export default class App extends Component {
     // Outputs the percentage range value as a data attribute for CSS targeting.
     const min = this.lengthRangeEl.getAttribute('min');
     const max = this.lengthRangeEl.getAttribute('max');
+
+    if (!min || !max) {
+      return;
+    }
+
     const percent = this.calcRangeProgressPercentage(min, max, value);
 
     this.lengthRangeEl.dataset.rangeValue = percent;
@@ -193,9 +201,10 @@ export default class App extends Component {
 
     if (target instanceof HTMLInputElement) {
       const { checked, value } = target;
+      const valueType = /** @type {keyof CHAR_TYPE} */ (value.toUpperCase());
       const charTypes = this.selectedCharTypes;
 
-      checked ? charTypes.add(value) : charTypes.delete(value);
+      checked ? charTypes.add(valueType) : charTypes.delete(valueType);
       this.selectedCharTypes = charTypes;
     }
   }
@@ -226,19 +235,19 @@ export default class App extends Component {
    * Transforms the selected character type values into an array of numbers as defined
    * in the `CHAR_TYPE` enum. @see CHAR_TYPE
    *
-   * @param {Set<string>} selectedCharTypes - The selected character types.
-   * @returns {number[]} The selected character types as an array of numbers.
+   * @param {Set<keyof CHAR_TYPE>} selectedCharTypes - The selected character types.
+   * @returns {CHAR_TYPE[keyof CHAR_TYPE][]} The selected character types as an array of numbers.
    */
   getCharTypesAsEnum(selectedCharTypes) {
     return [...selectedCharTypes].map((charType) => {
-      return CHAR_TYPE[/** @type {keyof typeof CHAR_TYPE} */ (charType.toUpperCase())];
+      return CHAR_TYPE[charType];
     });
   }
 
   /**
    * Outputs the strength of the password.
    *
-   * @param {number[]} charTypes - The character types. @see CHAR_TYPE
+   * @param {CHAR_TYPE[keyof CHAR_TYPE][]} charTypes - The character types. @see CHAR_TYPE
    * @param {number} length - The length of the password.
    */
   updateStrengthIndicator(charTypes, length) {

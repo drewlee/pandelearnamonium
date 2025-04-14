@@ -4,7 +4,7 @@ export namespace ComponentType {
   interface EventRegistry {
     id: string;
     el: string;
-    type?: string;
+    type?: keyof HTMLElementEventMap;
     listener?: string | ListenerFn;
   }
 }

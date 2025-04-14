@@ -11,13 +11,13 @@ export default class SharePopup extends Component {
    */
   registerDOM() {
     /** @type {HTMLButtonElement} */
-    this.triggerEl = null;
+    this.triggerEl;
 
     /** @type {HTMLButtonElement} */
-    this.closeBtnEl = null;
+    this.closeBtnEl;
 
     /** @type {HTMLElement} */
-    this.sharePopupEl = null;
+    this.sharePopupEl;
 
     return [
       {
@@ -98,6 +98,7 @@ export default class SharePopup extends Component {
     this.triggerEl.setAttribute('aria-expanded', 'true');
 
     // Place the user's focus on the first focusable element in the popup.
-    this.sharePopupEl.querySelector('button').focus();
+    const btnEl = this.sharePopupEl.querySelector('button');
+    btnEl && btnEl.focus();
   }
 }
