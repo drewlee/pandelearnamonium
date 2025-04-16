@@ -23,36 +23,32 @@ export default class TotalsModule extends Component {
    * @returns {ComponentType.EventRegistry[]}
    */
   registerDOM() {
-    /** @type {HTMLButtonElement} */
-    this.resetBtnEl;
-
-    /** @type {HTMLElement} */
-    this.splitTipEl;
-
-    /** @type {HTMLElement} */
-    this.splitTotalEl;
-
-    /** @type {HTMLElement} */
-    this.liveRegionEl;
+    /**
+     * @type {{
+     *  [key: string]: HTMLElement,
+     *  resetBtn: HTMLButtonElement,
+     * }}
+     */
+    this.el;
 
     return [
       {
         id: 'splitter-reset-btn',
-        el: 'resetBtnEl',
+        el: 'resetBtn',
         type: 'click',
         listener: 'handleResetClick',
       },
       {
         id: 'splitter-split-tip',
-        el: 'splitTipEl',
+        el: 'splitTip',
       },
       {
         id: 'splitter-split-total',
-        el: 'splitTotalEl',
+        el: 'splitTotal',
       },
       {
         id: 'splitter-live-region',
-        el: 'liveRegionEl',
+        el: 'liveRegion',
       },
     ];
   }
@@ -117,8 +113,8 @@ export default class TotalsModule extends Component {
 
     // Update the UI.
     this.renderTotals(splitTip, splitTotal);
-    this.resetBtnEl.classList.remove('disabled');
-    this.resetBtnEl.setAttribute('aria-disabled', 'false');
+    this.el.resetBtn.classList.remove('disabled');
+    this.el.resetBtn.setAttribute('aria-disabled', 'false');
     this.#isActive = true;
 
     return true;
@@ -129,8 +125,8 @@ export default class TotalsModule extends Component {
    */
   handleReset() {
     this.renderTotals();
-    this.resetBtnEl.classList.add('disabled');
-    this.resetBtnEl.setAttribute('aria-disabled', 'true');
+    this.el.resetBtn.classList.add('disabled');
+    this.el.resetBtn.setAttribute('aria-disabled', 'true');
     this.#isActive = false;
   }
 
@@ -142,8 +138,8 @@ export default class TotalsModule extends Component {
    * @param {string} splitTotal - The total cost per person.
    */
   renderTotals(splitTip = '0.00', splitTotal = '0.00') {
-    this.splitTipEl.textContent = splitTip;
-    this.splitTotalEl.textContent = splitTotal;
+    this.el.splitTip.textContent = splitTip;
+    this.el.splitTotal.textContent = splitTotal;
 
     this.notifyA11y(splitTip, splitTotal);
   }
@@ -161,11 +157,11 @@ export default class TotalsModule extends Component {
     }
 
     const message = `Tip amount per person: $${splitTip} - Total per person: $${splitTotal}`;
-    this.liveRegionEl.textContent = message;
+    this.el.liveRegion.textContent = message;
 
     // Clear the live region after a short duration.
     setTimeout(() => {
-      this.liveRegionEl.textContent = '';
+      this.el.liveRegion.textContent = '';
     }, 5000);
   }
 }

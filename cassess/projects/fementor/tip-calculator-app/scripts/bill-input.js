@@ -30,28 +30,30 @@ export default class BillInput extends Component {
    * @returns {ComponentType.EventRegistry[]}
    */
   registerDOM() {
-    /** @type {HTMLInputElement} */
+    /**
+     * @type {{
+     *  [key: string]: HTMLElement,
+     *  main: HTMLInputElement,
+     * }}
+     */
     this.el;
-
-    /** @type {HTMLElement} */
-    this.errorEl;
 
     return [
       {
         id: 'splitter-bill-input',
-        el: 'el',
+        el: 'main',
         type: 'keydown',
         listener: 'handleKeyDown',
       },
       {
         id: 'splitter-bill-input',
-        el: 'el',
+        el: 'main',
         type: 'focusout',
         listener: 'handleFocusOut',
       },
       {
         id: 'splitter-bill-input-error',
-        el: 'errorEl',
+        el: 'error',
       },
     ];
   }
@@ -63,7 +65,7 @@ export default class BillInput extends Component {
    */
   handleKeyDown(evt) {
     const { key } = evt;
-    const { value } = this.el;
+    const { value } = this.el.main;
 
     // Using an allow-list of keys, prevents the input of non-numeric characters, with the
     // exception of a `.` and the "select all" keyboard macro, e.g., `Ctrl + a` or `Cmd + a`.
@@ -84,7 +86,7 @@ export default class BillInput extends Component {
    * Focusout event listener on the bill input element.
    */
   handleFocusOut() {
-    const { value } = this.el;
+    const { value } = this.el.main;
 
     // No-op if the user hasn't entered a value.
     if (!value.length) {
@@ -92,14 +94,14 @@ export default class BillInput extends Component {
     }
 
     // Normalizes the input into a valid dollar currency format.
-    this.el.value = normalizeFloat(value);
+    this.el.main.value = normalizeFloat(value);
   }
 
   /**
    * Listener for the `clearAllValues` custom event. Resets the input to default.
    */
   handleClearValues() {
-    this.el.value = '';
+    this.el.main.value = '';
   }
 
   /**
@@ -109,7 +111,7 @@ export default class BillInput extends Component {
    * @returns {Record<string, string | null>} The bill dollar amount.
    */
   handleGetValues() {
-    const { value } = this.el;
+    const { value } = this.el.main;
     const numValue = Number(value);
     let bill = null;
 
@@ -138,19 +140,19 @@ export default class BillInput extends Component {
    * @param {string} msg - The validation error message.
    */
   showValidationError(msg) {
-    this.el.classList.add('error');
-    this.el.setAttribute('aria-invalid', 'true');
-    this.el.setAttribute('aria-describedby', this.errorEl.id);
-    this.errorEl.textContent = msg;
+    this.el.main.classList.add('error');
+    this.el.main.setAttribute('aria-invalid', 'true');
+    this.el.main.setAttribute('aria-describedby', this.el.error.id);
+    this.el.error.textContent = msg;
   }
 
   /**
    * Removes the input validation error from the UI.
    */
   hideValidationError() {
-    this.el.classList.remove('error');
-    this.el.setAttribute('aria-invalid', 'false');
-    this.el.removeAttribute('aria-describedby');
-    this.errorEl.textContent = '';
+    this.el.main.classList.remove('error');
+    this.el.main.setAttribute('aria-invalid', 'false');
+    this.el.main.removeAttribute('aria-describedby');
+    this.el.error.textContent = '';
   }
 }

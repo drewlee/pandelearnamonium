@@ -5,13 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <script>
-      document.documentElement.classList.add(
-        localStorage.getItem('isDarkTheme') === 'true' ? 'style-theme-dark' : 'style-theme-light',
-      );
+      (function () {
+        const FRONTEND_QUIZ_APP = Object.freeze({
+          THEME_LS_KEY: 'feMentorFrontEndQuizApp_isDarkTheme',
+          THEME_LIGHT_CN: 'style-theme-light',
+          THEME_DARK_CN: 'style-theme-dark',
+        });
 
-      document.addEventListener('DOMContentLoaded', () => {
-        requestAnimationFrame(() => document.documentElement.classList.remove('transitions-off'));
-      });
+        document.documentElement.classList.add(
+          localStorage.getItem(FRONTEND_QUIZ_APP.THEME_LS_KEY) === 'true'
+            ? FRONTEND_QUIZ_APP.THEME_DARK_CN
+            : FRONTEND_QUIZ_APP.THEME_LIGHT_CN,
+        );
+
+        document.addEventListener('DOMContentLoaded', () => {
+          requestAnimationFrame(() => document.documentElement.classList.remove('transitions-off'));
+        });
+
+        globalThis.FRONTEND_QUIZ_APP = FRONTEND_QUIZ_APP;
+      })();
     </script>
     <link rel="stylesheet" href="./styles/main.css" />
     <script src="./scripts/init.js" type="module"></script>
@@ -33,7 +45,7 @@
         ></button>
       </div>
     </header>
-    <main class="fqa-main"></main>
+    <main class="fqa-main" id="main"></main>
     <!-- Quiz menu start -->
     Welcome to the Frontend Quiz! Pick a subject to get started. HTML CSS JavaScript Accessibility
     <!-- Quiz menu end -->

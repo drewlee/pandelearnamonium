@@ -1,41 +1,41 @@
-import Component from '../../shared/scripts/component.js';
+import Component, { type ComponentType } from '../../shared/scripts/component.js';
 import ToggleSwitch from './toggle-switch.js';
-import type { ComponentType } from '../../shared/scripts/component.js';
+import { enableDarkTheme, enableLightTheme, syncThemeState } from './theme-utils.js';
+import appData from './app-data.js';
+import QuizChooser from './quiz-chooser.js';
 
 export default class App extends Component {
   declare themeSwitch: ToggleSwitch;
 
   constructor() {
     super();
-    this.syncThemeSwitchState();
+
+    syncThemeState(() => {
+      this.themeSwitch.setActive();
+    });
+    this.loadData();
   }
 
   registerDOM(): ComponentType.EventRegistry[] {
-    this.themeSwitch = new ToggleSwitch();
-    this.themeSwitch.el.addEventListener('click', this.handleThemeToggleClick);
+    this.themeSwitch = new ToggleSwitch({ onToggle: this.handleThemeToggle });
 
     return [];
   }
 
-  handleThemeToggleClick() {
-    this.themeSwitch.isActive ? this.enableDarkTheme() : this.enableLightTheme();
+  handleThemeToggle(): void {
+    this.themeSwitch.isActive ? enableDarkTheme() : enableLightTheme();
   }
 
-  syncThemeSwitchState() {
-    if (localStorage.getItem('isDarkTheme') === 'true') {
-      this.themeSwitch.setActive();
+  async loadData(): Promise<void> {
+    const container = document.getElementById('main');
+
+    if (!container) {
+      return;
     }
-  }
 
-  enableDarkTheme() {
-    document.documentElement.classList.remove('style-theme-light');
-    document.documentElement.classList.add('style-theme-dark');
-    localStorage.setItem('isDarkTheme', 'true');
-  }
+    const data = await appData.getAppData();
+    // TODO: load error if data fetch fails
 
-  enableLightTheme() {
-    document.documentElement.classList.add('style-theme-light');
-    document.documentElement.classList.remove('style-theme-dark');
-    localStorage.setItem('isDarkTheme', 'false');
+    new QuizChooser({ container, data });
   }
 }

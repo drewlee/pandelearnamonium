@@ -26,7 +26,7 @@ export default class App extends Component {
   /** @param {boolean} isActiveParam */
   set isActive(isActiveParam) {
     this.#isActive = isActiveParam;
-    this.generateBtnEl.disabled = !isActiveParam;
+    this.el.generateBtn.disabled = !isActiveParam;
   }
 
   /** @returns {boolean} */
@@ -37,7 +37,7 @@ export default class App extends Component {
   /** @param {string} charLengthParam */
   set charLength(charLengthParam) {
     this.#charLength = Number(charLengthParam);
-    this.lengthOutputEl.innerText = charLengthParam;
+    this.el.lengthOutput.innerText = charLengthParam;
     this.checkAppState();
   }
 
@@ -55,84 +55,67 @@ export default class App extends Component {
    * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]}
    */
   registerDOM() {
-    /** @type {HTMLButtonElement} */
-    this.generateBtnEl;
-
-    /** @type {HTMLInputElement} */
-    this.lengthRangeEl;
-
-    /** @type {HTMLButtonElement} */
-    this.copyBtnEl;
-
-    /** @type {HTMLElement} */
-    this.copyTextEl;
-
-    /** @type {HTMLElement} */
-    this.checkBoxesEl;
-
-    /** @type {HTMLInputElement} */
-    this.pwOutputEl;
-
-    /** @type {HTMLElement} */
-    this.lengthOutputEl;
-
-    /** @type {HTMLElement} */
-    this.strengthEl;
-
-    /** @type {HTMLElement} */
-    this.liveRegionEl;
+    /**
+     * @type {{
+     *  [key: string]: HTMLElement,
+     *  lengthRange: HTMLInputElement,
+     *  copyBtn: HTMLButtonElement,
+     *  generateBtn: HTMLButtonElement,
+     * }}
+     */
+    this.el;
 
     return [
       {
         id: 'pw-gen_generate-btn',
-        el: 'generateBtnEl',
+        el: 'generateBtn',
         type: 'click',
         listener: 'handleGeneratePassword',
       },
       {
         id: 'pw-gen_length-range',
-        el: 'lengthRangeEl',
+        el: 'lengthRange',
         type: 'input',
         listener: 'handleRangeInput',
       },
       {
         id: 'pw-gen_length-range',
-        el: 'lengthRangeEl',
+        el: 'lengthRange',
         type: 'touchstart',
         // Prevents swipe page navigation on mobile browsers.
         listener: (evt) => evt.stopPropagation(),
       },
       {
         id: 'pw-gen_char-checkboxes',
-        el: 'checkBoxesEl',
+        el: 'checkBoxes',
         type: 'change',
         listener: 'handleCheckBoxes',
       },
       {
         id: 'pw-gen_copy-btn',
-        el: 'copyBtnEl',
+        el: 'copyBtn',
         type: 'click',
         listener: 'handleClickToCopy',
       },
       {
         id: 'pw-gen_copy-text',
-        el: 'copyTextEl',
+        el: 'copyText',
       },
       {
         id: 'pw-gen_password-output',
-        el: 'pwOutputEl',
+        el: 'pwOutput',
       },
       {
         id: 'pw-gen_length-output',
-        el: 'lengthOutputEl',
+        el: 'lengthOutput',
       },
       {
         id: 'pw-gen_strength',
-        el: 'strengthEl',
+        el: 'strength',
       },
       {
         id: 'pw-gen_live-region',
-        el: 'liveRegionEl',
+        el: 'liveRegion',
       },
     ];
   }
@@ -141,22 +124,22 @@ export default class App extends Component {
    * Event listener for the password generate button.
    */
   handleGeneratePassword() {
-    const length = Number(this.lengthRangeEl.value);
+    const length = Number(this.el.lengthRange.value);
     const charTypes = this.getCharTypesAsEnum(this.selectedCharTypes);
 
     this.password = generateRandomPassword(charTypes, length);
 
     // Update the strength indicator.
     this.updateStrengthIndicator(charTypes, length);
-    this.copyBtnEl.disabled = false;
+    this.el.copyBtn.disabled = false;
 
     // Shrinks the font size to fit long passwords.
     length >= 15
-      ? this.pwOutputEl.classList.add('shrink-font-size')
-      : this.pwOutputEl.classList.remove('shrink-font-size');
+      ? this.el.pwOutput.classList.add('shrink-font-size')
+      : this.el.pwOutput.classList.remove('shrink-font-size');
 
-    this.pwOutputEl.innerText = this.password;
-    this.copyTextEl.classList.remove('active');
+    this.el.pwOutput.innerText = this.password;
+    this.el.copyText.classList.remove('active');
 
     this.notifyA11y(`Generated password ${this.password}`);
   }
@@ -165,12 +148,12 @@ export default class App extends Component {
    * Input event listener for the character range element.
    */
   handleRangeInput() {
-    const { value } = this.lengthRangeEl;
+    const { value } = this.el.lengthRange;
     this.charLength = value;
 
     // Outputs the percentage range value as a data attribute for CSS targeting.
-    const min = this.lengthRangeEl.getAttribute('min');
-    const max = this.lengthRangeEl.getAttribute('max');
+    const min = this.el.lengthRange.getAttribute('min');
+    const max = this.el.lengthRange.getAttribute('max');
 
     if (!min || !max) {
       return;
@@ -178,7 +161,7 @@ export default class App extends Component {
 
     const percent = this.calcRangeProgressPercentage(min, max, value);
 
-    this.lengthRangeEl.dataset.rangeValue = percent;
+    this.el.lengthRange.dataset.rangeValue = percent;
   }
 
   /**
@@ -186,7 +169,7 @@ export default class App extends Component {
    */
   handleClickToCopy() {
     navigator.clipboard.writeText(this.password).then(() => {
-      this.copyTextEl.classList.add('active');
+      this.el.copyText.classList.add('active');
       this.notifyA11y(`Copied password to clipboard`);
     });
   }
@@ -254,8 +237,8 @@ export default class App extends Component {
     const strength = calcPasswordStrength(charTypes, length);
     const className = `strength-${strength + 1}`;
 
-    this.strengthEl.className = this.strengthEl.className.replace(/ strength-\d/, '');
-    this.strengthEl.classList.add(className);
+    this.el.strength.className = this.el.strength.className.replace(/ strength-\d/, '');
+    this.el.strength.classList.add(className);
   }
 
   /**
@@ -264,11 +247,11 @@ export default class App extends Component {
    * @param {string} message - The message to notify.
    */
   notifyA11y(message) {
-    this.liveRegionEl.textContent = message;
+    this.el.liveRegion.textContent = message;
 
     // Clear the live region after a short duration.
     setTimeout(() => {
-      this.liveRegionEl.textContent = '';
+      this.el.liveRegion.textContent = '';
     }, 5000);
   }
 }

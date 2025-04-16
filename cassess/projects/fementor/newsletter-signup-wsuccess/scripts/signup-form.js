@@ -12,8 +12,8 @@ export default class SignupForm extends Component {
   /** @param {string} value */
   set email(value) {
     this.#email = value;
-    this.emailInputEl.value = '';
-    this.successEmailEl.textContent = this.#email;
+    this.el.emailInput.value = '';
+    this.el.successEmail.textContent = this.#email;
   }
 
   /**
@@ -22,52 +22,42 @@ export default class SignupForm extends Component {
    * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]}
    */
   registerDOM() {
-    /** @type {HTMLFormElement} */
-    this.formEl;
-
-    /** @type {HTMLInputElement} */
-    this.emailInputEl;
-
-    /** @type {HTMLElement} */
-    this.successContentEl;
-
-    /** @type {HTMLElement} */
-    this.formContentEl;
-
-    /** @type {HTMLElement} */
-    this.successEmailEl;
-
-    /** @type {HTMLElement} */
-    this.formErrorEl;
+    /**
+     * @type {{
+     *  [key: string]: HTMLElement,
+     *  emailInput: HTMLInputElement,
+     * }}
+     */
+    this.el;
 
     return [
       {
         id: 'newsletter-form',
-        el: 'formEl',
+        el: 'form',
         type: 'submit',
         listener: 'handleFormSubmit',
       },
       {
         id: 'success-content',
-        el: 'successContentEl',
+        el: 'successContent',
         type: 'click',
         listener: 'handleSuccessDismiss',
       },
       {
         id: 'newsletter-form-email-input',
-        el: 'emailInputEl',
+        el: 'emailInput',
       },
       {
         id: 'newsletter-form-content',
-        el: 'formContentEl',
+        el: 'formContent',
       },
       {
         id: 'success-email',
-        el: 'successEmailEl',
+        el: 'successEmail',
       },
       {
         id: 'newsletter-form-error',
-        el: 'formErrorEl',
+        el: 'formError',
       },
     ];
   }
@@ -80,22 +70,22 @@ export default class SignupForm extends Component {
   handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const email = this.emailInputEl.value;
+    const email = this.el.emailInput.value;
 
     if (this.isValidEmail(email)) {
-      this.formEl.classList.remove('error');
-      this.emailInputEl.setAttribute('aria-invalid', 'false');
-      this.emailInputEl.removeAttribute('aria-describedby');
+      this.el.form.classList.remove('error');
+      this.el.emailInput.setAttribute('aria-invalid', 'false');
+      this.el.emailInput.removeAttribute('aria-describedby');
 
       this.email = email;
 
-      this.showContent(this.successContentEl);
-      this.setFocus(this.successContentEl);
+      this.showContent(this.el.successContent);
+      this.setFocus(this.el.successContent);
     } else {
-      this.formEl.classList.add('error');
-      this.emailInputEl.setAttribute('aria-invalid', 'true');
-      this.emailInputEl.setAttribute('aria-describedby', 'newsletter-form-error');
-      this.setFocus(this.formErrorEl);
+      this.el.form.classList.add('error');
+      this.el.emailInput.setAttribute('aria-invalid', 'true');
+      this.el.emailInput.setAttribute('aria-describedby', 'newsletter-form-error');
+      this.setFocus(this.el.formError);
     }
   }
 
@@ -108,8 +98,8 @@ export default class SignupForm extends Component {
     const { target } = evt;
 
     if (target instanceof HTMLButtonElement && target.id === 'success-dismiss-btn') {
-      this.showContent(this.formContentEl);
-      this.setFocus(this.formContentEl);
+      this.showContent(this.el.formContent);
+      this.setFocus(this.el.formContent);
     }
   }
 

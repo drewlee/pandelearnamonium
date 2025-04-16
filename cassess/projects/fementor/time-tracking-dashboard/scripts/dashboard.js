@@ -34,22 +34,16 @@ export default class Dashboard extends Component {
    * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]} The registry array.
    */
   registerDOM() {
-    /** @type {HTMLElement} */
-    this.navEl;
-
-    /** @type {HTMLElement} */
-    this.dashboardContentEl;
-
     return [
       {
         id: 'dashboard-nav',
-        el: 'navEl',
+        el: 'nav',
         type: 'click',
         listener: 'handleDashboardNav',
       },
       {
         id: 'dashboard-content',
-        el: 'dashboardContentEl',
+        el: 'dashboardContent',
       },
     ];
   }
@@ -120,7 +114,7 @@ export default class Dashboard extends Component {
       this.htmlCache.set(timeframe, html);
     }
 
-    this.dashboardContentEl.innerHTML = html;
+    this.el.dashboardContent.innerHTML = html;
   }
 
   /**
@@ -156,16 +150,16 @@ export default class Dashboard extends Component {
       }
 
       const timeframe = /** @type {keyof TIMEFRAME_LABEL} */ (href.slice(1));
-      const activeEl = this.navEl.querySelector('.active');
+      const activeEl = this.el.nav.querySelector('.active');
 
       activeEl && activeEl.classList.remove('active');
       target.classList.add('active');
 
       this.renderContentForTimeframe(timeframe);
-      this.setA11yLabelForTimeframe(timeframe, this.dashboardContentEl);
+      this.setA11yLabelForTimeframe(timeframe, this.el.dashboardContent);
 
       const origScrollTop = document.documentElement.scrollTop;
-      setFocus(this.dashboardContentEl);
+      setFocus(this.el.dashboardContent);
 
       // Prevent abrupt focus scrolling on smaller screens
       document.documentElement.scrollTop = origScrollTop;

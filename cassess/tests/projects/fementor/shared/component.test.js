@@ -6,7 +6,7 @@ import { Component } from '../index.js';
 const DEFAULT_REGISTRY = [
   {
     id: 'test-button',
-    el: 'testBtnEl',
+    el: 'testBtn',
   },
 ];
 
@@ -26,18 +26,6 @@ class EmptyComponent extends Component {}
 
 class TestComponent extends Component {
   registerDOM() {
-    /** @type {HTMLButtonElement | null} */
-    this.testBtnEl = null;
-
-    /** @type {HTMLButtonElement | null} */
-    this.testBtnEl1 = null;
-
-    /** @type {HTMLButtonElement | null} */
-    this.testBtnEl2 = null;
-
-    /** @type {HTMLButtonElement | null} */
-    this.testBtnEl3 = null;
-
     return getRegistry();
   }
 
@@ -79,7 +67,7 @@ describe('Component.registerDOM', () => {
 
     const component = new TestComponent();
 
-    expect(component.testBtnEl).toEqual(btnEl);
+    expect(component.el.testBtn).toEqual(btnEl);
   });
 
   test('Assigns the specified DOM element to an instance property when defining event listeners', () => {
@@ -102,7 +90,7 @@ describe('Component.registerDOM', () => {
 
     const component = new TestComponent();
 
-    expect(component.testBtnEl).toEqual(btnEl);
+    expect(component.el.testBtn).toEqual(btnEl);
   });
 
   test('Assigns the specified anonymous event listener to the element', () => {
@@ -174,17 +162,17 @@ describe('Component.registerDOM', () => {
     const registry = [
       {
         id: 'test-button-1',
-        el: 'testBtnEl1',
+        el: 'testBtn1',
         ...events,
       },
       {
         id: 'test-button-2',
-        el: 'testBtnEl2',
+        el: 'testBtn2',
         ...events,
       },
       {
         id: 'test-button-3',
-        el: 'testBtnEl3',
+        el: 'testBtn3',
         ...events,
       },
     ];
@@ -197,9 +185,9 @@ describe('Component.registerDOM', () => {
 
     expect(spyFn).toHaveBeenCalledTimes(3);
     expect(component.events).toStrictEqual(registry);
-    expect(component.testBtnEl1).toEqual(btnEls[0]);
-    expect(component.testBtnEl2).toEqual(btnEls[1]);
-    expect(component.testBtnEl3).toEqual(btnEls[2]);
+    expect(component.el.testBtn1).toEqual(btnEls[0]);
+    expect(component.el.testBtn2).toEqual(btnEls[1]);
+    expect(component.el.testBtn3).toEqual(btnEls[2]);
   });
 });
 

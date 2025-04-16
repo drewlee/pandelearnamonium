@@ -27,19 +27,21 @@ export default class CustomTipInput extends Component {
    * @returns {ComponentType.EventRegistry[]}
    */
   registerDOM() {
-    /** @type {HTMLInputElement} */
+    /**
+     * @type {{ main: HTMLInputElement }}
+     */
     this.el;
 
     return [
       {
         id: 'splitter-custom-tip-input',
-        el: 'el',
+        el: 'main',
         type: 'keydown',
         listener: 'handleKeyDown',
       },
       {
         id: 'splitter-custom-tip-input',
-        el: 'el',
+        el: 'main',
         type: 'focusout',
         listener: 'handleFocusOutAndEnter',
       },
@@ -53,7 +55,7 @@ export default class CustomTipInput extends Component {
    */
   handleKeyDown(evt) {
     const { key } = evt;
-    const { value } = this.el;
+    const { value } = this.el.main;
 
     // Using an allow-list of keys, prevents the input of non-numeric characters, with the
     // exception of a `.` and the "select all" keyboard macro, e.g., `Ctrl + a` or `Cmd + a`.
@@ -74,7 +76,7 @@ export default class CustomTipInput extends Component {
    * Focusout event listener on the tip input element. Also gets triggered on `Enter` key press.
    */
   handleFocusOutAndEnter() {
-    const { value } = this.el;
+    const { value } = this.el.main;
 
     // No-op if the user hasn't entered a value.
     if (!value.length) {
@@ -85,7 +87,7 @@ export default class CustomTipInput extends Component {
     const normValue = validateFloat(value);
     const numValue = Number(normValue);
 
-    this.el.value = normValue;
+    this.el.main.value = normValue;
 
     // Input validation.
     if (isNaN(numValue) || numValue === 0 || numValue > 100 || numValue < 0) {
@@ -111,22 +113,22 @@ export default class CustomTipInput extends Component {
    * Resets the input to default.
    */
   handleClearValues() {
-    this.el.value = '';
+    this.el.main.value = '';
   }
 
   /**
    * Displays the input validation error in the UI.
    */
   showValidationError() {
-    this.el.classList.add('error');
-    this.el.setAttribute('aria-invalid', 'true');
+    this.el.main.classList.add('error');
+    this.el.main.setAttribute('aria-invalid', 'true');
   }
 
   /**
    * Removes the input validation error from the UI.
    */
   hideValidationError() {
-    this.el.classList.remove('error');
-    this.el.setAttribute('aria-invalid', 'false');
+    this.el.main.classList.remove('error');
+    this.el.main.setAttribute('aria-invalid', 'false');
   }
 }

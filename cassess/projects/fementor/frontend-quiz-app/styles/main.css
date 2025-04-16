@@ -179,6 +179,7 @@ body {
   color: var(--color-text-body, var(--color-black));
 }
 
+/* Theme Switch Toggle */
 .fqa-theme-switch_btn {
   display: flex;
   width: 48px;

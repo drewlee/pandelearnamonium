@@ -35,7 +35,7 @@ export default class TipButtons extends Component {
     return [
       {
         id: 'splitter-app',
-        el: 'el',
+        el: 'main',
         type: 'click',
         listener: 'handleTipSelection',
       },

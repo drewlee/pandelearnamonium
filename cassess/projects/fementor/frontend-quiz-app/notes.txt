@@ -1,0 +1,56 @@
+IMPLEMENTATION NOTES
+--------------------
+
+There are three views in the app:
+1. Quiz chooser
+2. Question screen
+3. Final score
+
+Components:
+- Theme toggle switch. Appears on all three views.
+  - Toggles the color scheme between light and dark mode.
+- Quiz title.
+  - Adjacent to the toggle switch.
+  - Only appears on the Question and Score screens.
+- Both of these occupy the same block:
+  - Introductory text (Chooser screen).
+  - Question text (Question screen).
+  - Quiz completed text (Score screen).
+- Progress bar. (Question screen).
+- These occupy the same block on all three screens:
+  - Quiz chooser
+  - Answer choices
+  - Final score
+  - Submit answer / next question buttons
+  - Play again button
+
+Interactive components:
+- Theme switch toggle
+- Quiz chooser
+  - Starts the selected quiz
+- Question bank
+  - Selects the answer to the question
+  - Enables the "Submit Answer" button
+  - Applies the selected state on the selected button
+  - Removes the selected state from the previously selected button
+  - Should these be a set of radio buttons? No
+- Submit Answer button
+  - Disabled until an answer is chosen
+  - Displays an error if it is chosen while disabled
+  - Displays the correct and/or incorrect answer
+  - Disappears to display the "Next Question" button
+- Play Again button
+  - Returns the user to the Quiz chooser view
+
+Layout:
+- Text block / Interactive controls block
+  - Flexbox: column vs row flex directions
+- Common parent container to load dynamic content into
+- Container for title. Populates for selected quiz.
+
+Application Flow:
+- Fetch data on initial page load
+- Render chooser content based on the shape of the data
+  - Associate each button with its corresponding subject
+  - The chooser is its own component
+  - The chooser needs to inform its parent that a quiz has been selected

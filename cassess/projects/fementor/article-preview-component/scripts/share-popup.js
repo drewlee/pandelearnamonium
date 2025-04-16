@@ -10,37 +10,28 @@ export default class SharePopup extends Component {
    * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]}
    */
   registerDOM() {
-    /** @type {HTMLButtonElement} */
-    this.triggerEl;
-
-    /** @type {HTMLButtonElement} */
-    this.closeBtnEl;
-
-    /** @type {HTMLElement} */
-    this.sharePopupEl;
-
     return [
       {
         id: 'share-btn',
-        el: 'triggerEl',
+        el: 'trigger',
         type: 'click',
         listener: 'handleTrigger',
       },
       {
         id: 'close-btn',
-        el: 'closeBtnEl',
+        el: 'closeBtn',
         type: 'click',
         listener: 'handleClose',
       },
       {
         id: 'apcomp-share-popup',
-        el: 'sharePopupEl',
+        el: 'sharePopup',
         type: 'click',
         listener: (evt) => evt.stopPropagation(),
       },
       {
         id: 'apcomp-share-popup',
-        el: 'sharePopupEl',
+        el: 'sharePopup',
         type: 'keyup',
         listener: 'handleEscapeKey',
       },
@@ -78,11 +69,11 @@ export default class SharePopup extends Component {
     // Remove the event listener for document click.
     document.removeEventListener('click', this.handleClose);
 
-    this.sharePopupEl.classList.remove('active');
-    this.triggerEl.setAttribute('aria-expanded', 'false');
+    this.el.sharePopup.classList.remove('active');
+    this.el.trigger.setAttribute('aria-expanded', 'false');
 
     // Place the user's focus back on the trigger button.
-    this.triggerEl.focus();
+    this.el.trigger.focus();
   }
 
   /**
@@ -94,11 +85,11 @@ export default class SharePopup extends Component {
     // Close the popup when anything but the popup is clicked.
     document.addEventListener('click', this.handleClose);
 
-    this.sharePopupEl.classList.add('active');
-    this.triggerEl.setAttribute('aria-expanded', 'true');
+    this.el.sharePopup.classList.add('active');
+    this.el.trigger.setAttribute('aria-expanded', 'true');
 
     // Place the user's focus on the first focusable element in the popup.
-    const btnEl = this.sharePopupEl.querySelector('button');
+    const btnEl = this.el.sharePopup.querySelector('button');
     btnEl && btnEl.focus();
   }
 }
