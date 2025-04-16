@@ -107,6 +107,8 @@ body {
   --bg-img-url-tablet: url('../images/pattern-background-tablet-light.svg');
   --bg-img-url-desktop-left: url('../images/pattern-background-desktop-light-left.svg');
   --bg-img-url-desktop-right: url('../images/pattern-background-desktop-light-right.svg');
+  --icon-url-sun: url('../images/icon-sun-light.svg');
+  --icon-url-moon: url('../images/icon-moon-light.svg');
 }
 
 .style-theme-dark {
@@ -116,6 +118,8 @@ body {
   --bg-img-url-tablet: url('../images/pattern-background-tablet-dark.svg');
   --bg-img-url-desktop-left: url('../images/pattern-background-desktop-dark-left.svg');
   --bg-img-url-desktop-right: url('../images/pattern-background-desktop-dark-right.svg');
+  --icon-url-sun: url('../images/icon-sun-dark.svg');
+  --icon-url-moon: url('../images/icon-moon-dark.svg');
 }
 
 /* TYPOGRAPHY
@@ -173,26 +177,53 @@ body {
   font-style: italic;
 }
 
+/* ICONS */
+.icn-sun {
+  background: var(--icon-url-sun) center / 100% no-repeat transparent;
+}
+
+.icn-moon {
+  background: var(--icon-url-moon) center / 100% no-repeat transparent;
+}
+
 /* MAIN APPLICATION STYLES */
 .fqa-root {
   background: var(--bg-img-url-mobile) 0 0 no-repeat var(--color-background, var(--color-white));
   color: var(--color-text-body, var(--color-black));
 }
 
+/* Header */
+.fqa-header {
+  display: flex;
+}
+
+.fqa-theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing-100);
+  margin: 0 0 0 auto;
+}
+
+.fqa-theme-icn {
+  display: block;
+  width: var(--spacing-200);
+  height: var(--spacing-200);
+}
+
 /* Theme Switch Toggle */
 .fqa-theme-switch_btn {
   display: flex;
-  width: 48px;
-  height: 28px;
-  border-radius: 14px;
+  width: 32px;
+  height: 20px;
+  border-radius: 10px;
   padding: 2px;
   background-color: var(--color-purple-600);
 
   &::before {
     content: '';
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background-color: var(--color-white);
     margin-left: 0;
@@ -202,8 +233,35 @@ body {
 
 .fqa-theme-switch_btn.active {
   &::before {
-    transform: translateX(19px);
+    transform: translateX(12px);
   }
+}
+
+/* CONTROL BUTTONS */
+.fqa-controls_btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing-200);
+  padding: var(--spacing-200);
+  background-color: var(--color-white);
+  border-radius: var(--spacing-300);
+  color: var(--color-blue-900);
+}
+
+.fqa-controls_btn-img-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: lightgrey;
+}
+
+.fqa-controls_btn-img {
+  width: 28px;
+  height: 28px;
 }
 
 /* Attribution */
@@ -247,6 +305,35 @@ body {
   /* MAIN APPLICATION STYLES */
   .fqa-root {
     background-image: var(--bg-img-url-tablet);
+  }
+
+  /* HEADER */
+  .fqa-theme-switch {
+    gap: 0 var(--spacing-200);
+  }
+
+  .fqa-theme-icn {
+    width: var(--spacing-300);
+    height: var(--spacing-300);
+  }
+
+  /* Theme Switch Toggle */
+  .fqa-theme-switch_btn {
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    padding: 2px;
+
+    &::before {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .fqa-theme-switch_btn.active {
+    &::before {
+      transform: translateX(19px);
+    }
   }
 }
 
