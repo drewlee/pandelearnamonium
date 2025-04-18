@@ -9,11 +9,11 @@ interface QuizChooserParams {
 
 export default class QuizChooser extends Component {
   html: string | undefined;
-
   onChosenCallback: QuizChooserParams['onChosenParam'];
 
   constructor(params: QuizChooserParams) {
     super(params);
+
     this.onChosenCallback = params.onChosenParam;
   }
 
@@ -28,13 +28,17 @@ export default class QuizChooser extends Component {
     ];
   }
 
-  getHTML(data: QuizChooserParams['data']): string {
-    const buttons = data
+  composeHTML(data: QuizChooserParams['data']): string {
+    const controls = data
       .map(
         (entry, index) => `
-          <button class="fqa-controls_btn font-style_preset-4 font-style_medium" type="button" data-quiz-subject="${index}">
-            <span class="fqa-controls_btn-img-wrap">
-              <img class="fqa-controls_btn-img" src="${entry.icon}" width="40" height="40" alt="" />
+          <button
+            class="fqa-controls_btn fqa-btn_secondary fqa-btn font-style_preset-4 font-style_medium"
+            type="button"
+            data-quiz-subject="${index}"
+          >
+            <span class="fqa-badge_container fqa-badge_color-${index}">
+              <img class="fqa-badge_img" src="${entry.icon}" width="40" height="40" alt="" />
             </span>
             ${entry.title}
           </button>`,
@@ -44,19 +48,21 @@ export default class QuizChooser extends Component {
     const layout = `
       <div class="fqa-info">
         <h1 class="fqa-info_chooser-heading font-style_preset-2 font-style_light">
-          Welcome to the<br />
+          Welcome to the
           <strong class="font-style_medium">Frontend Quiz!</strong>
         </h1>
-        <p class="fqa-info_chooser-text font-style_preset-6 font-style_italic">Pick a subject to get started.</p>
+        <p class="fqa-info_chooser-text text-color_accent font-style_preset-6 font-style_italic">
+          Pick a subject to get started.
+        </p>
       </div>
-      <div class="fqa-controls" id="fqa-controls-container">${buttons}</div>`;
+      <div class="fqa-controls" id="fqa-controls-container">${controls}</div>`;
 
     return layout;
   }
 
   render(params: QuizChooserParams): string {
     if (!this.html) {
-      this.html = this.getHTML(params.data);
+      this.html = this.composeHTML(params.data);
     }
 
     return this.html;

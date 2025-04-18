@@ -33,6 +33,7 @@
   --color-blue-50: rgb(235 240 255);
   --color-green-500: rgb(47 216 135);
   --color-green-100: rgb(224 253 239);
+  --color-purple-300: rgb(211 148 250);
   --color-purple-600: rgb(167 41 245);
   --color-purple-100: rgb(246 231 255);
   --color-orange-400: rgb(255 126 53);
@@ -48,6 +49,7 @@
   --spacing-500: calc(var(--spacing-unit) * 5);
   --spacing-600: calc(var(--spacing-unit) * 6);
   --spacing-800: calc(var(--spacing-unit) * 8);
+  --spacing-900: calc(var(--spacing-unit) * 9);
   --spacing-1600: calc(var(--spacing-unit) * 16);
   --spacing-1800: calc(var(--spacing-unit) * 18);
   --spacing-2300: calc(var(--spacing-unit) * 23);
@@ -67,10 +69,10 @@ li {
 }
 
 button {
+  display: block;
   background-color: transparent;
   border-color: transparent;
   cursor: pointer;
-  display: block;
   font: inherit;
 }
 
@@ -96,30 +98,34 @@ html {
   background-color: var(--color-grey-500);
 }
 
-body {
-  height: 100svh;
-}
-
 .style-theme-light {
   --color-background: var(--color-grey-50);
   --color-text-body: var(--color-blue-900);
+  --color-text-accent: var(--color-grey-500);
   --bg-img-url-mobile: url('../images/pattern-background-mobile-light.svg');
   --bg-img-url-tablet: url('../images/pattern-background-tablet-light.svg');
   --bg-img-url-desktop-left: url('../images/pattern-background-desktop-light-left.svg');
   --bg-img-url-desktop-right: url('../images/pattern-background-desktop-light-right.svg');
   --icon-url-sun: url('../images/icon-sun-light.svg');
   --icon-url-moon: url('../images/icon-moon-light.svg');
+  --color-bg-btn-secondary: var(--color-white);
+  --color-text-btn-secondary: var(--color-blue-900);
+  --color-shadow-btn-secondary: rgb(143 160 193 / 14%);
 }
 
 .style-theme-dark {
   --color-background: var(--color-blue-900);
   --color-text-body: var(--color-white);
+  --color-text-accent: var(--color-blue-300);
   --bg-img-url-mobile: url('../images/pattern-background-mobile-dark.svg');
   --bg-img-url-tablet: url('../images/pattern-background-tablet-dark.svg');
   --bg-img-url-desktop-left: url('../images/pattern-background-desktop-dark-left.svg');
   --bg-img-url-desktop-right: url('../images/pattern-background-desktop-dark-right.svg');
   --icon-url-sun: url('../images/icon-sun-dark.svg');
   --icon-url-moon: url('../images/icon-moon-dark.svg');
+  --color-bg-btn-secondary: var(--color-blue-850);
+  --color-text-btn-secondary: var(--color-white);
+  --color-shadow-btn-secondary: rgb(49 62 81 / 14%);
 }
 
 /* TYPOGRAPHY
@@ -177,13 +183,151 @@ body {
   font-style: italic;
 }
 
+.text-color_accent {
+  color: var(--color-text-accent);
+}
+
+/* BADGES */
+.fqa-badge_container {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-grey-50);
+  border-radius: 6px;
+  color: var(--color-grey-500);
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fqa-badge_img {
+  width: 28px;
+  height: 28px;
+}
+
+.fqa-badge_color-0 {
+  background-color: var(--color-orange-50);
+}
+
+.fqa-badge_color-1 {
+  background-color: var(--color-green-100);
+}
+
+.fqa-badge_color-2 {
+  background-color: var(--color-blue-50);
+}
+
+.fqa-badge_color-3 {
+  background-color: var(--color-purple-100);
+}
+
+/* BUTTONS */
+.fqa-btn {
+  border-radius: 12px;
+  box-shadow: 0 16px 40px var(--color-shadow-btn-secondary);
+  width: 100%;
+}
+
+.fqa-btn_primary {
+  background-color: var(--color-purple-600);
+  color: var(--color-white);
+  padding: calc(var(--spacing-200) + 1px);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-purple-300);
+  }
+}
+
+.fqa-btn_secondary {
+  background-color: var(--color-bg-btn-secondary);
+  border: 3px solid transparent;
+  color: var(--color-text-btn-secondary);
+  padding: calc(var(--spacing-200) - 3px);
+
+  &.correct-option {
+    &::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 32px;
+      margin: 0 0 0 auto;
+      background: url('../images/icon-correct.svg') center / cover no-repeat transparent;
+      flex: 0 0 auto;
+    }
+  }
+
+  &.incorrect-affirm {
+    border-color: var(--color-red-500);
+
+    &::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 32px;
+      margin: 0 0 0 auto;
+      background: url('../images/icon-incorrect.svg') center / cover no-repeat transparent;
+      flex: 0 0 auto;
+    }
+
+    .fqa-badge_container {
+      background-color: var(--color-red-500);
+      color: var(--color-white);
+    }
+  }
+
+  &.correct-affirm {
+    border-color: var(--color-green-500);
+
+    &::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 32px;
+      margin: 0 0 0 auto;
+      background: url('../images/icon-correct.svg') center / cover no-repeat;
+      flex: 0 0 auto;
+    }
+
+    .fqa-badge_container {
+      background-color: var(--color-green-500);
+      color: var(--color-white);
+    }
+  }
+
+  &:hover,
+  &:focus-visible,
+  &.active {
+    border-color: var(--color-purple-600);
+
+    .fqa-badge_container:not([class*='fqa-badge_color']) {
+      background-color: var(--color-purple-600);
+      color: var(--color-white);
+    }
+  }
+}
+
 /* ICONS */
 .icn-sun {
-  background: var(--icon-url-sun) center / 100% no-repeat transparent;
+  background: var(--icon-url-sun) center / cover no-repeat transparent;
 }
 
 .icn-moon {
-  background: var(--icon-url-moon) center / 100% no-repeat transparent;
+  background: var(--icon-url-moon) center / cover no-repeat transparent;
+}
+
+.icn-error {
+  background: url('../images/icon-error.svg') center / cover no-repeat transparent;
+}
+
+/* LAYOUT */
+.fqa-grid {
+  height: 100svh;
+  display: grid;
+  grid-template:
+    '. header .' auto
+    '. main .' 1fr
+    / minmax(24px, auto) minmax(min-content, 500px) minmax(24px, auto);
 }
 
 /* MAIN APPLICATION STYLES */
@@ -194,14 +338,25 @@ body {
 
 /* Header */
 .fqa-header {
+  box-sizing: border-box;
+  grid-area: header;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4.5rem; /* 72px */
+  padding: var(--spacing-200) 0;
+}
+
+.fqa-header_title-container {
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing-200);
 }
 
 .fqa-theme-switch {
   display: flex;
   align-items: center;
   gap: 0 var(--spacing-100);
-  margin: 0 0 0 auto;
 }
 
 .fqa-theme-icn {
@@ -237,31 +392,78 @@ body {
   }
 }
 
-/* CONTROL BUTTONS */
+.fqa-main {
+  grid-area: main;
+}
+
+.fqa-info_chooser-heading {
+  max-width: 18.75rem; /* 300px */
+  margin: var(--spacing-400) 0 var(--spacing-200);
+}
+
+.fqa-info_chooser-text {
+  margin: 0 0 var(--spacing-500);
+}
+
+/* Controls */
 .fqa-controls_btn {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 0 var(--spacing-200);
-  padding: var(--spacing-200);
-  background-color: var(--color-white);
-  border-radius: var(--spacing-300);
-  color: var(--color-blue-900);
+  margin: var(--spacing-200) 0 0;
+  text-align: left;
+
+  &:first-child {
+    margin: 0;
+  }
 }
 
-.fqa-controls_btn-img-wrap {
-  display: flex;
+.fqa-controls_submit {
+  display: none;
+  margin: var(--spacing-200) 0;
+
+  &.active {
+    display: block;
+  }
+}
+
+.fqa-controls_submit-error {
+  display: none;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-  background-color: lightgrey;
+  gap: 0 var(--spacing-100);
+  color: var(--color-red-500);
+
+  &.active {
+    display: flex;
+  }
+
+  .icn-error {
+    display: block;
+    width: 32px;
+    height: 32px;
+  }
 }
 
-.fqa-controls_btn-img {
-  width: 28px;
-  height: 28px;
+.fqa-controls.submitted .fqa-controls_btn {
+  pointer-events: none;
+}
+
+/* Progress Bar */
+.fqa-progress-bar {
+  width: 100%;
+  margin: var(--spacing-300) 0 var(--spacing-500);
+  background-color: var(--color-bg-btn-secondary);
+  border-radius: 8px;
+  border: 4px solid transparent;
+
+  .fqa-progress-bar_inner {
+    height: 8px;
+    width: 0;
+    border-radius: 4px;
+    background-color: var(--color-purple-600);
+  }
 }
 
 /* Attribution */
@@ -302,12 +504,58 @@ body {
     line-height: 1.5;
   }
 
+  /* BUTTONS */
+  .fqa-btn {
+    border-radius: 24px;
+  }
+
+  .fqa-btn_primary {
+    padding: calc(var(--spacing-400) - 2px);
+  }
+
+  .fqa-btn_secondary {
+    &.incorrect-affirm,
+    &.correct-affirm,
+    &.correct-option {
+      &::after {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  /* BADGES */
+  .fqa-badge_container {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+  }
+
+  .fqa-badge_img {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* LAYOUT */
+  .fqa-grid {
+    grid-template-columns: minmax(64px, auto) minmax(640px, 1157px) minmax(64px, auto);
+  }
+
   /* MAIN APPLICATION STYLES */
   .fqa-root {
     background-image: var(--bg-img-url-tablet);
   }
 
-  /* HEADER */
+  /* Header */
+  .fqa-header {
+    min-height: 8.5rem; /* 136px */
+    padding: var(--spacing-500) 0;
+  }
+
+  .fqa-header_title-container {
+    gap: 0 var(--spacing-300);
+  }
+
   .fqa-theme-switch {
     gap: 0 var(--spacing-200);
   }
@@ -335,13 +583,85 @@ body {
       transform: translateX(19px);
     }
   }
+
+  .fqa-info_chooser-heading {
+    max-width: 31.25rem; /* 500px */
+    margin: 0 0 var(--spacing-200);
+  }
+
+  .fqa-info_chooser-text {
+    margin: 0 0 var(--spacing-600);
+  }
+
+  /* Progress Bar */
+  .fqa-progress-bar {
+    margin: var(--spacing-500) 0;
+  }
+
+  /* Controls */
+  .fqa-controls_btn {
+    gap: 0 var(--spacing-400);
+    margin: var(--spacing-300) 0 0;
+  }
+
+  .fqa-controls_submit {
+    margin: var(--spacing-400) 0;
+  }
+
+  .fqa-controls_submit-error .icn-error {
+    display: block;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (width >= 1024px) {
+  /* BUTTONS */
+  .fqa-btn_secondary {
+    padding: calc(var(--spacing-300) - 3px);
+  }
+
   /* MAIN APPLICATION STYLES */
   .fqa-root {
     background:
       var(--bg-img-url-desktop-left) left top no-repeat,
       var(--bg-img-url-desktop-right) right bottom no-repeat var(--color-background);
+  }
+
+  /* Header */
+  .fqa-header {
+    min-height: 13.875rem; /* 222px */
+    padding: 83px 0;
+  }
+
+  .fqa-main {
+    display: flex;
+  }
+
+  .fqa-info {
+    flex: 1 0 51.25%;
+  }
+
+  .fqa-info_chooser-heading {
+    margin: 0 0 var(--spacing-600);
+    font-size: clamp(3.5rem, 5.4vw, 4rem);
+  }
+
+  .fqa-info_chooser-text {
+    margin: 0;
+  }
+
+  /* Progress Bar */
+  .fqa-progress-bar {
+    margin: var(--spacing-2300) 0 0;
+  }
+
+  /* Controls */
+  .fqa-controls {
+    flex: 1 0 48.75%;
+  }
+
+  .fqa-controls_btn {
+    margin: var(--spacing-200) 0 0 0;
   }
 }

@@ -3,10 +3,14 @@ import ToggleSwitch from './toggle-switch.js';
 import { enableDarkTheme, enableLightTheme, syncThemeState } from './theme-utils.js';
 import appData, { type AppDataType } from './app-data.js';
 import QuizChooser from './quiz-chooser.js';
+import QuizQuestion from './quiz-question.js';
+import QuizScore from './quiz-score.js';
 
 export default class App extends Component {
   declare themeSwitch: ToggleSwitch;
   declare quizChooser: QuizChooser;
+  declare quizQuestion: QuizQuestion;
+  declare quizScore: QuizScore;
   declare data: AppDataType.Data;
 
   constructor() {
@@ -23,7 +27,7 @@ export default class App extends Component {
 
     return [
       {
-        id: 'fqa-header-title',
+        id: 'fqa-header-title-container',
         el: 'pageTitle',
       },
     ];
@@ -34,25 +38,50 @@ export default class App extends Component {
   }
 
   handleChosenQuiz(quizIDStr: string): void {
-    this.quizChooser.destroy();
     const quizID = Number(quizIDStr);
 
-    console.log(this.data.quizzes[quizID]);
+    this.quizChooser.destroy();
+    this.setQuizTitle(quizID);
 
-    this.el.pageTitle.innerText = this.data.quizzes[quizID].title;
-
-    setTimeout(() => {
-      this.quizChooser.rerender();
-    }, 3000);
+    this.quizQuestion = new QuizQuestion({
+      container: this.container as HTMLElement,
+      currQuestionIdx: 0,
+      data: this.data.quizzes[quizID].questions,
+      onViewScoreParam: this.handleShowScore,
+      quizID,
+    });
   }
 
-  async loadData(): Promise<void> {
-    const container = document.getElementById('main');
+  handleShowScore(score: number, quizID: number): void {
+    const baseParams = {
+      data: this.data.quizzes[quizID],
+      quizID,
+      score,
+    };
 
-    if (!container) {
+    if (this.quizScore !== undefined) {
+      this.quizScore.rerender(baseParams);
       return;
     }
 
+    this.quizScore = new QuizScore({
+      ...baseParams,
+      container: this.container as HTMLElement,
+      onReplayParam: this.handleReplay,
+    });
+  }
+
+  handleReplay(): void {
+    this.quizChooser.rerender({
+      data: this.data.quizzes,
+      onChosenParam: this.handleChosenQuiz,
+    });
+  }
+
+  async loadData(): Promise<void> {
+    const container = document.getElementById('main') as HTMLElement;
+
+    this.container = container;
     this.data = await appData.getAppData();
     // TODO: load error if data fetch fails
 
@@ -61,5 +90,23 @@ export default class App extends Component {
       data: this.data.quizzes,
       onChosenParam: this.handleChosenQuiz,
     });
+    this.quizChooser.destroy();
+    // For dev purposes
+    this.handleShowScore(8, 3);
+  }
+
+  setQuizTitle(quizID?: number): void {
+    let source = '';
+
+    if (quizID !== undefined) {
+      const { icon, title } = this.data.quizzes[quizID];
+      source = `
+        <span class="fqa-badge_container fqa-badge_color-${quizID}">
+          <img class="fqa-badge_img" src="${icon}" width="40" height="40" alt="" />
+        </span>
+        <h1 class="fqa-header_title font-style_medium font-style_preset-4">${title}</h1>`;
+    }
+
+    this.el.pageTitle.innerHTML = source;
   }
 }
