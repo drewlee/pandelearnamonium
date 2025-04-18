@@ -31,7 +31,6 @@ export default {
         // assets` folder. This bundling and naming scheme is also applied to CSS files, but occurs
         // outside of the control of this hook.
         entryFileNames(chunkInfo) {
-          console.log(chunkInfo);
           // `facadeModuleId` corresponds to the absolute path of the HTML file being processed.
           const { facadeModuleId } = chunkInfo;
           // Converts the absolute file path to a relative dir path.
@@ -61,8 +60,7 @@ export default {
           const baseIdx = segments.indexOf(ROOT_DIR);
           // While this function also processes shared CSS files, Vite ultimately discards their
           // modification, as they are handled in the `assetFileNames` hook. More on that below.
-          // Just as a precaution, this preserves the file's original extension.
-          let out = `[name]-[hash].${ext}`;
+          let out = `[name]-[hash].js`;
 
           // Handles assets injected by Vite. E.g., `modulepreload-polyfill.js`.
           if (baseIdx === -1) {
