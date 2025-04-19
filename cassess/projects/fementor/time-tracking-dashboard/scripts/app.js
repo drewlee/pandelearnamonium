@@ -27,7 +27,9 @@ class App {
    * @returns {Promise<JSONRecordType[] | undefined>} The response JSON as a promise.
    */
   async #fetchJsonData() {
-    const response = await fetch('../../../fementor-time-tracking-dashboard-data.json');
+    const response = await fetch(
+      '../../../fementor-time-tracking-dashboard/fementor-time-tracking-dashboard-data.json',
+    );
 
     if (response.ok) {
       return response.json();

@@ -17,10 +17,25 @@ export namespace AppDataType {
 }
 
 class AppData {
-  async getAppData(): Promise<AppDataType.Data> {
-    // TODO: error handling
-    const response = await fetch('../../../fementor-frontend-quiz-app-data.json');
-    const data: AppDataType.Data = await response.json();
+  /**
+   * Fetches the JSON data for the application.
+   *
+   * @returns The application data object.
+   */
+  async getAppData(): Promise<AppDataType.Data | null> {
+    let data: AppDataType.Data | null = null;
+
+    try {
+      const response = await fetch(
+        '../../../fementor-frontend-quiz-app/fementor-frontend-quiz-app-data.json',
+      );
+
+      if (response.ok) {
+        data = await response.json();
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
     return data;
   }

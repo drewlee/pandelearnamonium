@@ -33,8 +33,8 @@
   --color-blue-50: rgb(235 240 255);
   --color-green-500: rgb(47 216 135);
   --color-green-100: rgb(224 253 239);
-  --color-purple-300: rgb(211 148 250);
   --color-purple-600: rgb(167 41 245);
+  --color-purple-300: rgb(211 148 250);
   --color-purple-100: rgb(246 231 255);
   --color-orange-400: rgb(255 126 53);
   --color-orange-50: rgb(255 245 237);
@@ -85,12 +85,6 @@ ul {
   list-style-type: none;
 }
 
-.transitions-off *,
-.transitions-off *::before,
-.transitions-off *::after {
-  transition: none !important;
-}
-
 html {
   font:
     normal 400 100% / 1.5 Rubik,
@@ -98,6 +92,7 @@ html {
   background-color: var(--color-grey-500);
 }
 
+/* THEME CONFIG */
 .style-theme-light {
   --color-background: var(--color-grey-50);
   --color-text-body: var(--color-blue-900);
@@ -111,6 +106,9 @@ html {
   --color-bg-btn-secondary: var(--color-white);
   --color-text-btn-secondary: var(--color-blue-900);
   --color-shadow-btn-secondary: rgb(143 160 193 / 14%);
+  --color-secondary-text: var(--color-blue-850);
+  --color-secondary-text-link: var(--color-purple-600);
+  --color-focus-outline: var(--color-blue-500);
 }
 
 .style-theme-dark {
@@ -126,6 +124,38 @@ html {
   --color-bg-btn-secondary: var(--color-blue-850);
   --color-text-btn-secondary: var(--color-white);
   --color-shadow-btn-secondary: rgb(49 62 81 / 14%);
+  --color-secondary-text: var(--color-blue-300);
+  --color-secondary-text-link: var(--color-white);
+  --color-focus-outline: var(--color-white);
+}
+
+/* Focus Outline */
+* {
+  outline-width: 0;
+  transition: outline-width 100ms ease-in;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--color-focus-outline);
+  outline-offset: 3px;
+}
+
+/* No Transitions on Page Load */
+.transitions-off *,
+.transitions-off *::before,
+.transitions-off *::after {
+  transition: none !important;
+}
+
+/* A11y Visually Hidden Content */
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 /* TYPOGRAPHY
@@ -205,6 +235,7 @@ html {
   height: 28px;
 }
 
+/* Colored Badges */
 .fqa-badge_color-0 {
   background-color: var(--color-orange-50);
 }
@@ -226,6 +257,10 @@ html {
   border-radius: 12px;
   box-shadow: 0 16px 40px var(--color-shadow-btn-secondary);
   width: 100%;
+
+  &:disabled {
+    cursor: default;
+  }
 }
 
 .fqa-btn_primary {
@@ -295,11 +330,12 @@ html {
     }
   }
 
-  &:hover,
-  &:focus-visible,
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled),
   &.active {
     border-color: var(--color-purple-600);
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .fqa-badge_container:not([class*='fqa-badge_color']) {
       background-color: var(--color-purple-600);
       color: var(--color-white);
@@ -327,7 +363,8 @@ html {
   grid-template:
     '. header .' auto
     '. main .' 1fr
-    / minmax(24px, auto) minmax(min-content, 500px) minmax(24px, auto);
+    'footer footer footer' auto
+    / auto minmax(min-content, 548px) auto;
 }
 
 /* MAIN APPLICATION STYLES */
@@ -344,7 +381,7 @@ html {
   align-items: center;
   justify-content: space-between;
   min-height: 4.5rem; /* 72px */
-  padding: var(--spacing-200) 0;
+  padding: var(--spacing-200) var(--spacing-300) 0;
 }
 
 .fqa-header_title-container {
@@ -361,24 +398,24 @@ html {
 
 .fqa-theme-icn {
   display: block;
-  width: var(--spacing-200);
-  height: var(--spacing-200);
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
 }
 
 /* Theme Switch Toggle */
 .fqa-theme-switch_btn {
   display: flex;
-  width: 32px;
-  height: 20px;
-  border-radius: 10px;
-  padding: 2px;
+  width: 2rem; /* 32px */
+  height: 1.25rem; /* 20px */
+  border-radius: 0.625rem; /* 10px */
+  padding: 0.125rem; /* 2px */
   background-color: var(--color-purple-600);
 
   &::before {
     content: '';
     display: block;
-    width: 12px;
-    height: 12px;
+    width: 0.75rem; /* 12px */
+    height: 0.75rem; /* 12px */
     border-radius: 50%;
     background-color: var(--color-white);
     margin-left: 0;
@@ -388,12 +425,27 @@ html {
 
 .fqa-theme-switch_btn.active {
   &::before {
-    transform: translateX(12px);
+    transform: translateX(0.75rem); /* 12px */
   }
 }
 
 .fqa-main {
   grid-area: main;
+  padding: 0 var(--spacing-300);
+}
+
+/* Data Error Message */
+.fqa-main-error {
+  display: flex;
+  gap: 0 var(--spacing-100);
+  margin: var(--spacing-300) 0;
+  color: var(--color-red-500);
+
+  .icn-error {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .fqa-info_chooser-heading {
@@ -446,13 +498,12 @@ html {
   }
 }
 
-.fqa-controls.submitted .fqa-controls_btn {
-  pointer-events: none;
+.fqa-info_progress {
+  margin: var(--spacing-400) 0 var(--spacing-200);
 }
 
 /* Progress Bar */
 .fqa-progress-bar {
-  width: 100%;
   margin: var(--spacing-300) 0 var(--spacing-500);
   background-color: var(--color-bg-btn-secondary);
   border-radius: 8px;
@@ -466,14 +517,47 @@ html {
   }
 }
 
-/* Attribution */
-.attribution {
-  font-size: 0.6875rem; /* 11px */
-  text-align: center;
+/* Score */
+.fqa-info_score-heading {
+  max-width: 22.625rem; /* 362px */
+  margin: var(--spacing-400) 0 var(--spacing-500);
 }
 
-.attribution a {
-  color: rgb(62 82 163);
+.fqa-score-card {
+  padding: var(--spacing-400);
+  background-color: var(--color-bg-btn-secondary);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px var(--color-shadow-btn-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-200) 0;
+}
+
+.fqa-score-card_title {
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing-200);
+}
+
+.fqa-score-card_score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-200);
+}
+
+/* Attribution */
+.fqa-attribution {
+  grid-area: footer;
+  padding: 1.5rem 0; /* 24px */
+  font-size: 0.6875rem; /* 11px */
+  color: var(--color-secondary-text);
+  text-align: center;
+
+  a {
+    color: var(--color-secondary-text-link);
+  }
 }
 
 /* OVERRIDES FOR NON-MOBILE SCREENS */
@@ -546,6 +630,11 @@ html {
     background-image: var(--bg-img-url-tablet);
   }
 
+  .fqa-main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   /* Header */
   .fqa-header {
     min-height: 8.5rem; /* 136px */
@@ -561,26 +650,35 @@ html {
   }
 
   .fqa-theme-icn {
-    width: var(--spacing-300);
-    height: var(--spacing-300);
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
   }
 
   /* Theme Switch Toggle */
   .fqa-theme-switch_btn {
-    width: 48px;
-    height: 28px;
-    border-radius: 14px;
-    padding: 2px;
+    width: 3rem; /* 48px */
+    height: 1.75rem; /* 28px */
+    border-radius: 0.875rem; /* 14px */
 
     &::before {
-      width: 20px;
-      height: 20px;
+      width: 1.25rem; /* 20px */
+      height: 1.25rem; /* 20px */
     }
   }
 
   .fqa-theme-switch_btn.active {
     &::before {
-      transform: translateX(19px);
+      transform: translateX(1.1875rem); /* 19px */
+    }
+  }
+
+  /* Data Error Message */
+  .fqa-main-error {
+    gap: 0 var(--spacing-200);
+
+    .icn-error {
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -598,6 +696,10 @@ html {
     margin: var(--spacing-500) 0;
   }
 
+  .fqa-info_progress {
+    margin: 0 0 var(--spacing-300);
+  }
+
   /* Controls */
   .fqa-controls_btn {
     gap: 0 var(--spacing-400);
@@ -613,9 +715,25 @@ html {
     width: 40px;
     height: 40px;
   }
+
+  /* Score */
+  .fqa-info_score-heading {
+    max-width: 28.125rem; /* 450px */
+    margin: 0 0 var(--spacing-800);
+  }
+
+  .fqa-score-card {
+    padding: var(--spacing-600);
+    gap: var(--spacing-500) 0;
+  }
 }
 
 @media (width >= 1024px) {
+  /* TYPOGRAPHY */
+  .font-style_preset-2 {
+    font-size: 3.5rem;
+  }
+
   /* BUTTONS */
   .fqa-btn_secondary {
     padding: calc(var(--spacing-300) - 3px);
@@ -639,12 +757,15 @@ html {
   }
 
   .fqa-info {
+    box-sizing: border-box;
+    padding-right: 11.06%;
     flex: 1 0 51.25%;
   }
 
-  .fqa-info_chooser-heading {
+  .fqa-info_chooser-heading,
+  .fqa-info_score-heading {
     margin: 0 0 var(--spacing-600);
-    font-size: clamp(3.5rem, 5.4vw, 4rem);
+    font-size: clamp(3.1875rem, 4.9vw, 4rem); /* 51px - 64px */
   }
 
   .fqa-info_chooser-text {
@@ -653,7 +774,7 @@ html {
 
   /* Progress Bar */
   .fqa-progress-bar {
-    margin: var(--spacing-2300) 0 0;
+    margin: var(--spacing-2300) 0 0 0;
   }
 
   /* Controls */

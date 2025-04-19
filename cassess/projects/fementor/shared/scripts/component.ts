@@ -11,11 +11,12 @@ export namespace ComponentType {
 
 export default class Component {
   container: HTMLElement | undefined;
-
   el: Record<string, HTMLElement> = {};
-
   events: ComponentType.EventRegistry[] = [];
 
+  /**
+   * @param args - The parameters passed into the class instantiation.
+   */
   constructor(...args: any[]) {
     this.#bindEventListeners();
     this.#initialRender(...args);
@@ -24,12 +25,15 @@ export default class Component {
 
     this.#addEventListeners(events);
     this.events = events;
+    this.afterRender();
   }
 
   /**
    * Fixes context reference for event listener functions.
+   *
+   * @sealed
    */
-  #bindEventListeners() {
+  #bindEventListeners(): void {
     const proto = Object.getPrototypeOf(this);
     const listeners = Object.getOwnPropertyNames(proto) as (keyof Component)[];
 
@@ -40,7 +44,13 @@ export default class Component {
     }
   }
 
-  #initialRender(...args: any[]) {
+  /**
+   * Renders the HTML markup returned by the `render` function into the specified container element.
+   *
+   * @sealed
+   * @param args - The arguments to pass into the `render` function.
+   */
+  #initialRender(...args: any[]): void {
     for (const arg of args) {
       if (Object.hasOwn(arg, 'container') && arg.container instanceof HTMLElement) {
         this.container = arg.container;
@@ -79,7 +89,9 @@ export default class Component {
   }
 
   /**
-   * Removes the event listeners that were added from the DOM registry.
+   * Removes all event listeners that were applied using the DOM registry.
+   *
+   * @sealed
    */
   #removeEventListeners(): void {
     for (const attrs of this.events) {
@@ -95,10 +107,12 @@ export default class Component {
   }
 
   /**
-   * TODO
+   * Determines the type of the supplied listener parameter and returns it for reference in
+   * `addEventListener` and `removeEventListener`.
    *
-   * @param listener - TODO
-   * @returns TODO
+   * @sealed
+   * @param listener - The supplied listener string or function.
+   * @returns A reference to the supplied listener as a function.
    */
   #getListenerFn(
     listener: ComponentType.EventRegistry['listener'],
@@ -124,21 +138,38 @@ export default class Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    * Must be subclassed.
+   *
+   * @virtual
    */
   registerDOM(): ComponentType.EventRegistry[] {
     throw new Error('The `registerDOM` method must be overridden by the subclass');
   }
 
   /**
-   * TODO
+   * An optional hook to subclass which must return the HTML markup to render into the DOM.
    *
-   * @param args - TODO
+   * @virtual
+   * @param args - Typically the data to output as part of the HTML.
+   * @returns The HTML markup to render.
    */
   render(...args: any[]): string {
     return '';
   }
 
-  rerender(...args: any[]) {
+  /**
+   * An optional hook to subclass which runs after `render` is invoked.
+   *
+   * @virtual
+   */
+  afterRender(): void {}
+
+  /**
+   * To be called if the HTML content associated with this component are to be rendered back into
+   * the DOM.
+   *
+   * @param args - Typically the data to output as part of the HTML.
+   */
+  rerender(...args: any[]): void {
     const source = this.render(...args);
 
     if (source && this.container) {
@@ -146,8 +177,13 @@ export default class Component {
     }
 
     this.#addEventListeners(this.events);
+    this.afterRender();
   }
 
+  /**
+   * To be called if the HTML content associated with this component are to be removed from the DOM.
+   * Primarily used to remove all registered event listeners.
+   */
   destroy(): void {
     this.#removeEventListeners();
 

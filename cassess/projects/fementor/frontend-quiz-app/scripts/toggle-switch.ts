@@ -1,6 +1,8 @@
 import Component, { type ComponentType } from '../../shared/scripts/component.js';
 
-type OnToggleCallback = (isActive: boolean) => void;
+interface ToggleSwitchParams {
+  onToggleParam: (isActive: boolean) => void;
+}
 
 export default class ToggleSwitch extends Component {
   #isActive: boolean = false;
@@ -9,14 +11,22 @@ export default class ToggleSwitch extends Component {
     return this.#isActive;
   }
 
-  onToggle: OnToggleCallback;
+  onToggleCallback: ToggleSwitchParams['onToggleParam'];
 
-  constructor({ onToggle }: { onToggle: OnToggleCallback }) {
+  /**
+   * @param params - The parameters passed into the class instantiation.
+   */
+  constructor({ onToggleParam }: ToggleSwitchParams) {
     super();
-
-    this.onToggle = onToggle;
+    this.onToggleCallback = onToggleParam;
   }
 
+  /**
+   * Returns a registry of DOM elements and event listeners to initialize.
+   *
+   * @override
+   * @returns The registry array.
+   */
   registerDOM(): ComponentType.EventRegistry[] {
     return [
       {
@@ -28,17 +38,26 @@ export default class ToggleSwitch extends Component {
     ];
   }
 
+  /**
+   * The click event listener function.
+   */
   handleToggleSwitchClick() {
     this.isActive ? this.setInactive() : this.setActive();
-    this.onToggle(this.isActive);
+    this.onToggleCallback(this.isActive);
   }
 
+  /**
+   * Sets the active state of the toggle switch component.
+   */
   setActive() {
     this.#isActive = true;
     this.el.main.classList.add('active');
     this.el.main.setAttribute('aria-checked', 'true');
   }
 
+  /**
+   * Sets the inactive state of the toggle switch component.
+   */
   setInactive() {
     this.#isActive = false;
     this.el.main.classList.remove('active');

@@ -1,5 +1,6 @@
 import App from './app.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  new App();
+  const container = document.getElementById('fqa-app-container');
+  container && new App({ container });
 });

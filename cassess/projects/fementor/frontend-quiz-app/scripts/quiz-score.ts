@@ -1,4 +1,5 @@
 import Component, { type ComponentType } from '../../shared/scripts/component.js';
+import { setFocus } from '../../shared/scripts/a11y-focus-utils.js';
 import type { AppDataType } from './app-data.js';
 
 interface QuizScoreParams {
@@ -12,12 +13,20 @@ interface QuizScoreParams {
 export default class QuizScore extends Component {
   onReplayCallback;
 
+  /**
+   * @param params - The parameters passed into the class instantiation.
+   */
   constructor(params: QuizScoreParams) {
     super(params);
-
     this.onReplayCallback = params.onReplayParam;
   }
 
+  /**
+   * Returns a registry of DOM elements and event listeners to initialize.
+   *
+   * @override
+   * @returns The registry array.
+   */
   registerDOM(): ComponentType.EventRegistry[] {
     return [
       {
@@ -26,18 +35,38 @@ export default class QuizScore extends Component {
         type: 'click',
         listener: 'handleReplayClick',
       },
+      {
+        id: 'fqa-score-heading',
+        el: 'heading',
+      },
     ];
   }
 
+  /**
+   * Event listener for "Replay" button click.
+   */
   handleReplayClick() {
     this.destroy();
     this.onReplayCallback();
   }
 
-  render({ data, quizID, score }: QuizScoreParams) {
+  /**
+   * Renders the resulting score of taking the quiz.
+   *
+   * @override
+   * @param params - The parameter object.
+   * @param params.data - The data object for the current quiz subject.
+   * @param params.quizID - The ID of the current quiz subject.
+   * @param params.score - The resulting score of taking the quiz.
+   * @returns The HTML to render.
+   */
+  render({ data, quizID, score }: QuizScoreParams): string {
     return `
       <div class="fqa-info">
-        <h1 class="fqa-info_score-heading font-style_preset-2 font-style_light">
+        <h1
+          class="fqa-info_score-heading font-style_preset-2 font-style_light"
+          id="fqa-score-heading"
+        >
           Quiz completed
           <strong class="font-style_medium">You scored...</strong>
         </h1>
@@ -63,5 +92,12 @@ export default class QuizScore extends Component {
           Play Again
         </button>
       </div>`;
+  }
+
+  /**
+   * Hook used to set focus on the heading element for a11y.
+   */
+  afterRender(): void {
+    setFocus(this.el.heading);
   }
 }

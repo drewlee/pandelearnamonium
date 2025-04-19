@@ -12,11 +12,15 @@
           THEME_DARK_CN: 'style-theme-dark',
         });
 
-        document.documentElement.classList.add(
-          localStorage.getItem(FRONTEND_QUIZ_APP.THEME_LS_KEY) === 'true'
-            ? FRONTEND_QUIZ_APP.THEME_DARK_CN
-            : FRONTEND_QUIZ_APP.THEME_LIGHT_CN,
-        );
+        let theme = FRONTEND_QUIZ_APP.THEME_LIGHT_CN;
+
+        try {
+          if (localStorage.getItem(FRONTEND_QUIZ_APP.THEME_LS_KEY) === 'true') {
+            theme = FRONTEND_QUIZ_APP.THEME_DARK_CN;
+          }
+        } catch (error) {}
+
+        document.documentElement.classList.add(theme);
 
         document.addEventListener('DOMContentLoaded', () => {
           requestAnimationFrame(() => document.documentElement.classList.remove('transitions-off'));
@@ -47,6 +51,12 @@
       </div>
     </header>
 
-    <main class="fqa-main" id="main"></main>
+    <main class="fqa-main" id="fqa-app-container"></main>
+
+    <footer class="fqa-attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
+    </footer>
   </body>
 </html>

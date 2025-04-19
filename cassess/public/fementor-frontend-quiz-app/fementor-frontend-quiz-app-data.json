@@ -2,7 +2,7 @@
   "quizzes": [
     {
       "title": "HTML",
-      "icon": "./images/icon-html.svg",
+      "icon": "../../../fementor-frontend-quiz-app/icon-html.svg",
       "questions": [
         {
           "question": "What does HTML stand for?",
@@ -83,7 +83,7 @@
     },
     {
       "title": "CSS",
-      "icon": "./images/icon-css.svg",
+      "icon": "../../../fementor-frontend-quiz-app/icon-css.svg",
       "questions": [
         {
           "question": "What does CSS stand for?",
@@ -159,7 +159,7 @@
     },
     {
       "title": "JavaScript",
-      "icon": "./images/icon-js.svg",
+      "icon": "../../../fementor-frontend-quiz-app/icon-js.svg",
       "questions": [
         {
           "question": "Which syntax is correct to output 'Hello World' in an alert box?",
@@ -245,7 +245,7 @@
     },
     {
       "title": "Accessibility",
-      "icon": "./images/icon-accessibility.svg",
+      "icon": "../../../fementor-frontend-quiz-app/icon-accessibility.svg",
       "questions": [
         {
           "question": "What does 'WCAG' stand for?",
