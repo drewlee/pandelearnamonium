@@ -1,5 +1,5 @@
 import Component, { type ComponentType } from '../../shared/scripts/component.js';
-import { setFocus } from '../../time-tracking-dashboard/scripts/a11y-utils.js';
+import { setFocus } from '../../shared/scripts/a11y-focus-utils.js';
 import type { AppDataType } from './app-data.js';
 import { sanitize } from './utils.js';
 
