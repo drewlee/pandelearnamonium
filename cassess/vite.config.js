@@ -14,6 +14,10 @@ const seenChunks = new Map();
 export default {
   root: __dirname,
   base: '/pandelearnamonium/cassess/',
+  appType: 'mpa',
+  esbuild: {
+    jsxInject: "import React from 'react';",
+  },
   build: {
     rollupOptions: {
       // Targets all HTML files in the application as this is a multi-page app.
