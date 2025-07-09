@@ -1,20 +1,4 @@
-export namespace AppDataType {
-  export interface Question {
-    answer: string;
-    options: string[];
-    question: string;
-  }
-
-  export interface Subject {
-    icon: string;
-    questions: Question[];
-    title: string;
-  }
-
-  export interface Data {
-    quizzes: Subject[];
-  }
-}
+import * as AppDataType from './app-data-types.js';
 
 class AppData {
   /**
@@ -31,7 +15,7 @@ class AppData {
       );
 
       if (response.ok) {
-        data = await response.json();
+        data = (await response.json()) as AppDataType.Data;
       }
     } catch (error) {
       console.error(error);

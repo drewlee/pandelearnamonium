@@ -10,7 +10,9 @@ export function syncThemeState(syncCallback: () => void): void {
     if (localStorage.getItem(FRONTEND_QUIZ_APP.THEME_LS_KEY) === 'true') {
       syncCallback();
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 /**
@@ -22,7 +24,9 @@ export function enableDarkTheme(): void {
 
   try {
     localStorage.setItem(FRONTEND_QUIZ_APP.THEME_LS_KEY, 'true');
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 /**
@@ -34,5 +38,7 @@ export function enableLightTheme(): void {
 
   try {
     localStorage.removeItem(FRONTEND_QUIZ_APP.THEME_LS_KEY);
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 }

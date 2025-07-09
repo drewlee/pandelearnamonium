@@ -5,6 +5,7 @@ interface FrontendQuizAppGlobal {
 }
 
 declare global {
+  // eslint-disable-next-line no-var
   var FRONTEND_QUIZ_APP: FrontendQuizAppGlobal;
 }
 

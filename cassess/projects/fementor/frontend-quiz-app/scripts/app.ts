@@ -1,7 +1,8 @@
 import Component, { type ComponentType } from '../../shared/scripts/component.js';
 import ToggleSwitch from './toggle-switch.js';
 import { enableDarkTheme, enableLightTheme, syncThemeState } from './theme.js';
-import appData, { type AppDataType } from './app-data.js';
+import appData from './app-data.js';
+import type * as AppDataType from './app-data-types.js';
 import QuizChooser from './quiz-chooser.js';
 import QuizQuestion from './quiz-question.js';
 import QuizScore from './quiz-score.js';
@@ -23,7 +24,7 @@ export default class App extends Component {
    */
   constructor(params: AppParams) {
     super(params);
-    this.initializeApp();
+    void this.initializeApp();
   }
 
   /**
@@ -47,7 +48,11 @@ export default class App extends Component {
    * @param isActive - Whether the toggle switch component is active.
    */
   handleThemeToggle(isActive: boolean): void {
-    isActive ? enableDarkTheme() : enableLightTheme();
+    if (isActive) {
+      enableDarkTheme();
+    } else {
+      enableLightTheme();
+    }
   }
 
   /**
@@ -75,7 +80,7 @@ export default class App extends Component {
     this.quizQuestion = new QuizQuestion({
       ...baseParams,
       container: this.container,
-      onViewScoreParam: this.handleShowScore,
+      onViewScoreParam: this.handleShowScore.bind(this),
     });
   }
 
@@ -102,7 +107,7 @@ export default class App extends Component {
     this.quizScore = new QuizScore({
       ...baseParams,
       container: this.container,
-      onReplayParam: this.handleReplay,
+      onReplayParam: this.handleReplay.bind(this),
     });
   }
 
@@ -113,7 +118,7 @@ export default class App extends Component {
     // Rerender the quiz chooser.
     this.quizChooser.rerender({
       data: this.data.quizzes,
-      onChosenParam: this.handleChosenQuiz,
+      onChosenParam: this.handleChosenQuiz.bind(this),
     });
 
     // Clear out the quiz title.
@@ -125,7 +130,7 @@ export default class App extends Component {
    */
   async initializeApp(): Promise<void> {
     // Initialize the theme toggle switch and sync it to the user's settings.
-    this.themeToggle = new ToggleSwitch({ onToggleParam: this.handleThemeToggle });
+    this.themeToggle = new ToggleSwitch({ onToggleParam: this.handleThemeToggle.bind(this) });
     syncThemeState(() => this.themeToggle.setActive());
 
     // Get the application data.
@@ -142,7 +147,7 @@ export default class App extends Component {
     this.quizChooser = new QuizChooser({
       container: this.container,
       data: this.data.quizzes,
-      onChosenParam: this.handleChosenQuiz,
+      onChosenParam: this.handleChosenQuiz.bind(this),
     });
   }
 

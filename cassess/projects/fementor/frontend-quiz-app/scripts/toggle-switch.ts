@@ -42,7 +42,12 @@ export default class ToggleSwitch extends Component {
    * The click event listener function.
    */
   handleToggleSwitchClick() {
-    this.isActive ? this.setInactive() : this.setActive();
+    if (this.isActive) {
+      this.setInactive();
+    } else {
+      this.setActive();
+    }
+
     this.onToggleCallback(this.isActive);
   }
 

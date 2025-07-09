@@ -1,6 +1,6 @@
 import Component, { type ComponentType } from '../../shared/scripts/component.js';
 import { setFocus } from '../../shared/scripts/a11y-focus-utils.js';
-import type { AppDataType } from './app-data.js';
+import type * as AppDataType from './app-data-types.js';
 
 interface QuizChooserParams {
   container: HTMLElement;

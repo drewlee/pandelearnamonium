@@ -3,6 +3,9 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import html from '@html-eslint/eslint-plugin';
+import tseslint from 'typescript-eslint';
+
+const TS_FILES = Object.freeze(['**/*.{ts,tsx,mts,cts}']);
 
 /** @type {import('eslint').Linter.Config[]} */
 export default defineConfig([
@@ -21,6 +24,29 @@ export default defineConfig([
 
   // Prettier settings
   eslintConfigPrettier,
+
+  // TypeScript settings
+  tseslint.configs.recommendedTypeChecked.map((config) => {
+    if (config.languageOptions) {
+      return {
+        ...config,
+        files: TS_FILES,
+        languageOptions: {
+          ...config.languageOptions,
+          parserOptions: {
+            ...config.languageOptions.parserOptions,
+            projectService: true,
+            tsconfigRootDir: import.meta.dirname,
+          },
+        },
+      };
+    }
+
+    return {
+      ...config,
+      files: TS_FILES,
+    };
+  }),
 
   // HTML ESLint settings
   {
@@ -59,5 +85,6 @@ export default defineConfig([
       return config;
     }, {}),
   },
+
   globalIgnores(['dist']),
 ]);
