@@ -52,7 +52,7 @@ export default class App extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]}
+   * @returns {import('../../shared/scripts/component.js').ComponentTypeEventRegistry[]}
    */
   registerDOM() {
     /**

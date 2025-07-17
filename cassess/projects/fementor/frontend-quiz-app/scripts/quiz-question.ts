@@ -1,4 +1,4 @@
-import Component, { type ComponentType } from '../../shared/scripts/component.js';
+import Component, { type ComponentTypeEventRegistry } from '../../shared/scripts/component.js';
 import { setFocus } from '../../shared/scripts/a11y-focus-utils.js';
 import type * as AppDataType from './app-data-types.js';
 import { sanitize } from './utils.js';
@@ -41,7 +41,7 @@ export default class QuizQuestion extends Component {
    * @override
    * @returns The registry array.
    */
-  registerDOM(): ComponentType.EventRegistry[] {
+  registerDOM(): ComponentTypeEventRegistry[] {
     return [
       {
         id: 'fqa-controls-container',

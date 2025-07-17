@@ -1,4 +1,4 @@
-import Component, { type ComponentType } from '../../shared/scripts/component.js';
+import Component, { type ComponentTypeEventRegistry } from '../../shared/scripts/component.js';
 import ToggleSwitch from './toggle-switch.js';
 import { enableDarkTheme, enableLightTheme, syncThemeState } from './theme.js';
 import appData from './app-data.js';
@@ -33,7 +33,7 @@ export default class App extends Component {
    * @override
    * @returns The registry array.
    */
-  registerDOM(): ComponentType.EventRegistry[] {
+  registerDOM(): ComponentTypeEventRegistry[] {
     return [
       {
         id: 'fqa-header-title-container',

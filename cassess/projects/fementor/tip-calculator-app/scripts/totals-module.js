@@ -2,8 +2,6 @@ import Component from '../../shared/scripts/component.js';
 import PubSub from '../../shared/scripts/pubsub.js';
 import { calculateTips } from './utils.js';
 
-/** @import {ComponentType} from  '../../shared/scripts/component.js' */
-
 export default class TotalsModule extends Component {
   /** @type {boolean} */
   #isActive = false;
@@ -20,7 +18,7 @@ export default class TotalsModule extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {ComponentType.EventRegistry[]}
+   * @returns {import('../../shared/scripts/component.js').ComponentTypeEventRegistry[]}
    */
   registerDOM() {
     /**

@@ -2,8 +2,6 @@ import Component from '../../shared/scripts/component.js';
 import PubSub from '../../shared/scripts/pubsub.js';
 import { getAllowedKeys, validateFloat } from './utils.js';
 
-/** @import {ComponentType} from  '../../shared/scripts/component.js' */
-
 export default class CustomTipInput extends Component {
   /** @type {Set<string>} */
   #allowedKeys;
@@ -24,7 +22,7 @@ export default class CustomTipInput extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {ComponentType.EventRegistry[]}
+   * @returns {import('../../shared/scripts/component.js').ComponentTypeEventRegistry[]}
    */
   registerDOM() {
     /**

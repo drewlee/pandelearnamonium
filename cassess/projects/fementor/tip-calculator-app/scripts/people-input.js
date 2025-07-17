@@ -2,8 +2,6 @@ import Component from '../../shared/scripts/component.js';
 import PubSub from '../../shared/scripts/pubsub.js';
 import { ERROR_MSG, getAllowedActiveKeys, getAllowedKeys, normalizeWholeNumber } from './utils.js';
 
-/** @import {ComponentType} from  '../../shared/scripts/component.js' */
-
 export default class PeopleInput extends Component {
   /** @type {Set<string>} */
   #allowedActiveKeys;
@@ -26,7 +24,7 @@ export default class PeopleInput extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {ComponentType.EventRegistry[]}
+   * @returns {import('../../shared/scripts/component.js').ComponentTypeEventRegistry[]}
    */
   registerDOM() {
     /**

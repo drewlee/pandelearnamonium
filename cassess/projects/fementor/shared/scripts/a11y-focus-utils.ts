@@ -5,7 +5,8 @@ const focusableEls = new Set(['button', 'select', 'textarea', 'summary']);
  * from the element that was focused.
  *
  * @param event - The event object.
- * @param event.currentTarget - The element that initiated the event.
+ * @remarks
+ * `event.currentTarget` - The element that initiated the event.
  */
 function handleFocusOutTabindex({ currentTarget }: Event): void {
   if (currentTarget instanceof HTMLElement) {

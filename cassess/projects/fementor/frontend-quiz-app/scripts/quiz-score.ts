@@ -1,4 +1,4 @@
-import Component, { type ComponentType } from '../../shared/scripts/component.js';
+import Component, { type ComponentTypeEventRegistry } from '../../shared/scripts/component.js';
 import { setFocus } from '../../shared/scripts/a11y-focus-utils.js';
 import type * as AppDataType from './app-data-types.js';
 
@@ -27,7 +27,7 @@ export default class QuizScore extends Component {
    * @override
    * @returns The registry array.
    */
-  registerDOM(): ComponentType.EventRegistry[] {
+  registerDOM(): ComponentTypeEventRegistry[] {
     return [
       {
         id: 'fqa-replay-btn',
@@ -55,9 +55,10 @@ export default class QuizScore extends Component {
    *
    * @override
    * @param params - The parameter object.
-   * @param params.data - The data object for the current quiz subject.
-   * @param params.quizID - The ID of the current quiz subject.
-   * @param params.score - The resulting score of taking the quiz.
+   * @remarks
+   * * `params.data` - The data object for the current quiz subject.
+   * * `params.quizID` - The ID of the current quiz subject.
+   * * `params.score` - The resulting score of taking the quiz.
    * @returns The HTML to render.
    */
   render({ data, quizID, score }: QuizScoreParams): string {

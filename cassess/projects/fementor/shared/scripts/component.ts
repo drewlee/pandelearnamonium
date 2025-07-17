@@ -1,29 +1,21 @@
-/* Temporary TypeScript lint suppression */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint @typescript-eslint/no-explicit-any: ['off', { fixToUnknown: false, ignoreRestArgs: true }] */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// eslint-disable-next-line @typescript-eslint/no-namespace
-export namespace ComponentType {
-  export type ListenerFn = (evt: Event) => void;
+export type ComponentTypeListenerFn = (evt: Event) => void;
 
-  export interface EventRegistry {
-    id: string;
-    el: string;
-    type?: keyof HTMLElementEventMap;
-    listener?: string | ListenerFn;
-  }
+export interface ComponentTypeEventRegistry {
+  id: string;
+  el: string;
+  type?: keyof HTMLElementEventMap;
+  listener?: string | ComponentTypeListenerFn;
 }
 
-export default class Component {
+export default abstract class Component {
   container: HTMLElement | undefined;
   el: Record<string, HTMLElement> = {};
-  events: ComponentType.EventRegistry[] = [];
+  events: ComponentTypeEventRegistry[] = [];
 
   /**
    * @param args - The parameters passed into the class instantiation.
    */
-  constructor(...args: any[]) {
+  constructor(...args: unknown[]) {
     this.#bindEventListeners();
     this.#initialRender(...args);
 
@@ -45,8 +37,7 @@ export default class Component {
 
     for (const listener of listeners) {
       if (listener.startsWith('handle') && typeof this[listener] === 'function') {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-        this[listener] = (this[listener] as Function).bind(this);
+        (this[listener] as (...args: unknown[]) => unknown) = this[listener].bind(this);
       }
     }
   }
@@ -57,9 +48,16 @@ export default class Component {
    * @sealed
    * @param args - The arguments to pass into the `render` function.
    */
-  #initialRender(...args: any[]): void {
+  #initialRender(...args: unknown[]): void {
     for (const arg of args) {
-      if (Object.hasOwn(arg, 'container') && arg.container instanceof HTMLElement) {
+      if (
+        arg !== null &&
+        typeof arg === 'object' &&
+        !Array.isArray(arg) &&
+        'container' in arg &&
+        Object.hasOwn(arg, 'container') &&
+        arg.container instanceof HTMLElement
+      ) {
         this.container = arg.container;
       }
     }
@@ -80,7 +78,7 @@ export default class Component {
    *
    * @param events - The event registry object.
    */
-  #addEventListeners(events: ComponentType.EventRegistry[]): void {
+  #addEventListeners(events: ComponentTypeEventRegistry[]): void {
     for (const attrs of events) {
       const { el, listener, type } = attrs;
       const callback = this.#getListenerFn(listener);
@@ -125,14 +123,12 @@ export default class Component {
    * @param listener - The supplied listener string or function.
    * @returns A reference to the supplied listener as a function.
    */
-  #getListenerFn(
-    listener: ComponentType.EventRegistry['listener'],
-  ): ComponentType.ListenerFn | null {
-    let callback: ComponentType.ListenerFn | null = null;
+  #getListenerFn(listener: ComponentTypeEventRegistry['listener']): ComponentTypeListenerFn | null {
+    let callback: ComponentTypeListenerFn | null = null;
 
     switch (typeof listener) {
       case 'string':
-        callback = this[listener as keyof Component] as ComponentType.ListenerFn;
+        callback = this[listener as keyof Component] as ComponentTypeListenerFn;
         break;
       case 'function':
         callback = listener;
@@ -152,7 +148,7 @@ export default class Component {
    *
    * @virtual
    */
-  registerDOM(): ComponentType.EventRegistry[] {
+  registerDOM(): ComponentTypeEventRegistry[] {
     throw new Error('The `registerDOM` method must be overridden by the subclass');
   }
 
@@ -163,8 +159,7 @@ export default class Component {
    * @param _args - Typically the data to output as part of the HTML.
    * @returns The HTML markup to render.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  render(...args: any[]): string {
+  render(..._args: unknown[]): string {
     return '';
   }
 
@@ -173,7 +168,9 @@ export default class Component {
    *
    * @virtual
    */
-  afterRender(): void {}
+  afterRender(): void {
+    return;
+  }
 
   /**
    * To be called if the HTML content associated with this component are to be rendered back into
@@ -181,7 +178,7 @@ export default class Component {
    *
    * @param args - Typically the data to output as part of the HTML.
    */
-  rerender(...args: any[]): void {
+  rerender(...args: unknown[]): void {
     const source = this.render(...args);
 
     if (source && this.container) {

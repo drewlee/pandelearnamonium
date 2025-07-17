@@ -1,8 +1,8 @@
 import { Component } from '../index.js';
 
-/** @import {ComponentType} from '../../../../projects/fementor/shared/scripts/component.js' */
+/** @import { ComponentTypeEventRegistry } from '../../../../projects/fementor/shared/scripts/component.js' */
 
-/** @type {ComponentType.EventRegistry[]} */
+/** @type {ComponentTypeEventRegistry[]} */
 const DEFAULT_REGISTRY = [
   {
     id: 'test-button',
@@ -12,12 +12,12 @@ const DEFAULT_REGISTRY = [
 
 let registry = DEFAULT_REGISTRY;
 
-/** @type {(customRegistry: ComponentType.EventRegistry[]) => void} */
+/** @type {(customRegistry: ComponentTypeEventRegistry[]) => void} */
 function setRegistry(customRegistry) {
   registry = customRegistry;
 }
 
-/** @type {() => ComponentType.EventRegistry[]} */
+/** @type {() => ComponentTypeEventRegistry[]} */
 function getRegistry() {
   return registry;
 }
@@ -77,7 +77,7 @@ describe('Component.registerDOM', () => {
 
     const spyFn = vi.fn();
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -100,7 +100,7 @@ describe('Component.registerDOM', () => {
 
     const spyFn = vi.fn();
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -124,7 +124,7 @@ describe('Component.registerDOM', () => {
 
     const spyFn = vi.spyOn(TestComponent.prototype, 'handleTestButtonClick');
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -158,7 +158,7 @@ describe('Component.registerDOM', () => {
       listener: 'handleTestButtonClick',
     };
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         id: 'test-button-1',
@@ -206,7 +206,7 @@ describe('Component.bindEventListeners', () => {
       },
     );
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -238,7 +238,7 @@ describe('Component.bindEventListeners', () => {
       },
     );
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -346,7 +346,7 @@ describe('Component.destroy', () => {
 
     const spyFn = vi.spyOn(TestComponent.prototype, 'handleTestButtonClick');
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -375,7 +375,7 @@ describe('Component.destroy', () => {
 
     const spyFn = vi.fn();
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         ...DEFAULT_REGISTRY[0],
@@ -406,7 +406,7 @@ describe('Component.destroy', () => {
       return btnEl;
     });
 
-    /** @type {ComponentType.EventRegistry[]} */
+    /** @type {ComponentTypeEventRegistry[]} */
     const registry = [
       {
         id: 'test-button-1',

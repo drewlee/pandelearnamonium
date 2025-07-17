@@ -1,11 +1,11 @@
-import Component, { type ComponentType } from '../../shared/scripts/component.js';
+import Component, { type ComponentTypeEventRegistry } from '../../shared/scripts/component.js';
 
 interface ToggleSwitchParams {
   onToggleParam: (isActive: boolean) => void;
 }
 
 export default class ToggleSwitch extends Component {
-  #isActive: boolean = false;
+  #isActive = false;
 
   get isActive(): boolean {
     return this.#isActive;
@@ -27,7 +27,7 @@ export default class ToggleSwitch extends Component {
    * @override
    * @returns The registry array.
    */
-  registerDOM(): ComponentType.EventRegistry[] {
+  registerDOM(): ComponentTypeEventRegistry[] {
     return [
       {
         id: 'fqa-theme-switch-btn',

@@ -1,4 +1,4 @@
-import Component, { type ComponentType } from '../../shared/scripts/component.js';
+import Component, { type ComponentTypeEventRegistry } from '../../shared/scripts/component.js';
 import { setFocus } from '../../shared/scripts/a11y-focus-utils.js';
 import type * as AppDataType from './app-data-types.js';
 
@@ -27,7 +27,7 @@ export default class QuizChooser extends Component {
    * @override
    * @returns The registry array.
    */
-  registerDOM(): ComponentType.EventRegistry[] {
+  registerDOM(): ComponentTypeEventRegistry[] {
     return [
       {
         id: 'fqa-controls-container',
@@ -109,14 +109,13 @@ export default class QuizChooser extends Component {
    *
    * @override
    * @param params - The parameter object.
-   * @param params.data - The data to output in the view.
+   * @remarks
+   * `params.data` - The data to output in the view.
    * @returns The HTML to render.
    */
   render({ data }: QuizChooserParams): string {
     // Use the cached content if this view has previously been rendered.
-    if (this.html === undefined) {
-      this.html = this.composeHTML(data);
-    }
+    this.html ??= this.composeHTML(data);
 
     return this.html;
   }

@@ -31,7 +31,7 @@ export default class Dashboard extends Component {
   /**
    * Returns a registry of DOM elements and event listeners to initialize.
    *
-   * @returns {import('../../shared/scripts/component.js').ComponentType.EventRegistry[]} The registry array.
+   * @returns {import('../../shared/scripts/component.js').ComponentTypeEventRegistry[]} The registry array.
    */
   registerDOM() {
     return [
