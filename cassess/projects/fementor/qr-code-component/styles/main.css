@@ -47,7 +47,7 @@ body {
   padding: 16px 16px 40px;
   background-color: hsl(0deg 0% 100%);
   border-radius: 20px;
-  box-shadow: 0 25px 25px hsla(0deg 0% 0% / 4.77%);
+  box-shadow: 0 25px 25px hsl(0deg 0% 0% / 4.77%);
 }
 
 .qr-card-image {
