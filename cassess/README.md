@@ -22,3 +22,4 @@
 - [Password Generator App](./projects/fementor/password-generator-app/)
 - [Frontend Quiz App](./projects/fementor/frontend-quiz-app/)
 - [Interactive Rating Component](./projects/fementor/interactive-rating-component/)
+- [FAQ Accordion](./projects/fementor/faq-accordion/)

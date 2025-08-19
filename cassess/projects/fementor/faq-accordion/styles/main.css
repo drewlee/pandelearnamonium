@@ -1,0 +1,150 @@
+/* CUSTOM FONT INCLUSION */
+@font-face {
+  font-family: 'Work Sans';
+  src: url('../../shared/assets/fonts/work-sans/WorkSans-VariableFont_wght.ttf')
+    format('opentype-variations');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CUSTOM PROPERTIES */
+:root {
+  /* Color Scheme */
+  --color-white: rgb(255 255 255);
+  --color-purple-100: rgb(248 238 255);
+  --color-purple-600: rgb(139 105 144);
+  --color-purple-950: rgb(48 21 52);
+  --color-violet-600: rgb(173 40 235);
+  --color-black: rgb(0 0 0);
+
+  /* Spacing */
+  --spacing-unit: 8px;
+  --spacing-100: calc(var(--spacing-unit) * 1);
+  --spacing-200: calc(var(--spacing-unit) * 2);
+  --spacing-300: calc(var(--spacing-unit) * 3);
+  --spacing-400: calc(var(--spacing-unit) * 4);
+  --spacing-500: calc(var(--spacing-unit) * 5);
+}
+
+/* RESETS & GENERAL STYLES */
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+html {
+  font:
+    normal 400 100% / 1.5 'Work Sans',
+    sans-serif;
+  background-color: var(--color-purple-100);
+  color: var(--color-purple-950);
+}
+
+body {
+  font-size: 0.875rem; /* 14px */
+}
+
+/* TYPOGRAPHY
+  - Regular: 400
+  - SemiBold: 600
+  - Bold: 700
+  - 700 32px / 38px | 700 56px / 66px
+  - 600 16px / 19px | 600 18px / 21px
+  - 400 14px / 1.5 | 400 16px / 1.5 */
+.text-preset-1 {
+  font-weight: 700;
+  font-size: 2rem; /* 32px */
+  line-height: 2.375rem; /* 38px */
+}
+
+.text-preset-2 {
+  font-weight: 600;
+  font-size: 1rem; /* 16px */
+  line-height: 1.1875rem; /* 19px */
+}
+
+.text-preset-3 {
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+}
+
+/* LAYOUT */
+.faqa-layout {
+  height: 100svh;
+  display: grid;
+  align-items: center;
+  grid-template:
+    '. . .' 3rem
+    '. main .' 1fr
+    'footer footer footer' 3rem
+    / auto minmax(375px, 648px) auto;
+}
+
+/* MAIN CONTENT */
+.faqa-main {
+  grid-area: main;
+  padding: 0 var(--spacing-300);
+}
+
+.faqa-main_container {
+  padding: var(--spacing-300);
+  border-radius: var(--spacing-100);
+  background-color: var(--color-white);
+}
+
+/* Attribution */
+.attribution {
+  grid-area: footer;
+  font-size: 0.6875rem; /* 11px */
+  text-align: center;
+
+  li {
+    display: inline;
+  }
+
+  a {
+    color: rgb(62 82 163);
+  }
+}
+
+/* OVERRIDES FOR NON-MOBILE SCREENS */
+@media (width >= 768px) {
+  /* TYPOGRAPHY */
+  .text-preset-1 {
+    font-size: 3.5rem; /* 56px */
+    line-height: 4.125rem; /* 66px */
+  }
+
+  .text-preset-2 {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.3125rem; /* 21px */
+  }
+
+  .text-preset-3 {
+    font-size: 1rem; /* 16px */
+  }
+
+  /* MAIN CONTENT */
+  .faqa-main_container {
+    padding: var(--spacing-400);
+    border-radius: var(--spacing-200);
+    background-color: var(--color-white);
+  }
+}
