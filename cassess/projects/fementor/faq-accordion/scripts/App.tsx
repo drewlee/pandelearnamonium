@@ -1,20 +1,15 @@
+import Accordion from './Accordion.js';
+import FAQS from './accordion-content.js';
+
 export default function App() {
   return (
     <section className="faqa-main_container">
-      <h1 className="text-preset-1">FAQs</h1>
-      <h2 className="text-preset-2">What is Frontend Mentor, and how will it help me?</h2>
-      <p className="text-preset-3">
-        Frontend Mentor offers realistic coding challenges to help developers improve their frontend
-        coding skills with projects in HTML, CSS, and JavaScript. It&apos;s suitable for all levels
-        and ideal for portfolio building.
-      </p>
-      Is Frontend Mentor free? Yes, Frontend Mentor offers both free and premium coding challenges,
-      with the free option providing access to a range of projects suitable for all skill levels.
-      Can I use Frontend Mentor projects in my portfolio? Yes, you can use projects completed on
-      Frontend Mentor in your portfolio. It&apos;s an excellent way to showcase your skills to
-      potential employers! How can I get help if I&apos;m stuck on a Frontend Mentor challenge? The
-      best place to get help is inside Frontend Mentor&apos;s Discord community. There&apos;s a help
-      channel where you can ask questions and seek support from other community members.
+      <div className="faqa-main_heading">
+        <span className="faqa-icon_star" role="presentation"></span>
+        <h1 className="text-preset-1">FAQs</h1>
+      </div>
+
+      <Accordion content={FAQS} />
     </section>
   );
 }

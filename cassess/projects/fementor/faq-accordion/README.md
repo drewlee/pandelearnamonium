@@ -10,6 +10,7 @@ This is a solution to the [FAQ accordion challenge on Frontend Mentor](https://w
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
+  - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
@@ -42,11 +43,15 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+- React
 - TypeScript
 - Accessibility
 - ESLint
 - Stylelint
+
+### Useful resources
+
+- [ARIA Authoring Practices Guide - Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) - Specification for authoring an accessible web accordion.
 
 ## Author
 
