@@ -12,7 +12,6 @@ This is a solution to the [FAQ accordion challenge on Frontend Mentor](https://w
   - [Built with](#built-with)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
