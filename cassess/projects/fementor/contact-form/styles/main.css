@@ -1,0 +1,144 @@
+/* CUSTOM FONT INCLUSION */
+@font-face {
+  font-family: Karla;
+  src: url('../../shared/assets/fonts/karla/Karla-VariableFont_wght.ttf')
+    format('opentype-variations');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CUSTOM PROPERTIES */
+:root {
+  /* Color Scheme */
+  --color-black: rgb(0 0 0);
+  --color-grey-900: rgb(42 65 68);
+  --color-grey-500: rgb(134 162 165);
+  --color-green-600: rgb(12 125 105);
+  --color-green-200: rgb(224 241 232);
+  --color-red: rgb(215 60 60);
+  --color-white: rgb(255 255 255);
+
+  /* Spacing */
+  --spacing-unit: 8px;
+  --spacing-100: calc(var(--spacing-unit) * 1);
+  --spacing-150: calc(var(--spacing-unit) * 1.5);
+  --spacing-200: calc(var(--spacing-unit) * 2);
+  --spacing-300: calc(var(--spacing-unit) * 3);
+  --spacing-400: calc(var(--spacing-unit) * 4);
+  --spacing-500: calc(var(--spacing-unit) * 5);
+  --spacing-1600: calc(var(--spacing-unit) * 16);
+}
+
+/* RESETS & GENERAL STYLES */
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+img {
+  display: block;
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+button {
+  font: inherit;
+}
+
+html {
+  font:
+    normal 400 100% / 1.5 Karla,
+    sans-serif;
+  background-color: var(--color-green-200);
+  color: var(--color-grey-900);
+}
+
+/* TYPOGRAPHY */
+.font-style_heading {
+  font-weight: 700;
+  font-size: 2rem; /* 32px */
+  line-height: 1;
+  letter-spacing: -0.0625rem; /* -1px */
+}
+
+.font-style_body-md {
+  font-weight: 400;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.5;
+}
+
+.font-style_body-sm {
+  font-weight: 400;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
+}
+
+.font-style_bold {
+  font-weight: 700;
+}
+
+/* LAYOUT */
+.acf-layout {
+  height: 100svh;
+  display: grid;
+  align-items: center;
+  grid-template:
+    '. . .' 3rem /* 48px */
+    '. main .' 1fr
+    'footer footer footer' 3rem /* 48px */
+    / auto minmax(375px, 722px) auto;
+}
+
+/* MAIN CONTENT */
+.acf-main {
+  grid-area: main;
+  padding: 0 var(--spacing-200);
+}
+
+.acf-container {
+  padding: var(--spacing-300);
+  border-radius: var(--spacing-200);
+  background-color: var(--color-white);
+}
+
+/* Attribution */
+.attribution {
+  grid-area: footer;
+  font-size: 0.6875rem; /* 11px */
+  text-align: center;
+
+  li {
+    display: inline;
+  }
+
+  a {
+    color: rgb(62 82 163);
+  }
+}
+
+/* OVERRIDES FOR NON-MOBILE SCREENS */
+@media (width >= 768px) {
+  .acf-main {
+    padding: 0;
+  }
+
+  .acf-layout {
+    grid-template-columns: minmax(39px, 1fr) minmax(690px, 736px) minmax(39px, 1fr);
+  }
+
+  .acf-container {
+    padding: var(--spacing-500);
+  }
+}
