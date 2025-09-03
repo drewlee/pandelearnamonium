@@ -18,7 +18,7 @@
     "preview": "npm run build:vite && vite preview --open",
     "prettier:check": "prettier . -c",
     "prettier:write": "npm run prettier",
-    "serve": "vite serve --open",
+    "serve": "vite serve --host --open",
     "stylelint": "stylelint '**/*.css'",
     "test": "npm run lint:check && npm run build:ts && vitest run",
     "vitest": "vitest run"
