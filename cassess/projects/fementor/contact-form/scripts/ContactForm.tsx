@@ -89,10 +89,12 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
    * to store the values from the user's input.
    *
    * @param evt - Change event object.
+   * @remarks
+   * `evt.target` - The event's source element.
    */
-  function handleInputChange(evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-    const { target } = evt;
-
+  function handleInputChange({
+    target,
+  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     if (target.name) {
       const { name, value } = target;
       const newFieldValues = structuredClone(fieldValues);
@@ -114,10 +116,10 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
    * out extraneous whitespace from the user's input.
    *
    * @param evt - Focus event object.
+   * @remarks
+   * `evt.target` - The event's source element.
    */
-  function handleInputBlur(evt: FocusEvent<HTMLInputElement | HTMLTextAreaElement>): void {
-    const { target } = evt;
-
+  function handleInputBlur({ target }: FocusEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     if (target.name) {
       const { name, value } = target;
       const newFieldValues = structuredClone(fieldValues);

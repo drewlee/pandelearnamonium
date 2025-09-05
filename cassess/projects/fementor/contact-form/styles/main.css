@@ -154,9 +154,10 @@ html {
 }
 
 .acf-container {
-  padding: var(--spacing-300);
+  padding: calc(var(--spacing-300) - 1px);
   border-radius: var(--spacing-200);
   background-color: var(--color-white);
+  border: 1px solid transparent;
 }
 
 .acf-form {
@@ -306,9 +307,10 @@ textarea.acf-form_txt-input {
   z-index: 1;
   width: auto;
   max-width: 450px;
-  padding: var(--spacing-300);
+  padding: calc(var(--spacing-300) - 1px);
   background-color: var(--color-grey-900);
   border-radius: var(--spacing-150);
+  border: 1px solid transparent;
   color: var(--color-white);
   opacity: 0;
   transition: opacity 200ms ease-in;
@@ -370,7 +372,7 @@ textarea.acf-form_txt-input {
   }
 
   .acf-container {
-    padding: var(--spacing-500);
+    padding: calc(var(--spacing-500) - 1px);
   }
 
   .acf-form_layout-inline {
