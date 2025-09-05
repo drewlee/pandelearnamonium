@@ -1,4 +1,4 @@
-import { type ChangeEvent, type JSX } from 'react';
+import { type ChangeEvent, type FocusEvent, type JSX } from 'react';
 import FieldLabel from './FieldLabel.js';
 import FieldError from './FieldError.js';
 
@@ -10,11 +10,28 @@ interface TextFieldProps {
   isValidValue: boolean;
   label: string;
   name: string;
-  onInputBlur: (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onInputBlur: (evt: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onValueChange: (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   value: string;
 }
 
+/**
+ * Helper component used for rendering a text field and its associated label and error.
+ *
+ * @param props - The component props.
+ * @remarks
+ * - `props.autocomplete` - Value for the `autocomplete` attribute.
+ * - `props.errorMessage` - The associated error element's text content.
+ * - `props.id` - ID attribute value to target the elements.
+ * - `props.isMultiline` - Whether the text field is single line (`input`) or multiline (`textarea`).
+ * - `props.isValidValue` - Whether the input's value is of valid format.
+ * - `props.label` - Text content for the associated label element.
+ * - `props.name` - Value for the `name` attribute.
+ * - `props.onInputBlur` - Listener function for the input's `blur` event.
+ * - `props.inValueChange` - Listener function for the input's `change` event.
+ * - `props.value` - The input's `value` attribute.
+ * @returns JSX markup for the text field.
+ */
 export default function TextFieldGroup({
   autocomplete,
   errorMessage,

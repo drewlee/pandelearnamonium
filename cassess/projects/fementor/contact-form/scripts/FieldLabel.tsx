@@ -7,6 +7,17 @@ interface FieldLabelProps {
   label: string;
 }
 
+/**
+ * Helper component used for rendering a field label element.
+ *
+ * @param props - The component props.
+ * @remarks
+ * - `props.classNameOverride` - Optional class name. Overrides the default value.
+ * - `props.htmlFor` - Value for the `for` attribute.
+ * - `props.isRequired` - Whether the label corresponds to a required form field.
+ * - `props.label` - Text content for the label element.
+ * @returns JSX markup for the label element.
+ */
 export default function FieldLabel({
   classNameOverride = 'acf-form_label font-style_body-sm',
   htmlFor,

@@ -3,6 +3,7 @@ import {
   useRef,
   useState,
   type ChangeEvent,
+  type FocusEvent,
   type FormEvent,
   type RefObject,
 } from 'react';
@@ -49,6 +50,14 @@ const fieldValuesDefault: FieldValues = {
   },
 };
 
+/**
+ * The contact form component.
+ *
+ * @param props - The component props.
+ * @remarks
+ * `props.onSubmitSuccess` - Callback to run on successful form submission.
+ * @returns JSX markup for the contact form.
+ */
 export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
   const rootEl: RefObject<HTMLFormElement | null> = useRef(null);
   const isInvalidSubmit = useRef(false);
@@ -57,7 +66,8 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
   const isValidConsent = fieldValues.consented.isValid;
 
   useEffect(() => {
-    // Sets focus on the first invalid input after submission
+    // Sets focus on the first invalid input after form submission. Used as a means
+    // to provide an audible notification for assistive software users (a11y).
     if (isInvalidSubmit.current && rootEl.current instanceof HTMLFormElement) {
       for (const el of rootEl.current.elements) {
         if (
@@ -74,6 +84,12 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
     }
   }, [fieldValues]);
 
+  /**
+   * Listener function for the input `change` event. Used primarily
+   * to store the values from the user's input.
+   *
+   * @param evt - Change event object.
+   */
   function handleInputChange(evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     const { target } = evt;
 
@@ -93,7 +109,13 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
     }
   }
 
-  function handleInputBlur(evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+  /**
+   * Listener function for the input `blur` event. Used primarily to strip
+   * out extraneous whitespace from the user's input.
+   *
+   * @param evt - Focus event object.
+   */
+  function handleInputBlur(evt: FocusEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     const { target } = evt;
 
     if (target.name) {
@@ -108,6 +130,12 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
     }
   }
 
+  /**
+   * Listener function for the form `submit` event. Primarily used
+   * for validating the user's input.
+   *
+   * @param evt - Form event object.
+   */
   function handleFormSubmit(evt: FormEvent<HTMLFormElement>): void {
     evt.preventDefault();
 
@@ -132,14 +160,14 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
 
     setFieldValues(newFieldValues);
 
-    // Terminate early if there are validation errors
+    // Return early if there are validation errors.
     if (Object.values(newFieldValues).some((entry) => !entry.isValid)) {
       isInvalidSubmit.current = true;
       return;
     }
 
+    // Otherwise, reset the form after successful submission.
     if (evt.target instanceof HTMLFormElement) {
-      // Reset the form on successful submission
       for (const el of evt.target.elements) {
         if (el instanceof HTMLInputElement && el.checked) {
           el.checked = false;
