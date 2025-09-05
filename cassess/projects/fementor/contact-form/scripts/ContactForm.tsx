@@ -179,7 +179,14 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
   }
 
   return (
-    <form action="post" className="acf-form" noValidate onSubmit={handleFormSubmit} ref={rootEl}>
+    <form
+      action="./"
+      className="acf-form"
+      method="post"
+      noValidate
+      onSubmit={handleFormSubmit}
+      ref={rootEl}
+    >
       <div className="acf-form_layout-inline">
         <TextField
           autocomplete="given-name"
@@ -229,6 +236,7 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
               id="contact_query-inquiry"
               name="queryType"
               onChange={handleInputChange}
+              required
               type="radio"
               value="inquiry"
             />
@@ -248,6 +256,7 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
               id="contact_query-support"
               name="queryType"
               onChange={handleInputChange}
+              required
               type="radio"
               value="support"
             />
