@@ -1,4 +1,15 @@
-import { useState, type FormEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+  type RefObject,
+} from 'react';
+import FieldLabel from './FieldLabel.js';
+import TextField from './TextFieldGroup.js';
+import FieldError from './FieldError.js';
+import { isValidEmail } from './utils.js';
 
 interface FieldValueEntry {
   value: string;
@@ -6,6 +17,10 @@ interface FieldValueEntry {
 }
 
 type FieldValues = Record<string, FieldValueEntry>;
+
+interface ContactFormProps {
+  onSubmitSuccess: () => void;
+}
 
 const fieldValuesDefault: FieldValues = {
   firstName: {
@@ -34,188 +49,232 @@ const fieldValuesDefault: FieldValues = {
   },
 };
 
-export default function ContactForm() {
+export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
+  const rootEl: RefObject<HTMLFormElement | null> = useRef(null);
+  const isInvalidSubmit = useRef(false);
   const [fieldValues, setFieldValues] = useState(fieldValuesDefault);
-  const isValidFirstName = fieldValues.firstName.isValid;
-  const isValidLastName = fieldValues.lastName.isValid;
+  const isValidQuery = fieldValues.queryType.isValid;
+  const isValidConsent = fieldValues.consented.isValid;
 
-  function handleInputChange(name: string, value: string) {
-    const newFieldValues = structuredClone(fieldValues);
+  useEffect(() => {
+    // Sets focus on the first invalid input after submission
+    if (isInvalidSubmit.current && rootEl.current instanceof HTMLFormElement) {
+      for (const el of rootEl.current.elements) {
+        if (
+          (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) &&
+          el.name &&
+          !fieldValues[el.name].isValid
+        ) {
+          el.focus();
+          break;
+        }
+      }
 
-    newFieldValues[name].value = value.trim();
-    setFieldValues(newFieldValues);
+      isInvalidSubmit.current = false;
+    }
+  }, [fieldValues]);
+
+  function handleInputChange(evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+    const { target } = evt;
+
+    if (target.name) {
+      const { name, value } = target;
+      const newFieldValues = structuredClone(fieldValues);
+      let fieldValue = value;
+
+      if (name === 'consented' && target instanceof HTMLInputElement) {
+        fieldValue = target.checked ? 'yes' : '';
+      }
+
+      if (newFieldValues[name].value !== fieldValue) {
+        newFieldValues[name].value = fieldValue;
+        setFieldValues(newFieldValues);
+      }
+    }
+  }
+
+  function handleInputBlur(evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+    const { target } = evt;
+
+    if (target.name) {
+      const { name, value } = target;
+      const newFieldValues = structuredClone(fieldValues);
+      const normalizedValue = value.trim();
+
+      if (newFieldValues[name].value !== normalizedValue) {
+        newFieldValues[name].value = normalizedValue;
+        setFieldValues(newFieldValues);
+      }
+    }
   }
 
   function handleFormSubmit(evt: FormEvent<HTMLFormElement>): void {
     evt.preventDefault();
-    console.log(fieldValues);
 
     const newFieldValues = structuredClone(fieldValues);
 
-    // Reset validation errors
     for (const key of Object.keys(newFieldValues)) {
-      newFieldValues[key].isValid = true;
-    }
+      let isValid = true;
 
-    // Validation
-    for (const key of Object.keys(newFieldValues)) {
-      if (key === 'email') {
-        // todo
-      } else if (newFieldValues[key].value === '') {
-        newFieldValues[key].isValid = false;
+      // Normalize values for text fields
+      newFieldValues[key].value = newFieldValues[key].value.trim();
+
+      // Input value validation
+      if (
+        (key === 'email' && !isValidEmail(newFieldValues[key].value)) ||
+        newFieldValues[key].value === ''
+      ) {
+        isValid = false;
       }
+
+      newFieldValues[key].isValid = isValid;
     }
 
     setFieldValues(newFieldValues);
+
+    // Terminate early if there are validation errors
+    if (Object.values(newFieldValues).some((entry) => !entry.isValid)) {
+      isInvalidSubmit.current = true;
+      return;
+    }
+
+    if (evt.target instanceof HTMLFormElement) {
+      // Reset the form on successful submission
+      for (const el of evt.target.elements) {
+        if (el instanceof HTMLInputElement && el.checked) {
+          el.checked = false;
+        }
+      }
+      setFieldValues(fieldValuesDefault);
+      onSubmitSuccess();
+    }
   }
 
   return (
-    <form className="acf-form" action="post" noValidate onSubmit={handleFormSubmit}>
+    <form action="post" className="acf-form" noValidate onSubmit={handleFormSubmit} ref={rootEl}>
       <div className="acf-form_layout-inline">
-        <div className="acf-form_input-container">
-          <label className="acf-form_label font-style_body-sm" htmlFor="contact_first-name">
-            First Name <em>*</em>
-          </label>
-
-          <input
-            type="text"
-            className={`acf-form_txt-input${!isValidFirstName ? ' invalid' : ''}`}
-            id="contact_first-name"
-            autoComplete="given-name"
-            aria-describedby={!isValidFirstName ? 'contact_first-name_error' : undefined}
-            aria-invalid={!isValidFirstName}
-            required
-            onChange={(evt) => handleInputChange('firstName', evt.target.value)}
-          />
-
-          {!isValidFirstName && (
-            <p className="acf-form_error" id="contact_first-name_error">
-              This field is required
-            </p>
-          )}
-        </div>
-
-        <div className="acf-form_input-container">
-          <label className="acf-form_label font-style_body-sm" htmlFor="contact_last-name">
-            Last Name <em>*</em>
-          </label>
-
-          <input
-            type="text"
-            className={`acf-form_txt-input${!isValidLastName ? ' invalid' : ''}`}
-            id="contact_last-name"
-            autoComplete="family-name"
-            aria-describedby={!isValidLastName ? 'contact_last-name_error' : undefined}
-            aria-invalid={!isValidLastName}
-            required
-            onChange={(evt) => handleInputChange('lastName', evt.target.value)}
-          />
-
-          {!isValidLastName && (
-            <p className="acf-form_error" id="contact_last-name_error">
-              This field is required
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className="acf-form_input-container">
-        <label className="acf-form_label font-style_body-sm" htmlFor="contact_email">
-          Email Address <em>*</em>
-        </label>
-
-        <input
-          type="text"
-          className="acf-form_txt-input font-style_body-md"
-          id="contact_email"
-          autoComplete="email"
-          aria-describedby={!fieldValues.email.isValid ? 'foo' : undefined}
-          required
-          onChange={(evt) => handleInputChange('email', evt.target.value)}
+        <TextField
+          autocomplete="given-name"
+          id="first-name"
+          isValidValue={fieldValues.firstName.isValid}
+          label="First Name"
+          name="firstName"
+          onInputBlur={handleInputBlur}
+          onValueChange={handleInputChange}
+          value={fieldValues.firstName.value}
         />
-        {!fieldValues.email.isValid && <p>Error!</p>}
+
+        <TextField
+          autocomplete="family-name"
+          id="last-name"
+          isValidValue={fieldValues.lastName.isValid}
+          label="Last Name"
+          name="lastName"
+          onInputBlur={handleInputBlur}
+          onValueChange={handleInputChange}
+          value={fieldValues.lastName.value}
+        />
       </div>
+
+      <TextField
+        autocomplete="email"
+        errorMessage="Please enter a valid email address"
+        id="email"
+        isValidValue={fieldValues.email.isValid}
+        label="Email Address"
+        name="email"
+        onInputBlur={handleInputBlur}
+        onValueChange={handleInputChange}
+        value={fieldValues.email.value}
+      />
 
       <fieldset className="acf-form_input-container">
         <legend className="acf-form_radio-legend font-style_body-sm">
           Query Type <em>*</em>
         </legend>
 
-        <div
-          className="acf-form_layout-inline condensed"
-          onChange={({ target }) => {
-            if (target instanceof HTMLInputElement) {
-              handleInputChange('queryType', target.value);
-            }
-          }}
-        >
+        <div className="acf-form_layout-inline condensed">
           <div className="acf-form_radio-container">
             <input
-              type="radio"
+              aria-describedby={!isValidQuery ? 'contact_query_error' : undefined}
               className="acf-form_radio"
               id="contact_query-inquiry"
-              name="contact_query-type"
+              name="queryType"
+              onChange={handleInputChange}
+              type="radio"
               value="inquiry"
             />
 
-            <label
-              htmlFor="contact_query-inquiry"
-              className="acf-form_radio-label font-style_body-md"
-            >
-              General Inquiry
-            </label>
+            <FieldLabel
+              classNameOverride="acf-form_radio-label font-style_body-md"
+              htmlFor="query-inquiry"
+              isRequired={false}
+              label="General Inquiry"
+            />
           </div>
 
           <div className="acf-form_radio-container">
             <input
-              type="radio"
+              aria-describedby={!isValidQuery ? 'contact_query_error' : undefined}
               className="acf-form_radio"
               id="contact_query-support"
-              name="contact_query-type"
+              name="queryType"
+              onChange={handleInputChange}
+              type="radio"
               value="support"
             />
 
-            <label
-              htmlFor="contact_query-support"
-              className="acf-form_radio-label font-style_body-md"
-            >
-              Support Request
-            </label>
+            <FieldLabel
+              classNameOverride="acf-form_radio-label font-style_body-md"
+              htmlFor="query-support"
+              isRequired={false}
+              label="Support Request"
+            />
           </div>
         </div>
+
+        {!isValidQuery && <FieldError id="query" message="Please select a query type" />}
       </fieldset>
 
-      <div className="acf-form_input-container">
-        <label className="acf-form_label font-style_body-sm" htmlFor="contact_msg">
-          Message <em>*</em>
-        </label>
+      <TextField
+        id="message"
+        isMultiline={true}
+        isValidValue={fieldValues.message.isValid}
+        label="Message"
+        name="message"
+        onInputBlur={handleInputBlur}
+        onValueChange={handleInputChange}
+        value={fieldValues.message.value}
+      />
 
-        <textarea
-          className="acf-form_txt-input font-style_body-md"
-          id="contact_msg"
-          required
-          onChange={(evt) => handleInputChange('message', evt.target.value)}
-        ></textarea>
-      </div>
+      <div className="acf-form_input-container acf-form_consent-container">
+        <div className="acf-form_consent">
+          <input
+            aria-describedby={!isValidConsent ? 'contact_consent_error' : undefined}
+            aria-invalid={!isValidConsent}
+            className="acf-form_checkbox"
+            id="contact_consent"
+            name="consented"
+            onChange={handleInputChange}
+            required
+            type="checkbox"
+          />
 
-      <div className="acf-form_input-container acf-form_consent inline">
-        <input
-          className="acf-form_checkbox"
-          id="contact_consent"
-          type="checkbox"
-          required
-          onChange={(evt) => handleInputChange('consented', evt.target.checked ? 'yes' : '')}
-        />
+          <FieldLabel htmlFor="consent" label="I consent to being contacted by the team" />
+        </div>
 
-        <label className="acf-form_label font-style_body-sm" htmlFor="contact_consent">
-          I consent to being contacted by the team <em>*</em>
-        </label>
+        {!isValidConsent && (
+          <FieldError
+            id="consent"
+            message="To submit this form, please consent to being contacted"
+          />
+        )}
       </div>
 
       <div className="acf-form_input-container">
         <button
-          type="submit"
           className="acf-form_btn-submit acf-btn_primary font-style_body-md font-style_bold"
+          type="submit"
         >
           Submit
         </button>
