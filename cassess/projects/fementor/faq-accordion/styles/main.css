@@ -125,7 +125,8 @@ body {
 }
 
 .faqa-main_container {
-  padding: var(--spacing-300) calc(var(--spacing-300) - 2px);
+  padding: calc(var(--spacing-300) - 1px) calc(var(--spacing-200) - 1px);
+  border: 1px solid transparent;
   border-radius: var(--spacing-100);
   background-color: var(--color-white);
   box-shadow: 0 32px 56px rgb(80 0 118 / 10%);
@@ -136,7 +137,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0 var(--spacing-300);
-  margin: 0 2px;
+  margin: 0 6px;
 }
 
 .faqa-icon_star {
@@ -147,7 +148,7 @@ body {
 
 /* Accordion */
 .faqa-accordion_item {
-  padding: var(--spacing-300) 0;
+  padding: calc(var(--spacing-200) + 2px) 0;
   border-bottom: 1px solid var(--color-purple-100);
 
   &:last-child {
@@ -162,6 +163,7 @@ body {
   align-items: center;
   gap: 0 var(--spacing-300);
   width: 100%;
+  padding: calc(var(--spacing-100) - 2px);
   text-align: left;
   background-color: transparent;
 
@@ -179,18 +181,19 @@ body {
 }
 
 .faqa-accordion_content {
-  display: none;
-  margin: var(--spacing-300) 2px 0;
+  height: auto;
+  overflow: hidden;
   color: var(--color-purple-600);
+  transition: height 200ms ease-in;
+}
+
+.faqa-accordion_content-spacing {
+  margin: calc(var(--spacing-300) - 6px) calc(var(--spacing-100)) var(--spacing-100);
 }
 
 .active {
   .faqa-accordion_trigger-icon {
     background: url('../assets/images/icon-minus.svg') center / auto 123% no-repeat;
-  }
-
-  .faqa-accordion_content {
-    display: block;
   }
 }
 
@@ -237,12 +240,16 @@ body {
   }
 
   .faqa-main_container {
-    padding: var(--spacing-500) calc(var(--spacing-500) - 2px);
+    padding: calc(var(--spacing-500) - 1px) calc(var(--spacing-400) - 1px);
     border-radius: var(--spacing-200);
     background-color: var(--color-white);
   }
 
   /* Heading */
+  .faqa-main_heading {
+    margin: 0 var(--spacing-100);
+  }
+
   .faqa-icon_star {
     width: 35px;
     height: 35px;
