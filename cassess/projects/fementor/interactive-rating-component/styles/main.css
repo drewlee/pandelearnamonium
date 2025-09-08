@@ -234,6 +234,7 @@ body {
 }
 
 .irc-card_success {
+  border-radius: inherit;
   padding: var(--spacing-400) var(--spacing-300);
   text-align: center;
 }
