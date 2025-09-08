@@ -1,17 +1,31 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 
-interface RatingCardParams {
+interface RatingCardProps {
   maxRating: number;
   ratingOptions: readonly number[];
   onRatingSubmit: (rating: number) => void;
 }
 
-export default function RatingCard({ maxRating, ratingOptions, onRatingSubmit }: RatingCardParams) {
+/**
+ * Component for selecting and submitting a rating.
+ *
+ * @param props - The component props.
+ * @remarks
+ * - `props.maxRating` - Maximum possible rating.
+ * - `props.ratingOptions` - Rating numerical values.
+ * - `props.onRatingSubmit` - Listener for the submit button `click` event.
+ * @returns JSX markup for the rating component.
+ */
+export default function RatingCard({
+  maxRating,
+  ratingOptions,
+  onRatingSubmit,
+}: RatingCardProps): React.JSX.Element {
   const [selectedRating, setSelectedRating] = useState(0);
 
   return (
     <section className="irc-card irc-card_rating">
-      <span className="graphic_star irc-card_star-graphic" aria-hidden="true"></span>
+      <span className="graphic_star irc-card_star-graphic" role="presentation"></span>
 
       <h1 className="irc-card_heading font-style_heading">How did we do?</h1>
 
@@ -23,33 +37,36 @@ export default function RatingCard({ maxRating, ratingOptions, onRatingSubmit }:
       <fieldset className="irc-card_rate-options">
         <legend className="visually-hidden">Rating</legend>
 
-        {ratingOptions.map((value) => {
-          const id = `rating_${value}`;
+        <ul className="irc-card_rate-options-list">
+          {ratingOptions.map((value) => {
+            const id = `rating_${value}`;
 
-          return (
-            <Fragment key={`input_${value}`}>
-              <input
-                type="radio"
-                name="rating"
-                id={id}
-                className="visually-hidden styled-radio"
-                aria-label={`Rate us ${value} out of ${maxRating}`}
-                value={value}
-                onInput={() => setSelectedRating(value)}
-              />
-              <label htmlFor={id} className="btn_secondary font-style_accent-2">
-                <span>{value}</span>
-              </label>
-            </Fragment>
-          );
-        })}
+            return (
+              <li key={id}>
+                <input
+                  aria-label={`Rate us ${value} out of ${maxRating}`}
+                  className="visually-hidden radio_styled"
+                  id={id}
+                  name="rating"
+                  onInput={() => setSelectedRating(value)}
+                  type="radio"
+                  value={value}
+                />
+
+                <label className="btn_secondary font-style_accent-2" htmlFor={id}>
+                  <span>{value}</span>
+                </label>
+              </li>
+            );
+          })}
+        </ul>
       </fieldset>
 
       <button
-        type="button"
         className="btn_primary font-style_accent-1"
         disabled={!selectedRating}
         onClick={() => onRatingSubmit(selectedRating)}
+        type="button"
       >
         Submit
       </button>

@@ -57,7 +57,7 @@ ul {
 }
 
 button {
-  border-color: transparent;
+  border: 2px solid transparent;
   cursor: pointer;
   font: inherit;
 }
@@ -141,9 +141,10 @@ body {
   border-radius: 22.5px;
   padding: calc(var(--spacing-100) + 4px) 0 calc(var(--spacing-100) + 3px);
   text-transform: uppercase;
-  transition: all 100ms linear;
+  transition: all 100ms ease-in;
 
   &:disabled {
+    opacity: 0.4;
     cursor: not-allowed;
   }
 
@@ -154,12 +155,14 @@ body {
 }
 
 .btn_secondary {
-  background-color: var(--color-grey-900);
-  color: var(--color-grey-500);
-  border-radius: 50%;
+  box-sizing: border-box;
   width: 2.625rem; /* 42px */
   height: 2.625rem; /* 42px */
-  transition: all 100ms linear;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background-color: var(--color-grey-900);
+  color: var(--color-grey-500);
+  transition: all 100ms ease-in;
 
   &:hover {
     background-color: var(--color-white);
@@ -172,7 +175,7 @@ body {
   }
 }
 
-.styled-radio {
+.radio_styled {
   &:checked + .btn_secondary {
     background-color: var(--color-orange-500);
     color: var(--color-grey-950);
@@ -218,6 +221,7 @@ body {
 }
 
 .irc-card_container {
+  border: 1px solid transparent;
   border-radius: 15px;
   background-image: radial-gradient(rgb(35 42 52) 0%, rgb(24 30 39) 100%);
 }
@@ -226,7 +230,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-200) 0;
-  padding: var(--spacing-300);
+  padding: calc(var(--spacing-300) - 1px);
 }
 
 .irc-card_success {
@@ -243,8 +247,6 @@ body {
 }
 
 .irc-card_rate-options {
-  display: flex;
-  justify-content: space-between;
   margin: 0 0 var(--spacing-100);
 
   /* stylelint-disable-next-line no-descending-specificity */
@@ -256,18 +258,27 @@ body {
   }
 }
 
+.irc-card_rate-options-list {
+  display: flex;
+  justify-content: space-between;
+}
+
 .irc-card_callout {
   margin: var(--spacing-100) auto;
-  padding: calc(var(--spacing-100) - 2px) var(--spacing-200) calc(var(--spacing-100) - 4px);
+  padding: calc(var(--spacing-100) - 3px) calc(var(--spacing-200) - 1px)
+    calc(var(--spacing-100) - 5px);
+  border: 1px solid transparent;
   border-radius: 22.5px;
   background-color: var(--color-grey-900);
   color: var(--color-orange-500);
 }
 
 .irc-card_star-graphic {
+  box-sizing: border-box;
   margin: 0 0 var(--spacing-100);
   width: 40px;
   height: 40px;
+  border: 1px solid transparent;
   border-radius: 50%;
   background-color: var(--color-grey-900);
   background-size: 14px auto;
@@ -341,7 +352,7 @@ body {
   }
 
   .irc-card {
-    padding: var(--spacing-400) var(--spacing-300);
+    padding: calc(var(--spacing-400) - 1px) calc(var(--spacing-300) - 1px);
   }
 
   .irc-card_success {
@@ -354,7 +365,8 @@ body {
 
   .irc-card_callout {
     margin: var(--spacing-200) auto;
-    padding: calc(var(--spacing-100) - 2px) var(--spacing-200) calc(var(--spacing-100) - 6px);
+    padding: calc(var(--spacing-100) - 3px) calc(var(--spacing-200) - 1px)
+      calc(var(--spacing-100) - 7px);
   }
 
   .irc-card_star-graphic {

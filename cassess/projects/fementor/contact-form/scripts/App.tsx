@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import ContactForm from './ContactForm.jsx';
+import ContactForm from './ContactForm.js';
 
 /**
- * The main application component.
+ * Main application component.
  *
- * @returns JSX markup for the main application.
+ * @returns JSX markup for the application.
  */
 export default function App(): React.JSX.Element {
   const [isSubmitSuccess, setSubmitSuccess] = useState(false);
