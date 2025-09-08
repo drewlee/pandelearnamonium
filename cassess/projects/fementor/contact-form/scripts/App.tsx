@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type JSX, type RefObject } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ContactForm from './ContactForm.jsx';
 
 /**
@@ -6,9 +6,9 @@ import ContactForm from './ContactForm.jsx';
  *
  * @returns JSX markup for the main application.
  */
-export default function App(): JSX.Element {
+export default function App(): React.JSX.Element {
   const [isSubmitSuccess, setSubmitSuccess] = useState(false);
-  const toastEl: RefObject<HTMLElement | null> = useRef(null);
+  const toastEl: React.RefObject<HTMLElement | null> = useRef(null);
 
   /**
    * Listener function for the document `focusin` event. Used to remove

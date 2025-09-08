@@ -1,5 +1,3 @@
-import { type JSX } from 'react';
-
 interface FieldLabelProps {
   classNameOverride?: string;
   htmlFor: string;
@@ -23,7 +21,7 @@ export default function FieldLabel({
   htmlFor,
   isRequired = true,
   label,
-}: FieldLabelProps): JSX.Element {
+}: FieldLabelProps): React.JSX.Element {
   return (
     <label className={classNameOverride} htmlFor={`contact_${htmlFor}`}>
       {label} {isRequired && <em>*</em>}

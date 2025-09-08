@@ -1,4 +1,3 @@
-import { type ChangeEvent, type FocusEvent, type JSX } from 'react';
 import FieldLabel from './FieldLabel.js';
 import FieldError from './FieldError.js';
 
@@ -10,8 +9,8 @@ interface TextFieldProps {
   isValidValue: boolean;
   label: string;
   name: string;
-  onInputBlur: (evt: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  onValueChange: (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onInputBlur: (evt: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onValueChange: (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   value: string;
 }
 
@@ -43,7 +42,7 @@ export default function TextFieldGroup({
   onInputBlur,
   onValueChange,
   value,
-}: TextFieldProps): JSX.Element {
+}: TextFieldProps): React.JSX.Element {
   return (
     <div className="acf-form_input-container">
       <FieldLabel htmlFor={id} label={label} />

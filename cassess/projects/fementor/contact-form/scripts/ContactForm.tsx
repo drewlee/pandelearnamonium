@@ -1,12 +1,4 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ChangeEvent,
-  type FocusEvent,
-  type FormEvent,
-  type RefObject,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FieldLabel from './FieldLabel.js';
 import TextField from './TextFieldGroup.js';
 import FieldError from './FieldError.js';
@@ -58,8 +50,8 @@ const fieldValuesDefault: FieldValues = {
  * `props.onSubmitSuccess` - Callback to run on successful form submission.
  * @returns JSX markup for the contact form.
  */
-export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
-  const rootEl: RefObject<HTMLFormElement | null> = useRef(null);
+export default function ContactForm({ onSubmitSuccess }: ContactFormProps): React.JSX.Element {
+  const rootEl: React.RefObject<HTMLFormElement | null> = useRef(null);
   const isInvalidSubmit = useRef(false);
   const [fieldValues, setFieldValues] = useState(fieldValuesDefault);
   const isValidQuery = fieldValues.queryType.isValid;
@@ -94,7 +86,7 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
    */
   function handleInputChange({
     target,
-  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+  }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     if (target.name) {
       const { name, value } = target;
       const newFieldValues = structuredClone(fieldValues);
@@ -119,7 +111,9 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
    * @remarks
    * `evt.target` - The event's source element.
    */
-  function handleInputBlur({ target }: FocusEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+  function handleInputBlur({
+    target,
+  }: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>): void {
     if (target.name) {
       const { name, value } = target;
       const newFieldValues = structuredClone(fieldValues);
@@ -138,7 +132,7 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
    *
    * @param evt - Form event object.
    */
-  function handleFormSubmit(evt: FormEvent<HTMLFormElement>): void {
+  function handleFormSubmit(evt: React.FormEvent<HTMLFormElement>): void {
     evt.preventDefault();
 
     const newFieldValues = structuredClone(fieldValues);
