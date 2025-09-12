@@ -2,7 +2,8 @@
 - Solution URL: https://github.com/drewlee/pandelearnamonium/tree/main/cassess/projects/fementor/<project_name>
 - Live Site URL: https://drewlee.github.io/pandelearnamonium/cassess/projects/fementor/<project_name>/
 
-- JavaScript
+- TypeScript
+- React
 - Accessibility
 - ESLint
 - Stylelint
@@ -12,6 +13,13 @@
 
 # HTML
 <link rel="stylesheet" href="./styles/main.css" />
-<script src="./scripts/init.js" type="module"></script>
+<script src="./scripts/index.js" type="module"></script>
 
-Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.
+<div class="attribution">
+  <nav>
+    <ul>
+      <li>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</li>
+      <li>Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.</li>
+    </ul>
+  </nav>
+</div>
