@@ -8,17 +8,134 @@
     <link rel="stylesheet" href="./styles/main.css" />
     <script src="./scripts/index.js" type="module"></script>
   </head>
-  <body>
-    Home New Popular Trending Categories The Bright Future of Web 3.0? We dive into the next
-    evolution of the web that claims to put the power of the platforms back into the hands of the
-    people. But is it really fulfilling its promise? Read more New Hydrogen VS Electric Cars Will
-    hydrogen-fueled cars ever catch up to EVs? The Downsides of AI Artistry What are the possible
-    adverse effects of on-demand AI image generation? Is VC Funding Drying Up? Private funding by VC
-    firms is down 50% YOY. We take a look at what that means. 01 Reviving Retro PCs What happens
-    when old PCs are given modern upgrades? 02 Top 10 Laptops of 2022 Our best picks for various
-    needs and budgets. 03 The Growth of Gaming How the pandemic has sparked fresh opportunities.
 
-    <div class="attribution">
+  <body class="nh-layout font-style_body">
+    <header class="nh-navbar">
+      <a href="#home" class="nh-navbar_logo" aria-label="W logo graphic"></a>
+      <div id="nh-nav_root"></div>
+    </header>
+
+    <main class="nh-main">
+      <section class="nh-hero-story">
+        <picture class="nh-hero-story_img">
+          <source srcset="./assets/images/image-web-3-desktop.jpg" media="(min-width: 425px)" />
+          <img
+            src="./assets/images/image-web-3-mobile.jpg"
+            width="343"
+            height="300"
+            alt="Landscape of three dimensional geometric shapes"
+          />
+        </picture>
+
+        <div class="nh-hero-story_content">
+          <h1 class="nh-hero-story_heading font-style_heading-primary">
+            The Bright Future of Web 3.0?
+          </h1>
+
+          <p class="nh-hero-story_body font-style_body">
+            We dive into the next evolution of the web that claims to put the power of the platforms
+            back into the hands of the people. But is it really fulfilling its promise?
+          </p>
+
+          <a href="#" class="nh-hero-story_link font-style_accent">READ MORE</a>
+        </div>
+      </section>
+
+      <section class="nh-new-stories">
+        <h2 class="nh-new-stories_heading font-style_heading-secondary">New</h2>
+
+        <article class="nh-new-stories_article">
+          <h3 class="nh-new-stories_article-heading font-style_heading-tertiary">
+            <a href="#">Hydrogen VS Electric Cars</a>
+          </h3>
+          <p class="nh-new-stories_article-content font-style_body">
+            Will hydrogen-fueled cars ever catch up to EVs?
+          </p>
+        </article>
+
+        <article class="nh-new-stories_article">
+          <h3 class="nh-new-stories_article-heading font-style_heading-tertiary">
+            <a href="#">The Downsides of AI Artistry</a>
+          </h3>
+          <p class="nh-new-stories_article-content font-style_body">
+            What are the possible adverse effects of on-demand AI image generation?
+          </p>
+        </article>
+
+        <article class="nh-new-stories_article">
+          <h3 class="nh-new-stories_article-heading font-style_heading-tertiary">
+            <a href="#">Is VC Funding Drying Up?</a>
+          </h3>
+          <p class="nh-new-stories_article-content font-style_body">
+            Private funding by VC firms is down 50% YOY. We take a look at what that means.
+          </p>
+        </article>
+      </section>
+
+      <section class="nh-top-stories">
+        <article class="nh-top-stories_article">
+          <img
+            src="./assets/images/image-retro-pcs.jpg"
+            width="100"
+            height="129"
+            class="nh-top-stories_img"
+            alt="1980's era retro computer"
+          />
+
+          <div class="nh-top-stories_content">
+            <p class="nh-top-stories_rating font-style_heading-secondary">01</p>
+            <h2 class="nh-top-stories_heading font-style_heading-tertiary">
+              <a href="#">Reviving Retro PCs</a>
+            </h2>
+            <p class="nh-top-stories_text font-style_body">
+              What happens when old PCs are given modern upgrades?
+            </p>
+          </div>
+        </article>
+
+        <article class="nh-top-stories_article">
+          <img
+            src="./assets/images/image-top-laptops.jpg"
+            width="100"
+            height="129"
+            class="nh-top-stories_img"
+            alt="Close up view of keyboard keys"
+          />
+
+          <div class="nh-top-stories_content">
+            <p class="nh-top-stories_rating font-style_heading-secondary">02</p>
+            <h2 class="nh-top-stories_heading font-style_heading-tertiary">
+              <a href="#">Top 10 Laptops of 2022</a>
+            </h2>
+            <p class="nh-top-stories_text font-style_body">
+              Our best picks for various needs and budgets.
+            </p>
+          </div>
+        </article>
+
+        <article class="nh-top-stories_article">
+          <img
+            src="./assets/images/image-gaming-growth.jpg"
+            width="100"
+            height="129"
+            class="nh-top-stories_img"
+            alt="Hand reaching out to floating gaming controller"
+          />
+
+          <div class="nh-top-stories_content">
+            <p class="nh-top-stories_rating font-style_heading-secondary">03</p>
+            <h2 class="nh-top-stories_heading font-style_heading-tertiary">
+              <a href="#">The Growth of Gaming</a>
+            </h2>
+            <p class="nh-top-stories_text font-style_body">
+              How the pandemic has sparked fresh opportunities.
+            </p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="attribution">
       <nav>
         <ul>
           <li>
@@ -29,6 +146,6 @@
           <li>Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.</li>
         </ul>
       </nav>
-    </div>
+    </footer>
   </body>
 </html>

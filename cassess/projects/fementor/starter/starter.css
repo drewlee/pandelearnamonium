@@ -15,7 +15,15 @@
   --color-white: rgb(255 255 255);
 
   /* Spacing */
-  --spacing-100: 8px;
+  --spacing-unit: 8px;
+  --spacing-100: calc(var(--spacing-unit) * 1);
+  --spacing-200: calc(var(--spacing-unit) * 2);
+  --spacing-300: calc(var(--spacing-unit) * 3);
+  --spacing-400: calc(var(--spacing-unit) * 4);
+  --spacing-500: calc(var(--spacing-unit) * 5);
+  --spacing-600: calc(var(--spacing-unit) * 6);
+  --spacing-700: calc(var(--spacing-unit) * 7);
+  --spacing-800: calc(var(--spacing-unit) * 8);
 }
 
 /* RESETS & GENERAL STYLES */

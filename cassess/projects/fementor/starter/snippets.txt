@@ -15,11 +15,11 @@
 <link rel="stylesheet" href="./styles/main.css" />
 <script src="./scripts/index.js" type="module"></script>
 
-<div class="attribution">
+<footer class="attribution">
   <nav>
     <ul>
       <li>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</li>
       <li>Coded by <a href="https://github.com/drewlee" target="_blank">Andrew A. Lee</a>.</li>
     </ul>
   </nav>
-</div>
+</footer>
