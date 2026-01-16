@@ -1,39 +1,31 @@
-import { bubbleSort, bubbleSortVariation } from '../src/bubble-sort.ts';
-import isSorted from './helpers/is-sorted.ts';
+import { insertionSort, insertionSortVariation } from '../../src/sorting/insertion-sort.ts';
+import isSorted from '../helpers/is-sorted.ts';
 
-describe('bubbleSort', () => {
+describe('insertionSort', () => {
   test('Returns an empty array when given an empty array', () => {
     const arr = [];
-    const result = bubbleSort(arr);
+    const result = insertionSort(arr);
 
     expect(result).toStrictEqual([]);
   });
 
   test('Returns an array of one element when given an array of one element', () => {
     const arr = [1];
-    const result = bubbleSort(arr);
+    const result = insertionSort(arr);
 
-    expect(result.length).toBe(1);
-  });
-
-  test('Mutates the original array', () => {
-    const arr = [7, 3, 1, 5];
-    expect(isSorted(arr)).toBeFalsy();
-
-    bubbleSort(arr);
-    expect(isSorted(arr)).toBeTruthy();
+    expect(result).toStrictEqual([1]);
   });
 
   test('Sorts the array of numbers', () => {
     const arr = [6, 2, 4, 7, 1, 3];
-    const result = bubbleSort(arr);
+    const result = insertionSort(arr);
 
     expect(isSorted(result)).toBeTruthy();
   });
 
   test('Sorts a small array', () => {
     const arr = [3, 1];
-    const result = bubbleSort(arr);
+    const result = insertionSort(arr);
 
     expect(isSorted(result)).toBeTruthy();
   });
@@ -41,45 +33,37 @@ describe('bubbleSort', () => {
   test('Sorts a large array', () => {
     const length = 100;
     const arr = new Array(length).fill(null).map((_, index) => length - index);
-    const result = bubbleSort(arr);
+    const result = insertionSort(arr);
 
     expect(isSorted(result)).toBeTruthy();
   });
 });
 
-describe('bubbleSortVariation', () => {
+describe('insertionSortVariation', () => {
   test('Returns an empty array when given an empty array', () => {
     const arr = [];
-    const result = bubbleSortVariation(arr);
+    const result = insertionSortVariation(arr);
 
     expect(result).toStrictEqual([]);
   });
 
   test('Returns an array of one element when given an array of one element', () => {
     const arr = [1];
-    const result = bubbleSortVariation(arr);
+    const result = insertionSortVariation(arr);
 
-    expect(result.length).toBe(1);
-  });
-
-  test('Mutates the original array', () => {
-    const arr = [7, 3, 1, 5];
-    expect(isSorted(arr)).toBeFalsy();
-
-    bubbleSortVariation(arr);
-    expect(isSorted(arr)).toBeTruthy();
+    expect(result).toStrictEqual([1]);
   });
 
   test('Sorts the array of numbers', () => {
     const arr = [6, 2, 4, 7, 1, 3];
-    const result = bubbleSortVariation(arr);
+    const result = insertionSortVariation(arr);
 
     expect(isSorted(result)).toBeTruthy();
   });
 
   test('Sorts a small array', () => {
     const arr = [3, 1];
-    const result = bubbleSortVariation(arr);
+    const result = insertionSortVariation(arr);
 
     expect(isSorted(result)).toBeTruthy();
   });
@@ -87,7 +71,7 @@ describe('bubbleSortVariation', () => {
   test('Sorts a large array', () => {
     const length = 100;
     const arr = new Array(length).fill(null).map((_, index) => length - index);
-    const result = bubbleSortVariation(arr);
+    const result = insertionSortVariation(arr);
 
     expect(isSorted(result)).toBeTruthy();
   });

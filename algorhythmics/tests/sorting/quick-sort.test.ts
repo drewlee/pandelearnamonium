@@ -1,5 +1,5 @@
-import quickSort from '../src/quick-sort.ts';
-import isSorted from './helpers/is-sorted.ts';
+import quickSort from '../../src/sorting/quick-sort.ts';
+import isSorted from '../helpers/is-sorted.ts';
 
 test('Does not return a value', () => {
   const arr = [3, 2, 1];
