@@ -4,7 +4,7 @@
  * O(1) space.
  *
  * @remarks
- * Builds the sorted list one element at a time, similarly to sorting the playing cards in your hand.
+ * Builds the sorted list one element at a time, similarly to sorting a hand of playing cards.
  * Most efficient on small datasets or data that is close to sorted, approaching O(n) performance.
  *
  * @param arr - The array to sort.

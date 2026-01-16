@@ -1,7 +1,7 @@
 /**
  * Sorts the specified array in-place using the `Quick Sort` algorithm.
  * O(n log n) time.
- * O(n log n) space.
+ * O(log n) space.
  *
  * @remarks
  * `Quick Sort` is an efficient in-place sorting algorithm that iteratively divides the array into a
