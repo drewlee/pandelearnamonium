@@ -1,0 +1,96 @@
+** start of script.js **
+
+var displayTree = tree => console.log(JSON.stringify(tree, null, 2));
+var Node = function() {
+  this.keys = new Map();
+  this.end = false;
+  this.setEnd = function() {
+    this.end = true;
+  };
+  this.isEnd = function() {
+    return this.end;
+  };
+};
+var Trie = function() {
+  // Only change code below this line
+  this.root = null;
+
+  this.add = function(word) {
+    if (this.root === null) {
+      this.root = new Node();
+    }
+
+    let node = this.root;
+
+    for (const char of word) {
+      if (!node.keys.has(char)) {
+        node.keys.set(char, new Node());
+      }
+
+      node = node.keys.get(char);
+    }
+
+    node.setEnd();
+  };
+
+  this.isWord = function(word) {
+    let node = this.root;
+
+    for (const char of word) {
+      if (!node.keys.has(char)) {
+        return false; 
+      }
+
+      node = node.keys.get(char);
+    }
+
+    return node.isEnd();
+  };
+
+  this.print = function() {
+    // Recursive solution
+    /*
+    function getWords(node, prefix = '') {
+      let words = [];
+
+      for (const [char, child] of node.keys) {
+        if (child.isEnd()) {
+          words.push(prefix + char);
+        }
+
+        const result = getWords(child, prefix + char);
+        words = [...words, ...result];
+      }
+
+      return words;
+    }
+
+    const result = getWords(this.root);
+    return result;
+    */
+
+    // Iterative solution
+    const words = [];
+    const nodes = [[this.root, '']];
+    
+    while (nodes.length) {
+      const [node, prefix] = nodes.pop();
+      
+      for (const [char, child] of node.keys) {
+        const word = prefix + char;
+
+        if (child.isEnd()) {
+          words.push(word);
+        }
+
+        nodes.push([child, word]);
+      }
+    }
+
+    return words;
+  };
+  // Only change code above this line
+};
+
+** end of script.js **
+

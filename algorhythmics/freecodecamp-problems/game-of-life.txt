@@ -1,0 +1,68 @@
+** start of script.js **
+
+function gameOfLife(grid) {
+  const result = [];
+
+  for (let row = 0; row < grid.length; row++) {
+    result[row] = [];
+
+    for (let col = 0; col < grid[row].length; col++) {
+      let neighbors = 0;
+
+      // Upper left cell
+      if (row > 0 && col > 0 && grid[row - 1][col - 1] === 1) {
+        neighbors++;
+      }
+      
+      // Upper cell
+      if (row > 0 && grid[row - 1][col] === 1) {
+        neighbors++;
+      }
+
+      // Upper right cell
+      if (row > 0 && col < grid[row].length - 1 && grid[row - 1][col + 1] === 1) {
+        neighbors++;
+      }
+
+      // Left cell
+      if (col > 0 && grid[row][col - 1] === 1) {
+        neighbors++;
+      }
+
+      // Right cell
+      if (col < grid[row].length - 1 && grid[row][col + 1] === 1) {
+        neighbors++;
+      }
+      
+      // Lower left cell
+      if (row < grid.length - 1 && col > 0 && grid[row + 1][col - 1] === 1) {
+        neighbors++;
+      }
+      
+      // Lower cell
+      if (row < grid.length - 1 && grid[row + 1][col] === 1) {
+        neighbors++;
+      }
+      
+      // Lower right cell
+      if (row < grid.length - 1 && col < grid[row].length - 1 && grid[row + 1][col + 1] === 1) {
+        neighbors++;
+      }
+      
+      const curr = grid[row][col];
+      result[row][col] = curr;
+      
+      if (curr === 1 && (neighbors < 2 || neighbors > 3)) {
+        result[row][col] = 0;
+      } else if (curr === 0 && neighbors === 3) {
+        result[row][col] = 1;
+      }
+    }
+  }
+
+  return result;
+}
+
+
+** end of script.js **
+

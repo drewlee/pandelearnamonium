@@ -1,0 +1,11 @@
+** start of script.js **
+
+var undirectedAdjList = {
+  James: ['Jeff'],
+  Jill: ['Jenny'],
+  Jenny: ['Jill', 'Jeff'],
+  Jeff: ['James', 'Jenny'],
+};
+
+** end of script.js **
+
