@@ -1,0 +1,44 @@
+function merge(leftArr, rightArr) {
+  let merged = [];
+
+  while (leftArr.length && rightArr.length) {
+    let value;
+
+    if (leftArr[0] < rightArr[0]) {
+      value = leftArr.shift();
+    } else {
+      value = rightArr.shift();
+    }
+
+    merged.push(value);
+  }
+
+  if (leftArr.length) {
+    merged = [...merged, ...leftArr];
+  }
+
+  if (rightArr.length) {
+    merged = [...merged, ...rightArr];
+  }
+
+  return merged;
+}
+
+function mergeSort(array) {
+  // Only change code below this line
+  if (array.length <= 1) {
+    return array;
+  }
+
+  const mid = Math.floor(array.length / 2);
+  const leftArr = array.slice(0, mid);
+  const rightArr = array.slice(mid);
+
+  const leftSorted = mergeSort(leftArr);
+  const rightSorted = mergeSort(rightArr);
+
+  const merged = merge(leftSorted, rightSorted);
+
+  return merged;
+  // Only change code above this line
+}

@@ -1,8 +1,0 @@
-** start of script.js **
-
-function oddOrEven(n) {
-  return n % 2 ? 'Odd' : 'Even';
-}
-
-** end of script.js **
-

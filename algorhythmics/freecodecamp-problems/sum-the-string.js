@@ -1,0 +1,15 @@
+function stringSum(str) {
+  const regExp = /\d+/g;
+  const matches = str.match(regExp);
+
+  if (matches === null) {
+    return 0;
+  }
+
+  const sum = matches.reduce((currSum, match) => {
+    const num = Number(match);
+    return currSum + num;
+  }, 0);
+
+  return sum;
+}

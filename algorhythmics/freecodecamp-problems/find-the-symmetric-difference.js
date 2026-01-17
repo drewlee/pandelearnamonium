@@ -1,0 +1,25 @@
+function sym(...args) {
+  const difference = [];
+
+  for (let i = 0; i < args.length; i++) {
+    for (let j = 0; j < args[i].length; j++) {
+      const num = args[i][j];
+
+      if (args[i].slice(0, j).includes(num)) {
+        continue;
+      }
+
+      const matchIdx = difference.indexOf(num);
+
+      if (matchIdx > -1) {
+        difference.splice(matchIdx, 1);
+      } else {
+        difference.push(num);
+      }
+    }
+  }
+
+  return difference;
+}
+
+sym([1, 2, 3], [5, 2, 1, 4]);

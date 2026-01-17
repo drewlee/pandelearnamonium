@@ -1,0 +1,40 @@
+function updateInventory(arr1, arr2) {
+  for (const [qty, itemName] of arr2) {
+    const itemIdx = arr1.findIndex(([_, currItemName]) => currItemName === itemName);
+
+    if (itemIdx > -1) {
+      arr1[itemIdx] = [arr1[itemIdx][0] + qty, itemName];
+    } else {
+      arr1.push([qty, itemName]);
+    }
+  }
+
+  arr1.sort((a, b) => {
+    if (a[1] < b[1]) {
+      return -1;
+    } else if (a[1] > b[1]) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  return arr1;
+}
+
+// Example inventory lists
+const curInv = [
+  [21, 'Bowling Ball'],
+  [2, 'Dirty Sock'],
+  [1, 'Hair Pin'],
+  [5, 'Microphone'],
+];
+
+const newInv = [
+  [2, 'Hair Pin'],
+  [3, 'Half-Eaten Apple'],
+  [67, 'Bowling Ball'],
+  [7, 'Toothpaste'],
+];
+
+updateInventory(curInv, newInv);

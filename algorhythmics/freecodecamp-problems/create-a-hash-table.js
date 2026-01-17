@@ -1,0 +1,46 @@
+let called = 0;
+const hash = (string) => {
+  called++;
+  let hashed = 0;
+  for (let i = 0; i < string.length; i++) {
+    hashed += string.charCodeAt(i);
+  }
+  return hashed;
+};
+const HashTable = function () {
+  this.collection = {};
+  // Only change code below this line
+
+  this.add = function (key, value) {
+    const hashedKey = hash(key);
+
+    if (this.collection[hashedKey] === undefined) {
+      this.collection[hashedKey] = {};
+    }
+
+    this.collection[hashedKey][key] = value;
+  };
+
+  this.remove = function (key) {
+    const hashedKey = hash(key);
+
+    if (this.collection[hashedKey] !== undefined && this.collection[hashedKey][key] !== undefined) {
+      delete this.collection[hashedKey][key];
+
+      if (!Object.keys(this.collection[hashedKey]).length) {
+        delete this.collection[hashedKey];
+      }
+    }
+  };
+
+  this.lookup = function (key) {
+    const hashedKey = hash(key);
+
+    if (this.collection[hashedKey] !== undefined && this.collection[hashedKey][key] !== undefined) {
+      return this.collection[hashedKey][key];
+    }
+
+    return null;
+  };
+  // Only change code above this line
+};

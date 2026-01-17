@@ -1,0 +1,27 @@
+const MaxHeap = function () {
+  // Only change code below this line
+  this.heap = [];
+
+  this.getParentIdx = function (index) {
+    return Math.floor((index - 1) / 2);
+  };
+
+  this.insert = function (value) {
+    this.heap.push(value);
+
+    let currIdx = this.heap.length - 1;
+    let parentIdx = this.getParentIdx(currIdx);
+
+    while (currIdx > 0 && this.heap[currIdx] > this.heap[parentIdx]) {
+      [this.heap[currIdx], this.heap[parentIdx]] = [this.heap[parentIdx], this.heap[currIdx]];
+
+      currIdx = parentIdx;
+      parentIdx = this.getParentIdx(parentIdx);
+    }
+  };
+
+  this.print = function () {
+    return this.heap;
+  };
+  // Only change code above this line
+};

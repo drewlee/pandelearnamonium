@@ -1,0 +1,45 @@
+const displayTree = (tree) => console.log(JSON.stringify(tree, null, 2));
+function Node(value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+function BinarySearchTree() {
+  this.root = null;
+  // Only change code below this line
+  this.findMinHeight = function (node = this.root, height = 0) {
+    if (this.root === null) {
+      return -1;
+    }
+
+    const leftHeight = node.left === null ? height : this.findMinHeight(node.left, height + 1);
+    const rightHeight = node.right === null ? height : this.findMinHeight(node.right, height + 1);
+    const result = Math.min(leftHeight, rightHeight);
+
+    return result;
+  };
+
+  this.findMaxHeight = function (node = this.root, height = 0) {
+    if (this.root === null) {
+      return -1;
+    }
+
+    const leftHeight = node.left === null ? height : this.findMaxHeight(node.left, height + 1);
+    const rightHeight = node.right === null ? height : this.findMaxHeight(node.right, height + 1);
+    const result = Math.max(leftHeight, rightHeight);
+
+    return result;
+  };
+
+  this.isBalanced = function () {
+    const minHeight = this.findMinHeight();
+    const maxHeight = this.findMaxHeight();
+
+    if (maxHeight - minHeight <= 1) {
+      return true;
+    }
+
+    return false;
+  };
+  // Only change code above this line
+}

@@ -1,0 +1,28 @@
+const factorialMem = [0, 1];
+
+function getFactorial(n) {
+  if (factorialMem[n] !== undefined) {
+    return factorialMem[n];
+  }
+
+  const result = n * getFactorial(n - 1);
+  factorialMem[n] = result;
+
+  return result;
+}
+
+function countPermutations(str) {
+  const perms = getFactorial(str.length);
+  const count = new Map();
+
+  for (const char of str) {
+    const val = count.has(char) ? count.get(char) : 0;
+    count.set(char, val + 1);
+  }
+
+  const repeatsArr = [...count].map(([_, value]) => getFactorial(value));
+  const repeats = repeatsArr.reduce((acc, value) => acc * value, 1);
+  const result = perms / repeats;
+
+  return result;
+}

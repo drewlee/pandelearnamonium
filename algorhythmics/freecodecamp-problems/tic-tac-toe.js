@@ -1,0 +1,55 @@
+function ticTacToe(board) {
+  // Dynamic solution
+  const length = board.length;
+  const columns = new Array(length).fill(null).map(() => new Array(length));
+  const diagonals = new Array(2).fill(null).map(() => new Array(length));
+
+  for (let row = 0; row < length; row++) {
+    for (let col = 0; col < length; col++) {
+      const value = board[row][col];
+
+      columns[col][row] = value;
+
+      if (row === col) {
+        diagonals[0][row] = value;
+      }
+
+      if (col === length - 1 - row) {
+        diagonals[1][row] = value;
+      }
+    }
+  }
+
+  const matches = [...board, ...columns, ...diagonals];
+
+  for (const match of matches) {
+    if (!match.includes('O') || !match.includes('X')) {
+      return `${match[0]} wins`;
+    }
+  }
+
+  // Simple solution
+  /*
+  for (let row = 0; row < board.length; row++) {
+    if (board[row][0] === board[row][1] && board[row][1] === board[row][2]) {
+      return `${board[row][0]} wins`;
+    }
+  }
+
+  for (let col = 0; col < board[0].length; col++) {
+    if (board[0][col] === board[1][col] && board[1][col] === board[2][col]) {
+      return `${board[0][col]} wins`;
+    }
+  }
+
+  if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+    return `${board[1][1]} wins`;
+  }
+
+  if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+    return `${board[1][1]} wins`;
+  }
+  */
+
+  return 'Draw';
+}

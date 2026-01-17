@@ -1,0 +1,10 @@
+function parseImage(markdown) {
+  const altRegExp = /\[(.+)\]/;
+  const srcRegExp = /\((.+)\)/;
+
+  const altMatch = markdown.match(altRegExp);
+  const srcMatch = markdown.match(srcRegExp);
+  const result = `<img src="${srcMatch[1]}" alt="${altMatch[1]}">`;
+
+  return result;
+}

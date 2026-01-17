@@ -1,0 +1,66 @@
+const MaxHeap = function () {
+  this.heap = [];
+  this.parent = (index) => {
+    return Math.floor((index - 1) / 2);
+  };
+  this.insert = (element) => {
+    this.heap.push(element);
+    this.heapifyUp(this.heap.length - 1);
+  };
+  this.heapifyUp = (index) => {
+    let currentIndex = index,
+      parentIndex = this.parent(currentIndex);
+    while (currentIndex > 0 && this.heap[currentIndex] > this.heap[parentIndex]) {
+      this.swap(currentIndex, parentIndex);
+      currentIndex = parentIndex;
+      parentIndex = this.parent(parentIndex);
+    }
+  };
+  this.swap = (index1, index2) => {
+    [this.heap[index1], this.heap[index2]] = [this.heap[index2], this.heap[index1]];
+  };
+  this.print = () => {
+    return this.heap;
+  };
+  // Only change code below this line
+  this.remove = function () {
+    const lastEl = this.heap.pop();
+
+    // Terminate early if the heap is now empty
+    if (!this.heap.length) {
+      return lastEl;
+    }
+
+    const maxValue = this.heap[0];
+    const len = this.heap.length;
+    this.heap[0] = lastEl;
+    let currIdx = 0;
+
+    while (currIdx < len) {
+      let child1 = 2 * currIdx + 1;
+      let child2 = child1 + 1;
+
+      // Filter out overflow indexes
+      const children = [child1, child2].filter((child) => child < len);
+      // Get the index of the maximum value of the children
+      const maxIdx = children.reduce((idx, child) => {
+        if (this.heap[child] > this.heap[idx]) {
+          return child;
+        }
+        return idx;
+      }, currIdx);
+
+      // Terminate early if the children are smaller
+      if (this.heap[maxIdx] <= this.heap[currIdx]) {
+        break;
+      }
+
+      // Swap values
+      this.swap(maxIdx, currIdx);
+      currIdx = maxIdx;
+    }
+
+    return maxValue;
+  };
+  // Only change code above this line
+};

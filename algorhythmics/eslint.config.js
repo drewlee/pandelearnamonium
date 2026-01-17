@@ -29,6 +29,13 @@ const config = [
     ...pluginJs.configs.recommended,
   },
 
+  {
+    files: ['freecodecamp-problems/*.{js,ts}'],
+    rules: {
+      'no-unused-vars': 'off',
+    },
+  },
+
   // Prettier settings
   {
     name: 'eslint-config-prettier',

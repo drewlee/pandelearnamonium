@@ -1,0 +1,26 @@
+function compressString(sentence) {
+  const sentenceArr = sentence.split(' ');
+  const compressed = [];
+  let count = 1;
+
+  for (let i = 0; i < sentenceArr.length; i++) {
+    const word = sentenceArr[i];
+
+    if (i !== sentenceArr.length - 1 && word === sentenceArr[i + 1]) {
+      count++;
+    } else {
+      let entry = word;
+
+      if (count > 1) {
+        entry += `(${count})`;
+        count = 1;
+      }
+
+      compressed.push(entry);
+    }
+  }
+
+  const result = compressed.join(' ');
+
+  return result;
+}
