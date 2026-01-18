@@ -10,6 +10,7 @@
     "build": "tsc -b",
     "eslint": "eslint .",
     "fcc": "npm run ts-node ./scripts/fcc-file-formatter.ts ./freecodecamp-problems",
+    "fcc:clean": "rm -rf ./freecodecamp-problems/*.txt",
     "lint": "npm run prettier:write && npm run eslint",
     "lint:check": "npm run prettier:check && npm run eslint",
     "prepare": "cd .. && husky",
