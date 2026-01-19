@@ -9,6 +9,13 @@ test('Creates an instance', () => {
   expect(node.next).toBeNull();
 });
 
+test('Creates an instance with no value', () => {
+  const node = new Node();
+
+  expect(node.value).toBeNull();
+  expect(node.next).toBeNull();
+});
+
 test('Links instances using the constructor', () => {
   const valueA = 'a';
   const valueB = 'b';

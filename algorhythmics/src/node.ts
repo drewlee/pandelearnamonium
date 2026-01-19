@@ -4,14 +4,14 @@
  * set a link to the next node.
  */
 export default class Node<T> {
-  value: T | undefined;
+  value: T | null;
   next: Node<T> | null;
 
   /**
    * @param value - The node's data value.
    * @param next - The next node to link to.
    */
-  constructor(value?: T, next: Node<T> | null = null) {
+  constructor(value: T | null = null, next: Node<T> | null = null) {
     this.value = value;
     this.next = next;
   }

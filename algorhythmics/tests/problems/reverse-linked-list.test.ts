@@ -29,7 +29,7 @@ describe('reverseLinkedList', () => {
   test('Returns an empty node for an invalid linked list', () => {
     const result = reverseLinkedList(null);
 
-    expect(result.value).toBeUndefined();
+    expect(result.value).toBeNull();
     expect(result.next).toBeNull();
   });
 });

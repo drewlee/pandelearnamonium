@@ -27,7 +27,7 @@ describe('createLinkedList', () => {
     const values: number[] = [];
     const head = createLinkedList(values);
 
-    expect(head.value).toBeUndefined();
+    expect(head.value).toBeNull();
     expect(head.next).toBeNull();
   });
 });
