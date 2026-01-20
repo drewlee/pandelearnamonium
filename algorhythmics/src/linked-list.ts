@@ -3,8 +3,7 @@ import Node from './node.js';
 /**
  * The linked list data structure is a utility for creating a chain of linked nodes,
  * where new values are appended to the head of the list. Insertions occur in O(1) time,
- * while removals have a worst case time of O(n), due to the need to traverse through
- * the list.
+ * while removals have a worst case O(n) time, due to the need to traverse through the list.
  */
 export default class LinkedList<T> {
   head: Node<T> | null;
@@ -17,7 +16,7 @@ export default class LinkedList<T> {
   }
 
   /**
-   * Inserts a new value at the head of the linked list.
+   * Inserts a new node with the specified value at the head of the linked list.
    *
    * @param value - Value to insert.
    */
@@ -29,11 +28,12 @@ export default class LinkedList<T> {
   }
 
   /**
-   * Removes the specified value from the linked list.
+   * Removes the node associated with the specified value from the linked list.
    *
-   * @param value - Value to remove.
+   * @param value - Value corresponding to the node to be removed.
+   * @returns The removed node.
    */
-  remove(value: T): void {
+  remove(value: T): Node<T> | null {
     let prevNode: Node<T> | null = null;
     let currNode: Node<T> | null = this.head;
 
@@ -48,11 +48,14 @@ export default class LinkedList<T> {
         }
 
         currNode.next = null;
-        return;
+
+        return currNode;
       }
 
       prevNode = currNode;
       currNode = currNode.next;
     }
+
+    return null;
   }
 }

@@ -1,6 +1,6 @@
 import Node from '../src/node.ts';
 
-test('Creates an instance', () => {
+test('Creates an instance with defaults', () => {
   const value = 12;
   const node = new Node(value);
 

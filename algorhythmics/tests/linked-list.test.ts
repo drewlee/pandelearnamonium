@@ -79,8 +79,11 @@ test('Removes a value from the middle of the list', () => {
     list.insert(value);
   }
 
-  list.remove(values[1]);
+  const result = list.remove(values[1]);
 
+  expect(result).toBeInstanceOf(Node);
+  expect(result?.value).toBe(values[1]);
+  expect(result?.next).toBeNull();
   expect(list.head?.value).toBe(values[2]);
   expect(list.head?.next?.value).toBe(values[0]);
 });
@@ -93,8 +96,11 @@ test('Removes a value from the end of the list', () => {
     list.insert(value);
   }
 
-  list.remove(values[0]);
+  const result = list.remove(values[0]);
 
+  expect(result).toBeInstanceOf(Node);
+  expect(result?.value).toBe(values[0]);
+  expect(result?.next).toBeNull();
   expect(list.head?.value).toBe(values[2]);
   expect(list.head?.next?.value).toBe(values[1]);
 });
@@ -107,20 +113,23 @@ test('Removes a value from the beginning of the list', () => {
     list.insert(value);
   }
 
-  list.remove(values[2]);
+  const result = list.remove(values[2]);
 
+  expect(result).toBeInstanceOf(Node);
+  expect(result?.value).toBe(values[2]);
+  expect(result?.next).toBeNull();
   expect(list.head?.value).toBe(values[1]);
   expect(list.head?.next?.value).toBe(values[0]);
 });
 
-test('Removing a non-existing value is ignored', () => {
+test('Removing a non-existing value returns `null`', () => {
   const value = 13;
   const list = new LinkedList<number>();
 
   list.insert(value);
-  list.remove(44);
+  const result = list.remove(44);
 
-  expect(list.head?.value).toBe(value);
+  expect(result).toBeNull();
 });
 
 test('Insertion & removal maintains the correct list order', () => {
