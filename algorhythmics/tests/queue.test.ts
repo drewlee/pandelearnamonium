@@ -47,14 +47,15 @@ test('Enqueued values are correctly linked', () => {
     queue.enqueue(value);
   }
 
+  const result: number[] = [];
   let node = queue.head;
-  let i = 0;
 
   while (node !== null) {
-    expect(node.value).toBe(values[i]);
+    result.push(node.value!);
     node = node.next;
-    i++;
   }
+
+  expect(result).toStrictEqual(values);
 });
 
 test('Peek returns the front-most value', () => {
@@ -121,16 +122,16 @@ test('Values are correctly linked after dequeueing', () => {
   queue.enqueue(values[0]);
   queue.enqueue(values[1]);
 
-  const expectedValues = [...values.slice(2), ...values.slice(0, 2)];
-
+  const expected = [...values.slice(2), ...values.slice(0, 2)];
+  const result: number[] = [];
   let node = queue.head;
-  let i = 0;
 
   while (node !== null) {
-    expect(node.value).toBe(expectedValues[i]);
+    result.push(node.value!);
     node = node.next;
-    i++;
   }
+
+  expect(result).toStrictEqual(expected);
 });
 
 test('Dequeue returns `null` for an empty queue', () => {

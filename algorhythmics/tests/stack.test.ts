@@ -30,14 +30,15 @@ test('Pushed values are correctly linked', () => {
     stack.push(value);
   }
 
+  const result: number[] = [];
   let node = stack.top;
-  let i = values.length - 1;
 
   while (node !== null) {
-    expect(node.value).toBe(values[i]);
+    result.push(node.value!);
     node = node.next;
-    i--;
   }
+
+  expect(result).toStrictEqual([...values].reverse());
 });
 
 test('Reports whether the stack is empty', () => {
@@ -108,14 +109,15 @@ test('Values are correctly linked after popping', () => {
   stack.push(values[3]);
   stack.push(values[4]);
 
+  const result: number[] = [];
   let node = stack.top;
-  let i = values.length - 1;
 
   while (node !== null) {
-    expect(node.value).toBe(values[i]);
+    result.push(node.value!);
     node = node.next;
-    i--;
   }
+
+  expect(result).toStrictEqual([...values].reverse());
 });
 
 test('Size property is reported', () => {
