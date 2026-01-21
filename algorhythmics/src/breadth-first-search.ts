@@ -18,7 +18,7 @@ export function breadthFirstSearch<T>(
   const queue = [root];
 
   while (queue.length > 0) {
-    const current = queue.pop()!;
+    const current = queue.shift()!;
     const { value } = current;
 
     if (debug) {
@@ -30,7 +30,7 @@ export function breadthFirstSearch<T>(
     }
 
     for (const child of current.children) {
-      queue.unshift(child);
+      queue.push(child);
     }
   }
 
@@ -56,7 +56,7 @@ export function breadthFirstSearchWithPath<T>(
   const queue = [[root]];
 
   while (queue.length > 0) {
-    const current = queue.pop()!;
+    const current = queue.shift()!;
     const node = current[current.length - 1];
     const { value } = node;
 
@@ -69,7 +69,7 @@ export function breadthFirstSearchWithPath<T>(
     }
 
     for (const child of node.children) {
-      queue.unshift([...current, child]);
+      queue.push([...current, child]);
     }
   }
 

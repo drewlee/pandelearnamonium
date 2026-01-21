@@ -17,17 +17,20 @@ export default function buildTreeFromValues<T>(values: T[], childLimit = 2): Tre
   let current: TreeNode<T> | undefined = root;
 
   for (let i = 1; i < values.length; i++) {
+    // Create a node for the current value and push it to the end of the queue
     const node = new TreeNode(values[i]);
-    queue.unshift(node);
+    queue.push(node);
 
+    // If the current child limit has been met, get a node from the front of the queue
     if (current.children.length >= childLimit) {
-      current = queue.pop();
+      current = queue.shift();
 
       if (!current) {
         break;
       }
     }
 
+    // Add the new node as a child of the current node
     current.children.push(node);
   }
 

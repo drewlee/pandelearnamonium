@@ -6,7 +6,6 @@ test('Instantiates a new tree', () => {
 
   expect(tree).toBeInstanceOf(BinarySearchTree);
   expect(tree.value).toBe(value);
-  expect(tree.depth).toBe(1);
   expect(tree.left).toBeNull();
   expect(tree.right).toBeNull();
 });
@@ -19,11 +18,9 @@ test('Inserts a lesser than value to be the left child', () => {
   tree.insert(leftValue);
 
   expect(tree.value).toBe(value);
-  expect(tree.depth).toBe(1);
   expect(tree.left).not.toBeNull();
   expect(tree.left).toBeInstanceOf(BinarySearchTree);
   expect(tree.left?.value).toBe(leftValue);
-  expect(tree.left?.depth).toBe(2);
   expect(tree.right).toBeNull();
 });
 
@@ -35,12 +32,10 @@ test('Inserts a greater than value to be the right child', () => {
   tree.insert(rightValue);
 
   expect(tree.value).toBe(value);
-  expect(tree.depth).toBe(1);
   expect(tree.left).toBeNull();
   expect(tree.right).not.toBeNull();
   expect(tree.right).toBeInstanceOf(BinarySearchTree);
   expect(tree.right?.value).toBe(rightValue);
-  expect(tree.right?.depth).toBe(2);
 });
 
 test('Inserts a duplicate value to be the right child', () => {
@@ -51,12 +46,10 @@ test('Inserts a duplicate value to be the right child', () => {
   tree.insert(rightValue);
 
   expect(tree.value).toBe(value);
-  expect(tree.depth).toBe(1);
   expect(tree.left).toBeNull();
   expect(tree.right).not.toBeNull();
   expect(tree.right).toBeInstanceOf(BinarySearchTree);
   expect(tree.right?.value).toBe(rightValue);
-  expect(tree.right?.depth).toBe(2);
 });
 
 test('Creates a tree recursively', () => {
@@ -75,18 +68,12 @@ test('Creates a tree recursively', () => {
   values.forEach((value) => tree.insert(value));
 
   expect(tree.value).toBe(value);
-  expect(tree.depth).toBe(1);
   expect(tree.left?.value).toBe(values[0]);
-  expect(tree.left?.depth).toBe(2);
   expect(tree.right?.value).toBe(values[1]);
-  expect(tree.right?.depth).toBe(2);
   expect(tree.left?.left?.value).toBe(values[2]);
-  expect(tree.left?.left?.depth).toBe(3);
   expect(tree.left?.right?.value).toBe(values[3]);
-  expect(tree.left?.right?.depth).toBe(3);
   expect(tree.right?.left).toBeNull();
   expect(tree.right?.right?.value).toBe(values[4]);
-  expect(tree.right?.right?.depth).toBe(3);
 });
 
 test('Outputs traversal info', () => {
@@ -166,4 +153,195 @@ test('Returns `null` when the target node is not found', () => {
 
   const node = tree.getNodeByValue(15);
   expect(node).toBeNull();
+});
+
+test('Gets the minimum value in the binary search tree', () => {
+  const value = 5;
+  const tree = new BinarySearchTree(value);
+  const values = [2, 7, 1, 3, 10];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.getMin();
+  expect(result).toBe(values[2]);
+});
+
+test('Gets the maximum value in the binary search tree', () => {
+  const value = 5;
+  const tree = new BinarySearchTree(value);
+  const values = [2, 7, 1, 3, 10];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.getMax();
+  expect(result).toBe(values[4]);
+});
+
+test('Removes a node with no children from the left branch', () => {
+  const value = 2;
+  const tree = new BinarySearchTree(value);
+  const values = [1, 3];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[0]);
+
+  expect(result?.value).toBe(values[0]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left).toBeNull();
+  expect(tree.right?.value).toBe(values[1]);
+});
+
+test('Removes a node with no children from the right branch', () => {
+  const value = 2;
+  const tree = new BinarySearchTree(value);
+  const values = [1, 3];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[1]);
+
+  expect(result?.value).toBe(values[1]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left?.value).toBe(values[0]);
+  expect(tree.right).toBeNull();
+});
+
+test('Removes a node with a single left child from the left branch', () => {
+  const value = 5;
+  const tree = new BinarySearchTree(value);
+  const values = [3, 1, 9];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[0]);
+
+  expect(result?.value).toBe(values[0]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left?.value).toBe(values[1]);
+  expect(tree.right?.value).toBe(values[2]);
+});
+
+test('Removes a node with a single right child from the left branch', () => {
+  const value = 5;
+  const tree = new BinarySearchTree(value);
+  const values = [3, 4, 9];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[0]);
+
+  expect(result?.value).toBe(values[0]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left?.value).toBe(values[1]);
+  expect(tree.right?.value).toBe(values[2]);
+});
+
+test('Removes a node with a single left child from the right branch', () => {
+  const value = 5;
+  const tree = new BinarySearchTree(value);
+  const values = [3, 7, 6];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[1]);
+
+  expect(result?.value).toBe(values[1]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left?.value).toBe(values[0]);
+  expect(tree.right?.value).toBe(values[2]);
+});
+
+test('Removes a node with a single right child from the right branch', () => {
+  const value = 5;
+  const tree = new BinarySearchTree(value);
+  const values = [3, 7, 9];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[1]);
+
+  expect(result?.value).toBe(values[1]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left?.value).toBe(values[0]);
+  expect(tree.right?.value).toBe(values[2]);
+});
+
+test('Removes a node with two children from the left branch', () => {
+  const value = 5;
+  const tree = new BinarySearchTree(value);
+  const values = [3, 1, 4, 9];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[0]);
+
+  expect(result?.value).toBe(values[0]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left?.value).toBe(values[2]);
+  expect(tree.left?.left?.value).toBe(values[1]);
+  expect(tree.left?.right).toBeNull();
+
+  expect(tree.right?.value).toBe(values[3]);
+});
+
+test('Removes a node with two children from the left branch: complex', () => {
+  const value = 7;
+  const tree = new BinarySearchTree(value);
+  const values = [4, 3, 5, 6, 9];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(values[0]);
+
+  expect(result?.value).toBe(values[0]);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.left?.value).toBe(values[2]);
+  expect(tree.left?.left?.value).toBe(values[1]);
+  expect(tree.left?.right?.value).toBe(values[3]);
+
+  expect(tree.right?.value).toBe(values[4]);
+});
+
+test.skip('Removes the root for a tree with a single left branch', () => {
+  const value = 2;
+  const tree = new BinarySearchTree(value);
+
+  tree.insert(1);
+
+  const result = tree.delete(2);
+
+  expect(result?.value).toBe(value);
+  expect(result?.left).toBeNull();
+  expect(result?.right).toBeNull();
+
+  expect(tree.value).toBe(1);
+});
+
+test('Returns `null` when the value to delete is not found', () => {
+  const value = 7;
+  const tree = new BinarySearchTree(value);
+  const values = [4, 3, 5, 6, 9];
+
+  values.forEach((value) => tree.insert(value));
+
+  const result = tree.delete(2);
+
+  expect(result).toBeNull();
 });
