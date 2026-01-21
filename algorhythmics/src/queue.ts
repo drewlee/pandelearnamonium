@@ -1,4 +1,4 @@
-import Node from './node.js';
+import Node from './nodes/node.js';
 
 /**
  * A queue is a data structure that follows a first in, first out (FIFO) protocol.

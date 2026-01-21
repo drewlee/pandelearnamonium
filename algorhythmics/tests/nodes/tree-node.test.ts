@@ -1,6 +1,6 @@
-import TreeNode from '../src/tree-node.ts';
+import TreeNode from '../../src/nodes/tree-node.ts';
 
-test('Creates an instance', () => {
+test('Creates an instance with defaults', () => {
   const value = 'A';
   const node = new TreeNode(value);
 
@@ -11,9 +11,11 @@ test('Creates an instance', () => {
 
 test('Can set the value', () => {
   const value = 'A';
-  const node = new TreeNode('');
-  node.value = value;
+  const node = new TreeNode();
 
+  expect(node.value).toBeNull();
+
+  node.value = value;
   expect(node.value).toBe(value);
 });
 

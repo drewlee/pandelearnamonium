@@ -1,6 +1,15 @@
-import Node from '../../src/node.ts';
-import createLinkedList from '../helpers/create-linked-list.ts';
+import Node from '../../src/nodes/node.ts';
+import LinkedList from '../../src/linked-list.ts';
 import reverseLinkedList from '../../src/problems/reverse-linked-list.ts';
+
+function createLinkedList<T>(values: T[]): Node<T> {
+  const rValues = [...values].reverse();
+  const list = new LinkedList<T>();
+
+  rValues.forEach((value) => list.insert(value));
+
+  return list.head!;
+}
 
 describe('reverseLinkedList', () => {
   test('Reverses the linked list', () => {
@@ -8,14 +17,15 @@ describe('reverseLinkedList', () => {
     const head = createLinkedList(values);
     const result = reverseLinkedList(head);
 
+    const expected: number[] = [];
     let curr: Node<number> | null = result;
-    let i = values.length - 1;
 
     while (curr !== null) {
-      expect(curr.value).toBe(values[i]);
+      expected.push(curr.value!);
       curr = curr.next;
-      i--;
     }
+
+    expect(expected).toStrictEqual(values.reverse());
   });
 
   test('Reverses the linked list with a single node', () => {

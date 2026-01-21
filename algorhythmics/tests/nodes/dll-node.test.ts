@@ -1,4 +1,4 @@
-import DLLNode from '../src/dll-node.ts';
+import DLLNode from '../../src/nodes/dll-node.ts';
 
 test('Creates an instance with defaults', () => {
   const value = 12;

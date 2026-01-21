@@ -1,4 +1,4 @@
-import DLLNode from './dll-node.js';
+import DLLNode from './nodes/dll-node.js';
 
 /**
  * Nodes in a doubly linked list can be inserted either at the head or the tail end of the list.

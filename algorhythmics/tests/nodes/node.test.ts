@@ -1,4 +1,4 @@
-import Node from '../src/node.ts';
+import Node from '../../src/nodes/node.ts';
 
 test('Creates an instance with defaults', () => {
   const value = 12;

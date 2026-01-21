@@ -1,4 +1,4 @@
-import Node from './node.js';
+import Node from './nodes/node.js';
 
 /**
  * A stack is a data structure that follows a last in, first out (LIFO) protocol.

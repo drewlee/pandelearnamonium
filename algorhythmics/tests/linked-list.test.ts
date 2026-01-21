@@ -1,5 +1,5 @@
 import LinkedList from '../src/linked-list.ts';
-import Node from '../src/node.ts';
+import Node from '../src/nodes/node.ts';
 
 test('Creates an instance with defaults', () => {
   const list = new LinkedList();
@@ -56,9 +56,7 @@ test('Insertion maintains the correct list order', () => {
   const values = [13, 15, 19, 22, 27];
   const list = new LinkedList<number>();
 
-  for (const value of values) {
-    list.insert(value);
-  }
+  values.forEach((value) => list.insert(value));
 
   const result: number[] = [];
   let node = list.head;
@@ -75,9 +73,7 @@ test('Removes a value from the middle of the list', () => {
   const values = [13, 15, 19];
   const list = new LinkedList<number>();
 
-  for (const value of values) {
-    list.insert(value);
-  }
+  values.forEach((value) => list.insert(value));
 
   const result = list.remove(values[1]);
 
@@ -92,9 +88,7 @@ test('Removes a value from the end of the list', () => {
   const values = [13, 15, 19];
   const list = new LinkedList<number>();
 
-  for (const value of values) {
-    list.insert(value);
-  }
+  values.forEach((value) => list.insert(value));
 
   const result = list.remove(values[0]);
 
@@ -109,9 +103,7 @@ test('Removes a value from the beginning of the list', () => {
   const values = [13, 15, 19];
   const list = new LinkedList<number>();
 
-  for (const value of values) {
-    list.insert(value);
-  }
+  values.forEach((value) => list.insert(value));
 
   const result = list.remove(values[2]);
 
@@ -136,9 +128,7 @@ test('Insertion & removal maintains the correct list order', () => {
   const values = [13, 15, 19, 22, 27];
   const list = new LinkedList<number>();
 
-  for (const value of values) {
-    list.insert(value);
-  }
+  values.forEach((value) => list.insert(value));
 
   list.remove(values[3]); // 22
   list.remove(values[0]); // 13

@@ -18,6 +18,7 @@ export function binarySearch<T>(arr: T[], target: T): number {
 
   while (start <= end) {
     // Determine the middle index of the current array segment.
+    // const mid = start + Math.floor((end - start) / 2);
     const mid = Math.floor((start + end) / 2);
 
     if (target === arr[mid]) {
@@ -60,6 +61,7 @@ export function binarySearchRecursive<T>(
   }
 
   // Determine the middle index of the current array segment.
+  // const mid = start + Math.floor((end - start) / 2);
   const mid = Math.floor((start + end) / 2);
 
   if (target === arr[mid]) {

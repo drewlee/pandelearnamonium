@@ -64,6 +64,14 @@ test('Creates a tree recursively', () => {
   const tree = new BinarySearchTree(value);
   const values = [2, 7, 1, 3, 10];
 
+  /*
+       5
+      / \
+     2   7
+    / \   \
+   1   3   10
+  */
+
   values.forEach((value) => tree.insert(value));
 
   expect(tree.value).toBe(value);
@@ -85,6 +93,14 @@ test('Outputs traversal info', () => {
   const value = 5;
   const tree = new BinarySearchTree(value);
   const values = [2, 7, 1, 3, 10];
+
+  /*
+       5
+      / \
+     2   7
+    / \   \
+   1   3   10
+  */
 
   values.forEach((value) => tree.insert(value));
 

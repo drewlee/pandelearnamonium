@@ -4,7 +4,7 @@
  * children of the current node.
  */
 export default class TreeNode<T> {
-  value: T;
+  value: T | null;
   children: TreeNode<T>[];
 
   /**
@@ -13,8 +13,8 @@ export default class TreeNode<T> {
    * @param value - The value to set for the node.
    * @param children - The child nodes to link to.
    */
-  constructor(value: T, children: TreeNode<T>[] = []) {
-    this.value = value;
+  constructor(value?: T, children: TreeNode<T>[] = []) {
+    this.value = value ?? null;
     this.children = children;
   }
 }

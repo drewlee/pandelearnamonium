@@ -1,4 +1,4 @@
-import Node from './node.js';
+import Node from './nodes/node.js';
 
 /**
  * The linked list data structure is a utility for creating a chain of linked nodes,

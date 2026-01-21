@@ -1,5 +1,5 @@
 import DoublyLinkedList from '../src/doubly-linked-list.ts';
-import DLLNode from '../src/dll-node.ts';
+import DLLNode from '../src/nodes/dll-node.ts';
 
 test('Creates an instance with defaults', () => {
   const list = new DoublyLinkedList();
@@ -69,9 +69,7 @@ test('Adding to head maintains the correct list order', () => {
   const values = [13, 15, 19, 22, 27];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToHead(value);
-  }
+  values.forEach((value) => list.addToHead(value));
 
   const result: number[] = [];
   let node = list.head;
@@ -129,9 +127,7 @@ test('Adding to tail maintains the correct list order', () => {
   const values = [13, 15, 19, 22, 27];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToTail(value);
-  }
+  values.forEach((value) => list.addToTail(value));
 
   const result: number[] = [];
   let node = list.head;
@@ -185,9 +181,7 @@ test('Removes the tail node from a list', () => {
   const values = [13, 15, 19];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToTail(value);
-  }
+  values.forEach((value) => list.addToTail(value));
 
   const result = list.removeTail();
   expect(result).toBe(values[2]);
@@ -222,9 +216,7 @@ test('Removes the specified node from the list', () => {
   const values = [13, 15, 19];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToHead(value);
-  }
+  values.forEach((value) => list.addToHead(value));
 
   const result = list.remove(values[1]);
 
@@ -246,9 +238,7 @@ test('Removes the first node from the list', () => {
   const values = [13, 15, 19];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToHead(value);
-  }
+  values.forEach((value) => list.addToHead(value));
 
   const result = list.remove(values[2]);
 
@@ -270,9 +260,7 @@ test('Removes the last node from the list', () => {
   const values = [13, 15, 19];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToHead(value);
-  }
+  values.forEach((value) => list.addToHead(value));
 
   const result = list.remove(values[0]);
 
@@ -305,9 +293,7 @@ test('Removes the first node from the list with two items', () => {
   const values = [13, 17];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToHead(value);
-  }
+  values.forEach((value) => list.addToHead(value));
 
   const result = list.remove(values[0]);
 
@@ -326,9 +312,7 @@ test('Removes the last node from the list with two items', () => {
   const values = [13, 17];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToHead(value);
-  }
+  values.forEach((value) => list.addToHead(value));
 
   const result = list.remove(values[1]);
 
@@ -347,9 +331,7 @@ test('Removing a node with a non-existing value returns `null`', () => {
   const values = [13, 15, 19];
   const list = new DoublyLinkedList<number>();
 
-  for (const value of values) {
-    list.addToTail(value);
-  }
+  values.forEach((value) => list.addToTail(value));
 
   const result = list.remove(44);
   expect(result).toBeNull();

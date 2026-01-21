@@ -1,4 +1,4 @@
-import TreeNode from './tree-node.js';
+import TreeNode from './nodes/tree-node.js';
 
 /**
  * Searches a tree for the node with the specified value using the `Breadth-First Search` algorithm.
@@ -7,7 +7,7 @@ import TreeNode from './tree-node.js';
  *
  * @param root - The root of the tree to search in.
  * @param target - The target value to find.
- * @param debug - Whether to ouput debug logging info, primarily used for testing.
+ * @param debug - Whether to output debug logging info, primarily used for testing.
  * @returns The node with the specified value or `null` if it isn't found.
  */
 export function breadthFirstSearch<T>(
@@ -45,7 +45,7 @@ export function breadthFirstSearch<T>(
  *
  * @param root - The root of the tree to search in.
  * @param target - The target value to find.
- * @param debug - Whether to ouput debug logging.
+ * @param debug - Whether to output debug logging.
  * @returns The path of the node with the specified value or `null` if it isn't found.
  */
 export function breadthFirstSearchWithPath<T>(

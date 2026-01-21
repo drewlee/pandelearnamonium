@@ -1,4 +1,4 @@
-import TreeNode from './tree-node.js';
+import TreeNode from './nodes/tree-node.js';
 
 /**
  * Searches a tree for the node with the specified value using the `Depth-First Search` algorithm.
