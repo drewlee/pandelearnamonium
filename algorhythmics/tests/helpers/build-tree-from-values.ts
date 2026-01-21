@@ -1,4 +1,4 @@
-import TreeNode from '../../src/tree-node.ts';
+import TreeNode from '../../src/nodes/tree-node.ts';
 
 /**
  * A utility function to construct a node tree from the given array of values.
