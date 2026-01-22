@@ -2,8 +2,8 @@
  * A binary search tree is an efficient data structure for fast, O(log n), data storage and
  * retrieval. It is made up of a root node and at most two child branches, named `left` and `right`.
  */
-export default class BinarySearchTree<T> {
-  value: T;
+export default class BinarySearchTree<T extends number | string | bigint> {
+  value: T | null;
   left: BinarySearchTree<T> | null;
   right: BinarySearchTree<T> | null;
 
@@ -12,7 +12,7 @@ export default class BinarySearchTree<T> {
    *
    * @param value - The value to set for the node.
    */
-  constructor(value: T) {
+  constructor(value: T | null = null) {
     this.value = value;
     this.left = null;
     this.right = null;
@@ -26,7 +26,9 @@ export default class BinarySearchTree<T> {
   insert(value: T): void {
     // Values less than the current value must be placed left.
     // Values greater than or equal to the current value must be placed right.
-    if (value < this.value) {
+    if (this.value === null) {
+      this.value = value;
+    } else if (value < this.value) {
       if (this.left === null) {
         this.left = new BinarySearchTree(value);
       } else {
@@ -48,6 +50,11 @@ export default class BinarySearchTree<T> {
    * @returns The node with the specified value, or `null` if it isn't found.
    */
   getNodeByValue(value: T): BinarySearchTree<T> | null {
+    // A tree with a null node is a no-op.
+    if (this.value === null) {
+      return null;
+    }
+
     if (this.value === value) {
       return this;
     } else if (this.left !== null && value < this.value) {
@@ -60,64 +67,64 @@ export default class BinarySearchTree<T> {
   }
 
   /**
-   * Removes the node from the tree with the specified value and returns it.
+   * Removes the node from the tree with the specified value.
    *
    * @param value - The target value.
-   * @returns The removed node, or `null` if it isn't found.
+   * @param isRoot - Whether this function is visiting the root node.
+   * @returns The tree root or `null`.
    */
-  delete(value: T, parent: BinarySearchTree<T> | null = null): BinarySearchTree<T> | null {
-    if (this.value === value) {
-      let child: BinarySearchTree<T> | null = null;
+  delete(value: T, isRoot = true): BinarySearchTree<T> | null {
+    // A tree with a `null` node is a no-op.
+    if (this.value === null) {
+      return this;
+    }
 
+    if (this.value === value) {
       // If the current node has no children, `null` will take its place.
       // If the current node has one child, the child will take its place.
       // If the current node has two children:
-      // - Find the node with the smallest value in the right subtree.
+      // - Find the node with the minimum value in the right subtree.
       // - The min-value node takes the current node's place.
       // - The min-value node is deleted from it's original place.
       if (this.left === null) {
-        child = this.right;
-      } else if (this.right === null) {
-        child = this.left;
-      } else {
-        child = this.right;
+        if (isRoot) {
+          this.value = this.right?.value ?? null;
+          this.left = this.right?.left ?? null;
+          this.right = this.right?.right ?? null;
 
-        while (child.left !== null) {
-          child = child.left;
+          return this;
         }
 
-        const temp = child.right;
-        this.right.delete(child.value);
+        return this.right;
+      } else if (this.right === null) {
+        if (isRoot) {
+          this.value = this.left?.value ?? null;
+          this.right = this.left?.right ?? null;
+          this.left = this.left?.left ?? null;
 
-        child.left = this.left;
-        child.right = temp;
-      }
+          return this;
+        }
 
-      // Determine which pointer the current node branches off of the parent,
-      // then reassign it to the appropriate child node.
-      if (parent !== null) {
-        const branch = parent.left === this ? 'left' : 'right';
-        parent[branch] = child;
+        return this.left;
       } else {
-        // This is a root node.
-        // if (child !== null) {
-        //   this.value = child?.value;
-        // }
-        // console.log('exec');
-      }
+        let minNode = this.right;
 
-      // Null out the pointers for the return value.
-      this.left = null;
-      this.right = null;
+        while (minNode.left !== null) {
+          minNode = minNode.left;
+        }
+
+        this.value = minNode.value;
+        this.right = this.right.delete(minNode.value!, false);
+      }
 
       return this;
     } else if (this.left !== null && value < this.value) {
-      return this.left.delete(value, this);
+      this.left = this.left.delete(value, false);
     } else if (this.right !== null && value >= this.value) {
-      return this.right.delete(value, this);
+      this.right = this.right.delete(value, false);
     }
 
-    return null;
+    return this;
   }
 
   /**
@@ -125,11 +132,10 @@ export default class BinarySearchTree<T> {
    *
    * @returns Minimum value in the tree.
    */
-  getMin(): T {
+  getMin(): T | null {
     if (this.left !== null) {
       return this.left.getMin();
     }
-
     return this.value;
   }
 
@@ -138,11 +144,10 @@ export default class BinarySearchTree<T> {
    *
    * @returns Maximum value in the tree.
    */
-  getMax(): T {
+  getMax(): T | null {
     if (this.right !== null) {
       return this.right.getMax();
     }
-
     return this.value;
   }
 
