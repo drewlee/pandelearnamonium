@@ -1,5 +1,7 @@
 /**
- * TODO
+ * The min-heap maintains the minimum value at the top of the dataset. It's the basis of the
+ * heapsort algorithm, which runs in O(n log n) time. It uses O(1) space if sorted in place, but
+ * results in descending order. Assigning the sorted values into a new array uses O(n) space.
  */
 export default class MinHeap {
   heap: number[];
@@ -9,7 +11,7 @@ export default class MinHeap {
   }
 
   /**
-   * Returns the parent index corresponding to the given child index.
+   * Returns the parent index corresponding to the provided index.
    *
    * @param index - Index to compute the parent index for.
    * @returns Parent index.
@@ -19,7 +21,7 @@ export default class MinHeap {
   }
 
   /**
-   * Returns the child indices corresponding to the given parent index.
+   * Returns the child indices corresponding to the provided index.
    *
    * @param index - Index to compute the child indices for.
    * @returns Child indices.
@@ -32,50 +34,45 @@ export default class MinHeap {
   }
 
   /**
-   * Iteratively swaps the values at the given index if its parent's value is less than
+   * Iteratively swaps the values at the given index if its parent value is less than
    * the current value.
    *
    * @param index - Index to begin the value comparisons.
+   * @param heap - Array to heapify.
    */
-  heapifyUp(index: number): void {
+  heapifyUp(index: number, heap = this.heap): void {
     let currIndex = index;
     let parentIndex = this.getParentIndex(currIndex);
 
-    while (currIndex > 0 && this.heap[currIndex] < this.heap[parentIndex]) {
-      [this.heap[currIndex], this.heap[parentIndex]] = [
-        this.heap[parentIndex],
-        this.heap[currIndex],
-      ];
+    while (currIndex > 0 && heap[currIndex] < heap[parentIndex]) {
+      [heap[currIndex], heap[parentIndex]] = [heap[parentIndex], heap[currIndex]];
       currIndex = parentIndex;
       parentIndex = this.getParentIndex(currIndex);
     }
   }
 
   /**
-   * Iteratively swaps the values at the given index if its children's
+   * Iteratively swaps the values at the given index if its child
    * values are less than the current value.
    *
-   * @param index - Index to begin the value comparisons.
+   * @param heap - Array to heapify.
+   * @param length - Length of the array to heapify.
    */
-  heapifyDown(index: number): void {
-    const length = this.heap.length;
-    let currIndex = index;
+  heapifyDown(heap = this.heap, length = this.heap.length): void {
+    let currIndex = 0;
     let [childIdx1, childIdx2] = this.getChildIndices(currIndex);
 
     while (childIdx1 < length) {
       // Determine which child has the minimum value.
       let minChildIdx = childIdx2;
 
-      if (childIdx2 >= length || this.heap[childIdx1] < this.heap[childIdx2]) {
+      if (childIdx2 >= length || heap[childIdx1] < heap[childIdx2]) {
         minChildIdx = childIdx1;
       }
 
       // Swap values.
-      if (this.heap[minChildIdx] < this.heap[currIndex]) {
-        [this.heap[minChildIdx], this.heap[currIndex]] = [
-          this.heap[currIndex],
-          this.heap[minChildIdx],
-        ];
+      if (heap[minChildIdx] < heap[currIndex]) {
+        [heap[minChildIdx], heap[currIndex]] = [heap[currIndex], heap[minChildIdx]];
       }
 
       currIndex = minChildIdx;
@@ -99,48 +96,86 @@ export default class MinHeap {
    * @returns Minimum heap value.
    */
   remove(): number | null {
+    const { length } = this.heap;
+
     // Terminate if the heap is empty.
-    if (!this.heap.length) {
+    if (!length) {
       return null;
     }
 
-    const bottomValue = this.heap.pop()!;
-    const { length } = this.heap;
+    // Swap the first and last values.
+    [this.heap[0], this.heap[length - 1]] = [this.heap[length - 1], this.heap[0]];
 
-    // No need to heapify if the heap is now empty.
-    if (!length) {
-      return bottomValue;
+    const topValue = this.heap.pop()!;
+
+    if (length - 1 > 0) {
+      this.heapifyDown();
     }
-
-    // Swap the top and bottom values.
-    const topIndex = 0;
-    const topValue = this.heap[topIndex];
-    this.heap[topIndex] = bottomValue;
-
-    this.heapifyDown(topIndex);
 
     return topValue;
   }
 
   /**
    * Sorts the given list of values in ascending order using the min-heap algorithm.
+   * Uses O(n) space due to array duplication.
    *
    * @param values - Array of values to sort.
    * @returns Array of sorted values.
    */
   sort(values: number[]): number[] {
-    const sorted: number[] = [];
-
-    // Insert the given values into the heap.
-    for (const value of values) {
-      this.insert(value);
+    if (values.length <= 1) {
+      return values;
     }
 
+    const heapified: number[] = values.slice();
+
+    // Insert the given values into the heap.
+    for (let i = 1; i < values.length; i++) {
+      this.heapifyUp(i, heapified);
+    }
+
+    const sorted: number[] = [];
+
     // Extract the heapified values from the heap.
-    while (this.heap.length) {
-      sorted.push(this.remove()!);
+    while (heapified.length) {
+      [heapified[0], heapified[heapified.length - 1]] = [
+        heapified[heapified.length - 1],
+        heapified[0],
+      ];
+
+      const topValue = heapified.pop()!;
+
+      this.heapifyDown(heapified, heapified.length);
+      sorted.push(topValue);
     }
 
     return sorted;
+  }
+
+  /**
+   * Sorts the given list of values in descending order using the min-heap algorithm.
+   * Use O(1) space due to sorting in-place, but the result is in descending instead
+   * of ascending order.
+   *
+   * @param values - Array of values to sort.
+   * @returns Array of sorted values.
+   */
+  sortInPlace(values: number[]): number[] {
+    if (values.length <= 1) {
+      return values;
+    }
+
+    for (let i = 1; i < values.length; i++) {
+      this.heapifyUp(i, values);
+    }
+
+    for (let i = values.length - 1; i > 0; i--) {
+      [values[0], values[i]] = [values[i], values[0]];
+
+      // Heapify down the new value.
+      this.heapifyDown(values, i);
+    }
+
+    return values;
   }
 }
