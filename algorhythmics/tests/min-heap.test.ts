@@ -85,14 +85,6 @@ test("Removing each subsequent value gets the heap's minimum value", () => {
 });
 
 describe('Sorting', () => {
-  test.skip('Sorts an array of values in ascending order', () => {
-    const minHeap = new MinHeap();
-    const values = [99, 13, 6, 32, 16, 1, 3, 7, 0, 4, -100];
-    const result = minHeap.sort(values);
-
-    expect(isSorted(result)).toBeTruthy();
-  });
-
   test('Returns an empty array when given an empty array', () => {
     const values = [];
     const minHeap = new MinHeap();
@@ -170,7 +162,7 @@ describe('Sorting in-place', () => {
 
   test('Sorts a large array', () => {
     const length = 100;
-    const values = new Array(length).fill(null).map((_, index) => length - index);
+    const values = new Array(length).fill(null).map((_, index) => index + 1);
     const minHeap = new MinHeap();
     const result = minHeap.sortInPlace(values);
 

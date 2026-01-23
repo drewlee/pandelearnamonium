@@ -1,9 +1,9 @@
 /**
- * The min-heap maintains the minimum value at the top of the dataset. It's the basis of the
+ * The max-heap maintains the maximum value at the top of the dataset. It's the basis of the
  * heapsort algorithm, which runs in O(n log n) time. It uses O(1) space if sorted in place, but
- * results in descending order. Assigning the sorted values into a new array uses O(n) space.
+ * results in ascending order. Assigning the sorted values into a new array uses O(n) space.
  */
-export default class MinHeap {
+export default class MaxHeap {
   heap: number[];
 
   constructor() {
@@ -34,7 +34,7 @@ export default class MinHeap {
   }
 
   /**
-   * Iteratively swaps the values at the given index if its parent value is less than
+   * Iteratively swaps the values at the given index if its parent value is lesser than
    * the current value.
    *
    * @param index - Index to begin the value comparisons.
@@ -44,7 +44,7 @@ export default class MinHeap {
     let currIndex = index;
     let parentIndex = this.getParentIndex(currIndex);
 
-    while (currIndex > 0 && heap[currIndex] < heap[parentIndex]) {
+    while (currIndex > 0 && heap[currIndex] > heap[parentIndex]) {
       [heap[currIndex], heap[parentIndex]] = [heap[parentIndex], heap[currIndex]];
       currIndex = parentIndex;
       parentIndex = this.getParentIndex(currIndex);
@@ -53,7 +53,7 @@ export default class MinHeap {
 
   /**
    * Iteratively swaps the values at the given index if its child
-   * values are less than the current value.
+   * values are greater than the current value.
    *
    * @param heap - Array to heapify.
    * @param length - Length of the array to heapify.
@@ -66,12 +66,12 @@ export default class MinHeap {
       // Determine which child has the minimum value.
       let minChildIdx = childIdx2;
 
-      if (childIdx2 >= length || heap[childIdx1] < heap[childIdx2]) {
+      if (childIdx2 >= length || heap[childIdx1] > heap[childIdx2]) {
         minChildIdx = childIdx1;
       }
 
       // Swap values.
-      if (heap[minChildIdx] < heap[currIndex]) {
+      if (heap[minChildIdx] > heap[currIndex]) {
         [heap[minChildIdx], heap[currIndex]] = [heap[currIndex], heap[minChildIdx]];
       }
 
@@ -91,9 +91,9 @@ export default class MinHeap {
   }
 
   /**
-   * Removes the minimum (root) value from the top of the heap.
+   * Removes the maximum (root) value from the top of the heap.
    *
-   * @returns Minimum heap value.
+   * @returns Maximum heap value.
    */
   remove(): number | null {
     const { length } = this.heap;
@@ -116,7 +116,7 @@ export default class MinHeap {
   }
 
   /**
-   * Sorts the given list of values in ascending order using the min-heap algorithm.
+   * Sorts the given list of values in descending order using the min-heap algorithm.
    * Uses O(n) space as it creates a new array of values.
    *
    * @param values - Array of values to sort.
@@ -153,8 +153,8 @@ export default class MinHeap {
   }
 
   /**
-   * Sorts the given list of values using the min-heap algorithm. Uses O(1) space as it
-   * sorts in-place, but the result is in descending instead of ascending order.
+   * Sorts the given list of values using the min-heap algorithm. Use O(1) space as it
+   * sorts in-place, but the result is in ascending instead of descending order.
    *
    * @param values - Array of values to sort.
    * @returns Array of sorted values.
