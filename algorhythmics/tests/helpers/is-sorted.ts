@@ -5,8 +5,19 @@
  * @returns `True` if the array is sorted, otherwise `false`.
  */
 export default function isSorted(arr: number[]): boolean {
+  let isIncreasing = false;
+  let isDecreasing = false;
+
   for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] < arr[i + 1]) {
+      isIncreasing = true;
+    }
+
     if (arr[i] > arr[i + 1]) {
+      isDecreasing = true;
+    }
+
+    if (isIncreasing && isDecreasing) {
       return false;
     }
   }

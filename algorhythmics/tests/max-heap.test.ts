@@ -106,7 +106,7 @@ describe('Sorting', () => {
     const maxHeap = new MaxHeap();
     const result = maxHeap.sort(values);
 
-    expect(isSorted(result.reverse())).toBeTruthy();
+    expect(isSorted(result)).toBeTruthy();
   });
 
   test('Sorts a small array', () => {
@@ -114,7 +114,7 @@ describe('Sorting', () => {
     const maxHeap = new MaxHeap();
     const result = maxHeap.sort(values);
 
-    expect(isSorted(result.reverse())).toBeTruthy();
+    expect(isSorted(result)).toBeTruthy();
   });
 
   test('Sorts a large array', () => {
@@ -123,7 +123,7 @@ describe('Sorting', () => {
     const maxHeap = new MaxHeap();
     const result = maxHeap.sort(values);
 
-    expect(isSorted(result.reverse())).toBeTruthy();
+    expect(isSorted(result)).toBeTruthy();
   });
 });
 

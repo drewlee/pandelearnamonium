@@ -133,7 +133,7 @@ describe('Sorting in-place', () => {
     const minHeap = new MinHeap();
     const result = minHeap.sortInPlace(values);
 
-    expect(result.reverse()).toStrictEqual([]);
+    expect(result).toStrictEqual([]);
   });
 
   test('Returns an array of one element when given an array of one element', () => {
@@ -149,7 +149,7 @@ describe('Sorting in-place', () => {
     const minHeap = new MinHeap();
     const result = minHeap.sortInPlace(values);
 
-    expect(isSorted(result.reverse())).toBeTruthy();
+    expect(isSorted(result)).toBeTruthy();
   });
 
   test('Sorts a small array', () => {
@@ -157,7 +157,7 @@ describe('Sorting in-place', () => {
     const minHeap = new MinHeap();
     const result = minHeap.sortInPlace(values);
 
-    expect(isSorted(result.reverse())).toBeTruthy();
+    expect(isSorted(result)).toBeTruthy();
   });
 
   test('Sorts a large array', () => {
@@ -166,6 +166,6 @@ describe('Sorting in-place', () => {
     const minHeap = new MinHeap();
     const result = minHeap.sortInPlace(values);
 
-    expect(isSorted(result.reverse())).toBeTruthy();
+    expect(isSorted(result)).toBeTruthy();
   });
 });
