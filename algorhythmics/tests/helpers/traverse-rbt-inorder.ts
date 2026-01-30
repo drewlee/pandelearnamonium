@@ -2,8 +2,9 @@ import RBTNode from '../../src/nodes/rbt-node.ts';
 import RedBlackTree from '../../src/red-black-tree.ts';
 
 interface RBTRecord<T extends bigint | number | string> {
-  value: T;
+  color: 'red' | 'black';
   depth: number;
+  value: T;
 }
 
 /**
@@ -26,8 +27,9 @@ function traverseNodes<T extends bigint | number | string>(
   }
 
   values.push({
-    value: node.value!,
+    color: node.isRed ? 'red' : 'black',
     depth,
+    value: node.value!,
   });
 
   if (node.right !== tree.nil) {
