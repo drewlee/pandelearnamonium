@@ -1,15 +1,24 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import SiteNavLinks from './SiteNavLinks.js';
+import SiteNavLinks from './SiteNavLinks.jsx';
 
 interface SiteNavModalProps {
   onModalClose: () => void;
   triggerEl: HTMLButtonElement | null;
 }
 
+/**
+ * Modal which displays the site navigation links on mobile screens.
+ *
+ * @param props - Component props.
+ * @remarks
+ * - `props.triggerEl` - Element which triggered the modal.
+ * - `props.onModalClose` - Callback to run to dismiss the navigation modal.
+ * @returns React JSX element.
+ */
 export default function SiteNavModal({
-  triggerEl,
   onModalClose,
+  triggerEl,
 }: SiteNavModalProps): React.JSX.Element {
   const rootElRef: React.RefObject<HTMLDivElement | null> = useRef(null);
 
@@ -26,7 +35,7 @@ export default function SiteNavModal({
       dialogEl.focus();
     }
 
-    const allSiblings = rootEl.parentElement?.children;
+    const allSiblings = rootEl.parentElement?.children as HTMLElement[] | undefined;
 
     if (!allSiblings?.length) {
       return;
@@ -40,8 +49,11 @@ export default function SiteNavModal({
         if (getComputedStyle(triggerEl).display !== 'none') {
           requestAnimationFrame(() => triggerEl.focus());
         } else {
-          // TODO: set focus on closest focusable element in proximity
-          console.log('Not visible');
+          const el = document.getElementById('nh-nav-home-link');
+
+          if (el) {
+            requestAnimationFrame(() => el.focus());
+          }
         }
       }
 
@@ -58,7 +70,7 @@ export default function SiteNavModal({
 
   return createPortal(
     <div className="nh-nav-modal_curtain" ref={rootElRef}>
-      {/* Used to capture delegated keyup events */}
+      {/* A11y compliant: used to capture delegated keyup events */}
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div
         aria-label="Site navigation"
@@ -74,7 +86,7 @@ export default function SiteNavModal({
           type="button"
         ></button>
 
-        <SiteNavLinks />
+        <SiteNavLinks isModal={true} />
       </div>
     </div>,
     document.body,

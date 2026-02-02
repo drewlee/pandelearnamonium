@@ -33,6 +33,7 @@
   --spacing-800: calc(var(--spacing-unit) * 8);
   --spacing-900: calc(var(--spacing-unit) * 9);
   --spacing-1000: calc(var(--spacing-unit) * 10);
+  --spacing-1100: calc(var(--spacing-unit) * 11);
 }
 
 /* RESETS & GENERAL STYLES */
@@ -68,6 +69,17 @@ button {
   border: 2px solid transparent;
   background-color: transparent;
   cursor: pointer;
+}
+
+/* Focus Outline Styles */
+* {
+  outline-width: 0;
+  transition: outline-width 100ms ease-in;
+}
+
+*:focus-visible {
+  outline: 2px solid rgb(0 145 255);
+  outline-offset: 2px;
 }
 
 html {
@@ -134,7 +146,7 @@ html {
   grid-template:
     '. navbar .' auto
     '. main .' 1fr
-    '. footer .' 3rem /* 48px */
+    '. footer .' auto
     / auto minmax(375px, 640px) auto;
   height: 100svh;
   align-items: center;
@@ -287,10 +299,6 @@ html {
   gap: var(--spacing-100) 0;
 }
 
-.nh-top-stories_heading {
-  /* white-space: nowrap; */
-}
-
 .nh-top-stories_rating {
   color: var(--color-red);
 }
@@ -312,6 +320,7 @@ html {
 /* ATTRIBUTION */
 .attribution {
   grid-area: footer;
+  padding: 3rem 0 2rem; /* 48px 32px */
   font-size: 0.6875rem; /* 11px */
   text-align: center;
 
@@ -334,23 +343,35 @@ html {
 }
 
 .nh-nav-modal_container {
-  width: 256px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1100) 0;
+  width: 68vw;
+  max-width: 312px;
   height: 100svh;
+  padding: 27px 21px;
   margin: 0 0 0 auto;
   background-color: var(--color-white);
 
   .nh-navbar_links {
     display: block;
+
+    a {
+      font-size: 1.125rem; /* 18px */
+    }
   }
 
   .nh-navbar_links-list {
     flex-direction: column;
+    gap: var(--spacing-300) 0;
   }
 }
 
 .nh-nav-modal_btn-close {
   width: 30px;
   height: 30px;
+  margin: 0 0 0 auto;
   background: url('../assets/images/icon-menu-close.svg') center / 100% no-repeat;
 }
 

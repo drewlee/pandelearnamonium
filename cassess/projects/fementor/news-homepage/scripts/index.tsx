@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import SiteNav from './SiteNav.js';
+import SiteNav from './SiteNav.jsx';
 
 const rootEl = document.getElementById('nh-nav_root');
 

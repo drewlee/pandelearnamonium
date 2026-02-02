@@ -24,3 +24,4 @@
 - [Interactive Rating Component](./projects/fementor/interactive-rating-component/)
 - [FAQ Accordion](./projects/fementor/faq-accordion/)
 - [Contact Form](./projects/fementor/contact-form/)
+- [News Homepage](./projects/fementor/news-homepage/)

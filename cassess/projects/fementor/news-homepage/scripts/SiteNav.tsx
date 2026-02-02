@@ -1,8 +1,13 @@
 import { useRef, useState } from 'react';
-import SiteNavLinks from './SiteNavLinks.js';
-import SiteNavModal from './SiteNavModal.js';
+import SiteNavLinks from './SiteNavLinks.jsx';
+import SiteNavModal from './SiteNavModal.jsx';
 
-export default function SiteNav() {
+/**
+ * Site navigation menu and mobile navigation trigger button.
+ *
+ * @returns React JSX element.
+ */
+export default function SiteNav(): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const btnElRef: React.RefObject<HTMLButtonElement | null> = useRef(null);
 
