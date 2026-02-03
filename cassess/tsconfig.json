@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
     "rootDir": "./",
     "types": ["vitest/globals"],
     "allowJs": true,
