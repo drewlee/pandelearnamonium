@@ -1,6 +1,6 @@
 import dijkstras from '../src/dijkstras.ts';
 
-test('Returns a map of shortest distances 1', () => {
+test('Returns a map of shortest distances and logs their paths 1', () => {
   const graph: Record<string, [string, number][]> = {
     A: [
       ['B', 10],
@@ -15,17 +15,48 @@ test('Returns a map of shortest distances 1', () => {
     ],
   };
 
+  const spy = vi.spyOn(console, 'log');
   const result = dijkstras(graph, 'D');
-  expect(result).toStrictEqual({
-    A: 17,
-    C: 20,
-    D: 0,
-    E: 10,
-    B: 27,
-  });
+
+  expect(spy.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        "Logging vertices paths:",
+        {
+          "A": [
+            "D",
+            "E",
+            "A",
+          ],
+          "B": [
+            "D",
+            "E",
+            "A",
+            "B",
+          ],
+          "C": [
+            "D",
+            "E",
+            "A",
+            "C",
+          ],
+          "D": [
+            "D",
+          ],
+          "E": [
+            "D",
+            "E",
+          ],
+        },
+      ],
+    ]
+  `);
+  expect(result).toStrictEqual({ A: 17, C: 20, D: 0, E: 10, B: 27 });
+
+  spy.mockRestore();
 });
 
-test('Returns a map of shortest distances 2', () => {
+test('Returns a map of shortest distances and logs their paths 2', () => {
   const graph: Record<string, [string, number][]> = {
     A: [
       ['B', 3],
@@ -62,7 +93,53 @@ test('Returns a map of shortest distances 2', () => {
     ],
   };
 
+  const spy = vi.spyOn(console, 'log');
   const result = dijkstras(graph, 'A');
-  console.log(result);
-  expect(result).toBeTruthy();
+
+  expect(spy.mock.calls).toMatchInlineSnapshot(`
+    [
+      [
+        "Logging vertices paths:",
+        {
+          "A": [
+            "A",
+          ],
+          "B": [
+            "A",
+            "B",
+          ],
+          "C": [
+            "A",
+            "C",
+          ],
+          "D": [
+            "A",
+            "C",
+            "D",
+          ],
+          "E": [
+            "A",
+            "B",
+            "E",
+          ],
+          "F": [
+            "A",
+            "B",
+            "E",
+            "F",
+          ],
+          "G": [
+            "A",
+            "B",
+            "E",
+            "F",
+            "G",
+          ],
+        },
+      ],
+    ]
+  `);
+  expect(result).toStrictEqual({ A: 0, B: 3, C: 1, D: 8, E: 4, F: 6, G: 7 });
+
+  spy.mockRestore();
 });
