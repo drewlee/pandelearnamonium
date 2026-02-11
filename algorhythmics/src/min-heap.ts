@@ -3,11 +3,32 @@
  * heapsort algorithm, which runs in O(n log n) time. It uses O(1) space if sorted in place, but
  * results in descending order. Assigning the sorted values into a new array uses O(n) space.
  */
-export default class MinHeap {
-  heap: number[];
+export default class MinHeap<T> {
+  /** Custom comparison function for usage with non-primitive values. */
+  comparisonPredicate?: (item1: T, item2: T) => boolean;
+  heap: T[];
 
-  constructor() {
+  get length(): number {
+    return this.heap.length;
+  }
+
+  constructor(comparisonPredicate?: (item1: T, item2: T) => boolean) {
     this.heap = [];
+    this.comparisonPredicate = comparisonPredicate;
+  }
+
+  /**
+   * Comparison function used for heapification.
+   *
+   * @param item1 - First item to compare.
+   * @param item2 - Second item to compare.
+   * @returns Whether the first item's value is less than the second item's value.
+   */
+  private isLessThan(item1: T, item2: T): boolean {
+    if (this.comparisonPredicate !== undefined) {
+      return this.comparisonPredicate(item1, item2);
+    }
+    return item1 < item2;
   }
 
   /**
@@ -16,7 +37,7 @@ export default class MinHeap {
    * @param index - Index to compute the parent index for.
    * @returns Parent index.
    */
-  getParentIndex(index: number): number {
+  private getParentIndex(index: number): number {
     return Math.floor((index - 1) / 2);
   }
 
@@ -26,7 +47,7 @@ export default class MinHeap {
    * @param index - Index to compute the child indices for.
    * @returns Child indices.
    */
-  getChildIndices(index: number): [number, number] {
+  private getChildIndices(index: number): [number, number] {
     const child1 = index * 2 + 1;
     const child2 = child1 + 1;
 
@@ -44,7 +65,7 @@ export default class MinHeap {
     let currIndex = index;
     let parentIndex = this.getParentIndex(currIndex);
 
-    while (currIndex > 0 && heap[currIndex] < heap[parentIndex]) {
+    while (currIndex > 0 && this.isLessThan(heap[currIndex], heap[parentIndex])) {
       [heap[currIndex], heap[parentIndex]] = [heap[parentIndex], heap[currIndex]];
       currIndex = parentIndex;
       parentIndex = this.getParentIndex(currIndex);
@@ -66,12 +87,12 @@ export default class MinHeap {
       // Determine which child has the minimum value.
       let minChildIdx = childIdx2;
 
-      if (childIdx2 >= length || heap[childIdx1] < heap[childIdx2]) {
+      if (childIdx2 >= length || this.isLessThan(heap[childIdx1], heap[childIdx2])) {
         minChildIdx = childIdx1;
       }
 
       // Swap values.
-      if (heap[minChildIdx] < heap[currIndex]) {
+      if (this.isLessThan(heap[minChildIdx], heap[currIndex])) {
         [heap[minChildIdx], heap[currIndex]] = [heap[currIndex], heap[minChildIdx]];
       }
 
@@ -85,7 +106,7 @@ export default class MinHeap {
    *
    * @param value - Value to insert.
    */
-  insert(value: number): void {
+  insert(value: T): void {
     const newLength = this.heap.push(value);
     this.heapifyUp(newLength - 1);
   }
@@ -95,7 +116,7 @@ export default class MinHeap {
    *
    * @returns Minimum heap value.
    */
-  remove(): number | null {
+  remove(): T | null {
     const { length } = this.heap;
 
     // Terminate if the heap is empty.
@@ -122,19 +143,19 @@ export default class MinHeap {
    * @param values - Array of values to sort.
    * @returns Array of sorted values.
    */
-  sort(values: number[]): number[] {
+  sort(values: T[]): T[] {
     if (values.length <= 1) {
       return values;
     }
 
-    const heapified: number[] = values.slice();
+    const heapified: T[] = values.slice();
 
     // Insert the given values into the heap.
     for (let i = 1; i < values.length; i++) {
       this.heapifyUp(i, heapified);
     }
 
-    const sorted: number[] = [];
+    const sorted: T[] = [];
 
     // Extract the heapified values from the heap.
     while (heapified.length) {
@@ -159,7 +180,7 @@ export default class MinHeap {
    * @param values - Array of values to sort.
    * @returns Array of sorted values.
    */
-  sortInPlace(values: number[]): number[] {
+  sortInPlace(values: T[]): T[] {
     if (values.length <= 1) {
       return values;
     }
