@@ -4,8 +4,10 @@ test('Creates instance with defaults', () => {
   const trie = new Trie();
 
   expect(trie).toBeInstanceOf(Trie);
-  expect(trie.endSymbol).toBe('*');
-  expect(trie.root).toStrictEqual({});
+  expect(trie.root).toStrictEqual({
+    keys: {},
+    isEnd: false,
+  });
 });
 
 describe('insert', () => {
@@ -17,12 +19,28 @@ describe('insert', () => {
 
     expect(trie.root).toMatchInlineSnapshot(`
       {
-        "h": {
-          "e": {
-            "l": {
-              "l": {
-                "o": {
-                  "*": true,
+        "isEnd": false,
+        "keys": {
+          "h": {
+            "isEnd": false,
+            "keys": {
+              "e": {
+                "isEnd": false,
+                "keys": {
+                  "l": {
+                    "isEnd": false,
+                    "keys": {
+                      "l": {
+                        "isEnd": false,
+                        "keys": {
+                          "o": {
+                            "isEnd": true,
+                            "keys": {},
+                          },
+                        },
+                      },
+                    },
+                  },
                 },
               },
             },
@@ -40,36 +58,73 @@ describe('insert', () => {
 
     expect(trie.root).toMatchInlineSnapshot(`
       {
-        "h": {
-          "e": {
-            "a": {
-              "p": {
-                "*": true,
-              },
-            },
-            "l": {
-              "l": {
-                "o": {
-                  "*": true,
+        "isEnd": false,
+        "keys": {
+          "h": {
+            "isEnd": false,
+            "keys": {
+              "e": {
+                "isEnd": false,
+                "keys": {
+                  "a": {
+                    "isEnd": false,
+                    "keys": {
+                      "p": {
+                        "isEnd": true,
+                        "keys": {},
+                      },
+                    },
+                  },
+                  "l": {
+                    "isEnd": false,
+                    "keys": {
+                      "l": {
+                        "isEnd": false,
+                        "keys": {
+                          "o": {
+                            "isEnd": true,
+                            "keys": {},
+                          },
+                        },
+                      },
+                      "p": {
+                        "isEnd": true,
+                        "keys": {},
+                      },
+                    },
+                  },
                 },
               },
-              "p": {
-                "*": true,
-              },
-            },
-          },
-          "i": {
-            "*": true,
-            "d": {
-              "e": {
-                "*": true,
-              },
-            },
-            "n": {
-              "d": {
-                "e": {
-                  "r": {
-                    "*": true,
+              "i": {
+                "isEnd": true,
+                "keys": {
+                  "d": {
+                    "isEnd": false,
+                    "keys": {
+                      "e": {
+                        "isEnd": true,
+                        "keys": {},
+                      },
+                    },
+                  },
+                  "n": {
+                    "isEnd": false,
+                    "keys": {
+                      "d": {
+                        "isEnd": false,
+                        "keys": {
+                          "e": {
+                            "isEnd": false,
+                            "keys": {
+                              "r": {
+                                "isEnd": true,
+                                "keys": {},
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
                   },
                 },
               },
@@ -184,5 +239,66 @@ describe('getWords', () => {
     const result = trie.getWords();
 
     expect(result).toStrictEqual([]);
+  });
+});
+
+describe('getWordsRecursive', () => {
+  test('Returns all words in trie', () => {
+    const values = ['answer', 'heap', 'hello', 'help', 'hi', 'hide', 'hinder'];
+    const trie = new Trie();
+
+    values.forEach((value) => trie.insert(value));
+
+    const result = trie.getWordsRecursive();
+    expect(result.sort()).toStrictEqual(values);
+  });
+
+  test('Returns an empty array when the trie is empty', () => {
+    const trie = new Trie();
+    const result = trie.getWordsRecursive();
+
+    expect(result).toStrictEqual([]);
+  });
+});
+
+describe('remove', () => {
+  test('Removes a word without affecting sibling words on the same prefix path', () => {
+    const values = ['hi', 'hide', 'hinder'];
+    const trie = new Trie();
+
+    values.forEach((value) => trie.insert(value));
+    trie.remove('hide');
+
+    expect(trie.getWords().sort()).toStrictEqual(['hi', 'hinder']);
+  });
+
+  test('Removes a word that is a prefix of other words without removing descendants', () => {
+    const values = ['car', 'card', 'care'];
+    const trie = new Trie();
+
+    values.forEach((value) => trie.insert(value));
+    trie.remove('car');
+
+    expect(trie.getWords().sort()).toStrictEqual(['card', 'care']);
+  });
+
+  test('Removes a word not shared with a common prefix', () => {
+    const values = ['answer', 'car', 'hello'];
+    const trie = new Trie();
+
+    values.forEach((value) => trie.insert(value));
+    trie.remove('car');
+
+    expect(trie.getWords().sort()).toStrictEqual(['answer', 'hello']);
+  });
+
+  test('Remove is a no-op when the word to delete is not in the trie', () => {
+    const values = ['hi', 'hide', 'hinder'];
+    const trie = new Trie();
+
+    values.forEach((value) => trie.insert(value));
+    trie.remove('hip');
+
+    expect(trie.getWords().sort()).toStrictEqual(values);
   });
 });

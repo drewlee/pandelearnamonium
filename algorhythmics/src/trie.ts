@@ -1,5 +1,6 @@
 interface TrieNode {
-  [key: string]: TrieNode | true;
+  keys: Record<string, TrieNode>;
+  isEnd: boolean;
 }
 
 /**
@@ -15,15 +16,17 @@ interface TrieNode {
  * Space: O(N x L)
  */
 export default class Trie {
-  private _endSymbol = '*';
-  private _root: TrieNode = {};
-
-  get endSymbol(): string {
-    return this._endSymbol;
-  }
+  private _root: TrieNode;
 
   get root(): TrieNode {
     return Object.freeze(this._root);
+  }
+
+  constructor() {
+    this._root = {
+      keys: {},
+      isEnd: false,
+    };
   }
 
   /**
@@ -35,14 +38,17 @@ export default class Trie {
     let current = this._root;
 
     for (const char of word) {
-      if (current[char] === undefined) {
-        current[char] = {};
+      if (current.keys[char] === undefined) {
+        current.keys[char] = {
+          keys: {},
+          isEnd: false,
+        };
       }
 
-      current = current[char] as TrieNode;
+      current = current.keys[char];
     }
 
-    current[this.endSymbol] = true;
+    current.isEnd = true;
   }
 
   /**
@@ -55,14 +61,14 @@ export default class Trie {
     let current = this.root;
 
     for (const char of word) {
-      if (current[char] === undefined) {
+      if (current.keys[char] === undefined) {
         return false;
       }
 
-      current = current[char] as TrieNode;
+      current = current.keys[char];
     }
 
-    return current[this.endSymbol] !== undefined;
+    return current.isEnd;
   }
 
   /**
@@ -75,11 +81,11 @@ export default class Trie {
     let current = this.root;
 
     for (const char of prefix) {
-      if (current[char] === undefined) {
+      if (current.keys[char] === undefined) {
         return false;
       }
 
-      current = current[char] as TrieNode;
+      current = current.keys[char];
     }
 
     return true;
@@ -92,33 +98,17 @@ export default class Trie {
    * @returns Array of words.
    */
   getWordsStartingWith(prefix: string): string[] {
-    const words: string[] = [];
     let current = this.root;
 
     for (const char of prefix) {
-      if (current[char] === undefined) {
-        return words;
+      if (current.keys[char] === undefined) {
+        return [];
       }
 
-      current = current[char] as TrieNode;
+      current = current.keys[char];
     }
 
-    const stack: [TrieNode, string][] = [[current, prefix]];
-
-    while (stack.length) {
-      const [node, currPrefix] = stack.pop()!;
-      const chars = Object.keys(node);
-
-      for (const char of chars) {
-        if (char === this.endSymbol) {
-          words.push(currPrefix);
-        }
-
-        stack.push([node[char] as TrieNode, currPrefix + char]);
-      }
-    }
-
-    return words;
+    return this.getWordsRecursive(current, prefix);
   }
 
   /**
@@ -132,17 +122,81 @@ export default class Trie {
 
     while (stack.length) {
       const [node, prefix] = stack.pop()!;
-      const chars = Object.keys(node);
+      const chars = Object.keys(node.keys);
 
       for (const char of chars) {
-        if (char === this.endSymbol) {
-          words.push(prefix);
+        const newPrefix = prefix + char;
+
+        if (node.keys[char].isEnd) {
+          words.push(newPrefix);
         }
 
-        stack.push([node[char] as TrieNode, prefix + char]);
+        stack.push([node.keys[char], newPrefix]);
       }
     }
 
     return words;
+  }
+
+  /**
+   * Recursively returns an array of all words that have been inserted into the trie.
+   *
+   * @param node - Current trie node. Defaults to root.
+   * @param prefix - Current prefix string.
+   * @returns Array of words.
+   */
+  getWordsRecursive(node = this.root, prefix = ''): string[] {
+    const chars = Object.keys(node.keys);
+    let currWords: string[] = [];
+
+    if (node.isEnd) {
+      currWords.push(prefix);
+    }
+
+    if (!chars.length) {
+      return currWords;
+    }
+
+    for (const char of chars) {
+      const newPrefix = prefix + char;
+      const words = this.getWordsRecursive(node.keys[char], newPrefix);
+
+      currWords = [...currWords, ...words];
+    }
+
+    return currWords;
+  }
+
+  /**
+   * Removes the specified word from the trie.
+   *
+   * @param word - Word to remove.
+   */
+  remove(word: string): void {
+    const stack: [TrieNode, string][] = [];
+    let current = this.root;
+
+    for (const char of word) {
+      if (current.keys[char] === undefined) {
+        return;
+      }
+
+      stack.push([current, char]);
+      current = current.keys[char];
+    }
+
+    if (!current.isEnd) {
+      return;
+    }
+
+    current.isEnd = false;
+
+    while (stack.length) {
+      const [node, char] = stack.pop()!;
+
+      if (!Object.keys(node.keys[char].keys).length && !node.keys[char].isEnd) {
+        delete node.keys[char];
+      }
+    }
   }
 }
