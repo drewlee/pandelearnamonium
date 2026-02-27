@@ -58,7 +58,6 @@ function BinarySearchTree() {
       } else {
         parent.right = newChild;
       }
-      target = null;
     }
     // Case 3: Target has two children
     // Only change code below this line

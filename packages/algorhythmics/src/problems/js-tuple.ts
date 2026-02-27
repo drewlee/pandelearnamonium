@@ -51,7 +51,7 @@ export function tupleMultiply(tuple: number[][], n: number): number {
     const index = n - 1;
 
     if (index < arr.length) {
-      return (product *= arr[n - 1]);
+      return product * arr[n - 1];
     }
 
     return 0;

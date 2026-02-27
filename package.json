@@ -31,11 +31,11 @@
     "vitest": "npm run vitest --workspaces"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^25.3.2",
-    "eslint": "^9.31.0",
+    "eslint": "^10.0.2",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-tsdoc": "^0.4.0",
+    "eslint-plugin-tsdoc": "^0.5.2",
     "globals": "^17.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
