@@ -1,4 +1,1 @@
-if [ -n "$GIT_PREFIX" ]; then
-  cd "$GIT_PREFIX" || exit 1
-  npx lint-staged
-fi
+npx lint-staged

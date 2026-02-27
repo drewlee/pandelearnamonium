@@ -9,7 +9,9 @@
     "type": "git",
     "url": "git+https://github.com/drewlee/pandelearnamonium.git"
   },
-  "workspaces": ["./packages/*"],
+  "workspaces": [
+    "./packages/*"
+  ],
   "scripts": {
     "build:ts": "npm run build:ts --workspaces",
     "eslint": "npm run eslint --workspaces",
