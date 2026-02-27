@@ -44,8 +44,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build --workspace=cassess
-      # - name: Modify the artifact directory structure
-      #  run: mv dist cassess && mkdir dist && mv cassess dist
+      - name: Modify the artifact directory structure
+        run: mv packages/cassess/dist packages/cassess/cassess && mkdir packages/cassess/dist && mv packages/cassess/cassess packages/cassess/dist
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
