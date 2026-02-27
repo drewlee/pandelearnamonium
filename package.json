@@ -19,7 +19,12 @@
     "prettier": "npm run prettier --workspaces",
     "prettier:check": "npm run prettier:check --workspaces",
     "prettier:write": "npm run prettier:write --workspaces",
-    "test": "npm run test --workspaces"
+    "stylelint": "npm run stylelint --workspaces --if-present",
+    "test": "npm run test --workspaces",
+    "vite:build": "npm run vite:build --workspaces --if-present",
+    "vite:preview": "npm run vite:preview --workspaces --if-present",
+    "vite:serve": "npm run vite:serve --workspaces --if-present",
+    "vitest": "npm run vitest --workspaces"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

@@ -16,7 +16,8 @@
     "prettier:check": "prettier . -c",
     "prettier:write": "npm run prettier",
     "test": "npm run lint:check && npm run build:ts && tsc -b ./tests && vitest run",
-    "ts-node": "node --import ./ts-node-esm-loader.js --no-deprecation"
+    "ts-node": "node --import ./ts-node-esm-loader.js --no-deprecation",
+    "vitest": "vitest run"
   },
   "lint-staged": {
     "*": [
