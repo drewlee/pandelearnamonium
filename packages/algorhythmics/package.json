@@ -1,11 +1,12 @@
 {
-  "name": "@pandelearnamonium/algorhythmics",
+  "name": "algorhythmics",
   "version": "1.0.0",
   "description": "TypeScript algorhythmics",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc -b",
+    "build": "npm run build:ts",
+    "build:ts": "tsc -b",
     "eslint": "eslint .",
     "fcc": "npm run ts-node ./scripts/fcc-file-formatter.ts ./freecodecamp-problems",
     "fcc:clean": "rm -rf ./freecodecamp-problems/*.txt",
@@ -25,6 +26,7 @@
       "eslint"
     ]
   },
-  "devDependencies": {
+  "volta": {
+    "extends": "../../package.json"
   }
 }

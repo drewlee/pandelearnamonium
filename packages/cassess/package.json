@@ -1,5 +1,5 @@
 {
-  "name": "@pandelearnamonium/cassess",
+  "name": "cassess",
   "version": "1.0.0",
   "description": "CaSSess",
   "private": true,
@@ -47,5 +47,8 @@
     "stylelint": "^16.21.1",
     "stylelint-config-standard": "^38.0.0",
     "vite": "^7.0.5"
+  },
+  "volta": {
+    "extends": "../../package.json"
   }
 }

@@ -11,7 +11,11 @@
   },
   "workspaces": ["./packages/*"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:ts": "npm run build:ts --workspaces",
+    "eslint": "npm run eslint --workspaces",
+    "prettier": "npm run prettier --workspaces",
+    "prettier:check": "npm run prettier:check --workspaces",
+    "prettier:write": "npm run prettier:write --workspaces"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
