@@ -7,19 +7,31 @@ name: Node.js CI
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
-  test-algorhythmics:
-    uses: ./.github/workflows/reuse-nodejs-test.yml
-    with:
-      working-directory: "algorhythmics"
-      cache-dependency-path: "algorhythmics/package-lock.json"
+  test:
+    runs-on: ubuntu-latest
 
-  test-cassess:
-    uses: ./.github/workflows/reuse-nodejs-test.yml
-    with:
-      working-directory: "cassess"
-      cache-dependency-path: "cassess/package-lock.json"
+    defaults:
+      run:
+        working-directory: '.'
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x, 24.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+
+      - run: npm ci
+      - run: npm test
