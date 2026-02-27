@@ -38,10 +38,7 @@ export default class Queue<T> {
     }
 
     this.tail = node;
-
-    if (this.head === null) {
-      this.head = node;
-    }
+    this.head ??= node;
 
     this.size++;
   }

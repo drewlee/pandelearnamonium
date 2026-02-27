@@ -67,9 +67,7 @@ function getFileContents(fileNames: string[], fileDir: string): Record<string, s
     if (existsSync(filePath)) {
       const text = readFileSync(filePath, { encoding: 'utf8' });
 
-      if (contents[fileName] === undefined) {
-        contents[fileName] = text;
-      }
+      contents[fileName] ??= text;
     }
 
     return contents;
@@ -88,10 +86,7 @@ function updateFileContents(fileContents: Record<string, string>): Record<string
   const newFileContents = Object.entries(fileContents).reduce<Record<string, string>>(
     (contents, [fileName, text]) => {
       const newText = transformContent(text);
-
-      if (contents[fileName] === undefined) {
-        contents[fileName] = newText;
-      }
+      contents[fileName] ??= newText;
 
       return contents;
     },

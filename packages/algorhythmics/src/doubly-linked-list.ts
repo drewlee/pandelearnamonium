@@ -35,10 +35,7 @@ export default class DoublyLinkedList<T> {
     }
 
     this.head = node;
-
-    if (this.tail === null) {
-      this.tail = node;
-    }
+    this.tail ??= node;
   }
 
   /**
@@ -55,10 +52,7 @@ export default class DoublyLinkedList<T> {
     }
 
     this.tail = node;
-
-    if (this.head === null) {
-      this.head = node;
-    }
+    this.head ??= node;
   }
 
   /**

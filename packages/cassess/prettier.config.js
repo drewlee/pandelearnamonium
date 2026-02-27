@@ -1,5 +1,5 @@
-/** @type {import('prettier').Config} */
+import config from '../../prettier.config.js';
+
 export default {
-  printWidth: 100,
-  singleQuote: true,
+  ...config,
 };

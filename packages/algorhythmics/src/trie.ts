@@ -38,12 +38,10 @@ export default class Trie {
     let current = this._root;
 
     for (const char of word) {
-      if (current.keys[char] === undefined) {
-        current.keys[char] = {
-          keys: {},
-          isEnd: false,
-        };
-      }
+      current.keys[char] ??= {
+        keys: {},
+        isEnd: false,
+      };
 
       current = current.keys[char];
     }
