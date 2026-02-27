@@ -70,7 +70,7 @@ export default defineConfig([
     extends: [
       reactPlugin.configs.flat.recommended,
       jsxA11y.flatConfigs.recommended,
-      reactHooks.configs['recommended-latest'],
+      reactHooks.configs.flat.recommended,
     ],
     rules: {
       // Handled via Vite config

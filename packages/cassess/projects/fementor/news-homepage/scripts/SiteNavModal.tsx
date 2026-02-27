@@ -4,7 +4,7 @@ import SiteNavLinks from './SiteNavLinks.jsx';
 
 interface SiteNavModalProps {
   onModalClose: () => void;
-  triggerEl: HTMLButtonElement | null;
+  getTriggerEl: () => HTMLButtonElement | null;
 }
 
 /**
@@ -18,7 +18,7 @@ interface SiteNavModalProps {
  */
 export default function SiteNavModal({
   onModalClose,
-  triggerEl,
+  getTriggerEl,
 }: SiteNavModalProps): React.JSX.Element {
   const rootElRef: React.RefObject<HTMLDivElement | null> = useRef(null);
 
@@ -45,6 +45,8 @@ export default function SiteNavModal({
     siblings.forEach((el) => el.setAttribute('inert', ''));
 
     return () => {
+      const triggerEl = getTriggerEl();
+
       if (triggerEl instanceof HTMLButtonElement) {
         if (getComputedStyle(triggerEl).display !== 'none') {
           requestAnimationFrame(() => triggerEl.focus());
@@ -59,7 +61,7 @@ export default function SiteNavModal({
 
       siblings.forEach((el) => el.removeAttribute('inert'));
     };
-  }, [triggerEl]);
+  }, [getTriggerEl]);
 
   function handleKeyUp(evt: React.KeyboardEvent): void {
     if (evt.key === 'Escape') {

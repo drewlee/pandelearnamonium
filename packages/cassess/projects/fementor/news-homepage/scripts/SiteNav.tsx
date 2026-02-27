@@ -11,6 +11,10 @@ export default function SiteNav(): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const btnElRef: React.RefObject<HTMLButtonElement | null> = useRef(null);
 
+  function getTriggerEl(): HTMLButtonElement | null {
+    return btnElRef.current;
+  }
+
   return (
     <>
       <button
@@ -23,9 +27,7 @@ export default function SiteNav(): React.JSX.Element {
 
       <SiteNavLinks />
 
-      {isOpen && (
-        <SiteNavModal onModalClose={() => setIsOpen(false)} triggerEl={btnElRef.current} />
-      )}
+      {isOpen && <SiteNavModal onModalClose={() => setIsOpen(false)} getTriggerEl={getTriggerEl} />}
     </>
   );
 }
