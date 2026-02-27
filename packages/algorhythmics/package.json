@@ -10,14 +10,12 @@
     "eslint": "eslint .",
     "fcc": "npm run ts-node ./scripts/fcc-file-formatter.ts ./freecodecamp-problems",
     "fcc:clean": "rm -rf ./freecodecamp-problems/*.txt",
-    "lint": "npm run prettier:write && npm run eslint",
+    "lint": "npm run prettier && npm run eslint",
     "lint:check": "npm run prettier:check && npm run eslint",
-    "prepare": "cd .. && husky",
     "prettier": "prettier . -w",
     "prettier:check": "prettier . -c",
     "prettier:write": "npm run prettier",
-    "start": "echo 'running start'",
-    "test": "npm run lint:check && npm run build && tsc -b ./tests && vitest run",
+    "test": "npm run lint:check && npm run build:ts && tsc -b ./tests && vitest run",
     "ts-node": "node --import ./ts-node-esm-loader.js --no-deprecation"
   },
   "lint-staged": {

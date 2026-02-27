@@ -13,9 +13,13 @@
   "scripts": {
     "build:ts": "npm run build:ts --workspaces",
     "eslint": "npm run eslint --workspaces",
+    "lint": "npm run lint --workspaces",
+    "lint:check": "npm run lint:check --workspaces",
+    "prepare": "husky",
     "prettier": "npm run prettier --workspaces",
     "prettier:check": "npm run prettier:check --workspaces",
-    "prettier:write": "npm run prettier:write --workspaces"
+    "prettier:write": "npm run prettier:write --workspaces",
+    "test": "npm run test --workspaces"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
