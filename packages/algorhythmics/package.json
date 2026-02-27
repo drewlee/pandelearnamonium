@@ -20,8 +20,10 @@
     "vitest": "vitest run"
   },
   "lint-staged": {
-    "*": [
-      "prettier -uw",
+    "*.{js,json,md,ts,yml}": [
+      "prettier -w"
+    ],
+    "*.{js,ts}": [
       "eslint"
     ]
   },

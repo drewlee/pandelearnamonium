@@ -23,13 +23,14 @@
     "vitest": "vitest run"
   },
   "lint-staged": {
-    "!(*.css)": [
-      "prettier -uw",
-      "eslint"
+    "*.{css,html,js,jsx,json,md,ts,tsx,yml}": [
+      "prettier -w"
     ],
     "*.css": [
-      "prettier -uw",
       "stylelint"
+    ],
+    "*.{html,js,jsx,ts,tsx}": [
+      "eslint"
     ]
   },
   "dependencies": {
