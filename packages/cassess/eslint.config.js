@@ -9,39 +9,48 @@ import reactPlugin from 'eslint-plugin-react';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import * as reactHooks from 'eslint-plugin-react-hooks';
 
+const { browser, vitest } = globals;
+const JS_FILES = Object.freeze(['**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}']);
 const TS_FILES = Object.freeze(['**/*.{ts,tsx,mts,cts}']);
 
-/** @type {import('eslint').Linter.Config[]} */
 export default defineConfig([
   // Global settings
   {
     languageOptions: {
       globals: {
-        ...globals.browser,
-        ...globals.vitest,
+        ...browser,
+        ...vitest,
       },
     },
   },
 
-  // ESLint recommended config
-  pluginJs.configs.recommended,
+  {
+    files: JS_FILES,
+    rules: {
+      // ESLint recommended rules
+      ...pluginJs.configs.recommended.rules,
+      // Prettier overrides
+      ...eslintConfigPrettier.rules,
+    },
+  },
 
-  // Prettier config
-  eslintConfigPrettier,
-
-  // HTML ESLint config
+  // HTML ESLint plugin
   {
     files: ['**/*.html'],
-    extends: [html.configs['flat/recommended']],
+    plugins: {
+      html,
+    },
+    extends: ['html/flat/recommended'],
+    language: 'html/html',
     rules: {
       // Misc rules
       '@html-eslint/indent': ['error', 2],
       '@html-eslint/require-meta-charset': 'error',
-      // Disables conflicts with Prettier
+      // Disable conflicts with Prettier
       '@html-eslint/attrs-newline': 'off',
       '@html-eslint/no-extra-spacing-attrs': 'off',
       '@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
-      // Enables a11y rules
+      // Enable a11y rules
       '@html-eslint/no-abstract-roles': 'error',
       '@html-eslint/no-accesskey-attrs': 'error',
       '@html-eslint/no-aria-hidden-body': 'error',
@@ -59,7 +68,7 @@ export default defineConfig([
     },
   },
 
-  // JSX configs
+  // JSX related plugins
   {
     files: ['**/*.{jsx,tsx}'],
     settings: {
@@ -69,6 +78,7 @@ export default defineConfig([
     },
     extends: [
       reactPlugin.configs.flat.recommended,
+      reactPlugin.configs.flat['jsx-runtime'],
       jsxA11y.flatConfigs.recommended,
       reactHooks.configs.flat.recommended,
     ],
@@ -78,7 +88,7 @@ export default defineConfig([
     },
   },
 
-  // TypeScript config
+  // TypeScript plugin
   {
     files: TS_FILES,
     languageOptions: {
@@ -104,7 +114,7 @@ export default defineConfig([
     },
   },
 
-  // TSDoc plugin config
+  // TSDoc plugin
   {
     files: TS_FILES,
     plugins: { tsdoc },
