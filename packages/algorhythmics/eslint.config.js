@@ -9,8 +9,6 @@ const { browser, node, nodeBuiltin, vitest } = globals;
 const JS_FILES = Object.freeze(['**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}']);
 const TS_FILES = Object.freeze(['**/*.{ts,tsx,mts,cts}']);
 
-// console.log(node);
-
 export default defineConfig([
   // Global settings
   {
