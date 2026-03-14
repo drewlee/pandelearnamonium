@@ -19,7 +19,7 @@ export default {
     jsxInject: "import React from 'react';",
   },
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       // Targets all HTML files in the application as this is a multi-page app.
       input: globSync('**/*.html').map((filePath) => {
         return path.resolve(__dirname, filePath);

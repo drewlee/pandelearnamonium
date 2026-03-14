@@ -10,7 +10,7 @@
     "noEmit": true,
     "noImplicitAny": true,
     "strict": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "isolatedModules": true
