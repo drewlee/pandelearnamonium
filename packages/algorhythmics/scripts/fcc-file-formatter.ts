@@ -115,12 +115,14 @@ function writeFiles(fileContents: Record<string, string>, fileDir: string): void
       } catch (error) {
         console.error(error);
       }
+    } else {
+      console.log(`File at ${newFilePath} already exists`);
     }
   });
 }
 
 /**
- * The main application entry point and controller.
+ * Application entry point and control of program flow.
  */
 function run(): void {
   const runArgs = argv.slice(2);
