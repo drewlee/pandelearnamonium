@@ -9,7 +9,7 @@ test('Does not return a value', () => {
 });
 
 test('Results in an empty array when given an empty array', () => {
-  const arr = [];
+  const arr: number[] = [];
 
   quickSort(arr);
   expect(arr).toStrictEqual([]);

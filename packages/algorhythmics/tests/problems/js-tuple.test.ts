@@ -37,7 +37,7 @@ describe('tupleMultiply', () => {
   });
 
   test('Returns 0 for an invalid outer array', () => {
-    const input = [];
+    const input: number[][] = [];
     const result = tupleMultiply(input, 5);
 
     expect(result).toBe(0);

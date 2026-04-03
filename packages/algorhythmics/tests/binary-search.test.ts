@@ -22,7 +22,7 @@ describe('Iterative binary search', () => {
   });
 
   test('Returns `-1` for an empty array', () => {
-    const arr = [];
+    const arr: number[] = [];
     const result = binarySearch(arr, 99);
 
     expect(result).toBe(-1);
@@ -65,7 +65,7 @@ describe('Recursive binary search', () => {
   });
 
   test('Returns `-1` for an empty array', () => {
-    const arr = [];
+    const arr: number[] = [];
     const result = binarySearchRecursive(arr, 99);
 
     expect(result).toBe(-1);

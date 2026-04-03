@@ -2,7 +2,7 @@ import selectionSort from '../../src/sorting/selection-sort.ts';
 import isSorted from '../helpers/is-sorted.ts';
 
 test('Returns an empty array when given an empty array', () => {
-  const arr = [];
+  const arr: number[] = [];
   const result = selectionSort(arr);
 
   expect(result).toStrictEqual([]);

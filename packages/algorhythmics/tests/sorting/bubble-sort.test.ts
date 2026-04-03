@@ -3,7 +3,7 @@ import isSorted from '../helpers/is-sorted.ts';
 
 describe('bubbleSort', () => {
   test('Returns an empty array when given an empty array', () => {
-    const arr = [];
+    const arr: number[] = [];
     const result = bubbleSort(arr);
 
     expect(result).toStrictEqual([]);
@@ -49,7 +49,7 @@ describe('bubbleSort', () => {
 
 describe('bubbleSortVariation', () => {
   test('Returns an empty array when given an empty array', () => {
-    const arr = [];
+    const arr: number[] = [];
     const result = bubbleSortVariation(arr);
 
     expect(result).toStrictEqual([]);

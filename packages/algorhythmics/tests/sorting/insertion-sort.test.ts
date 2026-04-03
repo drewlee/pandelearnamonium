@@ -3,7 +3,7 @@ import isSorted from '../helpers/is-sorted.ts';
 
 describe('insertionSort', () => {
   test('Returns an empty array when given an empty array', () => {
-    const arr = [];
+    const arr: number[] = [];
     const result = insertionSort(arr);
 
     expect(result).toStrictEqual([]);
@@ -41,7 +41,7 @@ describe('insertionSort', () => {
 
 describe('insertionSortVariation', () => {
   test('Returns an empty array when given an empty array', () => {
-    const arr = [];
+    const arr: number[] = [];
     const result = insertionSortVariation(arr);
 
     expect(result).toStrictEqual([]);
