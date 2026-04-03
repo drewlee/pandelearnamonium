@@ -86,7 +86,7 @@ test("Removing each subsequent value gets the heap's maximum value", () => {
 
 describe('Sorting', () => {
   test('Returns an empty array when given an empty array', () => {
-    const values = [];
+    const values: number[] = [];
     const maxHeap = new MaxHeap();
     const result = maxHeap.sort(values);
 
@@ -129,7 +129,7 @@ describe('Sorting', () => {
 
 describe('Sorting in-place', () => {
   test('Returns an empty array when given an empty array', () => {
-    const values = [];
+    const values: number[] = [];
     const maxHeap = new MaxHeap();
     const result = maxHeap.sortInPlace(values);
 

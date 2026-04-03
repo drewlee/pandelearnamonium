@@ -29,7 +29,7 @@ test('Returns `true` for an array with one element', () => {
 });
 
 test('Returns `true` for an empty array', () => {
-  const arr = [];
+  const arr: number[] = [];
   const result = isSorted(arr);
 
   expect(result).toBeTruthy();

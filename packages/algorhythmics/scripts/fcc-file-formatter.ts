@@ -9,7 +9,7 @@ import { extname, join, parse } from 'node:path';
  * @returns An array of file names.
  */
 function getFileNames(fileDir: string): string[] {
-  let files = [];
+  let files: string[] = [];
 
   try {
     files = readdirSync(fileDir);

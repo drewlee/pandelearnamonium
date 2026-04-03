@@ -120,7 +120,7 @@ test('Uses a custom comparison predicate function', () => {
 
 describe('Sorting', () => {
   test('Returns an empty array when given an empty array', () => {
-    const values = [];
+    const values: number[] = [];
     const minHeap = new MinHeap();
     const result = minHeap.sort(values);
 
@@ -163,7 +163,7 @@ describe('Sorting', () => {
 
 describe('Sorting in-place', () => {
   test('Returns an empty array when given an empty array', () => {
-    const values = [];
+    const values: number[] = [];
     const minHeap = new MinHeap<number>();
     const result = minHeap.sortInPlace(values);
 

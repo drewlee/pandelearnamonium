@@ -10,7 +10,7 @@ test('Does not mutate the original array', () => {
 });
 
 test('Returns an empty array when given an empty array', () => {
-  const arr = [];
+  const arr: number[] = [];
   const result = mergeSort(arr);
 
   expect(result).toStrictEqual([]);
