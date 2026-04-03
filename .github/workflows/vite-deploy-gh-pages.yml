@@ -47,7 +47,7 @@ jobs:
       - name: Modify the artifact directory structure
         run: mv packages/cassess/dist packages/cassess/cassess && mkdir packages/cassess/dist && mv packages/cassess/cassess packages/cassess/dist
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
