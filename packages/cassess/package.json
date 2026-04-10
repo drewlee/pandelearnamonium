@@ -38,7 +38,7 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@html-eslint/eslint-plugin": "^0.58.1",
+    "@html-eslint/eslint-plugin": "^0.59.0",
     "@html-eslint/parser": "^0.58.1",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
