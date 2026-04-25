@@ -37,7 +37,7 @@ export default abstract class Component {
 
     for (const listener of listeners) {
       if (listener.startsWith('handle') && typeof this[listener] === 'function') {
-        (this[listener] as (...args: unknown[]) => unknown) = this[listener].bind(this);
+        (this[listener] as Component[keyof Component]) = this[listener].bind(this);
       }
     }
   }
