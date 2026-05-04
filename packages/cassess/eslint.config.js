@@ -49,6 +49,7 @@ export default defineConfig([
       // Disable conflicts with Prettier
       '@html-eslint/attrs-newline': 'off',
       '@html-eslint/no-extra-spacing-attrs': 'off',
+      '@html-eslint/no-extra-spacing-tags': 'off',
       '@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
       // Enable a11y rules
       '@html-eslint/no-abstract-roles': 'error',
