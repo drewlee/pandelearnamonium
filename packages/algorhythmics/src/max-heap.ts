@@ -73,7 +73,7 @@ export default class MaxHeap<T> {
       }
 
       // Swap values.
-      if (heap[minChildIdx] > heap[currIndex]) {
+      if (heap[minChildIdx].priority > heap[currIndex].priority) {
         [heap[minChildIdx], heap[currIndex]] = [heap[currIndex], heap[minChildIdx]];
       }
 
@@ -121,18 +121,18 @@ export default class MaxHeap<T> {
    * Sorts the given list of values in descending order using the min-heap algorithm.
    * Uses O(n) space as it creates a new array of values.
    *
-   * @param items - Array of HeapItems to sort.
+   * @param values - Array of values to sort.
    * @returns Array of sorted values.
    */
-  sort(items: HeapItem<T>[]): HeapItem<T>[] {
-    if (items.length <= 1) {
-      return items;
+  sort(values: T[]): T[] {
+    if (values.length <= 1) {
+      return values;
     }
 
-    const heapified: HeapItem<T>[] = items.slice();
+    const heapified = values.map((value) => new HeapItem(value));
 
     // Insert the given items into the heap.
-    for (let i = 1; i < items.length; i++) {
+    for (let i = 1; i < heapified.length; i++) {
       this.heapifyUp(i, heapified);
     }
 
@@ -151,7 +151,7 @@ export default class MaxHeap<T> {
       sorted.push(topValue);
     }
 
-    return sorted;
+    return sorted.map((item) => item.value);
   }
 
   /**

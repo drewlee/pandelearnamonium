@@ -1,3 +1,4 @@
+import HeapItem from '../src/heap-item.ts';
 import MinHeap from '../src/min-heap.ts';
 import isSorted from './helpers/is-sorted.ts';
 
@@ -7,28 +8,27 @@ test('Creates an instance with defaults', () => {
   expect(minHeap).toBeInstanceOf(MinHeap);
   expect(minHeap.heap).not.toBeNull();
   expect(minHeap.length).toBe(0);
-  expect(minHeap.comparisonPredicate).toBeUndefined();
 });
 
 test('Inserts a value into the heap', () => {
-  const minHeap = new MinHeap();
-  const value = 3;
+  const minHeap = new MinHeap<number>();
+  const item = new HeapItem(3);
 
-  minHeap.insert(value);
+  minHeap.insert(item);
 
   expect(minHeap.length).toBe(1);
-  expect(minHeap.heap).toStrictEqual([value]);
+  expect(minHeap.heap).toStrictEqual([item]);
 });
 
 test('Inserts multiple values into the heap', () => {
-  const minHeap = new MinHeap();
+  const minHeap = new MinHeap<number>();
   const values = [4, 9, 3, 11, 1, 2];
 
-  values.forEach((value) => minHeap.insert(value));
+  values.forEach((value) => minHeap.insert(new HeapItem(value)));
 
   expect(minHeap.length).toBe(values.length);
-  expect(minHeap.heap[0]).toBe(values[4]); // 1
-  expect(minHeap.heap).toStrictEqual([1, 3, 2, 11, 9, 4]);
+  expect(minHeap.heap[0].value).toBe(values[4]); // 1
+  expect(minHeap.heap.map((item) => item.value)).toStrictEqual([1, 3, 2, 11, 9, 4]);
 });
 
 test('Removing from an empty heap returns `null`', () => {
@@ -42,14 +42,14 @@ test('Removes the value from a one item array', () => {
   const minHeap = new MinHeap();
   const value = 21;
 
-  minHeap.insert(value);
+  minHeap.insert(new HeapItem(value));
 
   const spy = vi.spyOn(minHeap, 'heapifyDown');
   const result = minHeap.remove();
 
-  expect(result).toBe(value);
+  expect(result?.value).toBe(value);
   expect(minHeap.length).toBe(0);
-  expect(spy).not.toBeCalled();
+  expect(spy).not.toHaveBeenCalled();
 
   spy.mockRestore();
 });
@@ -58,12 +58,12 @@ test('Removes the value from a two item array', () => {
   const minHeap = new MinHeap();
   const values = [21, 5];
 
-  values.forEach((value) => minHeap.insert(value));
+  values.forEach((value) => minHeap.insert(new HeapItem(value)));
 
   const spy = vi.spyOn(minHeap, 'heapifyDown');
   const result = minHeap.remove();
 
-  expect(result).toBe(values[1]);
+  expect(result?.value).toBe(values[1]);
   expect(minHeap.length).toBe(1);
   expect(spy).toHaveBeenCalledOnce();
 
@@ -74,47 +74,15 @@ test("Removing each subsequent value gets the heap's minimum value", () => {
   const minHeap = new MinHeap<number>();
   const values = [99, 13, 6, 32, 16, 1, 3, 7, 0, 4, -100];
 
-  values.forEach((value) => minHeap.insert(value));
+  values.forEach((value) => minHeap.insert(new HeapItem(value)));
 
   const expected = [-100, 0, 1, 3, 4, 6, 7, 13, 16, 32, 99];
   const result: number[] = [];
 
   while (minHeap.length) {
-    result.push(minHeap.remove()!);
+    result.push(minHeap.remove()!.value);
   }
 
-  expect(result).toStrictEqual(expected);
-});
-
-test('Uses a custom comparison predicate function', () => {
-  const cp = (value1: [string, number], value2: [string, number]) => value1[1] < value2[1];
-  const minHeap = new MinHeap<[string, number]>(cp);
-  const values = {
-    A: 7,
-    B: 13,
-    C: 2,
-    D: 15,
-    E: 1,
-    F: 4,
-  };
-
-  Object.entries(values).forEach(([key, value]) => minHeap.insert([key, value]));
-
-  const expected = [
-    ['E', 1],
-    ['C', 2],
-    ['F', 4],
-    ['A', 7],
-    ['B', 13],
-    ['D', 15],
-  ];
-  const result: [string, number][] = [];
-
-  while (minHeap.length) {
-    result.push(minHeap.remove()!);
-  }
-
-  expect(minHeap.comparisonPredicate).toBe(cp);
   expect(result).toStrictEqual(expected);
 });
 
@@ -163,7 +131,7 @@ describe('Sorting', () => {
 
 describe('Sorting in-place', () => {
   test('Returns an empty array when given an empty array', () => {
-    const values: number[] = [];
+    const values: HeapItem<number>[] = [];
     const minHeap = new MinHeap<number>();
     const result = minHeap.sortInPlace(values);
 
@@ -171,7 +139,7 @@ describe('Sorting in-place', () => {
   });
 
   test('Returns an array of one element when given an array of one element', () => {
-    const values = [1];
+    const values = [new HeapItem(1)];
     const minHeap = new MinHeap<number>();
     const result = minHeap.sortInPlace(values);
 
@@ -179,27 +147,27 @@ describe('Sorting in-place', () => {
   });
 
   test('Sorts the array of numbers', () => {
-    const values = [6, 2, 4, 7, 1, 3];
+    const values = [6, 2, 4, 7, 1, 3].map((v) => new HeapItem(v));
     const minHeap = new MinHeap<number>();
     const result = minHeap.sortInPlace(values);
 
-    expect(isSorted(result)).toBeTruthy();
+    expect(isSorted(result.map((item) => item.value))).toBeTruthy();
   });
 
   test('Sorts a small array', () => {
-    const values = [3, 1];
+    const values = [3, 1].map((v) => new HeapItem(v));
     const minHeap = new MinHeap<number>();
     const result = minHeap.sortInPlace(values);
 
-    expect(isSorted(result)).toBeTruthy();
+    expect(isSorted(result.map((item) => item.value))).toBeTruthy();
   });
 
   test('Sorts a large array', () => {
     const length = 100;
-    const values = new Array(length).fill(null).map((_, index) => index + 1);
+    const values = new Array(length).fill(null).map((_, index) => new HeapItem(index + 1));
     const minHeap = new MinHeap<number>();
     const result = minHeap.sortInPlace(values);
 
-    expect(isSorted(result)).toBeTruthy();
+    expect(isSorted(result.map((item) => item.value))).toBeTruthy();
   });
 });

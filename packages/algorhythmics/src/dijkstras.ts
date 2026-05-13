@@ -1,19 +1,8 @@
+import HeapItem from './heap-item.js';
 import MinHeap from './min-heap.js';
 
 type AdjacencyList = Record<string, [string, number][]>;
 type DijkstraResult = Record<string, number>;
-type MinHeapItem = [number, string];
-
-/**
- * Custom comparison function used by the min-heap.
- *
- * @param item1 - First item to compare.
- * @param item2 - Second item to compare.
- * @returns Whether the first item is less than the second item.
- */
-function compareDistances(item1: MinHeapItem, item2: MinHeapItem): boolean {
-  return item1[0] < item2[0];
-}
 
 /**
  * Dijkstra’s algorithm is used to find the shortest distance between the starting vertex and the
@@ -37,11 +26,13 @@ export default function dijkstras(graph: AdjacencyList, start: string): Dijkstra
   distances[start] = 0;
   paths[start] = [start];
 
-  const minHeap = new MinHeap<MinHeapItem>(compareDistances);
-  minHeap.insert([0, start]);
+  const minHeap = new MinHeap<string>();
+  minHeap.insert(new HeapItem(start, 0));
 
   while (minHeap.length) {
-    const [currentDistance, vertex] = minHeap.remove()!;
+    const item = minHeap.remove()!;
+    const vertex = item.value;
+    const currentDistance = item.priority as number;
     const vertices = graph[vertex];
 
     for (const [neighbor, toDistance] of vertices) {
@@ -50,7 +41,7 @@ export default function dijkstras(graph: AdjacencyList, start: string): Dijkstra
       if (newDistance < distances[neighbor]) {
         distances[neighbor] = newDistance;
         paths[neighbor] = [...paths[vertex], neighbor];
-        minHeap.insert([newDistance, neighbor]);
+        minHeap.insert(new HeapItem(neighbor, newDistance));
       }
     }
   }

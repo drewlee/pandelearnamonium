@@ -1,3 +1,4 @@
+import HeapItem from '../src/heap-item.ts';
 import MaxHeap from '../src/max-heap.ts';
 import isSorted from './helpers/is-sorted.ts';
 
@@ -9,24 +10,24 @@ test('Creates an instance with defaults', () => {
 });
 
 test('Inserts a value into the heap', () => {
-  const maxHeap = new MaxHeap();
-  const value = 3;
+  const maxHeap = new MaxHeap<number>();
+  const item = new HeapItem(3);
 
-  maxHeap.insert(value);
+  maxHeap.insert(item);
 
   expect(maxHeap.heap.length).toBe(1);
-  expect(maxHeap.heap).toStrictEqual([value]);
+  expect(maxHeap.heap).toStrictEqual([item]);
 });
 
 test('Inserts multiple values into the heap', () => {
-  const maxHeap = new MaxHeap();
+  const maxHeap = new MaxHeap<number>();
   const values = [4, 9, 3, 11, 1, 2];
 
-  values.forEach((value) => maxHeap.insert(value));
+  values.forEach((value) => maxHeap.insert(new HeapItem(value)));
 
   expect(maxHeap.heap.length).toBe(values.length);
-  expect(maxHeap.heap[0]).toBe(values[3]); // 11
-  expect(maxHeap.heap).toStrictEqual([11, 9, 3, 4, 1, 2]);
+  expect(maxHeap.heap[0].value).toBe(values[3]); // 11
+  expect(maxHeap.heap.map((item) => item.value)).toStrictEqual([11, 9, 3, 4, 1, 2]);
 });
 
 test('Removing from an empty heap returns `null`', () => {
@@ -40,14 +41,14 @@ test('Removes the value from a one item array', () => {
   const maxHeap = new MaxHeap();
   const value = 21;
 
-  maxHeap.insert(value);
+  maxHeap.insert(new HeapItem(value));
 
   const spy = vi.spyOn(maxHeap, 'heapifyDown');
   const result = maxHeap.remove();
 
-  expect(result).toBe(value);
+  expect(result?.value).toBe(value);
   expect(maxHeap.heap.length).toBe(0);
-  expect(spy).not.toBeCalled();
+  expect(spy).not.toHaveBeenCalled();
 
   spy.mockRestore();
 });
@@ -56,12 +57,12 @@ test('Removes the value from a two item array', () => {
   const maxHeap = new MaxHeap();
   const values = [5, 21];
 
-  values.forEach((value) => maxHeap.insert(value));
+  values.forEach((value) => maxHeap.insert(new HeapItem(value)));
 
   const spy = vi.spyOn(maxHeap, 'heapifyDown');
   const result = maxHeap.remove();
 
-  expect(result).toBe(values[1]);
+  expect(result?.value).toBe(values[1]);
   expect(maxHeap.heap.length).toBe(1);
   expect(spy).toHaveBeenCalledOnce();
 
@@ -69,16 +70,16 @@ test('Removes the value from a two item array', () => {
 });
 
 test("Removing each subsequent value gets the heap's maximum value", () => {
-  const maxHeap = new MaxHeap();
+  const maxHeap = new MaxHeap<number>();
   const values = [99, 13, 6, 32, 16, 1, 3, 7, 0, 4, -100];
 
-  values.forEach((value) => maxHeap.insert(value));
+  values.forEach((value) => maxHeap.insert(new HeapItem(value)));
 
   const expected = [99, 32, 16, 13, 7, 6, 4, 3, 1, 0, -100];
   const result: number[] = [];
 
   while (maxHeap.heap.length) {
-    result.push(maxHeap.remove()!);
+    result.push(maxHeap.remove()!.value);
   }
 
   expect(result).toStrictEqual(expected);
@@ -87,7 +88,7 @@ test("Removing each subsequent value gets the heap's maximum value", () => {
 describe('Sorting', () => {
   test('Returns an empty array when given an empty array', () => {
     const values: number[] = [];
-    const maxHeap = new MaxHeap();
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sort(values);
 
     expect(result).toStrictEqual([]);
@@ -95,7 +96,7 @@ describe('Sorting', () => {
 
   test('Returns an array of one element when given an array of one element', () => {
     const values = [1];
-    const maxHeap = new MaxHeap();
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sort(values);
 
     expect(result).toStrictEqual(values);
@@ -103,7 +104,7 @@ describe('Sorting', () => {
 
   test('Sorts the array of numbers', () => {
     const values = [6, 2, 4, 7, 1, 3];
-    const maxHeap = new MaxHeap();
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sort(values);
 
     expect(isSorted(result)).toBeTruthy();
@@ -111,7 +112,7 @@ describe('Sorting', () => {
 
   test('Sorts a small array', () => {
     const values = [1, 3];
-    const maxHeap = new MaxHeap();
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sort(values);
 
     expect(isSorted(result)).toBeTruthy();
@@ -120,7 +121,7 @@ describe('Sorting', () => {
   test('Sorts a large array', () => {
     const length = 100;
     const values = new Array(length).fill(null).map((_, index) => index + 1);
-    const maxHeap = new MaxHeap();
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sort(values);
 
     expect(isSorted(result)).toBeTruthy();
@@ -129,43 +130,43 @@ describe('Sorting', () => {
 
 describe('Sorting in-place', () => {
   test('Returns an empty array when given an empty array', () => {
-    const values: number[] = [];
-    const maxHeap = new MaxHeap();
+    const values: HeapItem<number>[] = [];
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sortInPlace(values);
 
     expect(result).toStrictEqual([]);
   });
 
   test('Returns an array of one element when given an array of one element', () => {
-    const values = [1];
-    const maxHeap = new MaxHeap();
+    const values = [new HeapItem(1)];
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sortInPlace(values);
 
     expect(result).toStrictEqual(values);
   });
 
   test('Sorts the array of numbers', () => {
-    const values = [6, 2, 4, 7, 1, 3];
-    const maxHeap = new MaxHeap();
+    const values = [6, 2, 4, 7, 1, 3].map((v) => new HeapItem(v));
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sortInPlace(values);
 
-    expect(isSorted(result)).toBeTruthy();
+    expect(isSorted(result.map((item) => item.value))).toBeTruthy();
   });
 
   test('Sorts a small array', () => {
-    const values = [3, 1];
-    const maxHeap = new MaxHeap();
+    const values = [3, 1].map((v) => new HeapItem(v));
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sortInPlace(values);
 
-    expect(isSorted(result)).toBeTruthy();
+    expect(isSorted(result.map((item) => item.value))).toBeTruthy();
   });
 
   test('Sorts a large array', () => {
     const length = 100;
-    const values = new Array(length).fill(null).map((_, index) => length - index);
-    const maxHeap = new MaxHeap();
+    const values = new Array(length).fill(null).map((_, index) => new HeapItem(length - index));
+    const maxHeap = new MaxHeap<number>();
     const result = maxHeap.sortInPlace(values);
 
-    expect(isSorted(result)).toBeTruthy();
+    expect(isSorted(result.map((item) => item.value))).toBeTruthy();
   });
 });
