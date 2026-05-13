@@ -1,10 +1,12 @@
+import HeapItem from './heap-item.js';
+
 /**
  * The max-heap maintains the maximum value at the top of the dataset. It's the basis of the
  * heapsort algorithm, which runs in O(n log n) time. It uses O(1) space if sorted in place, but
  * results in ascending order. Assigning the sorted values into a new array uses O(n) space.
  */
-export default class MaxHeap {
-  heap: number[];
+export default class MaxHeap<T> {
+  heap: HeapItem<T>[];
 
   constructor() {
     this.heap = [];
@@ -44,7 +46,7 @@ export default class MaxHeap {
     let currIndex = index;
     let parentIndex = this.getParentIndex(currIndex);
 
-    while (currIndex > 0 && heap[currIndex] > heap[parentIndex]) {
+    while (currIndex > 0 && heap[currIndex].priority > heap[parentIndex].priority) {
       [heap[currIndex], heap[parentIndex]] = [heap[parentIndex], heap[currIndex]];
       currIndex = parentIndex;
       parentIndex = this.getParentIndex(currIndex);
@@ -66,7 +68,7 @@ export default class MaxHeap {
       // Determine which child has the minimum value.
       let minChildIdx = childIdx2;
 
-      if (childIdx2 >= length || heap[childIdx1] > heap[childIdx2]) {
+      if (childIdx2 >= length || heap[childIdx1].priority > heap[childIdx2].priority) {
         minChildIdx = childIdx1;
       }
 
@@ -81,12 +83,12 @@ export default class MaxHeap {
   }
 
   /**
-   * Inserts the provided value into the heap.
+   * Inserts the provided HeapItem into the heap.
    *
-   * @param value - Value to insert.
+   * @param item - Item to insert.
    */
-  insert(value: number): void {
-    const newLength = this.heap.push(value);
+  insert(item: HeapItem<T>): void {
+    const newLength = this.heap.push(item);
     this.heapifyUp(newLength - 1);
   }
 
@@ -95,7 +97,7 @@ export default class MaxHeap {
    *
    * @returns Maximum heap value.
    */
-  remove(): number | null {
+  remove(): HeapItem<T> | null {
     const { length } = this.heap;
 
     // Terminate if the heap is empty.
@@ -119,22 +121,22 @@ export default class MaxHeap {
    * Sorts the given list of values in descending order using the min-heap algorithm.
    * Uses O(n) space as it creates a new array of values.
    *
-   * @param values - Array of values to sort.
+   * @param items - Array of HeapItems to sort.
    * @returns Array of sorted values.
    */
-  sort(values: number[]): number[] {
-    if (values.length <= 1) {
-      return values;
+  sort(items: HeapItem<T>[]): HeapItem<T>[] {
+    if (items.length <= 1) {
+      return items;
     }
 
-    const heapified: number[] = values.slice();
+    const heapified: HeapItem<T>[] = items.slice();
 
-    // Insert the given values into the heap.
-    for (let i = 1; i < values.length; i++) {
+    // Insert the given items into the heap.
+    for (let i = 1; i < items.length; i++) {
       this.heapifyUp(i, heapified);
     }
 
-    const sorted: number[] = [];
+    const sorted: HeapItem<T>[] = [];
 
     // Extract the heapified values from the heap.
     while (heapified.length) {
@@ -156,25 +158,25 @@ export default class MaxHeap {
    * Sorts the given list of values using the min-heap algorithm. Use O(1) space as it
    * sorts in-place, but the result is in ascending instead of descending order.
    *
-   * @param values - Array of values to sort.
+   * @param items - Array of HeapItems to sort.
    * @returns Array of sorted values.
    */
-  sortInPlace(values: number[]): number[] {
-    if (values.length <= 1) {
-      return values;
+  sortInPlace(items: HeapItem<T>[]): HeapItem<T>[] {
+    if (items.length <= 1) {
+      return items;
     }
 
-    for (let i = 1; i < values.length; i++) {
-      this.heapifyUp(i, values);
+    for (let i = 1; i < items.length; i++) {
+      this.heapifyUp(i, items);
     }
 
-    for (let i = values.length - 1; i > 0; i--) {
-      [values[0], values[i]] = [values[i], values[0]];
+    for (let i = items.length - 1; i > 0; i--) {
+      [items[0], items[i]] = [items[i], items[0]];
 
       // Heapify down the new value.
-      this.heapifyDown(values, i);
+      this.heapifyDown(items, i);
     }
 
-    return values;
+    return items;
   }
 }
