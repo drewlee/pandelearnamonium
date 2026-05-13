@@ -1,12 +1,12 @@
 /**
- * Base data structure used within min and max heaps.
+ * Base data structure used within the min and max heaps data structure.
  */
 export default class HeapItem<T> {
-  item: T;
+  value: T;
   priority: T | bigint | number | string;
 
-  constructor(item: T, priority = item) {
-    this.item = item;
-    this.priority = priority;
+  constructor(value: T, priority?: bigint | number | string) {
+    this.value = value;
+    this.priority = priority ?? value;
   }
 }
