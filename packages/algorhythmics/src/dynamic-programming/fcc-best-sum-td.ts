@@ -12,7 +12,7 @@ export default function bestSum(target: number, values: number[]): number[] | nu
       return null;
     }
 
-    const key = `${target},${path.join(',')}`;
+    const key = `${target},${path[path.length - 1] ?? -1}`;
     if (memo.has(key)) {
       return memo.get(key)!;
     }
@@ -22,7 +22,6 @@ export default function bestSum(target: number, values: number[]): number[] | nu
     for (const value of values) {
       path.push(value);
       const result = bestSumRec(target - value, path, memo);
-      // console.log(target, result);
       path.pop();
 
       if (result !== null && (best === null || result.length < best.length)) {
@@ -35,7 +34,9 @@ export default function bestSum(target: number, values: number[]): number[] | nu
   }
 
   const memo = new Map<string, number[] | null>();
-  return bestSumRec(target, [], memo);
+  const res = bestSumRec(target, [], memo);
+
+  return res;
 }
 
 // console.log(bestSum(7, [5, 3, 4, 7]));
