@@ -30,8 +30,7 @@ export default function gridTraveler(
     return memo.get(key)!;
   }
 
-  const result =
-    gridTraveler(rows - 1, cols, memo) + gridTraveler(rows, cols - 1, memo);
+  const result = gridTraveler(rows - 1, cols, memo) + gridTraveler(rows, cols - 1, memo);
   memo.set(key, result);
 
   return result;
