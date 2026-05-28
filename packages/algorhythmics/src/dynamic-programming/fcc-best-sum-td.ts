@@ -1,45 +1,49 @@
-export default function bestSum(target: number, values: number[]): number[] | null {
-  function bestSumRec(
-    target: number,
-    path: number[],
-    memo: Map<string, number[] | null>,
-  ): number[] | null {
-    if (target === 0) {
-      return [...path];
-    }
-
-    if (target < 0) {
-      return null;
-    }
-
-    const key = `${target},${path[path.length - 1] ?? -1}`;
-    if (memo.has(key)) {
-      return memo.get(key)!;
-    }
-
-    let best: number[] | null = null;
-
-    for (const value of values) {
-      path.push(value);
-      const result = bestSumRec(target - value, path, memo);
-      path.pop();
-
-      if (result !== null && (best === null || result.length < best.length)) {
-        best = result;
-      }
-    }
-
-    memo.set(key, best);
-    return best;
+/**
+ * Given a target number and an array of values, returns an array of values in the most
+ * optimal way that sums up to the target number. Optimal meaning the least amount of
+ * values used.
+ * Top-down recursive solution.
+ *
+ * @remarks
+ * Time: O(n^m * m), O(m^2 * n) w/memoization
+ * Space: O(m^2)
+ * Where `m` is the target and `n` is the size of the array.
+ *
+ * @param target - Target sum.
+ * @param values - Numbers to test.
+ * @returns Array of values that sum up to the target or `null` if the sum isn't possible.
+ */
+export default function bestSum(
+  target: number,
+  values: number[],
+  memo = new Map<number, number[] | null>(),
+): number[] | null {
+  if (target === 0) {
+    return [];
   }
 
-  const memo = new Map<string, number[] | null>();
-  const res = bestSumRec(target, [], memo);
+  if (target < 0) {
+    return null;
+  }
 
-  return res;
+  if (memo.has(target)) {
+    return memo.get(target)!;
+  }
+
+  let best: number[] | null = null;
+
+  for (const value of values) {
+    const result = bestSum(target - value, values, memo);
+    if (result === null) {
+      continue;
+    }
+
+    const combined = [...result, value];
+    if (best === null || combined.length < best.length) {
+      best = combined;
+    }
+  }
+
+  memo.set(target, best);
+  return best;
 }
-
-// console.log(bestSum(7, [5, 3, 4, 7]));
-// console.log(bestSum(8, [2, 3, 5]));
-// console.log(bestSum(8, [1, 4, 5]));
-console.log(bestSum(100, [1, 2, 5, 25]));
