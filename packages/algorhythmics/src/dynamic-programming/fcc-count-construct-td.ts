@@ -1,6 +1,7 @@
 /**
  * Determines the number of ways the target string can be constructed from the
  * given array of strings.
+ * Top-down recursive.
  *
  * @remarks
  * Time: O(n^m * m), O(n * m^2) w/memoization
