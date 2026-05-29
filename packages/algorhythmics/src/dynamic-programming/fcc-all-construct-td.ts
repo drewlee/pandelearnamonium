@@ -1,6 +1,7 @@
 /**
  * Determines and returns all the ways the target string can be constructed from the
  * given array of strings.
+ * Top-down recursive solution.
  *
  * @remarks
  * Time: O(n^m)
