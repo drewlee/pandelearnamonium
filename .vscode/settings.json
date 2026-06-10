@@ -25,5 +25,5 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["heapification"]
+  "cSpell.words": ["heapification", "itin"]
 }
