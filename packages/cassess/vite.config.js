@@ -56,6 +56,10 @@ export default {
         // original name of the file but places it in the project's root `assets` folder. This
         // function preserves the original location of the file.
         chunkFileNames(chunkInfo) {
+          if (!chunkInfo.moduleIds.length) {
+            return '';
+          }
+
           // `moduleId` corresponds to the absolute path of the file being processed.
           const moduleId = chunkInfo.moduleIds[0];
           const ext = path.extname(moduleId).slice(1);
@@ -68,6 +72,7 @@ export default {
 
           // Handles assets injected by Vite. E.g., `modulepreload-polyfill.js`.
           if (baseIdx === -1) {
+            // console.log(out);
             return path.join(ASSETS_DIR, out);
           }
 
@@ -91,7 +96,7 @@ export default {
             pathsForChunk.push(dir);
             seenChunks.set(fileName, [pathsForChunk, accessCount]);
           }
-
+          // console.log(out);
           return out;
         },
 
