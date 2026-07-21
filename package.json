@@ -25,7 +25,7 @@
     "prettier:write": "npm run prettier:write --workspaces",
     "stylelint": "npm run stylelint --workspaces --if-present",
     "test": "npm run test --workspaces",
-    "ts-node": "npm run ts-node --workspaces --if-present",
+    "tsx": "tsx",
     "vite:build": "npm run vite:build --workspaces --if-present",
     "vite:preview": "npm run vite:preview --workspaces --if-present",
     "vite:serve": "npm run vite:serve --workspaces --if-present",
@@ -41,7 +41,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "prettier": "3.9.5",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.23.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.64.0",
     "vitest": "^4.1.10"
