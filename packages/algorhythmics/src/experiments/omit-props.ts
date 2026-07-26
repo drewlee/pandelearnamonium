@@ -27,6 +27,8 @@ interface User {
   hashedPassword: string;
 }
 
+type OUser = Omit<User, 'hashedPassword' | 'password'>;
+
 const user: User = {
   email: 'andrew@dev.to',
   password: 'Hax0rZ',
@@ -34,6 +36,6 @@ const user: User = {
   hashedPassword: 'ds0938h4sdk7hjf832rh',
 };
 
-const nUser = omitProps(user, ['hashedPassword', 'password']);
+const nUser = omitProps(user, ['hashedPassword', 'password']) satisfies OUser;
 
 console.log(nUser);
