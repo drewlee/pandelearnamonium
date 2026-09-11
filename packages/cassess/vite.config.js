@@ -1,8 +1,8 @@
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import react from '@vitejs/plugin-react';
 import { globSync } from 'glob';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
 const ROOT_DIR = __dirname.split(path.sep).slice(-1)[0];
 const ASSETS_DIR = 'assets';
 const SCRIPTS_DIR = 'scripts';
@@ -14,10 +14,11 @@ const seenChunks = new Map();
 export default {
   root: __dirname,
   base: '/pandelearnamonium/cassess/',
+  plugins: [react()],
   appType: 'mpa',
-  esbuild: {
-    jsxInject: "import React from 'react';",
-  },
+  // esbuild: {
+  //   jsxInject: "import React from 'react';",
+  // },
   build: {
     rolldownOptions: {
       // Targets all HTML files in the application as this is a multi-page app.
