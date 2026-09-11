@@ -128,6 +128,7 @@ export default abstract class Component {
 
     switch (typeof listener) {
       case 'string':
+        // eslint-disable-next-line @typescript-eslint/unbound-method
         callback = this[listener as keyof Component] as ComponentTypeListenerFn;
         break;
       case 'function':
