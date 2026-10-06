@@ -7,6 +7,9 @@
  * following row. You are also given a target value, target. If the target is in the
  * grid, return an array with its row and column indices. Otherwise, return [-1, -1].
  *
+ * Time: O(log n)
+ * Space: O(1)
+ *
  * @param grid - Grid to search in.
  * @param target - Value to find.
  * @returns The row and column indices of the target value.
